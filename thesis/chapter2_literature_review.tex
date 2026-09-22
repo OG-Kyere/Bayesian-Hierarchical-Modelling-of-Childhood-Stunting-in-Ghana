@@ -115,7 +115,7 @@ This literature indicates that Ghana's stunting problem has changed rather than 
 
 Standard logistic regression assumes that observations are independent conditional on included covariates. DHS data violate this assumption structurally because children are sampled within households and households within survey clusters or enumeration areas. Children from the same household may resemble one another because of shared resources and behaviours, while households from the same community may share contextual conditions. Ignoring such clustering can produce overly optimistic uncertainty estimates and prevents direct quantification of between-group heterogeneity.
 
-Multilevel logistic regression extends the ordinary logistic model by including random effects for higher-level units. For a child (i) in household (j) and community (k), a three-level random-intercept model can be represented as
+Multilevel logistic regression extends the ordinary logistic model by including random effects for higher-level units. For a child $i$ in household $j$ and community $k$, a three-level random-intercept model can be represented as
 
 \begin{equation}
 Y_{ijk} \sim \text{Bernoulli}(p_{ijk}),
@@ -127,7 +127,7 @@ Y_{ijk} \sim \text{Bernoulli}(p_{ijk}),
 + u_k + v_{jk},
 \end{equation}
 
-where (u_k) is a community-specific random intercept and (v_{jk}) is a household-specific random intercept. The variance of these random effects measures residual heterogeneity that remains after the included covariates are held constant.
+where $u_k$ is a community-specific random intercept and $v_{jk}$ is a household-specific random intercept. The variance of these random effects measures residual heterogeneity that remains after the included covariates are held constant.
 
 Hierarchical models also enable calculation of quantities such as the intraclass correlation coefficient (ICC), which expresses the share of latent residual variance attributable to higher-level clustering, and the median odds ratio (MOR), which translates random-effect variance into the odds-ratio scale. These quantities complement conventional fixed-effect estimates by describing how strongly outcomes differ across contexts.
 
