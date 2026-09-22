@@ -4,10 +4,9 @@ This directory contains only **aggregate, non-identifying derived outputs** from
 
 ## What is public here
 
-- `tables/descriptive_all.csv`: exact aggregate data behind the descriptive figures.
+- `tables/descriptive_all.csv`: authoritative aggregate data behind the descriptive figures, including Taylor-linearized design SEs and 95% CIs.
 - `tables/analysis_sample_summary.csv`: analytic-sample counts and clustering summary.
 - `tables/household_structure.csv`: distribution of eligible children per household.
-- `tables/descriptive_weighted.csv`: first validated descriptive extract retained for audit history.
 - `figures/`: publication-ready descriptive SVG figures.
 - model-summary tables will be added only after each Bayesian model has been successfully fitted and checked.
 
