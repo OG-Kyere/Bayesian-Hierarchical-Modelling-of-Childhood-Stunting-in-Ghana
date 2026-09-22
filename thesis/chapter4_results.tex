@@ -7,7 +7,7 @@ This chapter presents the empirical findings from the 2022 Ghana Demographic and
 
 \section{Analytic Sample}
 
-The preliminary analytic sample contained 4,928 children aged 0--59 months with valid height-for-age measurements who slept in the sampled household on the night preceding the survey, consistent with the DHS de facto anthropometry population. Among these children, 927 were classified as stunted using the WHO criterion of height-for-age z-score below -2 standard deviations.
+The analytic sample contained 4,928 children aged 0--59 months with valid height-for-age measurements who slept in the sampled household on the night preceding the survey, consistent with the DHS de facto anthropometry population. Among these children, 927 were classified as stunted using the WHO criterion of height-for-age z-score below -2 standard deviations. The sum of the rescaled DHS sampling weights for these children was 4,292.97, which rounds to the weighted denominator of 4,293 children reported for height-for-age in Table 11.1 of the official 2022 GDHS. This agreement provides an additional validation of the analytic-sample construction and weighting procedure \citep{GSSICF2024}.
 
 The children were distributed across 616 survey communities and 3,545 households. Of the 3,545 households represented in the analytic sample, 2,398 contained one eligible child, 951 contained two, 165 contained three, 26 contained four, four contained five, and one household contained nine eligible children. In total, 1,147 households contained more than one eligible child. Approximately 51.3\% of children in the analytic sample lived in households containing at least two eligible children. This degree of within-household clustering provides direct empirical justification for including a household-level random effect in the hierarchical model.
 
@@ -17,11 +17,45 @@ The mean number of eligible children per household was 1.39, while the mean numb
 
 The unweighted prevalence of stunting in the analytic sample was 18.8\%. After application of the DHS household-member sampling weights, the estimated prevalence was 17.4\%. This weighted estimate closely reproduces the prevalence reported in the 2022 GDHS, providing an important validation of the analytic sample construction and outcome coding.
 
+
+\begin{table}[H]
+\centering
+\caption{Weighted prevalence of childhood stunting by selected characteristics}
+\label{tab:descriptive_stunting}
+\begin{tabular}{lrrr}
+\toprule
+Characteristic & Unweighted $n$ & Stunted $n$ & Weighted prevalence (\%) \\
+\midrule
+Overall & 4,928 & 927 & 17.4 \\
+\addlinespace
+Male & 2,529 & 529 & 19.4 \\
+Female & 2,399 & 398 & 15.3 \\
+\addlinespace
+Urban & 2,024 & 337 & 15.1 \\
+Rural & 2,904 & 590 & 19.6 \\
+\addlinespace
+Poorest & 1,601 & 375 & 22.8 \\
+Poorer & 1,220 & 275 & 22.0 \\
+Middle & 877 & 134 & 16.9 \\
+Richer & 694 & 103 & 15.5 \\
+Richest & 536 & 40 & 7.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Stunting by Age of the Child}
 
 Weighted stunting prevalence varied substantially by age. Prevalence was 13.2\% among children aged 0--5 months and 11.5\% among those aged 6--11 months. It increased to 17.2\% among children aged 12--23 months and reached its highest level, 24.6\%, among children aged 24--35 months. Prevalence then declined to 18.8\% among children aged 36--47 months and 14.2\% among those aged 48--59 months.
 
 The descriptive age pattern therefore suggests that linear growth faltering accumulates during the second and third years of life, with the highest observed burden occurring among children aged 24--35 months.
+
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{stunting_by_age}
+\caption{Survey-weighted stunting prevalence by child age group.}
+\label{fig:stunting_age}
+\end{figure}
 
 \section{Stunting by Sex}
 
@@ -33,6 +67,14 @@ A pronounced socioeconomic gradient was observed across household wealth quintil
 
 The descriptive results therefore indicate a strong inverse relationship between household wealth and stunting prevalence, although the multivariable hierarchical models are required to determine the extent to which this gradient persists after adjustment for other characteristics.
 
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{stunting_by_wealth}
+\caption{Survey-weighted stunting prevalence by household wealth quintile.}
+\label{fig:stunting_wealth}
+\end{figure}
+
 \section{Stunting by Place of Residence}
 
 Children living in rural areas had a weighted stunting prevalence of 19.6\%, compared with 15.1\% among children living in urban areas. The difference suggests a rural disadvantage at the descriptive level. However, rural residence is strongly associated with household wealth, region, access to water and sanitation, and other contextual conditions, and should therefore not be interpreted independently of the multivariable analysis.
@@ -43,11 +85,27 @@ Substantial regional differences were observed. The highest weighted prevalence 
 
 The lowest weighted prevalence estimates were observed in Eastern Region at 10.4\%, Western North Region at 10.6\%, and Greater Accra Region at 11.4\%. These descriptive differences closely resemble the regional pattern reported in the official 2022 GDHS and reinforce the importance of accounting for contextual heterogeneity.
 
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{stunting_by_region}
+\caption{Survey-weighted stunting prevalence by region.}
+\label{fig:stunting_region}
+\end{figure}
+
 \section{Maternal Education}
 
 Among children for whom maternal education information was available, weighted stunting prevalence decreased markedly with increasing maternal educational attainment. Prevalence was 24.4\% among children whose mothers had no formal education, 18.5\% among those whose mothers had primary education, 15.3\% among those whose mothers had secondary education, and 5.7\% among those whose mothers had higher education.
 
 Maternal education was unavailable for approximately 8.6\% of children in the preliminary analytic sample. For this reason, maternal education will be introduced in a later model using a harmonized sample so that changes in coefficients are not confounded by changes in the observations analysed.
+
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{stunting_by_maternal_education}
+\caption{Survey-weighted stunting prevalence by maternal educational attainment. The missing category represents children without linked maternal-education information.}
+\label{fig:stunting_matedu}
+\end{figure}
 
 \section{Water and Sanitation Patterns}
 
@@ -56,6 +114,21 @@ Water and sanitation were summarized using JMP-consistent improved/unimproved fa
 These classifications refer to source or facility type only. They do not represent the full JMP basic or safely managed service ladders because the latter require additional information such as collection time, sharing, availability, management, or water quality.
 
 These crude differences should not be interpreted causally because WASH conditions are strongly correlated with wealth, residence, and region.
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.78\textwidth]{stunting_by_sanitation}
+\caption{Survey-weighted stunting prevalence by improved versus unimproved/no sanitation facility type.}
+\label{fig:stunting_sanitation}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{stunting_by_water_source}
+\caption{Survey-weighted stunting prevalence by improved versus unimproved drinking-water source type.}
+\label{fig:stunting_water}
+\end{figure}
 
 \section{Household and Community Clustering}
 
