@@ -1,0 +1,390 @@
+\chapter{Methodology}
+\label{chap:methodology}
+
+\section{Introduction}
+
+This chapter describes the data source, study population, variable construction, survey design, Bayesian hierarchical modelling strategy, prior distributions, computational procedures, model assessment, and sensitivity analyses used to investigate childhood stunting in Ghana. The analysis is based on secondary data from the 2022 Ghana Demographic and Health Survey (GDHS). Because the study is intended for both thesis examination and publication, the methodological workflow is designed to be reproducible, transparent, and explicit about the distinction between the preliminary model and the final inferential models.
+
+\section{Study Design and Data Source}
+
+The study uses cross-sectional secondary data from the 2022 Ghana Demographic and Health Survey. The GDHS was implemented by the Ghana Statistical Service in collaboration with the Ghana Health Service and other national and international partners. The survey collected nationally representative information on demographic characteristics, maternal and child health, nutrition, household conditions, water and sanitation, and other health indicators \cite{GSSICF2024}.
+
+The 2022 GDHS employed a stratified two-stage cluster sampling design. In the first stage, 618 enumeration areas or survey clusters were selected from the national sampling frame. In the second stage, households were sampled within selected clusters. The design was intended to produce representative estimates at the national level, by urban-rural residence, and for the 16 administrative regions for most major indicators \cite{GSSICF2024}.
+
+A total of 18,540 households were selected, of which 17,933 were successfully interviewed. Anthropometric measurements were obtained for children under five using standardized DHS procedures. Trained biomarker technicians measured children's length or height and weight using standardized equipment and quality-control procedures \cite{GSSICF2024}.
+
+\section{Study Population}
+
+The target population for the present study is children aged 0--59 months residing in sampled Ghanaian households at the time of the 2022 GDHS.
+
+For the preliminary analysis, the Household Member Recode (PR) file was used because it contains anthropometric measurements for household members together with household and cluster identifiers. Children were included when they:
+
+\begin{enumerate}
+    \item were usual household members, operationalized by \texttt{hv103 = 1};
+    \item were aged 0--59 months, based on \texttt{hc1}; and
+    \item had a valid height-for-age z-score in the DHS recode, operationalized as \texttt{hc70} between -600 and 600.
+\end{enumerate}
+
+Applying these rules produced a preliminary analytic sample of 4,928 children distributed across 616 communities and 3,545 households. These figures refer to the analytic sample constructed from the PR file and should not be confused with the total number of children measured in the survey report. The analytic sample will be rechecked after all required household, WASH, and maternal variables have been merged and the final complete-case or harmonized modelling sample has been defined.
+
+\section{Outcome Variable}
+
+The primary outcome is childhood stunting. In the DHS recode, height-for-age z-scores are stored as integer values scaled by 100. Let (HAZ_i) denote the height-for-age z-score for child (i). A binary stunting indicator is defined as
+
+\begin{equation}
+Y_i =
+\begin{cases}
+1, & HAZ_i < -2, \
+0, & HAZ_i \ge -2.
+\end{cases}
+\end{equation}
+
+Operationally, the preliminary analysis classifies a child as stunted when \texttt{hc70 < -200}. This definition is consistent with the WHO Child Growth Standards, under which a height-for-age z-score below -2 standard deviations indicates stunting \cite{WHOStunting2026}.
+
+The pilot analytic sample contained 927 children classified as stunted. This count is unweighted and is used only to describe the preliminary modelling dataset. Population prevalence estimates will use the appropriate survey weights.
+
+\section{Explanatory Variables}
+
+Variable selection is guided by the conceptual framework developed in Chapter Two, previous Ghanaian evidence, and availability in the 2022 GDHS. Variables are grouped into child-level, maternal, household, and contextual domains.
+
+\subsection{Child-Level Variables}
+
+The preliminary model includes child sex and age. Sex is coded as male versus female, with female as the reference category.
+
+Child age is grouped into six categories:
+
+\begin{itemize}
+    \item 0--5 months;
+    \item 6--11 months;
+    \item 12--23 months;
+    \item 24--35 months;
+    \item 36--47 months; and
+    \item 48--59 months.
+\end{itemize}
+
+The 0--5 month group is used as the reference category. Categorization was selected because the association between age and linear growth faltering is not expected to be linear across infancy and early childhood.
+
+\subsection{Household Socioeconomic Variables}
+
+Household wealth is measured using the DHS wealth index variable \texttt{hv270}. The five categories are poorest, poorer, middle, richer, and richest, with the poorest quintile serving as the reference category.
+
+Place of residence is derived from \texttt{hv025} and coded as urban or rural, with urban residence as the reference category.
+
+\subsection{Region}
+
+Administrative region is represented by \texttt{hv024}. The 2022 GDHS contains 16 regions. Western Region, corresponding to code 1 in the recode file, is used as the reference category in the preliminary model. Region is included as a fixed effect to account for broad observed geographical differences while community-level random effects represent residual heterogeneity across survey clusters.
+
+\subsection{Water and Sanitation Variables}
+
+Water and sanitation variables will be introduced in the extended model after harmonization of the Household and Household Member recodes. Household drinking-water source and sanitation facility will be classified using DHS categories and, where appropriate, recoded into substantively interpretable groups such as improved versus unimproved services in accordance with established WHO/UNICEF definitions.
+
+The exact source variables and category mapping will be documented in the final variable dictionary and analysis code before interpretation. This is important because DHS response categories can contain heterogeneous sources within broad labels, and careless dichotomization can obscure meaningful differences.
+
+\subsection{Maternal Education}
+
+Maternal education will be introduced in a subsequent model. Where the biological mother can be reliably linked to the child within the household or recode structure, education will be represented using DHS educational attainment categories. The final coding and treatment of children whose mothers are deceased, absent, or not successfully linked will be documented explicitly.
+
+The maternal-education extension will be compared with preceding models on a harmonized sample so that changes in coefficients or random-effect variances are not mistakenly attributed to changes in sample composition.
+
+\section{Hierarchical Structure}
+
+The scientific hierarchy considered in this thesis consists of children nested within households and households nested within communities or survey clusters. Let child (i) belong to household (j) and community (k).
+
+The community identifier is based on the DHS cluster variable \texttt{hv001}. A household is uniquely identified by the combination of \texttt{hv001} and \texttt{hv002}. This nested structure reflects the fact that multiple children in the same household may share socioeconomic, caregiving, dietary, sanitation, and other unmeasured conditions, while households located within the same community may share health services, infrastructure, environmental conditions, markets, and social context.
+
+\section{Descriptive Analysis and Survey Weights}
+
+Descriptive estimates intended to represent the Ghanaian population will account for the DHS sampling weights. The household-member sampling weight is stored in \texttt{hv005} and will be rescaled according to DHS conventions before use in weighted descriptive statistics.
+
+Weighted estimates will be used for quantities such as national stunting prevalence and weighted subgroup prevalence. Unweighted counts will be reported where they describe the actual analytic sample size.
+
+The handling of survey weights in Bayesian hierarchical inference requires additional care because weighting, clustering, and hierarchical random effects address different aspects of the data-generating and sampling processes. Therefore, the study will not treat the survey weight as a mechanical replacement for multilevel structure. The primary hierarchical analysis and alternative weighted or pseudo-posterior specifications will be compared as part of a planned sensitivity analysis.
+
+\section{Bayesian Modelling Framework}
+
+\subsection{Likelihood}
+
+For child (i) in household (j) and community (k), stunting status is modelled as a Bernoulli outcome:
+
+\begin{equation}
+Y_{ijk} \sim \text{Bernoulli}(p_{ijk}),
+\end{equation}
+
+where (p_{ijk}) is the probability that the child is stunted.
+
+The log odds of stunting are related to covariates through a logistic link:
+
+\begin{equation}
+\text{logit}(p_{ijk}) = \eta_{ijk}.
+\end{equation}
+
+\subsection{Preliminary Community-Level Model}
+
+The preliminary model was specified as
+
+\begin{equation}
+\eta_{ik}
+=
+\alpha
++
+\mathbf{x}_{ik}^{\top}\boldsymbol{\beta}
++
+u_k,
+\end{equation}
+
+where (\alpha) is the intercept, (\mathbf{x}_{ik}) is the vector of observed covariates, (\boldsymbol{\beta}) is the corresponding coefficient vector, and (u_k) is a community-specific random intercept.
+
+A non-centred parameterization was used:
+
+\begin{align}
+z_k &\sim \mathcal{N}(0,1), \
+\tau_c &\sim \text{Half-Normal}(0,1), \
+u_k &= \tau_c z_k.
+\end{align}
+
+The non-centred form was selected to improve posterior geometry and sampling efficiency for the hierarchical variance parameter.
+
+\subsection{Household-and-Community Model}
+
+The principal extension introduces both household and community random intercepts:
+
+\begin{equation}
+\eta_{ijk}
+=
+\alpha
++
+\mathbf{x}_{ijk}^{\top}\boldsymbol{\beta}
++
+u_k
++
+v_{jk},
+\end{equation}
+
+with
+
+\begin{align}
+u_k &\sim \mathcal{N}(0,\tau_c^2), \
+v_{jk} &\sim \mathcal{N}(0,\tau_h^2),
+\end{align}
+
+where (\tau_c) and (\tau_h) represent the community- and household-level standard deviations, respectively.
+
+This model enables the analysis to distinguish heterogeneity shared by households in the same community from heterogeneity shared by children in the same household.
+
+\section{Sequential Model Development}
+
+The modelling strategy is deliberately sequential:
+
+\begin{description}
+    \item[Model 0:] core demographic and socioeconomic covariates with a community random intercept;
+    \item[Model 1:] Model 0 plus a household random intercept;
+    \item[Model 2:] Model 1 plus household water and sanitation variables;
+    \item[Model 3:] Model 2 plus maternal education.
+\end{description}
+
+Where models differ because of missing covariate information, a second set of comparisons will be performed on a harmonized sample. This prevents changes in posterior estimates from being confounded with changes in the observations included in each model.
+
+The final manuscript may present a reduced subset of these models if some stages are primarily diagnostic or sensitivity analyses, but the thesis will document the full sequence.
+
+\section{Prior Distributions}
+
+The preliminary model uses weakly regularizing priors chosen to constrain implausibly large effects without forcing coefficients toward a particular substantive conclusion.
+
+The intercept prior is
+
+\begin{equation}
+\alpha \sim \mathcal{N}(0,1.5^2).
+\end{equation}
+
+Each standardized log-odds coefficient is assigned an independent prior
+
+\begin{equation}
+\beta_r \sim \mathcal{N}(0,1^2),
+\end{equation}
+
+and the community-level standard deviation is assigned
+
+\begin{equation}
+\tau_c \sim \text{Half-Normal}(0,1).
+\end{equation}
+
+The household-level standard deviation in Model 1 and subsequent models will use the same family of weakly regularizing half-normal prior unless prior-predictive assessment indicates a need for revision.
+
+These priors imply substantial prior uncertainty on the odds-ratio scale while reducing the probability of extreme coefficients that would imply implausibly large multiplicative changes in the odds of stunting.
+
+\section{Prior Predictive Assessment}
+
+Before final model fitting, prior predictive simulation will be used to assess whether the chosen priors generate plausible distributions of stunting prevalence and between-group heterogeneity. This step is important because priors that appear weak on the coefficient scale can produce implausible probabilities after the inverse-logit transformation.
+
+Alternative prior scales will be evaluated in the sensitivity analysis. The objective is not to select priors that reproduce the observed results, but to ensure that the primary priors are scientifically defensible and not excessively restrictive or diffuse.
+
+\section{Posterior Computation}
+
+Posterior sampling is conducted in Python using PyMC. The preliminary model was fitted with the No-U-Turn Sampler (NUTS), an adaptive Hamiltonian Monte Carlo algorithm.
+
+The pilot model used four independent chains. Each chain contained 1,000 tuning iterations followed by 1,000 retained posterior draws, producing 4,000 retained draws in total. The NUTS target acceptance probability was set to 0.95, and the random seed was fixed at 20260922 to improve computational reproducibility.
+
+The preliminary model was fitted using PyMC version 6.3.2, with posterior summaries and diagnostics calculated using ArviZ version 1.3.0. Package versions will be recorded in the repository for the final analysis so that the computational environment can be reconstructed.
+
+\section{Convergence and Sampling Diagnostics}
+
+Convergence and sampling quality will be evaluated using several complementary diagnostics:
+
+\begin{itemize}
+    \item visual inspection of trace plots;
+    \item rank-normalized potential scale reduction statistics, (\hat{R});
+    \item bulk effective sample size;
+    \item tail effective sample size;
+    \item number of divergent transitions;
+    \item Bayesian fraction of missing information (BFMI); and
+    \item NUTS tree-depth diagnostics.
+\end{itemize}
+
+The preliminary model produced no divergent transitions, a maximum (\hat{R}) of approximately 1.008, a minimum bulk effective sample size of approximately 827, and a minimum tail effective sample size of approximately 1,186. These values support adequate sampling for the pilot model, although they do not validate the substantive adequacy of the final model.
+
+For final inference, convergence will be assessed for all scientifically relevant parameters and variance components rather than relying only on global summary values.
+
+\section{Posterior Summaries}
+
+Fixed-effect results will primarily be presented as posterior odds ratios. For regression coefficient (\beta_r), the odds ratio is
+
+\begin{equation}
+OR_r = \exp(\beta_r).
+\end{equation}
+
+Posterior medians and 95\% credible intervals will be reported. Where scientifically useful, posterior probabilities such as
+
+\begin{equation}
+P(\beta_r > 0 \mid \text{data})
+\end{equation}
+
+or equivalent probabilities on the odds-ratio scale will also be calculated.
+
+Interpretation will emphasize magnitude, uncertainty, and posterior probability rather than binary declarations based on whether an interval crosses one.
+
+\section{Variance Partitioning and Intraclass Correlation}
+
+For logistic hierarchical models, the level-1 residual variance on the latent logistic scale is conventionally represented by
+
+\begin{equation}
+\sigma_e^2 = \frac{\pi^2}{3}.
+\end{equation}
+
+For a model containing both household and community random intercepts, the total latent variance is
+
+\begin{equation}
+V =
+\tau_c^2
++
+\tau_h^2
++
+\frac{\pi^2}{3}.
+\end{equation}
+
+The community-level intraclass correlation is defined as
+
+\begin{equation}
+ICC_c =
+\frac{\tau_c^2}
+{\tau_c^2 + \tau_h^2 + \pi^2/3},
+\end{equation}
+
+while the household-plus-community correlation for two children in the same household is
+
+\begin{equation}
+ICC_{h+c} =
+\frac{\tau_h^2 + \tau_c^2}
+{\tau_c^2 + \tau_h^2 + \pi^2/3}.
+\end{equation}
+
+Posterior distributions of these quantities will be calculated from posterior draws rather than by inserting only posterior point estimates. This preserves uncertainty in the variance components.
+
+\section{Median Odds Ratio}
+
+The median odds ratio (MOR) is used to express random-effect heterogeneity on the odds-ratio scale. For a normally distributed random intercept with standard deviation (\tau),
+
+\begin{equation}
+MOR =
+\exp\left[
+\sqrt{2}\,
+\Phi^{-1}(0.75)\,
+\tau
+\right],
+\end{equation}
+
+where (\Phi^{-1}(0.75)) is the 75th percentile of the standard normal distribution.
+
+Separate MOR distributions will be calculated for household and community heterogeneity. The MOR can be interpreted as the median increase in the odds of stunting when comparing two otherwise similar observations from higher- and lower-risk randomly selected contextual units.
+
+\section{Posterior Predictive Checks}
+
+Posterior predictive checking will be used to assess whether the fitted models can reproduce important features of the observed data. Replicated stunting outcomes will be generated from the posterior predictive distribution and compared with observed quantities.
+
+The preliminary checks compare:
+
+\begin{itemize}
+    \item overall unweighted stunting prevalence; and
+    \item stunting prevalence across child age groups.
+\end{itemize}
+
+The final analysis will broaden these checks to include additional subgroup prevalences and, where useful, distributions of cluster- or household-level stunting counts. A model will not be considered adequate solely because coefficient diagnostics converge; it must also reproduce substantively important features of the observed data.
+
+\section{Model Comparison}
+
+Model comparison will consider both predictive performance and scientific interpretability. Where computationally reliable, approximate leave-one-out cross-validation or a related Bayesian predictive criterion will be used to compare candidate models fitted to the same observations.
+
+Predictive criteria will not be used mechanically to choose a single model if differences are negligible or if a simpler model provides clearer interpretation. Changes in fixed effects, household variance, community variance, posterior predictive performance, and sensitivity to model assumptions will all contribute to final model selection.
+
+\section{Survey-Weight Sensitivity Analysis}
+
+Because the GDHS uses unequal sampling probabilities, a dedicated sensitivity analysis will examine whether the main posterior conclusions change when survey weights are incorporated using a defensible pseudo-likelihood or other appropriate weighting strategy.
+
+At minimum, the sensitivity analysis will compare:
+
+\begin{enumerate}
+    \item the primary hierarchical specification;
+    \item a corresponding specification incorporating rescaled survey weights; and
+    \item weighted descriptive estimates used as external checks on model-implied population patterns.
+\end{enumerate}
+
+Any differences in coefficients, credible intervals, variance components, and posterior predictive quantities will be reported transparently. The final thesis will specify the exact rescaling and likelihood implementation once the weighted models have been fitted and validated.
+
+\section{Prior Sensitivity Analysis}
+
+Sensitivity to prior specification will be examined by refitting the principal model under alternative reasonable prior scales for fixed effects and hierarchical standard deviations. The analysis will focus on whether substantive conclusions, especially the household and community variance components and key odds ratios, are materially altered.
+
+A conclusion will be considered robust when its posterior magnitude and uncertainty remain substantively similar under reasonable prior alternatives.
+
+\section{Missing Data and Harmonized Samples}
+
+Missing data will be handled transparently. The primary modelling analysis will initially use observations with valid stunting measurements and complete information for the variables included in each model.
+
+However, sequential models with different covariates can otherwise contain different observations. Therefore, model comparisons intended to assess the effect of adding predictors will also be repeated on a harmonized sample containing complete information for all variables involved in the compared models.
+
+The amount and pattern of missingness for key variables will be described. If missingness is sufficiently extensive to threaten complete-case inference, alternative strategies such as multiple imputation or an explicitly Bayesian missing-data model will be considered before final analysis. Such a decision will be made based on the observed data pattern rather than assumed in advance.
+
+\section{Software and Reproducibility}
+
+Data management and modelling are conducted in Python. The principal software libraries include pandas and NumPy for data manipulation, PyMC for Bayesian modelling, ArviZ for posterior diagnostics and summaries, and Matplotlib for graphical output.
+
+All analysis scripts, model specifications, non-identifying derived results, and thesis source files are version-controlled in the project GitHub repository. Raw DHS data are excluded from version control and are not redistributed, in accordance with DHS data-use requirements.
+
+The repository separates data preparation, descriptive analysis, model fitting, sensitivity analysis, posterior predictive checking, and manuscript generation. Random seeds, package versions, and model specifications are recorded to support reproducibility.
+
+\section{Ethical Considerations}
+
+The study uses de-identified secondary survey data obtained through authorized access to The DHS Program. The 2022 GDHS was implemented under established ethical and informed-consent procedures described in the survey documentation \cite{GSSICF2024}.
+
+No attempt will be made to re-identify respondents or households. Raw DHS files will not be publicly redistributed through the project repository. Results will be reported in aggregate form, and small-cell outputs that could create unnecessary disclosure risk will be avoided.
+
+\section{Methodological Status of the Preliminary Model}
+
+The current community-level model is explicitly treated as a pilot rather than the final inferential model. It establishes that the data-processing pipeline, Bayesian specification, non-centred hierarchical parameterization, MCMC workflow, posterior summaries, and predictive checks operate successfully.
+
+The pilot deliberately omits household random effects, WASH variables, maternal education, and final survey-weight treatment. Therefore, estimates from the pilot are not used as the final thesis conclusions. Final inference will be based on the completed sequence of hierarchical models and sensitivity analyses described above.
+
+\section{Chapter Summary}
+
+This chapter has described the design and planned analytical framework for the study. The 2022 GDHS provides a nationally representative, hierarchically sampled dataset suitable for investigating childhood stunting at the child, household, and community levels. The primary analysis uses Bayesian hierarchical logistic regression to estimate associations while partitioning residual heterogeneity across households and communities.
+
+The modelling workflow proceeds sequentially from the completed community-level pilot to household-and-community models, followed by WASH and maternal-education extensions. Posterior inference will be evaluated using MCMC diagnostics, variance partitioning, median odds ratios, posterior predictive checks, predictive model comparison, survey-weight sensitivity, and prior sensitivity. Chapter Four will present the descriptive and modelling results after the final analysis has been completed.
