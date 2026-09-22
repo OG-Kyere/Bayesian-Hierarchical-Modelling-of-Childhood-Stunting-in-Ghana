@@ -1,0 +1,186 @@
+\chapter{Literature Review}
+\label{chap:literature_review}
+
+\section{Introduction}
+
+Childhood stunting is a chronic manifestation of impaired linear growth that develops through the cumulative influence of biological, nutritional, socioeconomic, environmental, and health-related conditions. Although measured as an individual anthropometric outcome, its determinants operate across several levels. Children are embedded within households that shape food access, care, sanitation, and material resources, while households are embedded within communities that differ in infrastructure, health services, socioeconomic composition, environmental exposures, and social conditions. A literature review that treats stunting only as an individual-level nutritional outcome therefore risks overlooking the hierarchical structure of its determinants.
+
+This chapter reviews the conceptual and empirical literature relevant to childhood stunting, with particular attention to Ghana and sub-Saharan Africa. It discusses the definition, measurement, and consequences of stunting; conceptual frameworks for its determinants; evidence on child, maternal, household, WASH, and community factors; Ghana-specific evidence; and the rationale for Bayesian hierarchical modelling. The final sections identify the research gap addressed by the present study.
+
+\section{Concept and Measurement of Childhood Stunting}
+
+Stunting refers to impaired linear growth relative to a child's age and sex. Under the WHO Child Growth Standards, a child under five is classified as stunted when the height-for-age z-score (HAZ) is below minus two standard deviations from the reference median, while severe stunting is conventionally defined as HAZ below minus three standard deviations \cite{WHOStunting2026}. Height-for-age reflects cumulative growth experience and is therefore generally interpreted as an indicator of chronic or recurrent undernutrition and repeated exposure to conditions that constrain healthy growth.
+
+The distinction between stunting and other anthropometric indicators is important. Wasting is defined primarily by low weight-for-height and reflects acute or recent nutritional deficit, whereas underweight is defined by low weight-for-age and may reflect either chronic or acute undernutrition. Stunting, by contrast, is especially useful for studying longer-term deprivation because linear growth responds to accumulated nutritional, disease, and caregiving conditions.
+
+Anthropometric classification simplifies a continuous biological process into policy-relevant categories. A binary stunting indicator is useful because it permits estimation of prevalence and facilitates comparison with national and international monitoring targets. However, the underlying HAZ distribution contains additional information about the severity and spread of growth deficits. The current study focuses on binary stunting because the principal aim is to model the probability of being stunted while examining variation across households and communities.
+
+\section{Consequences of Childhood Stunting}
+
+Stunting is important because it is associated with both immediate and long-term disadvantages. WHO identifies chronic or recurrent undernutrition, poor maternal health and nutrition, repeated illness, and inappropriate infant and young-child feeding and care among the major conditions linked to stunting \cite{WHOStunting2026}. Longitudinal evidence has further linked early-life undernutrition and growth restriction with poorer cognitive development, educational attainment, adult economic productivity, and health outcomes later in life \cite{VictoraEtAl2008,BlackEtAl2013}.
+
+These associations do not imply that height alone causes later disadvantage. Rather, stunting functions as a marker of accumulated biological and social adversity during a sensitive period of growth and development. Children who experience poor diets, infection, unsafe environments, limited access to health services, and socioeconomic deprivation may experience several of these disadvantages simultaneously.
+
+The global burden remains substantial. The 2025 UNICEF--WHO--World Bank Joint Child Malnutrition Estimates reported that approximately 150.2 million children under five, representing 23.2\% of the global under-five population, were stunted in 2024 \cite{JME2025}. Africa and Asia accounted for nearly all stunted children globally, demonstrating that the burden remains highly concentrated in regions where poverty, food insecurity, infectious disease, and constraints on health and social services are important.
+
+\section{Conceptual Framework for the Determinants of Stunting}
+
+The present study is informed by the UNICEF conceptual framework on maternal and child nutrition and by the WHO conceptualisation of childhood stunting determinants. The 2020 UNICEF framework places child nutrition within interconnected immediate, underlying, and enabling determinants \cite{UNICEF2020}. At the immediate level, adequate diets and adequate care contribute directly to child nutrition. These are shaped by underlying conditions involving food, feeding and hygiene practices, and access to nutrition, health, education, sanitation, and social protection services. At a broader level, resources, social norms, and governance determine whether families and communities can secure the conditions required for adequate nutrition.
+
+The WHO conceptual framework for childhood stunting similarly identifies household and family factors, inadequate complementary feeding, infection, and wider community and societal conditions as interrelated pathways to impaired growth \cite{WHOFramework2013}. Maternal nutrition and health, birth spacing, household food insecurity, sanitation, water supply, caregiver education, infectious disease, feeding quality, and access to health and other services are therefore not isolated exposures.
+
+These frameworks support a hierarchical interpretation of stunting. Child characteristics represent the most immediate level of observation. Maternal and household characteristics influence the nutritional and caregiving environment within which the child grows. Community characteristics may influence multiple households simultaneously through infrastructure, disease ecology, health-service availability, food environments, and socioeconomic conditions. The implication is methodological as well as conceptual: observations from the same household or community may be more alike than observations drawn at random from the national population.
+
+\section{Child-Level Factors Associated with Stunting}
+
+\subsection{Age of the Child}
+
+Age is one of the most consistently reported correlates of childhood stunting. Stunting prevalence often rises after the first months of life as children transition from exclusive breastfeeding to complementary foods and become increasingly exposed to contaminated food, water, and infectious agents. A systematic review of studies in sub-Saharan Africa identified increasing child age among the most consistent factors associated with stunting \cite{AkombiEtAl2017}. Bayesian pooled analysis of DHS data from 35 sub-Saharan African countries similarly demonstrated substantial age-related differences in stunting \cite{TakeleEtAl2022}.
+
+The association between age and stunting is generally nonlinear. Growth faltering tends to accumulate across infancy and early childhood rather than increase at a constant rate. This justifies modelling child age categorically or through sufficiently flexible functional forms rather than assuming that each additional month has an identical association with the log odds of stunting.
+
+\subsection{Sex of the Child}
+
+Male children have frequently been observed to experience higher stunting prevalence than female children in sub-Saharan Africa. The systematic review by \citet{AkombiEtAl2017} identified male sex as a recurrent risk factor, and the large Bayesian multilevel analysis by \citet{TakeleEtAl2022} also reported higher odds of stunting among boys. The biological mechanisms underlying this pattern are not completely established and may involve sex-specific vulnerability to infection, growth requirements, and other early-life exposures.
+
+Evidence from Ghana has also reported sex differences. Analyses of the 2008 and 2014 GDHS found that sex was associated with stunting, although effect magnitudes varied across studies and model specifications \cite{AhetoEtAl2015,DartehEtAl2014,BoahEtAl2019}. For this reason, sex is an important adjustment variable but should not be interpreted as a modifiable determinant.
+
+\subsection{Birth Size, Birth Order, and Early-Life Conditions}
+
+Poor fetal growth and adverse maternal conditions may place children on a disadvantaged growth trajectory before birth. Studies across sub-Saharan Africa have repeatedly linked low birthweight or small reported size at birth with later undernutrition \cite{AkombiEtAl2017,TakeleEtAl2022}. Ghanaian studies have similarly found associations involving birth size, birth order, maternal nutritional status, and other early-life characteristics \cite{BoahEtAl2019}. These variables may also capture unmeasured maternal, socioeconomic, or health-service conditions and therefore require careful interpretation.
+
+\section{Maternal Characteristics}
+
+\subsection{Maternal Education}
+
+Maternal education is among the most frequently studied social determinants of child nutritional status. Education may influence child growth through several pathways, including health literacy, knowledge of feeding and hygiene practices, healthcare utilisation, women's autonomy, employment opportunities, household resource allocation, and the ability to interpret health information. Systematic evidence from sub-Saharan Africa has consistently linked lower maternal education with adverse nutritional outcomes \cite{AkombiEtAl2017}.
+
+The importance of education may extend beyond the child's own mother. Using DHS data from 30 sub-Saharan African countries, \citet{AgyenEtAl2024} found that higher neighbourhood-level maternal education was associated with lower probability of childhood stunting, with stronger contextual associations in rural areas. This finding illustrates why maternal education can operate at more than one level: an individual mother's education may affect her own household, while the educational composition of the wider community may shape norms, information diffusion, and collective access to resources.
+
+Ghanaian evidence has also repeatedly implicated parental education in nutritional outcomes. Earlier analyses found lower risk of undernutrition as maternal education increased \cite{AhetoEtAl2015}, while subsequent studies have identified maternal or paternal education among factors associated with stunting or broader childhood undernutrition \cite{BoahEtAl2019,SeworJayalakshmi2024}. Maternal education is therefore included as a substantive extension in the present study rather than treated solely as a routine demographic control.
+
+\subsection{Maternal Age, Nutrition, and Care Resources}
+
+Maternal age may affect child nutrition through biological and social pathways. Very young motherhood may coincide with incomplete maternal growth, reduced economic resources, lower educational attainment, or constrained caregiving capacity. Older maternal age may be associated with greater experience and resources but may also correlate with higher parity and larger household demands. Maternal nutritional status is additionally relevant because maternal undernutrition can influence fetal growth and breastfeeding capacity.
+
+Ghanaian research has reported associations involving maternal age, maternal body mass index, women's autonomy, and health-service use \cite{BoahEtAl2019}. The interpretation of maternal characteristics should therefore recognise that they are embedded within household socioeconomic conditions rather than operating independently.
+
+\section{Household Socioeconomic Conditions}
+
+\subsection{Household Wealth}
+
+Household wealth is one of the most robust social gradients in child nutrition. Greater material resources may improve access to diverse diets, safer housing, healthcare, clean water, sanitation, transportation, and information. Conversely, poor households face greater exposure to food insecurity and environmental risks. Systematic review evidence across sub-Saharan Africa identifies low household socioeconomic status as a consistent correlate of stunting \cite{AkombiEtAl2017}.
+
+Ghanaian evidence demonstrates a similar gradient. Studies using the GDHS have repeatedly linked poorer wealth categories with higher undernutrition or stunting risk \cite{AhetoEtAl2015,BoahEtAl2019,SeworJayalakshmi2024}. The recent analysis of trends and inequalities from 1993 to 2022 likewise documented persistent socioeconomic inequalities despite the national decline in stunting prevalence \cite{OsborneEtAl2025}. Consequently, the decline in national prevalence should not be interpreted as the disappearance of socioeconomic patterning.
+
+Wealth is measured in DHS surveys through an asset-based index rather than direct household income. It therefore represents relative long-term material position within the survey population. Its association with stunting should be interpreted as socioeconomic stratification rather than a direct marginal effect of monetary income.
+
+\subsection{Household Composition and Shared Conditions}
+
+Children living in the same household share many exposures that are difficult to measure completely. These include food allocation, caregiving practices, household crowding, sanitation, pathogen exposure, socioeconomic shocks, cooking environment, parental characteristics, and unmeasured behavioural factors. Shared household conditions can create correlation between the nutritional outcomes of children from the same household.
+
+This point is empirically important in Ghana. Using the 2008 GDHS, \citet{AhetoEtAl2015} analysed 2,083 children nested within 1,641 households and reported strong residual household-level variation in childhood nutritional outcomes even after measured factors were included. Their findings suggest that conventional models that treat children as statistically independent may miss meaningful shared household influences.
+
+Household clustering also has implications for community-level inference. If multiple children from one household are treated as separate independent observations within a community, part of the variation attributed to communities may actually arise from household-specific conditions. A model that estimates household and community random effects simultaneously can help separate these sources of residual heterogeneity.
+
+\section{Water, Sanitation, and Hygiene}
+
+Water, sanitation, and hygiene (WASH) are central components of the household environment. Unsafe water and inadequate sanitation can increase exposure to enteric pathogens, recurrent diarrhoeal disease, and other infections that interfere with nutrient intake and absorption. The WHO stunting framework explicitly recognises inadequate sanitation, unsafe water, food contamination, infection, and poor hygiene practices as pathways through which the household environment may impair child growth \cite{WHOFramework2013}.
+
+Evidence from sub-Saharan Africa has generally shown associations between unimproved water or sanitation and adverse nutritional outcomes, although results vary by setting and by how WASH variables are defined \cite{AkombiEtAl2017}. The relationship is also likely to be confounded by household wealth and area of residence because access to improved facilities is socioeconomically patterned.
+
+Ghana-specific studies have reported associations between household toilet facilities, drinking-water sources, and child undernutrition \cite{AhetoEtAl2015}. More recently, \citet{OgumEtAl2026} used the 2022 GDHS to examine WASH and nutritional outcomes among 620 children born to mothers aged 15--24 years. Their survey-weighted multilevel and spatial analysis reported an 18.8\% stunting prevalence in that restricted subgroup and identified improved water access as an important WASH exposure.
+
+The 2026 study is highly relevant but does not remove the need for the present analysis. Its target population was specifically children of adolescent and young adult mothers and it jointly examined stunting, wasting, and underweight with an emphasis on spatial and socioeconomic inequality. The present thesis instead concerns the broader eligible under-five population and asks how WASH variables alter fixed-effect estimates and household/community variance components within a Bayesian hierarchical model.
+
+\section{Community and Contextual Effects}
+
+Children living in the same community may share exposures beyond the household. Health-service availability, transport, food markets, sanitation infrastructure, disease transmission, environmental conditions, educational opportunities, local socioeconomic composition, and social norms can create contextual differences in growth risk. Evidence from African DHS data has long suggested that community socioeconomic conditions can contribute to child malnutrition beyond individual household characteristics \cite{FotsoKuateDefo2006}.
+
+The distinction between composition and context is critical. A community may have high stunting prevalence because many poor households live there, which is a compositional explanation. Alternatively, living in a deprived community may confer additional risk even for children from otherwise similar households because of shared services, infrastructure, environmental exposures, or social conditions. Multilevel models provide one way to distinguish measured household composition from residual contextual heterogeneity.
+
+In Ghana, geographical and community patterning has been repeatedly observed. \citet{AhetoDagne2021}, using 2014 GDHS data, employed Bayesian geostatistical models and found substantial spatial variation in under-five stunting across survey clusters. \citet{AmoakoJohnson2022} analysed multiple GDHS rounds using Bayesian geo-additive semiparametric regression and found non-random spatial clustering, including high-stunting clusters in several northern areas and low-stunting clusters in parts of southern Ghana. These studies demonstrate that place matters, although spatial correlation and hierarchical household/community clustering answer related but distinct questions.
+
+\section{The Burden and Pattern of Childhood Stunting in Ghana}
+
+Ghana has achieved a substantial long-run reduction in childhood stunting. The 2022 GDHS reported national stunting prevalence of approximately 17.4\%, down from roughly one-third of children in the early 1990s \cite{GSSICF2024}. A recent inequality analysis using GDHS rounds from 1993 to 2022 similarly reported a fall from approximately 32.7\% to 17.3\% \cite{OsborneEtAl2025}. This national progress is important, but it has not been uniform across demographic, socioeconomic, and geographic groups.
+
+Earlier research using the 2008 GDHS identified age, sex, household composition, maternal characteristics, wealth, sanitation, and other household factors as correlates of childhood malnutrition \cite{DartehEtAl2014,AhetoEtAl2015}. Analysis of the 2014 GDHS similarly identified child age, sex, birth characteristics, maternal factors, wealth, and regional residence as relevant to undernutrition \cite{BoahEtAl2019}. A longitudinal comparison of Ghanaian DHS and MICS surveys from 2003 to 2017 found that stunting prevalence declined over time but that child age and poor household wealth remained among the most consistent risk factors \cite{SeworJayalakshmi2024}.
+
+More recent work has concentrated on understanding both the progress and the remaining inequalities. \citet{OtooEtAl2025} combined survey decomposition, qualitative research, and policy review to study Ghana's stunting reduction from 2003 to 2017. Their analysis attributed much of the improvement in child growth to changes in factors including household wealth, skilled birth attendance, antenatal care, maternal age, urban residence, and mosquito-net ownership, while qualitative evidence also emphasised maternal education, water and sanitation, infrastructure, disease control, and diet. \citet{OsborneEtAl2025} extended the inequality perspective through the 2022 GDHS and showed that national improvements coexist with persistent disparities.
+
+This literature indicates that Ghana's stunting problem has changed rather than disappeared. The central contemporary question is increasingly one of residual inequality and heterogeneity: which children remain at higher risk, which household conditions explain that risk, and how much variation persists between households and communities after observed characteristics are included?
+
+\section{Multilevel Modelling of Childhood Stunting}
+
+Standard logistic regression assumes that observations are independent conditional on included covariates. DHS data violate this assumption structurally because children are sampled within households and households within survey clusters or enumeration areas. Children from the same household may resemble one another because of shared resources and behaviours, while households from the same community may share contextual conditions. Ignoring such clustering can produce overly optimistic uncertainty estimates and prevents direct quantification of between-group heterogeneity.
+
+Multilevel logistic regression extends the ordinary logistic model by including random effects for higher-level units. For a child (i) in household (j) and community (k), a three-level random-intercept model can be represented as
+
+\begin{equation}
+Y_{ijk} \sim \text{Bernoulli}(p_{ijk}),
+\end{equation}
+
+\begin{equation}
+\text{logit}(p_{ijk}) =
+\alpha + \mathbf{x}_{ijk}^{\top}\boldsymbol{\beta}
++ u_k + v_{jk},
+\end{equation}
+
+where (u_k) is a community-specific random intercept and (v_{jk}) is a household-specific random intercept. The variance of these random effects measures residual heterogeneity that remains after the included covariates are held constant.
+
+Hierarchical models also enable calculation of quantities such as the intraclass correlation coefficient (ICC), which expresses the share of latent residual variance attributable to higher-level clustering, and the median odds ratio (MOR), which translates random-effect variance into the odds-ratio scale. These quantities complement conventional fixed-effect estimates by describing how strongly outcomes differ across contexts.
+
+Ghanaian research provides precedent for this approach. \citet{AhetoEtAl2015} used multilevel models to analyse children nested within households in the 2008 GDHS. \citet{IddrisuGyabaah2023} subsequently used a Bayesian multilevel ordinal logistic model with 2017--2018 MICS data and explicitly recognised the nesting of children within households and households within higher-level clusters. However, those studies differ from the present work in survey year, outcome formulation, and modelling objectives.
+
+\section{Bayesian Hierarchical Approaches}
+
+Bayesian inference combines the likelihood contributed by the observed data with prior distributions to obtain a posterior distribution for unknown parameters. In hierarchical models this framework is particularly useful because fixed effects and variance components are estimated jointly, and uncertainty in higher-level parameters propagates naturally to lower-level quantities.
+
+One advantage of Bayesian hierarchical models is partial pooling. Household or community effects are neither estimated completely independently nor forced to be identical. Instead, group-specific effects are shrunk toward the overall distribution to an extent determined by the information available in each group and by the estimated between-group variance. This can stabilise estimates when some clusters contain relatively few observations.
+
+Bayesian analysis also encourages direct examination of full posterior distributions rather than reliance solely on null-hypothesis significance tests. Credible intervals describe posterior uncertainty, while posterior probabilities can be calculated for scientifically meaningful quantities. Model adequacy can be assessed through posterior predictive checks, in which replicated datasets generated from the fitted model are compared with observed features of the data.
+
+The approach has been used in child-nutrition research across sub-Saharan Africa. \citet{TakeleEtAl2022} fitted Bayesian multilevel logistic models to DHS data for more than 170,000 children from 35 countries and used ICCs, posterior diagnostics, and leave-one-out information criteria in model assessment. In Ghana, Bayesian geostatistical and geo-additive approaches have quantified spatial heterogeneity \cite{AhetoDagne2021,AmoakoJohnson2022}, while Bayesian multilevel ordinal regression has been used for broader child-malnutrition outcomes \cite{IddrisuGyabaah2023}.
+
+The existence of this literature means that Bayesian methodology alone cannot constitute the novelty of the present thesis. Its value lies instead in how the hierarchical structure is used to answer a specific substantive question with the most recent national data.
+
+\section{Survey Design and Bayesian Inference}
+
+DHS surveys use stratification, clustering, and unequal selection probabilities to obtain nationally representative samples. Survey weights are therefore essential for design-based descriptive estimates such as national prevalence. Incorporating complex survey design into Bayesian multilevel inference is less straightforward because the sampling hierarchy and the scientific hierarchy may overlap but are not identical.
+
+A simplistic choice between weighted and unweighted Bayesian modelling can obscure this issue. Survey weights may correct informative selection, while hierarchical random effects account for dependence between observations; neither automatically replaces the other. In addition, rescaling or incorporating weights directly into a likelihood can affect posterior uncertainty.
+
+For this reason, the present study separates the goals of national description and hierarchical association modelling. Survey-weighted estimates will be used where appropriate for population description, while the primary Bayesian models will explicitly represent household and community clustering. Alternative treatments of survey weights will then be examined as sensitivity analyses rather than assumed to be inconsequential. The objective is to determine whether the substantive posterior conclusions depend materially on the handling of the sampling design.
+
+\section{Synthesis of the Ghanaian Evidence}
+
+The Ghanaian literature provides several established findings. First, childhood stunting has declined considerably over recent decades, but socioeconomic and geographic inequalities remain \cite{GSSICF2024,OsborneEtAl2025}. Second, child age, sex, household wealth, parental education, birth characteristics, and household environmental conditions have repeatedly been associated with stunting or broader undernutrition \cite{DartehEtAl2014,AhetoEtAl2015,BoahEtAl2019,SeworJayalakshmi2024}. Third, spatial and contextual heterogeneity is well documented \cite{AhetoDagne2021,AmoakoJohnson2022}. Fourth, earlier multilevel studies have demonstrated meaningful household-level variation, and Bayesian hierarchical models have already been applied to Ghanaian child-malnutrition data \cite{AhetoEtAl2015,IddrisuGyabaah2023}.
+
+The literature also reveals several limitations relevant to the present study. Many influential Ghana-specific analyses use the 2008 or 2014 GDHS or the 2017--2018 MICS rather than the 2022 GDHS. Studies using the latest survey have primarily focused on trends and inequalities or on specialised subpopulations such as children of young mothers \cite{OsborneEtAl2025,OgumEtAl2026}. Spatial models identify geographical patterning but do not necessarily distinguish variation shared within households from variation shared across communities. Conversely, studies focused on household determinants may not quantify residual community heterogeneity.
+
+These distinctions are important because a community random effect fitted without a household effect can absorb heterogeneity arising from shared household conditions. Similarly, adding household-level predictors without examining changes in variance components gives limited information about whether those predictors explain between-household or between-community differences.
+
+\section{Research Gap}
+
+The review does not support the claim that childhood stunting in Ghana has not previously been studied using multilevel or Bayesian methods. Such a claim would be inaccurate. Ghanaian researchers have used multilevel models, Bayesian geostatistical models, Bayesian geo-additive models, and Bayesian multilevel ordinal models across several nationally representative datasets \cite{AhetoEtAl2015,AhetoDagne2021,AmoakoJohnson2022,IddrisuGyabaah2023}.
+
+A more defensible gap concerns the combination of data recency, hierarchical decomposition, substantive extensions, and robustness assessment. At the time of this review, limited evidence was identified using the 2022 GDHS to model binary childhood stunting in the full eligible under-five population while simultaneously separating household and community random effects and then examining how household WASH conditions and maternal education alter both fixed-effect estimates and residual variance components. Recent 2022-GDHS studies address important but different questions, including long-term inequality trends \cite{OsborneEtAl2025} and WASH-related malnutrition among children of young mothers \cite{OgumEtAl2026}.
+
+The present study therefore addresses four connected gaps. First, it updates hierarchical evidence using the most recent nationally representative GDHS. Second, it distinguishes household-level from community-level residual heterogeneity rather than assigning all clustering above the child to a single contextual level. Third, it examines whether WASH characteristics and maternal education account for part of that heterogeneity through sequential model development. Fourth, it evaluates whether substantive conclusions are robust to reasonable choices regarding priors and survey-weight treatment.
+
+The contribution is thus not merely methodological novelty. It is the use of a transparent Bayesian hierarchical workflow to determine where residual stunting inequality is concentrated and how stable substantive conclusions are to the way the national survey data are modelled.
+
+\section{Conceptual Model for the Present Study}
+
+Based on the reviewed literature, the study conceptualises childhood stunting as the result of factors operating at three nested levels. At the child and maternal level, age, sex, and maternal characteristics represent biological and caregiving-related influences. At the household level, wealth, water, sanitation, maternal education, and other shared characteristics capture material and environmental conditions common to children in the same household. At the community level, shared contextual influences that are incompletely measured in the survey are represented through community-specific random effects.
+
+The empirical model is deliberately sequential. A baseline model first estimates associations of core demographic and socioeconomic characteristics while accounting for community clustering. A second model introduces household random effects to determine whether household-level dependence materially changes the estimated community heterogeneity. Subsequent models introduce WASH characteristics and maternal education. Changes in posterior coefficients and variance components across these models will be interpreted as evidence about the extent to which measured household conditions account for previously unexplained heterogeneity.
+
+This structure links the conceptual literature directly to the statistical analysis. The random effects are not included solely to improve standard errors; they represent unobserved household and community contexts that are substantively relevant to child growth.
+
+\section{Chapter Summary}
+
+This chapter has reviewed the conceptual, empirical, and methodological literature on childhood stunting. Stunting is a cumulative growth outcome shaped by interrelated child, maternal, household, environmental, and community conditions. Global and sub-Saharan African evidence consistently implicates age, sex, socioeconomic status, maternal education, birth characteristics, WASH, and contextual deprivation. Ghana has experienced a substantial national decline in stunting, but recent evidence demonstrates persistent inequality and geographical heterogeneity.
+
+Previous Ghanaian studies provide strong justification for both multilevel and Bayesian analysis, but they also mean that the present study must define its contribution more precisely than simply applying an advanced statistical method. The thesis therefore focuses on the 2022 GDHS, separates household from community heterogeneity, evaluates the explanatory role of WASH and maternal education, and examines the robustness of posterior conclusions to modelling choices. Chapter Three develops the data preparation, variable definitions, Bayesian hierarchical models, prior specifications, diagnostics, and sensitivity-analysis procedures used to implement this framework.
