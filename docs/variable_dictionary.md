@@ -4,7 +4,7 @@ This file documents the principal variables currently used in the thesis workflo
 
 | Construct | DHS variable | Operationalization in this project |
 |---|---|---|
-| Usual household member | `hv103` | Include children coded as usual household members |
+| Slept in household previous night | `hv103` | Restrict to `yes` to reproduce the DHS de facto anthropometry population |
 | Child age | `hc1` | Restrict to 0–59 months; categories 0–5, 6–11, 12–23, 24–35, 36–47, 48–59 |
 | Height-for-age z-score | `hc70` | DHS value divided conceptually by 100; valid range -600 to 600 |
 | Stunting outcome | derived from `hc70` | 1 if `hc70 < -200`, otherwise 0 |
@@ -15,8 +15,8 @@ This file documents the principal variables currently used in the thesis workflo
 | Residence | `hv025` | Urban / rural |
 | Region | `hv024` | 16 administrative regions |
 | Household wealth | `hv270` | DHS wealth quintiles |
-| Drinking-water source | `hv201` | Grouped into improved vs unimproved for the current descriptive WASH analysis |
-| Toilet facility | `hv205` | Grouped into improved vs unimproved/no facility for the current descriptive WASH analysis |
+| Drinking-water source | `hv201` | Grouped into improved vs unimproved source type for the current descriptive WASH analysis |
+| Toilet facility | `hv205` | Grouped into improved vs unimproved/no facility type for the current descriptive WASH analysis |
 | Maternal education | `hc61` | No education, primary, secondary, higher; missing retained explicitly in descriptive output |
 | Detailed maternal schooling | `hc68` | Retained for checking/possible sensitivity coding |
 
@@ -38,4 +38,4 @@ Current coding includes flush to piped sewer, septic tank or pit latrine; bio-di
 
 All remaining sanitation categories are currently grouped as unimproved/no facility.
 
-These groupings will be checked against the final WHO/UNICEF JMP classification used in the manuscript before inferential WASH modelling. Any revision will be reflected in both this dictionary and the analysis code.
+These groupings follow JMP source/facility-type definitions. They do not by themselves identify basic or safely managed services, which require additional information such as collection time, sharing, availability, management, or water quality. The inferential WASH model will retain this distinction.
