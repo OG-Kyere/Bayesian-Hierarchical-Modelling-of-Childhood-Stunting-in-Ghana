@@ -96,7 +96,7 @@ The community identifier is based on the DHS cluster variable \texttt{hv001}. A 
 
 Descriptive estimates intended to represent the Ghanaian population will account for the DHS sampling weights. The household-member sampling weight is stored in \texttt{hv005} and will be rescaled according to DHS conventions before use in weighted descriptive statistics.
 
-Weighted estimates will be used for quantities such as national stunting prevalence and weighted subgroup prevalence. Unweighted counts will be reported where they describe the actual analytic sample size.
+Weighted estimates will be used for quantities such as national stunting prevalence and weighted subgroup prevalence. Design-based standard errors and 95\% confidence intervals for descriptive prevalence estimates are calculated by Taylor linearization using \texttt{hv021} as the primary sampling unit and \texttt{hv022} as the sampling stratum. Unweighted counts will be reported where they describe the actual analytic sample size.
 
 The handling of survey weights in Bayesian hierarchical inference requires additional care because weighting, clustering, and hierarchical random effects address different aspects of the data-generating and sampling processes. Therefore, the study will not treat the survey weight as a mechanical replacement for multilevel structure. The primary hierarchical analysis and alternative weighted or pseudo-posterior specifications will be compared as part of a planned sensitivity analysis.
 
@@ -196,7 +196,7 @@ The intercept prior is
 \alpha \sim \mathcal{N}(0,1.5^2).
 \end{equation}
 
-Each standardized log-odds coefficient is assigned an independent prior
+Each regression coefficient is assigned an independent prior
 
 \begin{equation}
 \beta_r \sim \mathcal{N}(0,1^2),
