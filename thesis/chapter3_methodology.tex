@@ -15,26 +15,26 @@ A total of 18,540 households were selected, of which 17,933 were successfully in
 
 \section{Study Population}
 
-The target population for the present study is children aged 0--59 months residing in sampled Ghanaian households at the time of the 2022 GDHS.
+The target population for the present study is de facto children aged 0--59 months who were present in sampled Ghanaian households on the night preceding the household interview. This definition follows the DHS convention for child anthropometric indicators.
 
 For the preliminary analysis, the Household Member Recode (PR) file was used because it contains anthropometric measurements for household members together with household and cluster identifiers. Children were included when they:
 
 \begin{enumerate}
-    \item were usual household members, operationalized by \texttt{hv103 = 1};
+    \item were members or visitors who slept in the household on the night preceding the survey, operationalized by \texttt{hv103 = 1};
     \item were aged 0--59 months, based on \texttt{hc1}; and
     \item had a valid height-for-age z-score in the DHS recode, operationalized as \texttt{hc70} between -600 and 600.
 \end{enumerate}
 
-Applying these rules produced a preliminary analytic sample of 4,928 children distributed across 616 communities and 3,545 households. These figures refer to the analytic sample constructed from the PR file and should not be confused with the total number of children measured in the survey report. The analytic sample will be rechecked after all required household, WASH, and maternal variables have been merged and the final complete-case or harmonized modelling sample has been defined.
+Applying these rules produced an analytic sample of 4,928 children distributed across 616 communities and 3,545 households. The 616 communities represent the survey clusters containing at least one eligible child with a valid height-for-age measurement. Household WASH variables and linked maternal-education variables required for the planned extensions are already available in the PR file; therefore, no separate household-file merge is required for the current model sequence. Model-specific sample sizes will nevertheless be reported whenever missing covariate information reduces the analysis sample.
 
 \section{Outcome Variable}
 
-The primary outcome is childhood stunting. In the DHS recode, height-for-age z-scores are stored as integer values scaled by 100. Let (HAZ_i) denote the height-for-age z-score for child (i). A binary stunting indicator is defined as
+The primary outcome is childhood stunting. In the DHS recode, height-for-age z-scores are stored as integer values scaled by 100. Let $HAZ_i$ denote the height-for-age z-score for child $i$. A binary stunting indicator is defined as
 
 \begin{equation}
 Y_i =
 \begin{cases}
-1, & HAZ_i < -2, \
+1, & HAZ_i < -2, \\
 0, & HAZ_i \ge -2.
 \end{cases}
 \end{equation}
@@ -76,19 +76,19 @@ Administrative region is represented by \texttt{hv024}. The 2022 GDHS contains 1
 
 \subsection{Water and Sanitation Variables}
 
-Water and sanitation variables will be introduced in the extended model after harmonization of the Household and Household Member recodes. Household drinking-water source and sanitation facility will be classified using DHS categories and, where appropriate, recoded into substantively interpretable groups such as improved versus unimproved services in accordance with established WHO/UNICEF definitions.
+Water and sanitation variables are obtained directly from the Household Member Recode through household-level variables \texttt{hv201} (main source of drinking water) and \texttt{hv205} (type of toilet facility). For the current analysis, facility types are grouped as improved versus unimproved/no facility using WHO/UNICEF Joint Monitoring Programme (JMP) source and facility classifications \citep{WHOUNICEFJMP2021}. These categories describe facility type only; they should not be interpreted as the JMP ``basic'' or ``safely managed'' service levels, which require additional information on accessibility, sharing, availability, management, or water quality.
 
 The exact source variables and category mapping will be documented in the final variable dictionary and analysis code before interpretation. This is important because DHS response categories can contain heterogeneous sources within broad labels, and careless dichotomization can obscure meaningful differences.
 
 \subsection{Maternal Education}
 
-Maternal education will be introduced in a subsequent model. Where the biological mother can be reliably linked to the child within the household or recode structure, education will be represented using DHS educational attainment categories. The final coding and treatment of children whose mothers are deceased, absent, or not successfully linked will be documented explicitly.
+Maternal education is represented by \texttt{hc61}, the mother's highest educational level linked to the child in the PR recode. The categories are no education, primary, secondary, and higher education. Maternal education is unavailable for children whose mothers cannot be linked to the relevant maternal information; in the current analytic sample, 425 children (8.6\%) have missing \texttt{hc61}. These children are retained in descriptive summaries as a missing category but will not be silently reassigned to an education group in the inferential model.
 
 The maternal-education extension will be compared with preceding models on a harmonized sample so that changes in coefficients or random-effect variances are not mistakenly attributed to changes in sample composition.
 
 \section{Hierarchical Structure}
 
-The scientific hierarchy considered in this thesis consists of children nested within households and households nested within communities or survey clusters. Let child (i) belong to household (j) and community (k).
+The scientific hierarchy considered in this thesis consists of children nested within households and households nested within communities or survey clusters. Let child $i$ belong to household $j$ and community $k$.
 
 The community identifier is based on the DHS cluster variable \texttt{hv001}. A household is uniquely identified by the combination of \texttt{hv001} and \texttt{hv002}. This nested structure reflects the fact that multiple children in the same household may share socioeconomic, caregiving, dietary, sanitation, and other unmeasured conditions, while households located within the same community may share health services, infrastructure, environmental conditions, markets, and social context.
 
@@ -110,7 +110,7 @@ For child (i) in household (j) and community (k), stunting status is modelled as
 Y_{ijk} \sim \text{Bernoulli}(p_{ijk}),
 \end{equation}
 
-where (p_{ijk}) is the probability that the child is stunted.
+where $p_{ijk}$ is the probability that the child is stunted.
 
 The log odds of stunting are related to covariates through a logistic link:
 
@@ -132,13 +132,13 @@ The preliminary model was specified as
 u_k,
 \end{equation}
 
-where (\alpha) is the intercept, (\mathbf{x}_{ik}) is the vector of observed covariates, (\boldsymbol{\beta}) is the corresponding coefficient vector, and (u_k) is a community-specific random intercept.
+where $\alpha$ is the intercept, $\mathbf{x}_{ik}$ is the vector of observed covariates, $\boldsymbol{\beta}$ is the corresponding coefficient vector, and $u_k$ is a community-specific random intercept.
 
 A non-centred parameterization was used:
 
 \begin{align}
-z_k &\sim \mathcal{N}(0,1), \
-\tau_c &\sim \text{Half-Normal}(0,1), \
+z_k &\sim \mathcal{N}(0,1), \\
+\tau_c &\sim \text{Half-Normal}(0,1), \\
 u_k &= \tau_c z_k.
 \end{align}
 
@@ -163,11 +163,11 @@ v_{jk},
 with
 
 \begin{align}
-u_k &\sim \mathcal{N}(0,\tau_c^2), \
+u_k &\sim \mathcal{N}(0,\tau_c^2), \\
 v_{jk} &\sim \mathcal{N}(0,\tau_h^2),
 \end{align}
 
-where (\tau_c) and (\tau_h) represent the community- and household-level standard deviations, respectively.
+where $\tau_c$ and $\tau_h$ represent the community- and household-level standard deviations, respectively.
 
 This model enables the analysis to distinguish heterogeneity shared by households in the same community from heterogeneity shared by children in the same household.
 
@@ -220,11 +220,11 @@ Alternative prior scales will be evaluated in the sensitivity analysis. The obje
 
 \section{Posterior Computation}
 
-Posterior sampling is conducted in Python using PyMC. The preliminary model was fitted with the No-U-Turn Sampler (NUTS), an adaptive Hamiltonian Monte Carlo algorithm.
+Posterior sampling is conducted in Python using PyMC. The preliminary model was fitted with the No-U-Turn Sampler (NUTS), an adaptive Hamiltonian Monte Carlo algorithm \citep{HoffmanGelman2014}.
 
 The pilot model used four independent chains. Each chain contained 1,000 tuning iterations followed by 1,000 retained posterior draws, producing 4,000 retained draws in total. The NUTS target acceptance probability was set to 0.95, and the random seed was fixed at 20260922 to improve computational reproducibility.
 
-The preliminary model was fitted using PyMC version 6.3.2, with posterior summaries and diagnostics calculated using ArviZ version 1.3.0. Package versions will be recorded in the repository for the final analysis so that the computational environment can be reconstructed.
+The preliminary model was fitted using PyMC version 6.3.2, with posterior summaries and diagnostics calculated using ArviZ version 1.3.0 \citep{KumarEtAl2019}. Package versions will be recorded in the repository for the final analysis so that the computational environment can be reconstructed.
 
 \section{Convergence and Sampling Diagnostics}
 
@@ -232,7 +232,7 @@ Convergence and sampling quality will be evaluated using several complementary d
 
 \begin{itemize}
     \item visual inspection of trace plots;
-    \item rank-normalized potential scale reduction statistics, (\hat{R});
+    \item rank-normalized potential scale reduction statistics, $\hat{R}$ \citep{VehtariEtAl2021};
     \item bulk effective sample size;
     \item tail effective sample size;
     \item number of divergent transitions;
@@ -240,13 +240,13 @@ Convergence and sampling quality will be evaluated using several complementary d
     \item NUTS tree-depth diagnostics.
 \end{itemize}
 
-The preliminary model produced no divergent transitions, a maximum (\hat{R}) of approximately 1.008, a minimum bulk effective sample size of approximately 827, and a minimum tail effective sample size of approximately 1,186. These values support adequate sampling for the pilot model, although they do not validate the substantive adequacy of the final model.
+The preliminary model produced no divergent transitions, a maximum $\hat{R}$ of approximately 1.008, a minimum bulk effective sample size of approximately 827, and a minimum tail effective sample size of approximately 1,186. These values support adequate sampling for the pilot model, although they do not validate the substantive adequacy of the final model.
 
 For final inference, convergence will be assessed for all scientifically relevant parameters and variance components rather than relying only on global summary values.
 
 \section{Posterior Summaries}
 
-Fixed-effect results will primarily be presented as posterior odds ratios. For regression coefficient (\beta_r), the odds ratio is
+Fixed-effect results will primarily be presented as posterior odds ratios. For regression coefficient $\beta_r$, the odds ratio is
 
 \begin{equation}
 OR_r = \exp(\beta_r).
@@ -289,7 +289,15 @@ ICC_c =
 {\tau_c^2 + \tau_h^2 + \pi^2/3},
 \end{equation}
 
-while the household-plus-community correlation for two children in the same household is
+The household-specific variance partition coefficient is
+
+\begin{equation}
+VPC_h =
+\frac{\tau_h^2}
+{\tau_c^2 + \tau_h^2 + \pi^2/3}.
+\end{equation}
+
+This quantity describes the proportion of latent residual variance attributable specifically to differences between households. In contrast, while the household-plus-community correlation for two children in the same household is
 
 \begin{equation}
 ICC_{h+c} =
@@ -312,7 +320,7 @@ MOR =
 \right],
 \end{equation}
 
-where (\Phi^{-1}(0.75)) is the 75th percentile of the standard normal distribution.
+where $\Phi^{-1}(0.75)$ is the 75th percentile of the standard normal distribution.
 
 Separate MOR distributions will be calculated for household and community heterogeneity. The MOR can be interpreted as the median increase in the odds of stunting when comparing two otherwise similar observations from higher- and lower-risk randomly selected contextual units.
 
