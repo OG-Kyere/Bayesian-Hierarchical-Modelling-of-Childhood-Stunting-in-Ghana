@@ -1,0 +1,76 @@
+\chapter{Results}
+\label{chap:results}
+
+\section{Introduction}
+
+This chapter presents the empirical findings from the 2022 Ghana Demographic and Health Survey. It begins with the construction of the analytic sample and weighted descriptive patterns of childhood stunting. It then presents the Bayesian hierarchical modelling results. At the present stage, the descriptive analysis is complete and validated against the published GDHS patterns, while the final three-level Bayesian models are being fitted using the reproducible scripts described in Chapter Three.
+
+\section{Analytic Sample}
+
+The preliminary analytic sample contained 4,928 children aged 0--59 months with valid height-for-age measurements and usual household membership. Among these children, 927 were classified as stunted using the WHO criterion of height-for-age z-score below -2 standard deviations.
+
+The children were distributed across 616 survey communities and 3,545 households. Of the 3,545 households represented in the analytic sample, 2,398 contained one eligible child, 951 contained two, 165 contained three, 26 contained four, four contained five, and one household contained nine eligible children. In total, 1,147 households contained more than one eligible child. Approximately 51.3\% of children in the analytic sample lived in households containing at least two eligible children. This degree of within-household clustering provides direct empirical justification for including a household-level random effect in the hierarchical model.
+
+The mean number of eligible children per household was 1.39, while the mean number of eligible children per community was 8.0. Community sample sizes ranged from 1 to 28 children.
+
+\section{Overall Prevalence of Childhood Stunting}
+
+The unweighted prevalence of stunting in the analytic sample was 18.8\%. After application of the DHS household-member sampling weights, the estimated prevalence was 17.4\%. This weighted estimate closely reproduces the prevalence reported in the 2022 GDHS, providing an important validation of the analytic sample construction and outcome coding.
+
+\section{Stunting by Age of the Child}
+
+Weighted stunting prevalence varied substantially by age. Prevalence was 13.2\% among children aged 0--5 months and 11.5\% among those aged 6--11 months. It increased to 17.2\% among children aged 12--23 months and reached its highest level, 24.6\%, among children aged 24--35 months. Prevalence then declined to 18.8\% among children aged 36--47 months and 14.2\% among those aged 48--59 months.
+
+The descriptive age pattern therefore suggests that linear growth faltering accumulates during the second and third years of life, with the highest observed burden occurring among children aged 24--35 months.
+
+\section{Stunting by Sex}
+
+Weighted stunting prevalence was higher among male than female children. The estimated prevalence was 19.4\% among boys compared with 15.3\% among girls. This difference is consistent with the direction observed in several previous studies of childhood stunting in sub-Saharan Africa and Ghana.
+
+\section{Stunting by Household Wealth}
+
+A pronounced socioeconomic gradient was observed across household wealth quintiles. Weighted stunting prevalence was 22.8\% among children in the poorest households and 22.0\% among those in the poorer quintile. Prevalence declined to 16.9\% in the middle quintile, 15.5\% in the richer quintile, and 7.5\% among children in the richest households.
+
+The descriptive results therefore indicate a strong inverse relationship between household wealth and stunting prevalence, although the multivariable hierarchical models are required to determine the extent to which this gradient persists after adjustment for other characteristics.
+
+\section{Stunting by Place of Residence}
+
+Children living in rural areas had a weighted stunting prevalence of 19.6\%, compared with 15.1\% among children living in urban areas. The difference suggests a rural disadvantage at the descriptive level. However, rural residence is strongly associated with household wealth, region, access to water and sanitation, and other contextual conditions, and should therefore not be interpreted independently of the multivariable analysis.
+
+\section{Regional Variation}
+
+Substantial regional differences were observed. The highest weighted prevalence occurred in the Northern Region at 29.6\% and the North East Region at 29.3\%. Stunting prevalence was also relatively high in the Upper East Region and Savannah Region, both at approximately 21\%, and in Oti Region at 20.3\%.
+
+The lowest weighted prevalence estimates were observed in Eastern Region at 10.4\%, Western North Region at 10.6\%, and Greater Accra Region at 11.4\%. These descriptive differences closely resemble the regional pattern reported in the official 2022 GDHS and reinforce the importance of accounting for contextual heterogeneity.
+
+\section{Maternal Education}
+
+Among children for whom maternal education information was available, weighted stunting prevalence decreased markedly with increasing maternal educational attainment. Prevalence was 24.4\% among children whose mothers had no formal education, 18.5\% among those whose mothers had primary education, 15.3\% among those whose mothers had secondary education, and 5.7\% among those whose mothers had higher education.
+
+Maternal education was unavailable for approximately 8.6\% of children in the preliminary analytic sample. For this reason, maternal education will be introduced in a later model using a harmonized sample so that changes in coefficients are not confounded by changes in the observations analysed.
+
+\section{Water and Sanitation Patterns}
+
+Substantial descriptive variation was observed across drinking-water and sanitation categories. However, individual source categories contained very small numbers of children in some groups, making direct category-by-category interpretation unstable. For the inferential models, water and sanitation indicators will therefore be grouped using substantively defensible classifications rather than treating every raw DHS response category as a separate predictor.
+
+The descriptive analysis nevertheless showed that children living in households without any toilet facility had a weighted stunting prevalence of approximately 25.0\%, notably higher than the prevalence observed in several improved sanitation categories. Similarly, children relying on surface-water sources such as rivers, dams, lakes, ponds, streams, canals, or irrigation channels had weighted stunting prevalence of approximately 23.0\%.
+
+These crude differences should not be interpreted causally because WASH conditions are strongly correlated with wealth, residence, and region.
+
+\section{Household and Community Clustering}
+
+The structure of the analytic data demonstrates that stunting observations are not statistically independent. More than half of the children belonged to households containing at least one additional eligible child, and all children were nested within survey communities.
+
+The completed community-level pilot model estimated a non-negligible community variance component and supported the use of a hierarchical framework. However, that model did not include household random effects and is therefore treated as preliminary. The next model separates household-level and community-level heterogeneity to determine whether part of the variation previously attributed to communities is actually shared within households.
+
+\section{Bayesian Hierarchical Model Results}
+
+The final Bayesian model results will be presented after completion of the three-level model sequence described in Chapter Three. This section will report posterior odds ratios, 95\% credible intervals, household and community variance components, intraclass correlation coefficients, median odds ratios, convergence diagnostics, posterior predictive checks, and model-comparison results.
+
+No final inferential conclusions are drawn from the community-only pilot model because the thesis is designed to evaluate household clustering, WASH, maternal education, survey-weight sensitivity, and prior sensitivity before selecting the final specification.
+
+\section{Chapter Summary}
+
+The weighted descriptive analysis estimated a national childhood stunting prevalence of approximately 17.4\% in the analytic sample. Stunting was highest among children aged 24--35 months, boys, children from poorer households, rural residents, and children living in several northern regions. A strong gradient was also observed across maternal education categories.
+
+The data contain meaningful household and community clustering, providing empirical support for the hierarchical modelling strategy. The subsequent Bayesian models will determine which of these descriptive differences persist after adjustment and will quantify how much residual heterogeneity is attributable to households and communities.
