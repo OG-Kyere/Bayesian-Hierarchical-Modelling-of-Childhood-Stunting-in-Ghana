@@ -20,16 +20,22 @@ TABLES.mkdir(parents=True, exist_ok=True)
 def prepare_data(path=RAW):
     df = pd.read_stata(path, convert_categoricals=True)
 
+    # hv103 identifies whether the person slept in the household the previous night
+    # (the de facto population used for DHS child anthropometry).
+    hc1_num = pd.to_numeric(df["hc1"], errors="coerce")
+    hc70_num = pd.to_numeric(df["hc70"], errors="coerce")
     keep = (
-        (df["hv103"] == "yes")
-        & df["hc1"].between(0, 59)
-        & df["hc70"].between(-600, 600)
+        df["hv103"].astype(str).eq("yes")
+        & hc1_num.between(0, 59)
+        & hc70_num.between(-600, 600)
     )
     d = df.loc[keep].copy()
+    d["hc1_num"] = hc1_num.loc[keep]
+    d["hc70_num"] = hc70_num.loc[keep]
 
-    d["stunted"] = (d["hc70"] < -200).astype("int8")
+    d["stunted"] = (d["hc70_num"] < -200).astype("int8")
     d["age_group"] = pd.cut(
-        d["hc1"],
+        d["hc1_num"],
         bins=[-0.1, 5, 11, 23, 35, 47, 59],
         labels=["0-5", "6-11", "12-23", "24-35", "36-47", "48-59"],
     )
@@ -127,10 +133,10 @@ def fit_model():
     th = idata.posterior["tau_household"]
     logistic_var = np.pi**2 / 3
 
-    idata.posterior["icc_community"] = tc**2 / (tc**2 + th**2 + logistic_var)
-    idata.posterior["icc_same_household"] = (
-        tc**2 + th**2
-    ) / (tc**2 + th**2 + logistic_var)
+    total_var = tc**2 + th**2 + logistic_var
+    idata.posterior["icc_community"] = tc**2 / total_var
+    idata.posterior["vpc_household"] = th**2 / total_var
+    idata.posterior["icc_same_household"] = (tc**2 + th**2) / total_var
 
     q75 = 0.6744897501960817
     idata.posterior["mor_community"] = np.exp(np.sqrt(2) * q75 * tc)
@@ -146,6 +152,7 @@ def fit_model():
             "tau_community",
             "tau_household",
             "icc_community",
+            "vpc_household",
             "icc_same_household",
             "mor_community",
             "mor_household",
