@@ -1,0 +1,82 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Background to the Study}
+
+Childhood stunting remains an important public-health and development concern because it reflects chronic or recurrent nutritional deprivation and disease exposure during a critical period of physical and cognitive development. The World Health Organization (WHO) defines stunting among children under five years of age as a height-for-age z-score below minus two standard deviations from the median of the WHO Child Growth Standards \cite{WHOStunting2026}. Unlike wasting, which primarily reflects acute nutritional deficits, stunting captures accumulated constraints on linear growth and is therefore closely linked to the broader social, household, environmental, and health conditions in which children are born and raised.
+
+Globally, reducing childhood stunting is embedded within Sustainable Development Goal 2, particularly the goal of ending all forms of malnutrition. Stunting is consequential not only because it signals inadequate growth, but also because it is associated with poorer developmental outcomes and reduced human-capital potential. Its persistence therefore represents both a health problem and a marker of inequality \cite{WHOStunting2026}.
+
+Ghana has made substantial progress in reducing childhood stunting over the last three decades. According to the 2022 Ghana Demographic and Health Survey (GDHS), the prevalence of stunting among children under five was 17.4\%, compared with 33\% in 1993 \cite{GSSICF2024}. However, the national average conceals substantial heterogeneity. In the 2022 GDHS, stunting prevalence was approximately 20\% among children in rural areas compared with 15\% among those in urban areas, while regional prevalence ranged from about 10\% in the Eastern Region to approximately 30\% in the Northern Region \cite{GSSICF2024}. These differences suggest that the burden of stunting is unevenly distributed and that national-level averages may obscure important household and community contexts.
+
+The determinants of childhood stunting are inherently multilevel. A child's nutritional status may be associated with individual characteristics such as age and sex; maternal characteristics such as education; household characteristics such as wealth, water, and sanitation; and broader contextual factors operating within communities. Children who live in the same household may share food resources, caregiving conditions, sanitation facilities, socioeconomic constraints, and other unmeasured exposures. Households located within the same community may additionally share access to health services, environmental conditions, infrastructure, markets, cultural practices, and other contextual influences. Conventional regression approaches that assume independence between observations may therefore inadequately represent the dependence structure in such data.
+
+The Demographic and Health Surveys are themselves generated through a complex, multistage sampling design in which households are sampled within enumeration areas. Consequently, the statistical structure of the data is naturally aligned with hierarchical modelling. Bayesian hierarchical models provide a coherent framework for estimating individual-level associations while simultaneously quantifying unexplained heterogeneity at higher levels of the data structure. The Bayesian framework also enables direct probability statements about model parameters, propagation of uncertainty through the hierarchy, incorporation of prior information, and posterior predictive assessment of model adequacy.
+
+Previous studies have already established that advanced hierarchical and spatial methods are relevant to child nutrition research in Ghana. Using the 2014 GDHS, Aheto and Dagne applied Bayesian geostatistical modelling and documented substantial geographical variation in childhood stunting \cite{AhetoDagne2021}. Amoako Johnson analysed multiple rounds of the GDHS using Bayesian geo-additive methods and found that childhood stunting exhibited spatial clustering alongside socioeconomic and ecological patterning \cite{AmoakoJohnson2022}. Using the 2017--2018 Ghana Multiple Indicator Cluster Survey, Iddrisu and Gyabaah applied Bayesian multilevel ordinal logistic regression to child malnutrition and explicitly accounted for the nesting of children within households and higher-level clusters \cite{IddrisuGyabaah2023}. More recently, Ogum and colleagues used the 2022 GDHS to investigate water, sanitation, hygiene, and nutritional outcomes among children born to mothers aged 15--24 years using survey-weighted multilevel logistic regression and spatial inequality methods \cite{OgumEtAl2026}.
+
+These studies show that neither Bayesian modelling nor multilevel analysis is new to childhood nutrition research in Ghana. The present thesis therefore does not base its contribution on the simple application of a Bayesian model. Instead, it uses the most recent nationally representative 2022 GDHS to examine childhood stunting while explicitly separating household-level and community-level heterogeneity and assessing how substantive conclusions change as household environmental and maternal characteristics are introduced. Particular attention is given to the stability of estimates under alternative modelling choices, including treatment of clustering, survey weighting, and prior specification. This emphasis on hierarchical decomposition, transparent model comparison, and sensitivity analysis is intended to produce results that are both substantively informative and methodologically defensible.
+
+\section{Problem Statement}
+
+Although the prevalence of childhood stunting in Ghana has declined markedly, the problem remains substantial and unequally distributed. The 2022 GDHS estimates that approximately one in six children under five is stunted, with clear differences by residence, region, sex, and socioeconomic status \cite{GSSICF2024}. Such variation raises an important analytical question: how much of the observed risk is associated with characteristics of individual children and their households, and how much residual heterogeneity persists across households and communities after measured factors are taken into account?
+
+Much of the existing evidence on childhood stunting in Ghana has focused on identifying individual and socioeconomic correlates, mapping geographical variation, or analysing earlier rounds of nationally representative surveys. Prior Bayesian studies have demonstrated spatial and contextual heterogeneity using the 2014 GDHS and earlier surveys \cite{AhetoDagne2021,AmoakoJohnson2022}, while other multilevel work has used the 2017--2018 MICS rather than the most recent GDHS \cite{IddrisuGyabaah2023}. Emerging research using the 2022 GDHS has begun to address specific pathways, including WASH and nutritional outcomes among children of young mothers \cite{OgumEtAl2026}. However, these strands leave room for a broader analysis of stunting in the full eligible under-five population that jointly distinguishes household and community clustering and evaluates how those variance components change after the inclusion of household environmental and maternal characteristics.
+
+Failing to account adequately for hierarchical dependence may lead to underestimated uncertainty and may also obscure the level at which unexplained variation is concentrated. For example, an apparent community effect may partly reflect similarities among children living in the same household. Conversely, modelling only household characteristics may overlook meaningful contextual heterogeneity between communities. For a publication-oriented analysis, it is therefore important not only to identify associations but also to quantify the residual variance attributable to different levels of the data structure and to establish whether substantive conclusions are robust to reasonable analytical choices.
+
+This thesis addresses that problem using Bayesian hierarchical logistic regression applied to the 2022 GDHS. The analysis is designed to distinguish household- and community-level heterogeneity, estimate associations with selected child, socioeconomic, WASH, and maternal characteristics, and evaluate the robustness of posterior inferences through survey-weight and prior-sensitivity analyses.
+
+\section{Aim of the Study}
+
+The main aim of this study is to investigate individual-, household-, and community-level factors associated with childhood stunting in Ghana using Bayesian hierarchical modelling of the 2022 Ghana Demographic and Health Survey.
+
+\section{Specific Objectives}
+
+The study seeks to:
+
+\begin{enumerate}
+    \item estimate the prevalence and distribution of childhood stunting among children under five years in the 2022 Ghana Demographic and Health Survey;
+    \item assess the associations between selected child and household socioeconomic characteristics and childhood stunting;
+    \item quantify residual heterogeneity in childhood stunting at the household and community levels using Bayesian hierarchical logistic regression;
+    \item examine whether household water and sanitation characteristics are associated with childhood stunting after accounting for individual, household, and community-level structure;
+    \item assess the association between maternal education and childhood stunting within the hierarchical modelling framework;
+    \item compare alternative Bayesian model specifications to determine how household clustering and additional covariates affect estimated associations and variance components;
+    \item evaluate the sensitivity of posterior inferences to survey-weight treatment and alternative prior specifications; and
+    \item assess model adequacy using convergence diagnostics and posterior predictive checks.
+\end{enumerate}
+
+\section{Research Questions}
+
+The study is guided by the following questions:
+
+\begin{enumerate}
+    \item What is the prevalence and distribution of childhood stunting among children under five in the 2022 GDHS?
+    \item Which selected child and household socioeconomic characteristics are associated with childhood stunting?
+    \item How much residual variation in childhood stunting is attributable to households and communities after measured covariates are taken into account?
+    \item Are household water and sanitation characteristics associated with childhood stunting after adjustment for other measured characteristics and hierarchical clustering?
+    \item How is maternal education associated with childhood stunting within the multilevel model?
+    \item How do estimated associations and variance components change when household clustering is introduced in addition to community clustering?
+    \item How sensitive are the main posterior conclusions to survey-weight treatment and reasonable alternative prior specifications?
+    \item Do the fitted Bayesian hierarchical models adequately reproduce important features of the observed data?
+\end{enumerate}
+
+\section{Significance of the Study}
+
+The study has both substantive and methodological significance. Substantively, it provides updated evidence on childhood stunting using the most recent nationally representative GDHS. Because Ghana's national stunting prevalence has declined while important regional and socioeconomic disparities remain, identifying the levels at which residual heterogeneity persists may help clarify whether unexplained differences are concentrated primarily within households, between households, or between communities.
+
+Methodologically, the study treats clustering as part of the scientific question rather than merely as a nuisance to be corrected. By estimating household and community variance components, the analysis seeks to distinguish sources of contextual heterogeneity that would be combined in a simpler single-level or two-level model. Measures such as intraclass correlation coefficients and median odds ratios will be used to translate hierarchical variance into interpretable quantities.
+
+The study also emphasises analytical transparency. Model development is sequential, allowing changes in fixed effects and variance components to be examined as household clustering, WASH variables, and maternal education are introduced. In addition, prior-sensitivity analysis, survey-weight sensitivity, convergence assessment, and posterior predictive checks will be used to evaluate the robustness and adequacy of the final inferences. This approach is particularly important for work intended for publication, where conclusions should be supported not only by a fitted model but by evidence that the findings are stable under defensible analytical alternatives.
+
+\section{Scope of the Study}
+
+The study uses secondary data from the 2022 Ghana Demographic and Health Survey and focuses on children under five years of age with valid anthropometric information required to determine stunting status. Stunting is defined according to the WHO Child Growth Standards as a height-for-age z-score below minus two standard deviations from the reference median \cite{WHOStunting2026}.
+
+The primary outcome is binary stunting status. Explanatory variables are drawn from child, maternal, household, and community domains and include demographic characteristics, household wealth, place of residence, region, water and sanitation characteristics, and maternal education, subject to data availability and appropriate coding. The principal inferential approach is Bayesian hierarchical logistic regression with random intercepts representing household and community clustering.
+
+The study is national in scope and does not perform fine-scale spatial modelling or causal inference. Associations estimated from the cross-sectional GDHS should therefore not be interpreted as causal effects. Geographic variables are used to account for observed regional or community-level structure rather than to generate spatial risk surfaces.
+
+\section{Organisation of the Thesis}
+
+The thesis is organised into five chapters. Chapter One introduces the study, states the research problem, objectives, research questions, significance, and scope. Chapter Two reviews theoretical and empirical literature on childhood stunting, its determinants, evidence from Ghana, and the use of hierarchical and Bayesian methods in nutritional epidemiology. Chapter Three describes the 2022 GDHS, study population, variable definitions, survey design, Bayesian hierarchical models, prior distributions, computational procedures, model comparison, and sensitivity analyses. Chapter Four presents the descriptive and Bayesian modelling results, including variance decomposition, posterior estimates, diagnostics, and predictive checks. Chapter Five discusses the findings in relation to previous evidence, outlines implications and limitations, and presents the conclusions and recommendations of the study.
