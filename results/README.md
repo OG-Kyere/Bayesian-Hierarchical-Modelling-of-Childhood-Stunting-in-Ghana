@@ -15,6 +15,8 @@ This directory contains only **aggregate, non-identifying derived outputs** from
 - `tables/survey_weight_sensitivity_key_effects.csv`: fixed-effect comparison under the weighted pseudo-posterior.
 - `figures/model3_posterior_or_forest.svg`: Model 3 posterior odds-ratio forest plot.
 - `figures/model_variance_comparison.svg`: household/community SD comparison across models.
+- `tables/model3_ppc_summary.csv`: observed versus replicated prevalence for the Model 3 posterior predictive check.
+- `figures/model3_ppc_age.svg`: overall and age-specific posterior predictive check figure.
 
 ## What is deliberately not public
 
