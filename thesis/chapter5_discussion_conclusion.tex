@@ -65,6 +65,8 @@ The descriptive analysis showed higher stunting prevalence among children living
 
 In Model 3, unimproved drinking-water source was associated with approximately 50\% higher posterior odds of stunting relative to an improved source. The result was stable under tighter and wider priors and remained positive in the full-sample missing-data sensitivity analysis. Under the survey-weight pseudo-posterior, however, the estimate became less precise and its 95\% posterior interval included one. Therefore, the most defensible interpretation is that the primary analysis provides evidence of a positive association between unimproved water source and stunting, but the strength of that evidence is sensitive to the treatment of survey weights.
 
+A more detailed Bayesian WASH sensitivity analysis further indicated that the binary water association was concentrated most clearly among households relying on surface water. Relative to improved sources, surface-water use had a posterior OR of 1.52 (95\% posterior interval: 1.10--2.08), whereas unprotected groundwater had an OR of 1.41 (0.90--2.21). This pattern strengthens the interpretation that the broad water-source result is not solely an artifact of the binary classification, although the observational design still precludes a causal interpretation.
+
 The finding is broadly compatible with the biological rationale linking unsafe water to enteric infection, repeated diarrhoeal illness, impaired nutrient absorption, and chronic growth restriction. It also complements recent research using the 2022 GDHS among children born to young mothers, which reported lower crude stunting prevalence among households with improved water but found substantial uncertainty after multivariable adjustment \citep{OgumEtAl2026}. The difference between that study and the present analysis may reflect the target population, sample size, covariate set, statistical model, or treatment of household-level clustering.
 
 The sanitation result requires greater caution. Although the crude prevalence difference was large, the adjusted posterior estimate was much weaker. This attenuation is consistent with substantial confounding by wealth, residence, region, and other household conditions. It would therefore be inappropriate to conclude from this analysis that sanitation is unimportant for child health. Instead, the study indicates that the binary facility-type classification used here does not show a clearly independent association with stunting after adjustment.
@@ -125,7 +127,7 @@ Third, model development is sequential and transparent. The study examines how t
 
 Fourth, the Bayesian framework provides full posterior distributions for regression effects and variance components, enabling calculation of posterior odds ratios, ICCs, variance partition coefficients, median odds ratios, and posterior probabilities.
 
-Fifth, the analysis includes several robustness checks: alternative prior specifications, survey-weight sensitivity, explicit treatment of missing maternal-education information, an independent GEE clustering diagnostic, posterior predictive checks, and predictive model comparison.
+Fifth, the analysis includes several robustness checks: alternative prior specifications, survey-weight sensitivity, explicit treatment of missing maternal-education information, an independent GEE clustering diagnostic, posterior predictive checks, PSIS-LOO model comparison, a spline-based age sensitivity analysis, and a more detailed WASH-coding sensitivity analysis. The latter two checks showed that the main fixed-effect conclusions were not artifacts of the six age bands or the binary WASH classification.
 
 Finally, the project has been developed as a reproducible research workflow. Analysis code, aggregate tables, figures, variable definitions, model metadata, and LaTeX thesis files are version-controlled, while restricted DHS microdata are excluded from the public repository.
 
@@ -163,11 +165,13 @@ The community identifier is the DHS survey cluster. It is an operational samplin
 
 \subsection{Computational Precision of Variance Parameters}
 
-All principal Model 1--3 fits had zero divergent transitions and fixed-effect parameters showed good chain agreement. However, the household and community standard deviations mixed more slowly, particularly in the harmonized WASH and maternal-education models. The current estimates are sufficient to establish the broad contrast between household and community heterogeneity, but the exact variance-component intervals will be regenerated using longer production runs before final submission and publication.
+All principal Model 1--3 fits had zero divergent transitions and fixed-effect parameters showed good chain agreement. An extended Model 3 diagnostic run using eight independent chains and 4,000 retained posterior draws also showed acceptable sampler geometry: chain-specific BFMI values ranged from approximately 0.51 to 0.66, no divergences occurred, and no chain reached the maximum tree depth. Fixed-effect convergence was excellent, with maximum $\hat R$ of approximately 1.003 and bulk effective sample sizes above 2,200.
+
+The household and community standard deviations nevertheless remained the slowest-mixing quantities. In the extended run, $\hat R$ was approximately 1.021 for the community SD and 1.018 for the household SD, with bulk effective sample sizes of approximately 544 and 524. These diagnostics are substantially stronger than the earlier runs and support the broad household-versus-community contrast, but they remain slightly above the conservative $\hat R\leq1.01$ target for locking exact variance-component intervals.
 
 \subsection{Model Comparison}
 
-The WAIC comparison was conditional on fitted random effects and involved a high-dimensional hierarchical model. The difference between Model 2 and Model 3 was very small relative to its uncertainty, and some observations showed substantial pointwise log-likelihood variability. The comparison is therefore interpreted as evidence of similar predictive adequacy rather than as a definitive ranking of the models.
+PSIS-LOO comparison of the harmonized Model 2 and Model 3 showed essentially equivalent predictive performance. Model 3 improved ELPD by only about 0.92 relative to Model 2, with an estimated standard error of 3.38. Model 3 had no observations with Pareto $k>0.70$, whereas Model 2 had five; neither model had Pareto $k>1$. The predictive comparison is therefore interpreted as evidence of similar predictive adequacy rather than as a ranking in favour of Model 3. Maternal education contributes substantive interpretation even though it does not materially improve prediction.
 
 \subsection{No Fine-Scale Spatial Analysis}
 
@@ -201,7 +205,7 @@ A spatial extension using authorized DHS GPS data could separate spatially struc
 
 The maternal-education analysis could also be extended by examining more detailed educational categories, paternal education, maternal age, women's decision-making, healthcare utilisation, and interactions between education and household wealth or rural residence.
 
-Finally, the random-effect variance parameters should be re-estimated with longer MCMC chains in the final production environment, and the posterior predictive checks should be extended to household- and community-level counts before journal submission.
+Finally, longer unrestricted within-chain sampling would further tighten the Monte Carlo precision of the household and community variance parameters. Posterior predictive checks could also be extended to household- and community-level counts before journal submission, although the current overall and age-specific checks show no major lack of fit.
 
 \section{Conclusion}
 
