@@ -1,0 +1,11 @@
+# Pilot environment lock
+
+This file records the exact software versions stored in the completed community-level pilot model metadata. It is retained for reproducibility of Model 0 only.
+
+pymc==6.3.2
+arviz==1.3.0
+numpy==2.3.5
+pandas==2.2.3
+
+# A separate final environment lock will be created after Models 1--3 and all
+# sensitivity analyses have been successfully fitted and validated.
