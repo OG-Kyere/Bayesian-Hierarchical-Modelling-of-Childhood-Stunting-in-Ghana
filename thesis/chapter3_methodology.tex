@@ -15,7 +15,7 @@ A total of 18,540 households were selected, of which 17,933 were successfully in
 
 \section{Study Population}
 
-The target population for the present study is de facto children aged 0--59 months who were present in sampled Ghanaian households on the night preceding the household interview. This definition follows the DHS convention for child anthropometric indicators.
+The target population for the present study is de facto children aged 0--59 months who were present in sampled Ghanaian households on the night preceding the household interview. This definition follows the DHS convention for child anthropometric indicators \citep{DHSGuide2023}.
 
 For the preliminary analysis, the Household Member Recode (PR) file was used because it contains anthropometric measurements for household members together with household and cluster identifiers. Children were included when they:
 
@@ -84,7 +84,7 @@ The exact source variables and category mapping will be documented in the final 
 
 Maternal education is represented by \texttt{hc61}, the mother's highest educational level linked to the child in the PR recode. The categories are no education, primary, secondary, and higher education. Maternal education is unavailable for children whose mothers cannot be linked to the relevant maternal information; in the current analytic sample, 425 children (8.6\%) have missing \texttt{hc61}. These children are retained in descriptive summaries as a missing category but will not be silently reassigned to an education group in the inferential model.
 
-The maternal-education extension will be compared with preceding models on a harmonized sample so that changes in coefficients or random-effect variances are not mistakenly attributed to changes in sample composition.
+The maternal-education extension is compared with the preceding WASH model on a harmonized sample of 4,503 children with non-missing maternal education so that changes in coefficients or random-effect variances are not mistakenly attributed to changes in sample composition.
 
 \section{Hierarchical Structure}
 
@@ -98,13 +98,13 @@ Descriptive estimates intended to represent the Ghanaian population will account
 
 Weighted estimates will be used for quantities such as national stunting prevalence and weighted subgroup prevalence. Design-based standard errors and 95\% confidence intervals for descriptive prevalence estimates are calculated by Taylor linearization using \texttt{hv021} as the primary sampling unit and \texttt{hv022} as the sampling stratum. Unweighted counts will be reported where they describe the actual analytic sample size.
 
-The handling of survey weights in Bayesian hierarchical inference requires additional care because weighting, clustering, and hierarchical random effects address different aspects of the data-generating and sampling processes. Therefore, the study will not treat the survey weight as a mechanical replacement for multilevel structure. The primary hierarchical analysis and alternative weighted or pseudo-posterior specifications will be compared as part of a planned sensitivity analysis.
+The handling of survey weights in Bayesian hierarchical inference requires additional care because weighting, clustering, and hierarchical random effects address different aspects of the data-generating and sampling processes. Therefore, the study does not treat the survey weight as a mechanical replacement for multilevel structure. The primary hierarchical model is fitted without likelihood weighting, while a rescaled survey-weight pseudo-posterior is used as a sensitivity analysis.
 
 \section{Bayesian Modelling Framework}
 
 \subsection{Likelihood}
 
-For child (i) in household (j) and community (k), stunting status is modelled as a Bernoulli outcome:
+For child $i$ in household $j$ and community $k$, stunting status is modelled as a Bernoulli outcome:
 
 \begin{equation}
 Y_{ijk} \sim \text{Bernoulli}(p_{ijk}),
@@ -184,7 +184,7 @@ The modelling strategy is deliberately sequential:
 
 Where models differ because of missing covariate information, a second set of comparisons will be performed on a harmonized sample. This prevents changes in posterior estimates from being confounded with changes in the observations included in each model.
 
-The final manuscript may present a reduced subset of these models if some stages are primarily diagnostic or sensitivity analyses, but the thesis will document the full sequence.
+The thesis documents the full model sequence. For the comparison between Models 2 and 3, Model 2 is additionally refitted on the 4,503-child harmonized sample used by Model 3.
 
 \section{Prior Distributions}
 
@@ -208,7 +208,7 @@ and the community-level standard deviation is assigned
 \tau_c \sim \text{Half-Normal}(0,1).
 \end{equation}
 
-The household-level standard deviation in Model 1 and subsequent models will use the same family of weakly regularizing half-normal prior unless prior-predictive assessment indicates a need for revision.
+The household-level standard deviation in Model 1 and subsequent models uses the same weakly regularizing $\text{Half-Normal}(0,1)$ prior in the primary specification.
 
 These priors imply substantial prior uncertainty on the odds-ratio scale while reducing the probability of extreme coefficients that would imply implausibly large multiplicative changes in the odds of stunting.
 
@@ -216,7 +216,7 @@ These priors imply substantial prior uncertainty on the odds-ratio scale while r
 
 Before final model fitting, prior predictive simulation will be used to assess whether the chosen priors generate plausible distributions of stunting prevalence and between-group heterogeneity. This step is important because priors that appear weak on the coefficient scale can produce implausible probabilities after the inverse-logit transformation.
 
-Alternative prior scales will be evaluated in the sensitivity analysis. The objective is not to select priors that reproduce the observed results, but to ensure that the primary priors are scientifically defensible and not excessively restrictive or diffuse.
+Alternative prior scales are evaluated in the sensitivity analysis. The objective is not to select priors that reproduce the observed results, but to ensure that the primary priors are scientifically defensible and not excessively restrictive or diffuse.
 
 \section{Posterior Computation}
 
@@ -297,7 +297,7 @@ VPC_h =
 {\tau_c^2 + \tau_h^2 + \pi^2/3}.
 \end{equation}
 
-This quantity describes the proportion of latent residual variance attributable specifically to differences between households. In contrast, while the household-plus-community correlation for two children in the same household is
+This quantity describes the proportion of latent residual variance attributable specifically to differences between households. The household-plus-community correlation for two children in the same household is
 
 \begin{equation}
 ICC_{h+c} =
@@ -309,7 +309,7 @@ Posterior distributions of these quantities will be calculated from posterior dr
 
 \section{Median Odds Ratio}
 
-The median odds ratio (MOR) is used to express random-effect heterogeneity on the odds-ratio scale. For a normally distributed random intercept with standard deviation (\tau),
+The median odds ratio (MOR) is used to express random-effect heterogeneity on the odds-ratio scale. For a normally distributed random intercept with standard deviation $\tau$,
 
 \begin{equation}
 MOR =
@@ -345,23 +345,43 @@ Predictive criteria will not be used mechanically to choose a single model if di
 
 \section{Survey-Weight Sensitivity Analysis}
 
-Because the GDHS uses unequal sampling probabilities, a dedicated sensitivity analysis will examine whether the main posterior conclusions change when survey weights are incorporated using a defensible pseudo-likelihood or other appropriate weighting strategy.
+Because the GDHS uses unequal sampling probabilities, a dedicated sensitivity analysis examines whether the main posterior conclusions change when the sampling weights are incorporated through a pseudo-likelihood. Let $w_i$ denote the household-member weight for child $i$. For the weighted sensitivity model, the weights are rescaled to have mean one,
 
-At minimum, the sensitivity analysis will compare:
+\begin{equation}
+w_i^* = \frac{w_i}{\bar w},
+\end{equation}
 
-\begin{enumerate}
-    \item the primary hierarchical specification;
-    \item a corresponding specification incorporating rescaled survey weights; and
-    \item weighted descriptive estimates used as external checks on model-implied population patterns.
-\end{enumerate}
+and the weighted log-likelihood contribution is
 
-Any differences in coefficients, credible intervals, variance components, and posterior predictive quantities will be reported transparently. The final thesis will specify the exact rescaling and likelihood implementation once the weighted models have been fitted and validated.
+\begin{equation}
+\ell_w(\theta)
+=
+\sum_{i=1}^{n}
+w_i^*
+\log p(y_i\mid\theta).
+\end{equation}
+
+This pseudo-posterior retains the hierarchical random effects while allowing children with larger survey weights to contribute proportionally more to the likelihood. The weighted specification is used as a sensitivity analysis rather than the primary inferential model because likelihood weighting can alter both posterior curvature and the interpretation of hierarchical variance components. Consequently, particular emphasis is placed on whether the substantive fixed-effect conclusions change under weighting.
 
 \section{Prior Sensitivity Analysis}
 
-Sensitivity to prior specification will be examined by refitting the principal model under alternative reasonable prior scales for fixed effects and hierarchical standard deviations. The analysis will focus on whether substantive conclusions, especially the household and community variance components and key odds ratios, are materially altered.
+Sensitivity to prior specification is assessed by refitting Model 3 under tighter and wider weakly regularizing priors. Under the tighter specification,
 
-A conclusion will be considered robust when its posterior magnitude and uncertainty remain substantively similar under reasonable prior alternatives.
+\begin{equation}
+\beta_r \sim \mathcal{N}(0,0.5^2),
+\qquad
+\tau_c,\tau_h \sim \text{Half-Normal}(0,0.5),
+\end{equation}
+
+whereas under the wider specification,
+
+\begin{equation}
+\beta_r \sim \mathcal{N}(0,1.5^2),
+\qquad
+\tau_c,\tau_h \sim \text{Half-Normal}(0,1.5).
+\end{equation}
+
+The intercept prior remains $\mathcal{N}(0,1.5^2)$ in all specifications. Robustness is evaluated by comparing posterior odds ratios and uncertainty intervals for the principal substantive coefficients, together with the direction and approximate scale of the hierarchical variance components.
 
 \section{Missing Data and Harmonized Samples}
 
@@ -369,7 +389,7 @@ Missing data will be handled transparently. The primary modelling analysis will 
 
 However, sequential models with different covariates can otherwise contain different observations. Therefore, model comparisons intended to assess the effect of adding predictors will also be repeated on a harmonized sample containing complete information for all variables involved in the compared models.
 
-The amount and pattern of missingness for key variables will be described. If missingness is sufficiently extensive to threaten complete-case inference, alternative strategies such as multiple imputation or an explicitly Bayesian missing-data model will be considered before final analysis. Such a decision will be made based on the observed data pattern rather than assumed in advance.
+The amount and pattern of missingness for key variables are described. Maternal education is missing for 425 children (8.6\% of the core analytic sample). The primary maternal-education model therefore uses complete linked maternal information, with Model 2 refitted on the same observations for a fair comparison. A full-sample missing-category sensitivity analysis is also considered to assess whether the main fixed-effect conclusions depend materially on the complete-case restriction.
 
 \section{Software and Reproducibility}
 
@@ -393,6 +413,6 @@ The pilot deliberately omits household random effects, WASH variables, maternal 
 
 \section{Chapter Summary}
 
-This chapter has described the design and planned analytical framework for the study. The 2022 GDHS provides a nationally representative, hierarchically sampled dataset suitable for investigating childhood stunting at the child, household, and community levels. The primary analysis uses Bayesian hierarchical logistic regression to estimate associations while partitioning residual heterogeneity across households and communities.
+This chapter has described the design and analytical framework for the study. The 2022 GDHS provides a nationally representative, hierarchically sampled dataset suitable for investigating childhood stunting at the child, household, and community levels. The primary analysis uses Bayesian hierarchical logistic regression to estimate associations while partitioning residual heterogeneity across households and communities.
 
-The modelling workflow proceeds sequentially from the completed community-level pilot to household-and-community models, followed by WASH and maternal-education extensions. Posterior inference will be evaluated using MCMC diagnostics, variance partitioning, median odds ratios, posterior predictive checks, predictive model comparison, survey-weight sensitivity, and prior sensitivity. Chapter Four will present the descriptive and modelling results after the final analysis has been completed.
+The modelling workflow proceeds sequentially from the completed community-level pilot to household-and-community models, followed by WASH and maternal-education extensions. Posterior inference is evaluated using MCMC diagnostics, variance partitioning, median odds ratios, prior sensitivity, and survey-weight sensitivity. Expanded posterior predictive checks and predictive model comparison will be generated from the final locked posterior objects. Chapter Four presents the descriptive and current modelling results.
