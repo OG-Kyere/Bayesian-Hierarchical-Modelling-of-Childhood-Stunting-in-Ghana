@@ -76,13 +76,13 @@ The current three-level analyses model children within households and households
 Key findings from the present posterior runs include:
 
 - **Household heterogeneity is substantially larger than community heterogeneity.** In Model 1, the posterior median household SD was 1.07 compared with a community SD of 0.42. The household VPC was approximately 0.25 and the community ICC approximately 0.04.
-- **Unimproved drinking-water source** remained associated with higher posterior odds of stunting after adjustment. In Model 3, the posterior median OR was 1.50 (95% posterior interval 1.14–2.00).
-- **Sanitation facility type** showed a weaker and more uncertain adjusted association in Model 3: OR 1.11 (0.87–1.43).
-- **Higher maternal education** was associated with substantially lower posterior odds of stunting relative to no formal education: OR 0.38 (0.19–0.70).
+- **Unimproved drinking-water source** remained associated with higher posterior odds of stunting after adjustment. In Model 3, the posterior median OR was 1.50 (95% posterior interval 1.15–1.99).
+- **Sanitation facility type** showed a weaker and more uncertain adjusted association in Model 3: OR 1.12 (0.86–1.46).
+- **Higher maternal education** was associated with substantially lower posterior odds of stunting relative to no formal education: OR 0.37 (0.20–0.65).
 - The **wealth gradient attenuated but persisted** after maternal education was added; richest versus poorest had OR 0.36 (0.20–0.63) in Model 3.
 - Posterior predictive checks reproduced the overall and age-specific stunting patterns reasonably well.
-- Harmonized Model 2 and Model 3 had very similar predictive performance; the WAIC difference was negligible relative to its uncertainty.
+- Harmonized Model 2 and Model 3 had very similar predictive performance under PSIS-LOO; Model 3 improved ELPD by only about 0.92 (SE 3.38), with no Model 3 observations above Pareto k = 0.70.
 
-The hierarchical variance parameters mix more slowly than the fixed effects in the current constrained execution environment. Their broad household-versus-community contrast is stable, but longer production runs will be used for the final locked submission.
+An extended 8-chain Model 3 run produced 4,000 retained posterior draws, zero divergences, BFMI between 0.51 and 0.66, and no tree-depth saturation. Fixed effects showed excellent convergence; the two hierarchical SDs remain the slowest-mixing quantities, with R-hat approximately 1.02.
 
 See `results/tables/`, `results/figures/`, and `thesis/chapter4_results.tex` for the current aggregate outputs.
