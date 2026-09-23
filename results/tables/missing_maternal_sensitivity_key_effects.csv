@@ -1,0 +1,10 @@
+term,median_or,l95,u95,p_direction
+male,1.444515,1.211031,1.704036,1.000
+age_24-35,2.903654,2.109892,4.102137,1.000
+wealth_richest,0.393877,0.237394,0.660644,1.000
+water_unimproved,1.347145,1.005940,1.737713,0.976
+sanitation_unimproved,1.147130,0.899104,1.477989,0.869
+maternal_education_missing,1.111728,0.803818,1.525580,0.733
+maternal_education_higher,0.380243,0.219845,0.633978,1.000
+maternal_education_primary,1.072264,0.802686,1.446719,0.679
+maternal_education_secondary,0.927209,0.740334,1.185294,0.711
