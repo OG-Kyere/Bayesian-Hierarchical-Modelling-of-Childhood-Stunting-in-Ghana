@@ -17,6 +17,7 @@ This directory contains only **aggregate, non-identifying derived outputs** from
 - `figures/model_variance_comparison.svg`: household/community SD comparison across models.
 - `tables/model3_ppc_summary.csv`: observed versus replicated prevalence for the Model 3 posterior predictive check.
 - `figures/model3_ppc_age.svg`: overall and age-specific posterior predictive check figure.
+- `tables/model_predictive_comparison.csv`: harmonized Model 2 versus Model 3 conditional WAIC comparison.
 
 ## What is deliberately not public
 
