@@ -211,3 +211,76 @@ For the locked thesis/manuscript run:
 - regenerate all posterior tables and figures from the final saved InferenceData files
 
 The current results are suitable for thesis drafting, but the final submitted variance-component estimates should come from that locked production run.
+
+
+## Extended production-style diagnostics and robustness update
+
+A later diagnostic pass used a NUMBA-backed PyMC execution route and substantially increased the final-model sampling.
+
+### Extended Model 3
+- eight independent chains;
+- 500 warmup + 500 retained draws per chain;
+- 4,000 retained posterior draws;
+- 0 divergences across all chains;
+- BFMI range: 0.51--0.66;
+- no maximum-tree-depth hits;
+- maximum fixed-effect R-hat: approximately 1.003;
+- minimum fixed-effect bulk ESS: above 2,200;
+- community SD R-hat: 1.021, bulk ESS: 544;
+- household SD R-hat: 1.018, bulk ESS: 524.
+
+The main fixed-effect posterior medians from this extended run were essentially unchanged:
+- male OR: 1.50 (1.24--1.82);
+- age 24--35 months OR: 2.91 (2.06--4.21);
+- richest vs poorest OR: 0.36 (0.20--0.64);
+- unimproved water OR: 1.50 (1.15--1.99);
+- unimproved/no sanitation OR: 1.12 (0.86--1.46);
+- maternal higher education OR: 0.37 (0.20--0.65).
+
+The extended variance estimates were:
+- community SD median: 0.389 (0.067--0.610);
+- household SD median: 1.234 (0.940--1.535);
+- community ICC median: 0.030;
+- household VPC median: 0.307;
+- community MOR median: 1.45;
+- household MOR median: 3.24.
+
+### PSIS-LOO
+Using pointwise log likelihood:
+- harmonized Model 2 ELPD-LOO: -2012.39;
+- extended Model 3 ELPD-LOO: -2011.47;
+- difference (Model 3 - Model 2): 0.92;
+- SE of difference: 3.38.
+
+Pareto-k:
+- Model 3 maximum k: 0.69, 0 observations above 0.70;
+- Model 2 maximum k: 0.79, 5 observations above 0.70;
+- neither model had k above 1.
+
+Interpretation: there is no meaningful predictive advantage for Model 3, although its PSIS diagnostics are cleaner.
+
+### Bayesian age functional-form sensitivity
+Replacing the six age categories with a cubic B-spline yielded:
+- unimproved water OR: 1.49 (1.12--2.00);
+- sanitation OR: 1.11 (0.86--1.44);
+- richest vs poorest OR: 0.35 (0.19--0.61);
+- male OR: 1.53 (1.27--1.86);
+- maternal higher education OR: 0.37 (0.20--0.67).
+
+The key conclusions are therefore not dependent on the age cut points.
+
+### Bayesian detailed-WASH sensitivity
+Relative to improved water:
+- surface water OR: 1.52 (1.10--2.08);
+- unprotected groundwater OR: 1.41 (0.90--2.21).
+
+Relative to improved sanitation:
+- open defecation OR: 1.23 (0.92--1.64);
+- other unimproved sanitation OR: 0.93 (0.68--1.31).
+
+This suggests that the binary water association is driven most clearly by surface-water exposure, while adjusted sanitation associations remain weak.
+
+### Updated diagnostic verdict
+The fixed-effect results are now strongly supported across longer sampling, prior sensitivity, survey-weight sensitivity, missing-data sensitivity, age functional-form sensitivity, WASH-coding sensitivity, GEE cross-checks, and posterior predictive checks.
+
+The only remaining notable computational caution is the slower mixing of the hierarchical SDs, whose R-hat values remain modestly above 1.01 despite bulk ESS values above 500 in the extended Model 3 run.
