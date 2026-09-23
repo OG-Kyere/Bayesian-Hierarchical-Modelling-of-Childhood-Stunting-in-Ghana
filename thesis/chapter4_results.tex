@@ -258,6 +258,21 @@ The principal fixed-effect findings were similar to the complete-case analysis. 
 
 The full-sample sensitivity model also retained the same broad clustering pattern: the posterior median community SD was approximately 0.385 and the household SD approximately 1.114. However, as in the other extended models, the household variance parameter mixed more slowly than the fixed effects, so these variance quantities are interpreted cautiously. Overall, the missing-data sensitivity analysis indicates that the principal fixed-effect conclusions are not strongly dependent on the complete-case restriction.
 
+\subsection{Posterior Predictive Checks}
+
+Posterior predictive checks were performed for Model 3 using replicated outcomes generated directly from the NUTS posterior draws. The observed unweighted stunting prevalence in the 4,503-child Model 3 sample was 18.45\%, while the mean replicated prevalence across two independent PPC runs was 18.41\%. The central 95\% posterior predictive range for overall prevalence was approximately 17.2\%--19.8\%.
+
+Age-specific predictive checks also showed close agreement between the observed and replicated data. For example, observed prevalence among children aged 24--35 months was 26.2\%, compared with a mean replicated prevalence of 26.0\% and a 95\% predictive range of approximately 22.4\%--29.9\%. For children aged 0--5 months, the observed prevalence was 13.1\%, compared with a replicated mean of 13.6\% and a predictive range of approximately 10.1\%--17.7\%. Across all six age groups, the observed prevalence fell comfortably within the corresponding posterior predictive interval.
+
+These checks indicate that Model 3 reproduces the overall stunting level and the main age pattern in the analysed data reasonably well. They do not by themselves establish that every aspect of the hierarchical dependence structure is perfectly represented.
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.90\textwidth]{model3_ppc_age}
+\caption{Observed and posterior-predictive stunting prevalence overall and by child age group for Model 3. Points show replicated posterior means and whiskers show 95\% posterior predictive intervals; observed values are shown separately.}
+\label{fig:model3_ppc_age}
+\end{figure}
+
 \subsection{Remaining Production Checks}
 
 The current results constitute the principal inferential analysis, but they are not yet the final locked publication analysis. Before thesis submission, the hierarchical variance parameters will be confirmed with longer production runs in a stable computational environment. Expanded posterior predictive checks and a predictive model-comparison analysis will also be generated from those final saved posterior objects.
@@ -266,4 +281,4 @@ The current results constitute the principal inferential analysis, but they are 
 
 The weighted descriptive analysis estimated a national childhood stunting prevalence of 17.4\%. The hierarchical models showed that residual heterogeneity is concentrated more strongly at the household level than at the community level. In Model 1, the household VPC was approximately 0.25 compared with a community ICC of approximately 0.04, and the household MOR was about 2.76 compared with a community MOR of about 1.49.
 
-After adjustment for demographic, socioeconomic, regional, household, and community structure, unimproved drinking-water source remained associated with higher posterior odds of stunting. Sanitation showed a weaker and less certain adjusted association. Maternal higher education was associated with substantially lower posterior odds of stunting, while primary and secondary education were not clearly separated from no formal education after full adjustment. The household variance remained substantial after WASH and maternal education were introduced, indicating that important unmeasured household-level influences remain. Prior, survey-weight, and missing-maternal-information sensitivity analyses broadly supported the main fixed-effect conclusions, although the water association was less certain under the weighted pseudo-posterior. Expanded posterior predictive checks, predictive model comparison, and longer confirmation runs for the hierarchical variance parameters remain before the final publication analysis is locked.
+After adjustment for demographic, socioeconomic, regional, household, and community structure, unimproved drinking-water source remained associated with higher posterior odds of stunting. Sanitation showed a weaker and less certain adjusted association. Maternal higher education was associated with substantially lower posterior odds of stunting, while primary and secondary education were not clearly separated from no formal education after full adjustment. The household variance remained substantial after WASH and maternal education were introduced, indicating that important unmeasured household-level influences remain. Prior, survey-weight, and missing-maternal-information sensitivity analyses broadly supported the main fixed-effect conclusions, although the water association was less certain under the weighted pseudo-posterior. Predictive model comparison, additional cluster-level predictive diagnostics, and longer confirmation runs for the hierarchical variance parameters remain before the final publication analysis is locked.
