@@ -1,8 +1,8 @@
 # Maternal & Child Nutrition — Title Page
 
-**Manuscript title:** Household and Community Heterogeneity in Childhood Stunting in Ghana: A Bayesian Hierarchical Analysis of the 2022 Demographic and Health Survey
+**Manuscript title:** Household and Community Heterogeneity in Childhood Stunting in Ghana
 
-**Short running title:** Household and community heterogeneity in Ghanaian stunting
+**Short running title:** Household heterogeneity in Ghanaian stunting
 
 **Author:** Kyere Ofosu Gideon
 
