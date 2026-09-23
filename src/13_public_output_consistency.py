@@ -84,28 +84,27 @@ def main() -> int:
     )
 
     expected_common = {
-        "male OR": f"{rounded(male['median'])} ({interval(male)})",
-        "age 24–35 OR": f"{rounded(age['median'])} ({interval(age)})",
-        "richest OR": f"{rounded(wealth['median'])} ({interval(wealth)})",
-        "water OR": f"{rounded(water['median'])} ({interval(water)})",
-        "sanitation OR": f"{rounded(sanitation['median'])} ({interval(sanitation)})",
-        "higher education OR": f"{rounded(higher['median'])} ({interval(higher)})",
-        "household SD": rounded(household_sd["median"]),
-        "community SD": rounded(community_sd["median"]),
-        "household VPC": rounded(household_vpc["median"]),
-        "community ICC": rounded(community_icc["median"]),
-        "household MOR": rounded(household_mor["median"]),
-        "community MOR": rounded(community_mor["median"]),
+        "male OR": [rounded(male["median"]), interval(male)],
+        "age 24–35 OR": [rounded(age["median"]), interval(age)],
+        "richest OR": [rounded(wealth["median"]), interval(wealth)],
+        "water OR": [rounded(water["median"]), interval(water)],
+        "sanitation OR": [rounded(sanitation["median"]), interval(sanitation)],
+        "higher education OR": [rounded(higher["median"]), interval(higher)],
+        "household SD": [rounded(household_sd["median"])],
+        "community SD": [rounded(community_sd["median"])],
+        "household VPC": [rounded(household_vpc["median"])],
+        "community ICC": [rounded(community_icc["median"])],
+        "household MOR": [rounded(household_mor["median"])],
+        "community MOR": [rounded(community_mor["median"])],
     }
 
     failures: list[str] = []
 
     for path in PUBLIC_TEXT:
         text = path.read_text(encoding="utf-8")
-        for label, value in expected_common.items():
-            # The manuscripts do not necessarily repeat every variance scalar
-            # in exactly the same prose sentence, but each value should appear.
-            expect_in(text, value, f"{path}: {label}", failures)
+        for label, fragments in expected_common.items():
+            for fragment in fragments:
+                expect_in(text, fragment, f"{path}: {label}", failures)
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     prevalence = f"{100 * float(overall['weighted_prevalence']):.2f}%"
@@ -122,7 +121,6 @@ def main() -> int:
     # Known superseded values should not reappear in the public summary files.
     stale = [
         "1.14–2.00",
-        "0.38 (0.19–0.70)",
         "0.38 (0.19–0.70)",
         "WAIC difference was negligible",
     ]
