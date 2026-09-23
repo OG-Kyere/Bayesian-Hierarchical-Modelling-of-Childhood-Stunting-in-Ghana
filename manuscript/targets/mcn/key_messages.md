@@ -1,9 +1,9 @@
 # Key Messages
 
-- Residual childhood-stunting heterogeneity in the 2022 Ghana DHS was substantially larger between households than between survey communities.
-- The household-level variance remained large after adjustment for child characteristics, wealth, region, residence, WASH, and maternal education.
-- Unimproved drinking-water source was associated with higher posterior odds of stunting, with the clearest detailed association observed for surface-water use.
-- Higher maternal education and greater household wealth were associated with lower posterior odds of stunting.
-- The main conclusions were stable across multiple sensitivity analyses, although water estimates became less precise under survey-weighted pseudo-posterior analysis.
+- Most of the residual clustering in childhood stunting was between households rather than between survey communities.
+- The household component remained large after socioeconomic factors, WASH, and maternal education were added.
+- Surface-water use showed the clearest signal in the more detailed drinking-water sensitivity analysis.
+- Higher maternal education and greater household wealth were associated with lower odds of stunting.
+- The main conclusions changed little when age, priors, WASH coding, and missing maternal education were handled differently.
 
-Approximate length: 88 words.
+Approximate length: 74 words.
