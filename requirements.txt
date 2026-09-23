@@ -7,3 +7,4 @@ pytensor>=2.35,<3
 matplotlib>=3.9,<4
 statsmodels>=0.14,<1
 scipy>=1.14,<2
+patsy>=1,<2
