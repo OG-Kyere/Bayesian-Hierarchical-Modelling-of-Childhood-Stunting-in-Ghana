@@ -6,7 +6,7 @@ This repository contains the reproducible analysis, thesis materials, and manusc
 
 The project investigates individual-, household-, and community-level factors associated with childhood stunting in Ghana using Bayesian hierarchical logistic regression.
 
-## Planned modelling sequence
+## Completed modelling and robustness workflow
 
 1. Baseline community-level hierarchical model.
 2. Household + community random-intercept model.
@@ -14,8 +14,12 @@ The project investigates individual-, household-, and community-level factors as
 4. Extension with maternal education.
 5. Survey-weight sensitivity analysis.
 6. Prior sensitivity analysis.
-7. Posterior predictive checks and model comparison.
-8. Publication-ready tables, figures, and manuscript outputs.
+7. Missing-maternal-information sensitivity.
+8. Posterior predictive checks.
+9. PSIS-LOO predictive comparison.
+10. Age functional-form sensitivity using splines.
+11. Detailed WASH-coding sensitivity.
+12. Publication-ready tables, figures, thesis chapters, and journal manuscript draft.
 
 ## Data access and confidentiality
 
@@ -25,7 +29,7 @@ The analysis code expects locally stored DHS recode files and produces only deri
 
 ## Project status
 
-Ongoing thesis research intended for publication and PhD application support.
+Core analysis complete; thesis draft and journal-style manuscript are in active finalization. Remaining work is limited to final production Monte Carlo tightening of the hierarchical SDs, bibliography verification, institution/journal formatting, and submission-specific statements.
 
 
 ## Current validated descriptive results
