@@ -101,7 +101,8 @@ def fit_hierarchical(d, X, output_stem, seed=20260922):
 
         idata = pm.sample(
             draws=1000, tune=1000, chains=4, target_accept=0.95,
-            random_seed=seed, return_inferencedata=True
+            random_seed=seed, return_inferencedata=True,
+            idata_kwargs={"log_likelihood": True},
         )
         pm.sample_posterior_predictive(
             idata, var_names=["stunted"], random_seed=seed, extend_inferencedata=True
