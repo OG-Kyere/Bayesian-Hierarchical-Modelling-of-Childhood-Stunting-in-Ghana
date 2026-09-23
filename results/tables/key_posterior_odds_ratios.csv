@@ -1,0 +1,22 @@
+model,term,median_or,ci95_lower,ci95_upper,rhat,ess_basic
+Model 1,Male vs female,1.446,1.231,1.719,1.002,1600
+Model 1,Age 24-35 vs 0-5,2.955,2.099,4.200,1.002,671
+Model 1,Middle vs poorest,0.580,0.416,0.787,1.000,1222
+Model 1,Richer vs poorest,0.537,0.384,0.775,0.999,1101
+Model 1,Richest vs poorest,0.245,0.154,0.383,0.999,1600
+Model 1,Rural vs urban,0.888,0.689,1.133,1.005,1600
+Model 2 full,Unimproved water,1.360,1.052,1.781,1.000,1200
+Model 2 full,Unimproved/no sanitation,1.158,0.911,1.447,1.007,1200
+Model 2 harmonized,Unimproved water,1.512,1.163,1.985,0.999,1200
+Model 2 harmonized,Unimproved/no sanitation,1.127,0.865,1.446,1.000,1200
+Model 3,Male vs female,1.499,1.236,1.826,1.004,1200
+Model 3,Age 24-35 vs 0-5,2.981,1.995,4.354,1.004,623
+Model 3,Middle vs poorest,0.683,0.477,0.993,1.000,1101
+Model 3,Richer vs poorest,0.711,0.474,1.112,1.000,948
+Model 3,Richest vs poorest,0.356,0.196,0.631,1.002,1200
+Model 3,Rural vs urban,0.835,0.641,1.100,0.999,1200
+Model 3,Unimproved water,1.504,1.139,1.996,1.004,1200
+Model 3,Unimproved/no sanitation,1.111,0.865,1.434,0.999,1200
+Model 3,Primary vs no maternal education,1.040,0.769,1.416,0.999,1200
+Model 3,Secondary vs no maternal education,0.896,0.696,1.168,1.003,1134
+Model 3,Higher vs no maternal education,0.377,0.190,0.699,1.006,1200
