@@ -14,7 +14,7 @@ The thesis will contain the full methodological detail and complete sensitivity-
 
 ## Overleaf workflow
 
-The thesis is written in LaTeX and is designed to be compiled in Overleaf with `thesis/main.tex` selected as the main document. Upload or synchronize the entire repository so that `main.tex` can access the aggregate figures under `results/figures/`.
+The thesis is written in LaTeX and is designed for a full-repository Overleaf sync. Select the **root-level `main.tex`** as the Overleaf main document. It includes the chapter files under `thesis/` and accesses the aggregate figures under `results/figures/`. The older `thesis/main.tex` is retained as a local-folder entry point, but the root `main.tex` is the recommended Overleaf entry point.
 
 Current chapter files:
 - `chapter1_introduction.tex`
