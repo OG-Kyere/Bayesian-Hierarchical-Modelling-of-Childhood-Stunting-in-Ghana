@@ -1,0 +1,2 @@
+posterior_draws,divergences,min_bfmi,max_bfmi,max_fixed_effect_rhat,min_fixed_effect_bulk_ess,community_sd_rhat,community_sd_bulk_ess,household_sd_rhat,household_sd_bulk_ess,max_tree_depth_observed,reached_max_treedepth
+4000,0,0.5141501777875618,0.6601197294003776,1.0026882668279955,2273.958760454856,1.0211271803272388,543.5061621095813,1.0176339197014028,523.8275929803233,6,0
