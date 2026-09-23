@@ -335,7 +335,7 @@ The preliminary checks compare:
     \item stunting prevalence across child age groups.
 \end{itemize}
 
-The final analysis will broaden these checks to include additional subgroup prevalences and, where useful, distributions of cluster- or household-level stunting counts. A model will not be considered adequate solely because coefficient diagnostics converge; it must also reproduce substantively important features of the observed data.
+For the current Model 3 analysis, posterior predictive checks compare the observed overall prevalence and age-specific prevalence with replicated datasets generated directly from the fitted posterior draws. The final production analysis will additionally examine selected household- or community-level count distributions where computationally feasible. A model is not considered adequate solely because coefficient diagnostics converge; it must also reproduce substantively important features of the observed data.
 
 \section{Model Comparison}
 
@@ -415,4 +415,4 @@ The pilot deliberately omits household random effects, WASH variables, maternal 
 
 This chapter has described the design and analytical framework for the study. The 2022 GDHS provides a nationally representative, hierarchically sampled dataset suitable for investigating childhood stunting at the child, household, and community levels. The primary analysis uses Bayesian hierarchical logistic regression to estimate associations while partitioning residual heterogeneity across households and communities.
 
-The modelling workflow proceeds sequentially from the completed community-level pilot to household-and-community models, followed by WASH and maternal-education extensions. Posterior inference is evaluated using MCMC diagnostics, variance partitioning, median odds ratios, prior sensitivity, and survey-weight sensitivity. Expanded posterior predictive checks and predictive model comparison will be generated from the final locked posterior objects. Chapter Four presents the descriptive and current modelling results.
+The modelling workflow proceeds sequentially from the completed community-level pilot to household-and-community models, followed by WASH and maternal-education extensions. Posterior inference is evaluated using MCMC diagnostics, variance partitioning, median odds ratios, prior sensitivity, and survey-weight sensitivity. Posterior predictive checks of overall and age-specific prevalence are reported in Chapter Four. Predictive model comparison and any additional cluster-level predictive diagnostics will be generated from the final locked posterior objects. Chapter Four presents the descriptive and current modelling results.
