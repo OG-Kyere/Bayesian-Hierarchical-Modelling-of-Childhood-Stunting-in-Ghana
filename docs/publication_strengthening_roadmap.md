@@ -1,86 +1,62 @@
-# Publication-strengthening roadmap
+# What is left before submission
 
-The project is already suitable for thesis drafting. The remaining work is aimed at making the manuscript more defensible and reviewer-resistant rather than simply adding more variables.
+Most of the statistical work is now done. This file records the remaining jobs that would actually improve the paper, rather than adding more analysis for its own sake.
 
-## Highest-priority upgrades
+## Final production run
 
-### 1. Final production MCMC
-Run all preferred models in the pinned environment with at least four chains, 1,000 warmup iterations, and 1,000 retained draws per chain. Require:
+The fixed effects are already stable across the main model and the sensitivity analyses. The only persistent computational weakness is the slower mixing of the household and community SDs.
+
+The strengthened Model 3 run used eight chains and 4,000 retained posterior draws. It had:
 
 - zero divergences;
-- R-hat <= 1.01 for all reported parameters;
-- bulk and tail ESS >= 400 for key fixed effects and variance parameters;
-- acceptable BFMI;
-- no problematic tree-depth saturation.
+- BFMI between 0.51 and 0.66;
+- no tree-depth saturation;
+- fixed-effect R-hat values near 1.00;
+- bulk ESS above 500 for both random-effect SDs.
 
-Use `src/10_final_production_diagnostics.py` to summarize the locked fits.
+The SD R-hat values are still around 1.02. A longer clean run would be useful if the available computing environment makes that practical. It is not a reason to keep changing the model.
 
-### 2. Predictive comparison with PSIS-LOO
-The current WAIC difference between harmonized Model 2 and Model 3 is negligible relative to its uncertainty, and the present WAIC diagnostics are not ideal. The final comparison should therefore use PSIS-LOO with Pareto-k diagnostics. If influential observations make PSIS unreliable, use exact/K-fold alternatives rather than forcing a ranking.
+## Model comparison
 
-### 3. Functional-form sensitivity for age
-The main analysis uses six age groups. This is interpretable but arbitrary. A spline-age sensitivity model is included in `src/11_age_functional_form_sensitivity.py`.
+The old WAIC-only comparison has been superseded by PSIS-LOO.
 
-An independent GEE check already shows that replacing age categories with a cubic spline barely changes the major fixed-effect conclusions.
+For harmonized Model 2 versus Model 3, the ELPD difference is only about 0.92 with SE 3.38. Model 3 has no Pareto-k values above 0.70; Model 2 has five.
 
-### 4. WASH coding sensitivity
-The primary model uses improved/unimproved source/facility types. The detailed sensitivity model in `src/12_wash_coding_sensitivity.py` separates:
+I treat those models as predictively similar. Maternal education stays in Model 3 because it is substantively relevant, not because Model 3 clearly predicts better.
 
-- improved water;
-- unprotected groundwater;
-- surface water;
-- improved sanitation;
-- other unimproved sanitation;
-- open defecation.
+## Robustness checks already completed
 
-The independent GEE diagnostic suggests that the binary water association is driven most clearly by surface-water exposure, while adjusted sanitation associations remain weak.
+The main conclusions have now been checked against:
 
-## Findings from the new independent robustness check
+- tighter and wider priors;
+- a survey-weight pseudo-posterior;
+- missing maternal education retained as a category;
+- a spline rather than grouped age;
+- more detailed WASH coding;
+- an independent GEE clustering analysis;
+- posterior predictive checks.
 
-On the 4,503-child complete maternal-information sample, household-clustered GEE produced:
+The age specification makes very little difference to the main coefficients. In the detailed WASH model, the water association is clearest for surface-water use. Sanitation remains weak after adjustment.
 
-### Age functional-form robustness
-Changing from age categories to a cubic spline gave almost identical adjusted estimates:
+## What I do not plan to add
 
-- unimproved water OR: 1.40 vs 1.39;
-- unimproved sanitation OR: 1.10 vs 1.10;
-- higher maternal education OR: 0.40 vs 0.39;
-- male sex OR: 1.40 vs 1.42;
-- richest vs poorest OR: 0.43 vs 0.43.
+I do not plan to keep adding covariates simply to make the model look more complicated. I also do not plan to add spatial modelling unless it becomes a separate research question.
 
-This suggests the key conclusions are not artifacts of the six age bands.
+The paper is stronger when it stays focused on:
 
-### More detailed WASH coding
-Compared with improved water sources:
+1. household versus community residual heterogeneity;
+2. how that pattern changes after WASH and maternal education;
+3. whether the conclusions survive reasonable alternative specifications.
 
-- surface water OR: 1.43 (95% CI 1.12–1.83);
-- unprotected groundwater OR: 1.34 (0.93–1.94).
+## Submission work still pending
 
-Compared with improved sanitation:
+The main remaining tasks are practical:
 
-- open defecation OR: 1.18 (0.93–1.50);
-- other unimproved sanitation OR: 0.94 (0.70–1.26).
+- finalize authorship and affiliations;
+- confirm the submitting institution's ethics/exemption wording;
+- freeze the final software environment;
+- render references in the journal's exact style;
+- verify the final manuscript against the saved aggregate result tables;
+- run one longer variance-component fit if computing resources allow it.
 
-These are diagnostic GEE estimates rather than the final Bayesian results. They motivate the Bayesian detailed-WASH sensitivity analysis rather than replacing it.
-
-## What not to do
-
-- Do not keep adding unrelated covariates simply to make the thesis look more complex.
-- Do not describe associations as causal.
-- Do not claim Bayesian modelling of stunting in Ghana is novel by itself.
-- Do not rank Model 2 and Model 3 strongly when predictive differences are negligible.
-- Do not interpret binary improved/unimproved WASH variables as complete JMP service levels.
-- Do not report random-effect variance estimates as final until the longer production runs meet the diagnostic thresholds.
-
-## Manuscript contribution to emphasize
-
-The strongest contribution remains the combination of:
-
-1. the latest nationally representative 2022 Ghana DHS;
-2. explicit separation of household and community heterogeneity;
-3. sequential WASH and maternal-education extensions;
-4. same-sample model comparisons;
-5. survey-weight, prior, missing-data, functional-form, and WASH-coding sensitivity;
-6. transparent posterior predictive and predictive-model diagnostics.
-
-This is stronger than presenting the paper as merely another list of stunting predictors.
+At this point, clarity and reproducibility matter more than extra model complexity.
