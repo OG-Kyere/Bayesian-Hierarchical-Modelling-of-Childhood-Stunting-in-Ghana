@@ -1,27 +1,29 @@
-# Journal manuscript
+# Manuscript
 
-This folder contains a publication-oriented manuscript derived from the thesis.
+This folder contains the journal-paper version of the project.
 
-## Manuscript focus
+The thesis covers the full analysis. The paper is narrower. It focuses on the result that turned out to be the most interesting statistically: **the residual household variation in stunting is much larger than the residual community variation once both levels are modelled together.**
 
-The paper is intentionally narrower than the thesis. Its central contribution is:
-
-> separating residual household and community heterogeneity in childhood stunting using the 2022 Ghana DHS, then examining whether that hierarchy changes after WASH and maternal education are introduced.
-
-This framing avoids claiming that Bayesian or multilevel stunting analysis in Ghana is itself novel.
+That is the thread I want the manuscript to keep.
 
 ## Files
 
-- `main.tex` — standalone journal-style manuscript
-- `supplement.tex` — diagnostic and sensitivity-analysis supplement
+- `main.tex` — general manuscript version
+- `supplement.tex` — diagnostics and sensitivity analyses
+- `results_snapshot.md` — numerical values currently used in the paper
+- `reviewer_objections.md` — questions a skeptical reviewer is likely to ask
+- `strobe_self_audit.md` — reporting check against STROBE
+- `submission_gap_audit.md` — what is still missing before submission
+- `targets/mcn/` — version prepared for *Maternal & Child Nutrition*
 
-Both compile against the public figures under `../results/figures/` and the shared bibliography under `../thesis/references.bib`.
+## Numbers currently used in the paper
 
-## Current key results used in the manuscript
+The core sample has 4,928 children in 3,545 households and 616 survey communities. Weighted stunting prevalence is 17.4%.
 
-- weighted stunting prevalence: 17.4% (95% CI 15.8–18.9)
-- final household SD: 1.23
-- final community SD: 0.39
+The strengthened final Model 3 gives:
+
+- household SD: 1.23
+- community SD: 0.39
 - household VPC: 0.31
 - community ICC: 0.03
 - household MOR: 3.24
@@ -32,12 +34,20 @@ Both compile against the public figures under `../results/figures/` and the shar
 - male vs female OR: 1.50 (1.24–1.82)
 - age 24–35 vs 0–5 months OR: 2.91 (2.06–4.21)
 
-## Before journal submission
+Those values are also stored in `results_snapshot.md` so that manuscript edits can be checked against one place.
 
-1. Finalize co-authorship and affiliations.
-2. Select a target journal and reformat to its author instructions.
-3. Confirm whether the journal requires a structured abstract and specific word limit.
-4. Re-run the final preferred models in the pinned environment if exact variance-component R-hat <= 1.01 is required.
-5. Freeze the final posterior objects and regenerate all tables/figures from them.
-6. Add data-availability, ethics, funding, conflicts-of-interest, and author-contribution statements in the journal's required format.
-7. Verify every bibliography entry and DOI.
+## Journal version
+
+The first target currently being prepared is *Maternal & Child Nutrition*. The blinded manuscript, title page, key messages, cover letter, reference check, and submission checklist are under:
+
+```text
+manuscript/targets/mcn/
+```
+
+The paper is kept shorter than the thesis on purpose. Most of the detailed convergence checks and sensitivity results belong in the supplement rather than the main text.
+
+## What still needs to be completed
+
+Before submission, I still need to finalize the author list and affiliations, funding/conflict statements, the submitting institution's ethics wording, and the final journal reference formatting. A clean production rerun would also be useful if I can improve the two random-effect SD R-hat values beyond the current ~1.02.
+
+The analysis itself is not being expanded with extra covariates just for complexity. At this point, the priority is accuracy, reproducibility, and a clear paper.
