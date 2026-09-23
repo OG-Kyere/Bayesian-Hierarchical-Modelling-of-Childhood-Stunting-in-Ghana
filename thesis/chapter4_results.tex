@@ -138,18 +138,108 @@ These crude differences should not be interpreted causally because WASH conditio
 
 \section{Household and Community Clustering}
 
-The structure of the analytic data demonstrates that stunting observations are not statistically independent. More than half of the children belonged to households containing at least one additional eligible child, and all children were nested within survey communities.
-
-The completed community-level pilot model estimated a non-negligible community variance component and supported the use of a hierarchical framework. However, that model did not include household random effects and is therefore treated as preliminary. The next model separates household-level and community-level heterogeneity to determine whether part of the variation previously attributed to communities is actually shared within households.
+The structure of the analytic data demonstrates that stunting observations are not statistically independent. More than half of the children belonged to households containing at least one additional eligible child, and all children were nested within survey communities. An independent GEE diagnostic also indicated substantially stronger residual dependence within households than within communities, with exchangeable working correlations of approximately 0.154 and 0.024, respectively. These GEE quantities are not interchangeable with the Bayesian variance components reported below; they are used only as an independent check on the presence and relative scale of clustering.
 
 \section{Bayesian Hierarchical Model Results}
 
-The final Bayesian model results will be presented after completion of the three-level model sequence described in Chapter Three. This section will report posterior odds ratios, 95\% credible intervals, household and community variance components, intraclass correlation coefficients, median odds ratios, convergence diagnostics, posterior predictive checks, and model-comparison results.
+Three Bayesian hierarchical extensions were examined after the community-only pilot. Model 1 included both household and community random intercepts alongside the core child, household-wealth, residence, and regional covariates. Model 2 added drinking-water and sanitation source/facility type. Model 3 added maternal education and was fitted to the 4,503 children with linked maternal-education information. To separate the effect of maternal education from the effect of changing the analysis sample, Model 2 was also refitted on the same 4,503-child harmonized sample.
 
-No final inferential conclusions are drawn from the community-only pilot model because the thesis is designed to evaluate household clustering, WASH, maternal education, survey-weight sensitivity, and prior sensitivity before selecting the final specification.
+Across all of these fits, no divergent NUTS transitions were observed. Fixed-effect coefficients showed good cross-chain agreement, with $\hat R$ values close to 1.00. The hierarchical standard-deviation parameters mixed more slowly than the fixed effects; maximum $\hat R$ values were approximately 1.018 for Model 1, 1.012 for Model 2 on the full sample, 1.036 for the harmonized Model 2, and 1.033 for Model 3. Consequently, the direction and magnitude of the fixed-effect findings are considered stable, while the exact higher-level variance estimates will be confirmed with longer production runs before final thesis submission.
+
+\subsection{Model 1: Household and Community Random Effects}
+
+Introducing a household random intercept revealed substantially more residual heterogeneity between households than between communities. The posterior median community-level standard deviation was 0.416 (95\% posterior interval: 0.159--0.590), whereas the household-level standard deviation was 1.066 (0.774--1.346).
+
+On the latent logistic scale, the median community ICC was 0.038, while the household-specific variance partition coefficient was 0.246. The correlation for two otherwise similar children from the same household, which includes both shared household and shared community variation, was 0.285. Expressed on the odds-ratio scale, the community MOR was 1.49 and the household MOR was 2.76. Thus, after adjustment for the measured covariates, unexplained differences between households were substantially larger than unexplained differences between communities.
+
+The fixed-effect pattern was broadly consistent with the earlier pilot. Boys had higher posterior odds of stunting than girls (OR 1.45, 95\% posterior interval: 1.23--1.72). Children aged 24--35 months had approximately three times the odds of stunting compared with children aged 0--5 months (OR 2.95, 2.10--4.20). Relative to the poorest quintile, the middle (OR 0.58, 0.42--0.79), richer (OR 0.54, 0.38--0.78), and richest (OR 0.25, 0.15--0.38) groups had lower posterior odds. Rural residence was not clearly separated from urban residence after adjustment (OR 0.89, 0.69--1.13).
+
+\subsection{Model 2: Addition of Water and Sanitation}
+
+In the full-sample WASH model, children living in households using an unimproved drinking-water source had higher posterior odds of stunting than those using an improved source (OR 1.36, 95\% posterior interval: 1.05--1.78). The posterior probability that the corresponding log-odds coefficient was positive was approximately 0.989. In contrast, the sanitation comparison was less decisive after adjustment: the OR for an unimproved or absent sanitation facility was 1.16 (0.91--1.45), with posterior probability of a positive coefficient of approximately 0.872.
+
+Adding the WASH variables did not eliminate the hierarchical structure. The posterior median community SD changed from 0.416 in Model 1 to 0.390 in Model 2, while the household SD changed from 1.066 to 1.100. The corresponding household VPC remained substantial at approximately 0.260. These changes are small relative to the posterior uncertainty and do not support the interpretation that the WASH variables explain most of the residual household heterogeneity.
+
+\subsection{Model 3: Addition of Maternal Education}
+
+For the maternal-education analysis, Model 2 was first refitted to the 4,503 children with non-missing maternal education. On this harmonized sample, unimproved water remained associated with higher posterior odds of stunting (OR 1.51, 1.16--1.98), whereas the sanitation comparison remained less clearly separated from one (OR 1.13, 0.87--1.45).
+
+After maternal education was added in Model 3, the posterior association for unimproved drinking water remained essentially unchanged (OR 1.50, 1.14--2.00), with $P(\text{OR}>1\mid\text{data})\approx0.998$. The sanitation estimate remained comparatively uncertain (OR 1.11, 0.87--1.43; $P(\text{OR}>1\mid\text{data})\approx0.79$).
+
+Maternal higher education showed the clearest education association. Relative to children whose mothers had no formal education, children whose mothers had higher education had substantially lower posterior odds of stunting (OR 0.38, 0.19--0.70), with $P(\text{OR}<1\mid\text{data})\approx0.999$. Primary education was not clearly separated from no education (OR 1.04, 0.77--1.42), and the secondary-education estimate was also compatible with a range of modest protective or null associations (OR 0.90, 0.70--1.17).
+
+The wealth gradient attenuated after maternal education entered the model. For example, the richest-versus-poorest OR changed from 0.26 in the harmonized WASH model to 0.36 in Model 3, although the posterior interval remained clearly below one (0.20--0.63). This attenuation is consistent with overlap between maternal education and household socioeconomic position, but the cross-sectional design does not permit a causal mediation interpretation.
+
+\begin{table}[H]
+\centering
+\caption{Selected posterior odds ratios from the hierarchical models}
+\label{tab:key_posterior_or}
+\begin{tabular}{lll}
+\toprule
+Model and comparison & Posterior median OR & 95\% posterior interval \\
+\midrule
+Model 1: Male vs female & 1.45 & 1.23--1.72 \\
+Model 1: Age 24--35 vs 0--5 months & 2.95 & 2.10--4.20 \\
+Model 1: Richest vs poorest & 0.25 & 0.15--0.38 \\
+Model 2 full: Unimproved water & 1.36 & 1.05--1.78 \\
+Model 2 full: Unimproved/no sanitation & 1.16 & 0.91--1.45 \\
+Model 3: Unimproved water & 1.50 & 1.14--2.00 \\
+Model 3: Unimproved/no sanitation & 1.11 & 0.87--1.43 \\
+Model 3: Maternal primary vs none & 1.04 & 0.77--1.42 \\
+Model 3: Maternal secondary vs none & 0.90 & 0.70--1.17 \\
+Model 3: Maternal higher vs none & 0.38 & 0.19--0.70 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.95\textwidth]{model3_posterior_or_forest}
+\caption{Selected posterior odds ratios from Model 3 with 95\% posterior intervals.}
+\label{fig:model3_forest}
+\end{figure}
+
+\subsection{Comparison of Household and Community Heterogeneity Across Models}
+
+Table~\ref{tab:variance_comparison} summarizes the random-effect results. Household heterogeneity remained substantially larger than community heterogeneity throughout the model sequence. On the full analytic sample, the community SD decreased slightly after WASH was added, from 0.416 to 0.390, whereas the household SD remained close to or above 1.0. On the harmonized maternal-education sample, the household SD was approximately 1.22 before adding maternal education and 1.24 after it was added. Given the overlapping posterior intervals and slower mixing of these variance parameters, the small numerical increases should not be interpreted as evidence that maternal education increases unexplained heterogeneity. Rather, the central finding is that substantial household-level residual variation persists after WASH and maternal education are included.
+
+\begin{table}[H]
+\centering
+\caption{Posterior summaries of hierarchical heterogeneity across models}
+\label{tab:variance_comparison}
+\begin{tabular}{lcccc}
+\toprule
+Model & Community SD & Household SD & Community ICC & Household VPC \\
+\midrule
+Model 1 & 0.416 & 1.066 & 0.038 & 0.246 \\
+Model 2 full & 0.390 & 1.100 & 0.033 & 0.260 \\
+Model 2 harmonized & 0.391 & 1.222 & 0.031 & 0.301 \\
+Model 3 & 0.411 & 1.239 & 0.034 & 0.307 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.4em}
+\begin{minipage}{0.94\textwidth}
+\footnotesize
+\textit{Note:} SD denotes the latent-scale random-intercept standard deviation. ICC is the community variance share on the latent logistic scale. Household VPC is the household-specific latent variance share. Model 2 harmonized and Model 3 use the same 4,503-child analysis sample.
+\end{minipage}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.95\textwidth]{model_variance_comparison}
+\caption{Posterior medians and 95\% posterior intervals for household and community random-effect standard deviations across models.}
+\label{fig:variance_comparison}
+\end{figure}
+
+\section{Current Diagnostic Status and Remaining Sensitivity Analyses}
+
+The fixed-effect parameters in Models 1--3 showed satisfactory chain agreement and no divergent transitions were observed. The hierarchical variance parameters were more computationally demanding, particularly in the harmonized Model 2 and Model 3, where $\hat R$ for the community SD was approximately 1.036 and 1.033, respectively. These values do not overturn the broad conclusion that household heterogeneity is substantially larger than community heterogeneity, because the household/community contrast is large and consistent across models, but they indicate that longer production runs are warranted before final submission.
+
+The results in this section therefore represent the current inferential analysis rather than the final locked publication analysis. Prior-sensitivity analysis, survey-weight sensitivity, expanded posterior predictive checks, predictive model comparison, and longer-chain confirmation of the hierarchical variance components remain to be completed before the final discussion and conclusions are written.
 
 \section{Chapter Summary}
 
-The weighted descriptive analysis estimated a national childhood stunting prevalence of approximately 17.4\% in the analytic sample. Stunting was highest among children aged 24--35 months, boys, children from poorer households, rural residents, and children living in several northern regions. A strong gradient was also observed across maternal education categories.
+The weighted descriptive analysis estimated a national childhood stunting prevalence of 17.4\%. The hierarchical models showed that residual heterogeneity is concentrated more strongly at the household level than at the community level. In Model 1, the household VPC was approximately 0.25 compared with a community ICC of approximately 0.04, and the household MOR was about 2.76 compared with a community MOR of about 1.49.
 
-The data contain meaningful household and community clustering, providing empirical support for the hierarchical modelling strategy. The Bayesian models will determine which of these descriptive differences persist after adjustment and will quantify how much residual heterogeneity is attributable to households and communities.
+After adjustment for demographic, socioeconomic, regional, household, and community structure, unimproved drinking-water source remained associated with higher posterior odds of stunting. Sanitation showed a weaker and less certain adjusted association. Maternal higher education was associated with substantially lower posterior odds of stunting, while primary and secondary education were not clearly separated from no formal education after full adjustment. The household variance remained substantial after WASH and maternal education were introduced, indicating that important unmeasured household-level influences remain. These findings will be subjected to the planned prior, survey-weight, and predictive sensitivity analyses before the final thesis discussion is completed.
