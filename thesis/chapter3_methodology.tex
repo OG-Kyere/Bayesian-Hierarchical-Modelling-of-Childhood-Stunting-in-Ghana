@@ -96,7 +96,7 @@ The community identifier is based on the DHS cluster variable \texttt{hv001}. A 
 
 Descriptive estimates intended to represent the Ghanaian population will account for the DHS sampling weights. The household-member sampling weight is stored in \texttt{hv005} and will be rescaled according to DHS conventions before use in weighted descriptive statistics.
 
-Weighted estimates will be used for quantities such as national stunting prevalence and weighted subgroup prevalence. Design-based standard errors and 95\% confidence intervals for descriptive prevalence estimates are calculated by Taylor linearization using \texttt{hv021} as the primary sampling unit and \texttt{hv022} as the sampling stratum. Unweighted counts will be reported where they describe the actual analytic sample size.
+Weighted estimates are used for quantities such as national stunting prevalence and weighted subgroup prevalence. Design-based standard errors and 95\% confidence intervals for descriptive prevalence estimates are calculated by Taylor linearization using \texttt{hv021} as the primary sampling unit and \texttt{hv022} as the sampling stratum. Unweighted counts are reported where they describe the actual analytic sample size.
 
 The handling of survey weights in Bayesian hierarchical inference requires additional care because weighting, clustering, and hierarchical random effects address different aspects of the data-generating and sampling processes. Therefore, the study does not treat the survey weight as a mechanical replacement for multilevel structure. The primary hierarchical model is fitted without likelihood weighting, while a rescaled survey-weight pseudo-posterior is used as a sensitivity analysis.
 
@@ -182,7 +182,7 @@ The modelling strategy is deliberately sequential:
     \item[Model 3:] Model 2 plus maternal education.
 \end{description}
 
-Where models differ because of missing covariate information, a second set of comparisons will be performed on a harmonized sample. This prevents changes in posterior estimates from being confounded with changes in the observations included in each model.
+Where models differ because of missing covariate information, a second set of comparisons is performed on a harmonized sample. This prevents changes in posterior estimates from being confounded with changes in the observations included in each model.
 
 The thesis documents the full model sequence. For the comparison between Models 2 and 3, Model 2 is additionally refitted on the 4,503-child harmonized sample used by Model 3.
 
@@ -228,7 +228,7 @@ The principal extended models were sampled with PyMC's NUTS implementation using
 
 \section{Convergence and Sampling Diagnostics}
 
-Convergence and sampling quality will be evaluated using several complementary diagnostics:
+Convergence and sampling quality are evaluated using several complementary diagnostics:
 
 \begin{itemize}
     \item visual inspection of trace plots;
@@ -252,7 +252,7 @@ Fixed-effect results will primarily be presented as posterior odds ratios. For r
 OR_r = \exp(\beta_r).
 \end{equation}
 
-Posterior medians and 95\% credible intervals will be reported. Where scientifically useful, posterior probabilities such as
+Posterior medians and 95\% credible intervals are reported. Where scientifically useful, posterior probabilities such as
 
 \begin{equation}
 P(\beta_r > 0 \mid \text{data})
@@ -305,7 +305,7 @@ ICC_{h+c} =
 {\tau_c^2 + \tau_h^2 + \pi^2/3}.
 \end{equation}
 
-Posterior distributions of these quantities will be calculated from posterior draws rather than by inserting only posterior point estimates. This preserves uncertainty in the variance components.
+Posterior distributions of these quantities are calculated from posterior draws rather than by inserting only posterior point estimates. This preserves uncertainty in the variance components.
 
 \section{Median Odds Ratio}
 
@@ -322,11 +322,11 @@ MOR =
 
 where $\Phi^{-1}(0.75)$ is the 75th percentile of the standard normal distribution.
 
-Separate MOR distributions will be calculated for household and community heterogeneity. The MOR can be interpreted as the median increase in the odds of stunting when comparing two otherwise similar observations from higher- and lower-risk randomly selected contextual units.
+Separate MOR distributions are calculated for household and community heterogeneity. The MOR can be interpreted as the median increase in the odds of stunting when comparing two otherwise similar observations from higher- and lower-risk randomly selected contextual units.
 
 \section{Posterior Predictive Checks}
 
-Posterior predictive checking will be used to assess whether the fitted models can reproduce important features of the observed data. Replicated stunting outcomes will be generated from the posterior predictive distribution and compared with observed quantities.
+Posterior predictive checking is used to assess whether the fitted models can reproduce important features of the observed data. Replicated stunting outcomes are generated from the posterior predictive distribution and compared with observed quantities.
 
 The preliminary checks compare:
 
@@ -401,7 +401,7 @@ The repository separates data preparation, descriptive analysis, model fitting, 
 
 The study uses de-identified secondary survey data obtained through authorized access to The DHS Program. The 2022 GDHS was implemented under established ethical and informed-consent procedures described in the survey documentation \cite{GSSICF2024}.
 
-No attempt will be made to re-identify respondents or households. Raw DHS files will not be publicly redistributed through the project repository. Results will be reported in aggregate form, and small-cell outputs that could create unnecessary disclosure risk will be avoided.
+No attempt will be made to re-identify respondents or households. Raw DHS files will not be publicly redistributed through the project repository. Results are reported in aggregate form, and small-cell outputs that could create unnecessary disclosure risk are avoided.
 
 \section{Methodological Status of the Preliminary Model}
 
