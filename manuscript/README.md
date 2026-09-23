@@ -1,5 +1,5 @@
 # Journal manuscript
 
-This folder will contain the publication-oriented manuscript derived from the thesis.
+`main.tex` is the independent working article. From the repository root, compile with `pdflatex -output-directory=manuscript manuscript/main.tex`, run BibTeX on `manuscript/main`, then compile twice again.
 
-The manuscript will be narrower than the thesis and will focus on the strongest defensible contribution established by the literature review and final model comparisons.
+It contains verified descriptive results and the repaired methods. It deliberately withholds Bayesian effect estimates until the production sequence, diagnostics, sensitivities, and scientific review support them. The longer technical report remains under `thesis/` for path compatibility.

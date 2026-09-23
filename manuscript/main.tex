@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,booktabs,natbib}
+\usepackage[hidelinks]{hyperref}
+\title{Household and Community Heterogeneity in Childhood Stunting in Ghana: A Bayesian Analysis of the 2022 DHS}
+\author{Kyere Ofosu Gideon}
+\date{Working manuscript---September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+This study examines residual household and community heterogeneity in childhood stunting using the 2022 Ghana Demographic and Health Survey. The verified sample comprises 4,928 de facto children aged 0--59 months in 3,545 households and 616 represented survey clusters. Design-based stunting prevalence is 17.4\% (95\% normal-approximation confidence interval 15.8\%--18.9\%). Sequential Bayesian logistic models examine household clustering, water and sanitation, and maternal education. The analysis explicitly assesses prior specification, missing maternal information, and survey-weight sensitivity. Bayesian estimates remain provisional pending completion of computational and scientific validation; no inferential effect estimates or household/community ranking are claimed in this working manuscript.
+\end{abstract}
+\section{Introduction}
+The 2022 Ghana DHS documents a continuing burden of childhood stunting despite substantial national progress \citep{GSSICF2024}. Previous Ghana studies have already used Bayesian spatial and multilevel methods \citep{AhetoDagne2021,AmoakoJohnson2022,IddrisuGyabaah2023}. Consequently, the use of Bayesian methods alone is not a contribution. The question examined here is whether the estimated balance of residual household and community heterogeneity is stable across clustering specifications, measured household conditions, maternal-information selection, survey weighting, and priors. This proposed contribution requires confirmation against the closest existing studies before submission.
+\section{Methods}
+The source is the authorized Household Member Recode. Eligibility requires presence on the preceding night (hv103), age 0--59 months (hc1), and valid height-for-age values (hc70 between -600 and 600). Stunting is hc70 below -200. Descriptive inference uses hv005 weights, hv021 PSUs, and hv022 strata. Taylor-linearized ratio variances retain all 618 PSUs in 32 strata, including zero-contributing PSUs.
+
+For child $i$ in household $j$ and community $k$,
+\[
+Y_{ijk}\sim\operatorname{Bernoulli}(p_{ijk}),\qquad
+\operatorname{logit}(p_{ijk})=\alpha+\mathbf{x}_{ijk}^{\mathsf T}\boldsymbol\beta+u_k+v_{jk}.
+\]
+Community and household intercepts have independent normal distributions with standard deviations $\tau_c$ and $\tau_h$. Primary priors are $\alpha\sim N(0,1.5^2)$, $\beta_r\sim N(0,1)$ and half-normal $(0,1)$ priors on the standard deviations. Prior predictive plausibility and narrower, wider, and shifted-intercept sensitivities are assessed explicitly. The primary heterogeneity contrast is $\tau_h-\tau_c$, summarized by a posterior median, equal-tail interval, and probability of being positive. Latent-scale variance partitioning is a model summary, not a causal decomposition.
+
+The sequence starts with community-only clustering, then adds household clustering, WASH source/facility type, and maternal education. The maternal extension and its preceding comparator use the same 4,503 children with recorded maternal education. A missing-category specification retains all 4,928 children as a sensitivity, without claiming to correct nonrandom missingness. Primary Bayesian inference is unweighted; mean-one survey-weight pseudo-posteriors assess sensitivity and are not asserted to provide fully design-calibrated uncertainty.
+
+The reproducible workflow records model settings, seeds, source and sample hashes, software versions, and diagnostic status. Four-chain fits require R-hat below 1.01, bulk and tail ESS at least 400, zero divergences, BFMI at least 0.3, and no tree-depth saturation before scientific review. Diagnostics include latent effects as well as coefficients and variance components. Posterior predictive checks examine marginal prevalence and household/community count patterns. Conditional WAIC is used cautiously on identical observations; it does not evaluate prediction in new communities.
+\section{Verified Descriptive Results}
+There are 927 unweighted stunting cases among 4,928 eligible children. The weighted denominator is 4,292.975, and prevalence is 0.1738503 with design standard error 0.0079534. There are 1,147 households with multiple eligible children, containing 2,530 children. Maternal education is unavailable for 425 children (8.6\%). The repaired preparation reproduces all numerical columns of the existing descriptive table to floating-point precision.
+\section{Bayesian Results: Validation Pending}
+Legacy short-run fits suggested differences between household and community heterogeneity, but their variance diagnostics and result provenance were insufficient for final inference. Those exploratory results are retained in the technical report and explicitly labelled. Validated model estimates, sensitivity comparisons, and predictive checks will populate this section only after the full workflow and scientific review are complete.
+\section{Discussion}
+No confirmed substantive conclusions about adjusted associations or variance dominance are drawn at this stage. The main methodological issues are separation of household/community dependence, selection into the maternal-information sample, prior sensitivity of variance estimates, and the relationship between model-based and survey-based inference. The cross-sectional design does not identify causal effects. WASH variables measure source and facility type rather than complete service quality, and survey clusters need not coincide with socially defined communities. Fine-scale spatial modelling is outside the agreed scope.
+\section*{Data and Code Availability}
+Analysis code and aggregate outputs are maintained in the public project repository. Authorized researchers must obtain the original DHS microdata independently. Microdata, individual posterior effects, and row-level predictive or likelihood arrays are not redistributed.
+\bibliographystyle{apalike}
+\bibliography{thesis/references}
+\end{document}

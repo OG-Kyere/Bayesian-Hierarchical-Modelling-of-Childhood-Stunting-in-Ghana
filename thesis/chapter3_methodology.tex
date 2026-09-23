@@ -214,7 +214,7 @@ These priors imply substantial prior uncertainty on the odds-ratio scale while r
 
 \section{Prior Predictive Assessment}
 
-Prior predictive simulation is part of the final production validation plan and will be used to assess whether the chosen priors generate plausible distributions of stunting prevalence and between-group heterogeneity. This step is important because priors that appear weak on the coefficient scale can produce implausible probabilities after the inverse-logit transformation.
+Prior predictive simulation is implemented in the repaired workflow and is used to assess whether the chosen priors generate plausible distributions of stunting prevalence and between-group heterogeneity. This step is important because priors that appear weak on the coefficient scale can produce implausible probabilities after the inverse-logit transformation.
 
 Alternative prior scales are evaluated in the sensitivity analysis. The objective is not to select priors that reproduce the observed results, but to ensure that the primary priors are scientifically defensible and not excessively restrictive or diffuse.
 
@@ -224,7 +224,7 @@ Posterior sampling is conducted in Python using PyMC. The preliminary model was 
 
 The community-only pilot model used four independent chains with 1,000 tuning iterations followed by 1,000 retained draws per chain. For the subsequent three-level models, the execution environment imposed a per-process runtime ceiling. To preserve independent-chain inference without truncating completed work, each chain was therefore run sequentially with its own seed and the retained draws were combined after sampling. Model 1 used four chains with 400 tuning and 400 retained iterations per chain (1,600 retained draws). Model 2, the harmonized Model 2, and Model 3 each used four chains with 300 tuning and 300 retained iterations per chain (1,200 retained draws). The target acceptance probability was 0.95 for all principal fits.
 
-The principal extended models were sampled with PyMC's NUTS implementation using a non-centred random-effects parameterization. Chain-level outputs were stored separately and combined for posterior summaries, \hat{R}, effective sample-size calculations, divergence counts, posterior predictive checks, and derived variance quantities. This sequential execution strategy changes only how independent chains were scheduled computationally; it does not change the model likelihood, priors, or posterior target. The exact chain metadata and aggregate diagnostics are version-controlled with the analysis outputs. Longer production runs remain planned for the final locked publication environment, particularly for the hierarchical variance parameters.
+The principal extended models were sampled with PyMC's NUTS implementation using a non-centred random-effects parameterization. Chain-level outputs were stored separately and combined for posterior summaries, $\hat{R}$, effective sample-size calculations, divergence counts, posterior predictive checks, and derived variance quantities. This sequential execution strategy changes only how independent chains were scheduled computationally; it does not change the model likelihood, priors, or posterior target. The exact chain metadata and aggregate diagnostics are version-controlled with the analysis outputs. Longer production runs remain planned for the final locked publication environment, particularly for the hierarchical variance parameters.
 
 \section{Convergence and Sampling Diagnostics}
 

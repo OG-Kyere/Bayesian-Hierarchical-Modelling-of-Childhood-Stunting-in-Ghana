@@ -19,27 +19,12 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 
 def prepare_data():
-    df = pd.read_stata(RAW, convert_categoricals=True)
-    hc1 = pd.to_numeric(df["hc1"], errors="coerce")
-    hc70 = pd.to_numeric(df["hc70"], errors="coerce")
-    keep = (
-        df["hv103"].astype(str).eq("yes")
-        & hc1.between(0, 59)
-        & hc70.between(-600, 600)
-    )
-    d = df.loc[keep].copy()
-    d["age"] = hc1.loc[keep]
-    d["stunted"] = (hc70.loc[keep] < -200).astype(int)
-    d["community"] = pd.to_numeric(d["hv001"], errors="coerce").astype(int).astype(str)
-    d["household"] = (
-        d["community"]
-        + "_"
-        + pd.to_numeric(d["hv002"], errors="coerce").astype(int).astype(str)
-    )
-    d["age_group"] = pd.cut(
-        d["age"], [-0.1, 5, 11, 23, 35, 47, 59],
-        labels=["0-5", "6-11", "12-23", "24-35", "36-47", "48-59"]
-    )
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from stunting_data import load_data
+    d, _ = load_data(RAW)
+    d['community'] = d.hv001.astype(str)
+    d['household'] = d.household_id
     return d
 
 

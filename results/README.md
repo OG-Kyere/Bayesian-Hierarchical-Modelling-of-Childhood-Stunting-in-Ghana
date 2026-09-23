@@ -1,3 +1,5 @@
+> **Status correction (2026-09-23):** The Bayesian numerical results described below are legacy exploratory outputs, not validated publication findings. See `docs/reproducibility_repair.md` and per-run manifests under `results/runs/` for the repaired workflow and current validation status. Historical assertions of stability do not supersede the diagnostic gate.
+
 # Results
 
 This directory contains only **aggregate, non-identifying derived outputs** from the 2022 Ghana DHS analysis.
@@ -30,3 +32,7 @@ python src/02_descriptive_analysis.py
 ```
 
 The Bayesian model scripts use the same principle: code and aggregate outputs are public; DHS microdata remain local.
+
+## Repaired run outputs
+
+New outputs are isolated under `runs/<run-id>/<model>/` and must be read together with `manifest.json`. The existing Bayesian tables and figures in this directory are retained as historical exploratory outputs, not regenerated production evidence. `src/11_report_runs.py` creates current status summaries and figures from exact run tables, emitting inferential figures only for fits passing the diagnostic gate. Scientific review is still required.
