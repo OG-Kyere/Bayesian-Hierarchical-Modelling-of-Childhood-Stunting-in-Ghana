@@ -67,3 +67,22 @@ Additional figures for sex and residence are available in `results/figures/`.
 - `docs/variable_dictionary.md` — mapping of thesis constructs to DHS source variables.
 
 Raw DHS microdata and row-level derived extracts are deliberately excluded from the repository. Researchers must obtain the 2022 Ghana DHS files directly from The DHS Program under its access conditions.
+
+
+## Current Bayesian findings
+
+The current three-level analyses model children within households and households within survey communities.
+
+Key findings from the present posterior runs include:
+
+- **Household heterogeneity is substantially larger than community heterogeneity.** In Model 1, the posterior median household SD was 1.07 compared with a community SD of 0.42. The household VPC was approximately 0.25 and the community ICC approximately 0.04.
+- **Unimproved drinking-water source** remained associated with higher posterior odds of stunting after adjustment. In Model 3, the posterior median OR was 1.50 (95% posterior interval 1.14–2.00).
+- **Sanitation facility type** showed a weaker and more uncertain adjusted association in Model 3: OR 1.11 (0.87–1.43).
+- **Higher maternal education** was associated with substantially lower posterior odds of stunting relative to no formal education: OR 0.38 (0.19–0.70).
+- The **wealth gradient attenuated but persisted** after maternal education was added; richest versus poorest had OR 0.36 (0.20–0.63) in Model 3.
+- Posterior predictive checks reproduced the overall and age-specific stunting patterns reasonably well.
+- Harmonized Model 2 and Model 3 had very similar predictive performance; the WAIC difference was negligible relative to its uncertainty.
+
+The hierarchical variance parameters mix more slowly than the fixed effects in the current constrained execution environment. Their broad household-versus-community contrast is stable, but longer production runs will be used for the final locked submission.
+
+See `results/tables/`, `results/figures/`, and `thesis/chapter4_results.tex` for the current aggregate outputs.
