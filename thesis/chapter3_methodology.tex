@@ -339,9 +339,7 @@ For the current Model 3 analysis, posterior predictive checks compare the observ
 
 \section{Model Comparison}
 
-Model comparison will consider both predictive performance and scientific interpretability. Where computationally reliable, approximate leave-one-out cross-validation or a related Bayesian predictive criterion will be used to compare candidate models fitted to the same observations.
-
-Predictive criteria will not be used mechanically to choose a single model if differences are negligible or if a simpler model provides clearer interpretation. Changes in fixed effects, household variance, community variance, posterior predictive performance, and sensitivity to model assumptions will all contribute to final model selection.
+Model comparison considers both predictive performance and scientific interpretability. For the harmonized comparison between Models 2 and 3, a conditional widely applicable information criterion (WAIC) is calculated from pointwise log-likelihood draws evaluated on the same 4,503 children. Because hierarchical models can produce unstable pointwise importance measures, the effective number of parameters and the variance of the pointwise log likelihood are also inspected. Predictive criteria are not used mechanically to choose a single model when differences are negligible relative to their uncertainty. Changes in fixed effects, household variance, community variance, posterior predictive performance, and sensitivity to model assumptions are considered jointly.
 
 \section{Survey-Weight Sensitivity Analysis}
 
