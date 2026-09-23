@@ -1,0 +1,15 @@
+metric,value
+posterior_draws,2000
+divergences,0
+max_rhat,1.013135
+min_ess_bulk,379.395646
+min_ess_tail,426.831632
+tau_community_median,0.409967
+tau_community_l95,0.124267
+tau_community_u95,0.625242
+tau_household_median,1.227481
+tau_household_l95,0.925097
+tau_household_u95,1.541081
+pareto_k_max,0.785564
+pareto_k_gt_0_7,5
+pareto_k_gt_1,0
