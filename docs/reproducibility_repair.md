@@ -27,7 +27,7 @@ python src/02_descriptive_analysis.py
 python src/bayesian_workflow.py --model m3 --run-id production-v1 --sampler nutpie
 ```
 
-Repeat the last command for `m0`, `m1`, `m2`, `m2_harmonized`, `weighted`, `tight`, `wide`, `intercept`, and `missing` with the same run ID. The numbered scripts are compatibility entry points into that shared workflow. Defaults: 4 independent sequential chains, 2,000 tuning and 2,000 retained draws per chain, target acceptance 0.97, maximum tree depth 12. Chain checkpoints are saved locally. Each model/run directory is immutable: use a new run ID for a changed fit.
+Repeat the last command for `m0`, `m1`, `m2`, `m2_harmonized`, `weighted`, `tight`, `wide`, `intercept`, and `missing` with the same run ID. The numbered scripts are compatibility entry points into that shared workflow. Defaults: 4 independent chains sampled concurrently, 2,000 tuning and 2,000 retained draws per chain, target acceptance 0.97, maximum tree depth 12. The combined sampled posterior is checkpointed before postprocessing. Completed posterior checkpoints are preserved privately between sessions. Each model/run directory is immutable: use a new run ID for a changed fit.
 
 A system lacking Python C development libraries can use `PYTENSOR_FLAGS=cxx=` with the nutpie sampler; compilation uses Numba. This is an environment workaround, not a model change. The pinned pilot file records a historical environment and is separate from the repaired environment.
 

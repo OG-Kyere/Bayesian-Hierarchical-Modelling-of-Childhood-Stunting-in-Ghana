@@ -151,6 +151,67 @@ def aggregate_ppc(idata, d, out):
     pd.DataFrame(counts).to_csv(out/'ppc_group_discrepancies.csv',index=False)
 
 
+def linear_predictor(alpha, beta, tc, zc, X, ci, th=None, zh=None, hi=None):
+    eta = alpha[:, None] + beta @ X.T + tc[:, None] * zc[:, ci]
+    if th is not None:
+        eta += th[:, None] * zh[:, hi]
+    return eta
+
+
+def bernoulli_loglik(eta, y):
+    return y * eta - np.logaddexp(0., eta)
+
+
+def prior_predictive(d, X, spec, out, seed):
+    from scipy.special import expit
+    rng=np.random.default_rng(seed)
+    ci,communities=pd.factorize(d.hv001,sort=True)
+    hi,households=pd.factorize(d.household_id,sort=True)
+    prevalence=[]
+    for _ in range(10):
+        n=100
+        eta=linear_predictor(rng.normal(spec.get('alpha_mu',0),1.5,n),
+            rng.normal(0,spec.get('beta_sd',1),(n,X.shape[1])),
+            np.abs(rng.normal(0,spec.get('tau_sd',1),n)),rng.normal(size=(n,len(communities))),
+            X.to_numpy(),ci,
+            np.abs(rng.normal(0,spec.get('tau_sd',1),n)) if spec.get('household') else None,
+            rng.normal(size=(n,len(households))) if spec.get('household') else None,hi)
+        prevalence.extend(rng.binomial(1,expit(eta)).mean(axis=1))
+    write_json(out/'prior_predictive.json',dict(prevalence_quantiles=np.quantile(prevalence,[.025,.5,.975]).tolist(),
+        probability_prevalence_gt_080=float((np.asarray(prevalence)>.8).mean()),
+        note='1000 independent prior draws; unweighted sample prevalence. Scientific plausibility requires review.'))
+
+
+def add_predictive_arrays(idata,d,X,spec,seed):
+    from scipy.special import expit
+    import xarray as xr
+    p=idata.posterior
+    nch=p.sizes['chain'];ndraw=p.sizes['draw'];n=nch*ndraw
+    def flat(name):
+        a=p[name].transpose('chain','draw',...).values
+        return a.reshape((n,)+a.shape[2:])
+    ci,_=pd.factorize(d.hv001,sort=True);hi,_=pd.factorize(d.household_id,sort=True)
+    alpha,beta,tc,zc=[flat(x) for x in ['alpha','beta','tau_community','z_community']]
+    th=flat('tau_household') if spec.get('household') else None
+    zh=flat('z_household') if spec.get('household') else None
+    yrep=np.empty((n,len(d)),dtype=np.int8)
+    ll=np.empty((n,len(d)),dtype=float) if not spec.get('weighted') else None
+    rng=np.random.default_rng(seed)
+    for start in range(0,n,128):
+        sl=slice(start,min(start+128,n))
+        eta=linear_predictor(alpha[sl],beta[sl],tc[sl],zc[sl],X.to_numpy(),ci,
+            th[sl] if th is not None else None,zh[sl] if zh is not None else None,hi)
+        yrep[sl]=rng.binomial(1,expit(eta))
+        if ll is not None:ll[sl]=bernoulli_loglik(eta,d.stunted.to_numpy())
+    coords={'chain':p.chain.values,'draw':p.draw.values,'obs':np.arange(len(d))}
+    def dataset(a):return xr.Dataset({'stunted':(('chain','draw','obs'),a.reshape(nch,ndraw,len(d)))},coords=coords)
+    if 'posterior_predictive' in idata.groups():del idata.posterior_predictive
+    idata.add_groups({'posterior_predictive':dataset(yrep)})
+    if ll is not None:
+        if 'log_likelihood' in idata.groups():del idata.log_likelihood
+        idata.add_groups({'log_likelihood':dataset(ll)})
+
+
 def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--model',choices=SPECS,required=True)
@@ -187,37 +248,30 @@ def main(argv=None):
         columns=X.columns.tolist(),python=platform.python_version(),packages=packages,status='started')
     write_json(out/'manifest.json',manifest)
     model=build_model(d,X,spec)
+    prior_predictive(d, X, spec, out, args.seed)
+    if args.prior_only:
+        manifest['status']='prior_only';write_json(out/'manifest.json',manifest);return
     with model:
-        prior=pm.sample_prior_predictive(draws=1000,random_seed=args.seed)
-        prev=np.asarray(prior.prior_predictive.stunted).reshape(-1,len(d)).mean(axis=1)
-        write_json(out/'prior_predictive.json',dict(prevalence_quantiles=np.quantile(prev,[.025,.5,.975]).tolist(),
-            probability_prevalence_gt_080=float((prev>.8).mean()),note='Unweighted sample prevalence; plausibility requires scientific review.'))
-        if args.prior_only:
-            manifest['status']='prior_only';write_json(out/'manifest.json',manifest);return
-        chains=[]
-        for chain in range(args.chains):
-            kwargs=dict(draws=args.draws,tune=args.tune,chains=1,cores=1,
-                random_seed=args.seed+chain,target_accept=args.target_accept,
-                idata_kwargs={'log_likelihood':not spec.get('weighted',False)},
-                return_inferencedata=True,nuts_sampler=args.sampler)
-            if args.sampler=='pymc':kwargs['nuts']={'max_treedepth':args.max_treedepth}
-            else:kwargs['nuts_sampler_kwargs']={'maxdepth':args.max_treedepth}
-            fitted=pm.sample(**kwargs)
-            fitted=fitted.assign_coords(chain=[chain])
-            netcdf_safe(fitted).to_netcdf(private/f'chain_{chain}.nc')
-            chains.append(fitted)
-        idata=az.concat(*chains,dim='chain')
-        if not spec.get('weighted') and 'log_likelihood' not in idata.groups():
-            pm.compute_log_likelihood(idata, extend_inferencedata=True)
-        diag,metrics=diagnostics(idata,args.max_treedepth)
-        # Individual latent diagnostics are private; only aggregate metrics are public.
-        diag.to_csv(private/'all_parameter_diagnostics.csv')
-        scientific=diag.loc[~diag.index.str.startswith('z_')]
-        scientific.to_csv(out/'scientific_parameter_diagnostics.csv')
-        posterior_tables(idata,out,spec)
-        pm.sample_posterior_predictive(idata,random_seed=args.seed+10000,extend_inferencedata=True,var_names=['stunted'])
-        aggregate_ppc(idata,d,out)
-        netcdf_safe(idata).to_netcdf(private/'posterior.nc')
+        kwargs=dict(draws=args.draws,tune=args.tune,chains=args.chains,cores=min(args.chains,4),
+            random_seed=args.seed,target_accept=args.target_accept,
+            return_inferencedata=True,nuts_sampler=args.sampler)
+        if args.sampler=='pymc':
+            kwargs['nuts']={'max_treedepth':args.max_treedepth}
+            kwargs['idata_kwargs']={'log_likelihood':False}
+        else:
+            kwargs['nuts_sampler_kwargs']={'maxdepth':args.max_treedepth,'save_warmup':False}
+        idata=pm.sample(**kwargs)
+    netcdf_safe(idata).to_netcdf(private/'sampled.nc')
+    manifest['status']='sampling_complete_postprocessing_pending'
+    write_json(out/'manifest.json',manifest)
+    diag,metrics=diagnostics(idata,args.max_treedepth)
+    diag.to_csv(private/'all_parameter_diagnostics.csv')
+    diag.loc[~diag.index.str.startswith('z_')].to_csv(out/'scientific_parameter_diagnostics.csv')
+    posterior_tables(idata,out,spec)
+    add_predictive_arrays(idata,d,X,spec,args.seed+10000)
+    aggregate_ppc(idata,d,out)
+    netcdf_safe(idata).to_netcdf(private/'posterior.nc')
+
     manifest.update(diagnostics=metrics,status='diagnostics_passed_pending_scientific_review' if metrics['diagnostic_gate_passed'] else 'provisional_diagnostics_failed')
     write_json(out/'manifest.json',manifest)
     print(json.dumps(metrics,indent=2))

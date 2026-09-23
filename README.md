@@ -6,7 +6,7 @@ Independent research using the **2022 Ghana DHS**, intended for a journal manusc
 
 - **Verified:** sample construction and all descriptive table values were independently reproduced: 4,928 children, 927 unweighted stunting cases, 3,545 households, 616 represented communities, and weighted prevalence 17.385% (design SE 0.795 percentage points).
 - **Exploratory:** numerical Bayesian tables under `results/tables/` and Chapters 4–5 are historical short-run outputs. They do not establish confirmed effects or household/community variance dominance.
-- **Repaired workflow:** shared preparation, every planned model and sensitivity, per-chain checkpoints, source/sample hashes, full posterior diagnostic gates, and posterior predictive checks now have executable code. New runs under `results/runs/` carry explicit status in `manifest.json`.
+- **Repaired workflow:** shared preparation, every planned model and sensitivity, posterior checkpoints, source/sample hashes, full posterior diagnostic gates, and posterior predictive checks now have executable code. New runs under `results/runs/` carry explicit status in `manifest.json`.
 - A computational pass remains subject to scientific review. The independent report and working article do not present unvalidated Bayesian estimates as final findings.
 
 See [repair and validation protocol](docs/reproducibility_repair.md) for decisions, limitations, and exact commands. The original [run log](docs/model_run_log.md) documents historical fits.

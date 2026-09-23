@@ -33,4 +33,20 @@ class Invariants(unittest.TestCase):
         self.assertEqual(est,.5)
         self.assertAlmostEqual(se,np.sqrt(1.5*.5/4))
 
+class PredictiveMath(unittest.TestCase):
+    def test_predictor_preserves_nested_indices(self):
+        from bayesian_workflow import linear_predictor
+        X=np.array([[1.],[2.],[3.]])
+        actual=linear_predictor(np.array([1.]),np.array([[2.]]),np.array([.5]),
+            np.array([[2.,4.]]),X,np.array([0,0,1]),np.array([2.]),np.array([[1.,3.]]),np.array([0,0,1]))
+        np.testing.assert_allclose(actual,[[6.,8.,15.]])
+    def test_loglik_matches_bernoulli(self):
+        from bayesian_workflow import bernoulli_loglik
+        from scipy.special import expit
+        from scipy.stats import bernoulli
+        eta=np.array([[-3.,0.,4.],[2.,-1.,.5]])
+        y=np.array([0,1,1])
+        np.testing.assert_allclose(bernoulli_loglik(eta,y),bernoulli.logpmf(y,expit(eta)),rtol=1e-12)
+        self.assertTrue(np.isfinite(bernoulli_loglik(np.array([[-1000.,1000.]]),np.array([0,1]))).all())
+
 if __name__=='__main__':unittest.main()
