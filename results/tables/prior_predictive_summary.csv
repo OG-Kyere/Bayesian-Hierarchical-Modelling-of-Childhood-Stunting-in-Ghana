@@ -1,0 +1,17 @@
+metric,value
+prior_prevalence_p0_5,0.04027687
+prior_prevalence_p2_5,0.08502270
+prior_prevalence_p10,0.18700661
+prior_prevalence_p25,0.31871041
+prior_prevalence_median,0.49912528
+prior_prevalence_p75,0.66446442
+prior_prevalence_p90,0.78946533
+prior_prevalence_p97_5,0.89765353
+prior_prevalence_p99_5,0.95764577
+prior_probability_prevalence_gt_0_80,0.093
+prior_mor_community_p2_5,1.02825754
+prior_mor_community_median,1.88373279
+prior_mor_community_p97_5,8.32632867
+prior_mor_household_p2_5,1.03156459
+prior_mor_household_median,1.87826579
+prior_mor_household_p97_5,8.91249899
