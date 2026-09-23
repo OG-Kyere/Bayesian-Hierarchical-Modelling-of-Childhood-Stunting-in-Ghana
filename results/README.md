@@ -1,32 +1,54 @@
 # Results
 
-This directory contains only **aggregate, non-identifying derived outputs** from the 2022 Ghana DHS analysis.
+Everything in this folder is an aggregate, non-identifying output from the 2022 Ghana DHS analysis.
 
-## What is public here
+The raw DHS records stay outside the repository.
 
-- `tables/descriptive_all.csv`: authoritative aggregate data behind the descriptive figures, including Taylor-linearized design SEs and 95% CIs.
-- `tables/analysis_sample_summary.csv`: analytic-sample counts and clustering summary.
-- `tables/household_structure.csv`: distribution of eligible children per household.
-- `figures/`: publication-ready descriptive SVG figures.
-- `tables/model*_variance_summary.csv`: aggregate posterior variance summaries for Models 1--3.
-- `tables/model_comparison_variance.csv`: harmonized comparison of household/community heterogeneity across models.
-- `tables/model3_key_effects.csv`: selected posterior odds ratios from Model 3.
-- `tables/prior_sensitivity_key_effects.csv`: fixed-effect robustness under tighter and wider priors.
-- `tables/survey_weight_sensitivity_key_effects.csv`: fixed-effect comparison under the weighted pseudo-posterior.
-- `figures/model3_posterior_or_forest.svg`: Model 3 posterior odds-ratio forest plot.
-- `figures/model_variance_comparison.svg`: household/community SD comparison across models.
-- `tables/model3_ppc_summary.csv`: observed versus replicated prevalence for the Model 3 posterior predictive check.
-- `figures/model3_ppc_age.svg`: overall and age-specific posterior predictive check figure.
-- `tables/model_predictive_comparison.csv`: harmonized Model 2 versus Model 3 conditional WAIC comparison.
+## Descriptive results
 
-## What is deliberately not public
+The main descriptive files are:
 
-No raw DHS file and no row-level child or household extract is stored in this repository. The source microdata are licensed by The DHS Program and must be obtained independently by authorized users.
+- `tables/descriptive_all.csv` — weighted prevalence estimates, Taylor-linearized SEs, and 95% CIs;
+- `tables/analysis_sample_summary.csv` — sample, household, and community counts;
+- `tables/household_structure.csv` — number of eligible children per household;
+- `figures/stunting_by_*.svg` — descriptive figures used in the thesis and manuscript.
 
-A researcher with authorized access can reproduce the public outputs by placing `GHPR8CFL.DTA` under `data/raw/` and running:
+`descriptive_all.csv` is the authoritative source for the descriptive numbers quoted in the text.
 
-```bash
-python src/02_descriptive_analysis.py
-```
+## Bayesian results
 
-The Bayesian model scripts use the same principle: code and aggregate outputs are public; DHS microdata remain local.
+The strengthened final Model 3 summaries are:
+
+- `tables/model3_final_8chain_key_or.csv`
+- `tables/model3_final_8chain_variance_summary.csv`
+- `tables/model3_final_8chain_parameter_diagnostics.csv`
+- `tables/model3_final_8chain_sampler_diagnostics.csv`
+- `tables/model3_final_8chain_loo_summary.csv`
+
+Those are the files to check first if a manuscript number looks wrong.
+
+Earlier Model 1 and Model 2 summaries are retained because they show how the household/community variance structure changes as WASH and maternal education are added.
+
+## Sensitivity analyses
+
+The folder also contains aggregate results for:
+
+- tighter and wider priors;
+- the survey-weight pseudo-posterior;
+- missing maternal education retained as a category;
+- spline-based age modelling;
+- detailed WASH coding;
+- posterior predictive checks;
+- harmonized Model 2 versus Model 3 PSIS-LOO comparison.
+
+The current predictive comparison is based on **PSIS-LOO**. Older WAIC outputs remain in the repository as part of the analysis history but are not the main model-comparison result used in the manuscript.
+
+## Figures
+
+The main Bayesian figures include:
+
+- `figures/model3_posterior_or_forest.svg`
+- `figures/model_variance_comparison.svg`
+- `figures/model3_ppc_age.svg`
+
+All public figures are generated from aggregate outputs. No row-level DHS records are stored here.
