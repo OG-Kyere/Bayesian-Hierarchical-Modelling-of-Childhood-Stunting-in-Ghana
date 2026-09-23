@@ -124,3 +124,10 @@ The repository contains both the thesis version of the work and a shorter journa
 The manuscript focuses on the part of the project I think is most useful: separating household and community heterogeneity rather than presenting another list of factors associated with stunting.
 
 The analysis is still observational, so the reported odds ratios are interpreted as associations rather than causal effects.
+
+
+## Citation
+
+A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. The preferred citation will be updated to the final manuscript or thesis record once one is formally available.
+
+No open-source license has been assigned yet. That is intentional; reuse rights should be chosen explicitly rather than assumed.
