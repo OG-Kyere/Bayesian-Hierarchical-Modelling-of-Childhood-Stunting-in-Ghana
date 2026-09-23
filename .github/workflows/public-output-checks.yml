@@ -23,3 +23,6 @@ jobs:
 
       - name: Check manuscript and README numbers
         run: python src/13_public_output_consistency.py
+
+      - name: Check repository integrity
+        run: python src/14_repository_integrity.py
