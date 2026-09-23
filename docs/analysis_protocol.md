@@ -47,3 +47,7 @@ where:
 
 ## Publication strategy
 The thesis will provide full methodological and substantive detail. The journal manuscript will focus on the strongest defensible contribution established after literature review and model-comparison results.
+
+## 2026-09-23 retrospective repair amendment
+
+The executable specification and diagnostic requirements in `docs/reproducibility_repair.md` supersede earlier incomplete workflow descriptions. This amendment follows exploratory fitting and is not a preregistration. Independent-publication framing replaces university/degree submission framing. Household/community contrasts remain provisional until the joint posterior and sensitivity sequence are validated. Conditional WAIC is not a new-community prediction assessment.

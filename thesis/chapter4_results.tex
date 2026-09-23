@@ -1,6 +1,8 @@
 \chapter{Results}
 \label{chap:results}
 
+\begin{quote}\textbf{Exploratory results---not validated publication findings.} The numerical Bayesian results in this chapter come from legacy short runs. The repaired pipeline has not yet established that these results meet the final diagnostic and sensitivity requirements. They must not be cited as confirmed findings. Verified survey descriptive results are distinguished from these provisional model estimates.\end{quote}
+
 \section{Introduction}
 
 This chapter presents the empirical findings from the 2022 Ghana Demographic and Health Survey. It begins with the construction of the analytic sample and survey-weighted descriptive patterns of childhood stunting, followed by the sequential Bayesian hierarchical models. The chapter also reports prior-sensitivity, survey-weight sensitivity, missing-data sensitivity, posterior predictive checks, and a predictive comparison of the harmonized WASH and maternal-education models. Longer production runs for the hierarchical variance parameters remain part of the final publication lock.
@@ -144,7 +146,7 @@ The structure of the analytic data demonstrates that stunting observations are n
 
 Three Bayesian hierarchical extensions were examined after the community-only pilot. Model 1 included both household and community random intercepts alongside the core child, household-wealth, residence, and regional covariates. Model 2 added drinking-water and sanitation source/facility type. Model 3 added maternal education and was fitted to the 4,503 children with linked maternal-education information. To separate the effect of maternal education from the effect of changing the analysis sample, Model 2 was also refitted on the same 4,503-child harmonized sample.
 
-Across all of these fits, no divergent NUTS transitions were observed. Fixed-effect coefficients showed good cross-chain agreement, with $\hat R$ values close to 1.00. The hierarchical standard-deviation parameters mixed more slowly than the fixed effects; maximum $\hat R$ values were approximately 1.018 for Model 1, 1.012 for Model 2 on the full sample, 1.036 for the harmonized Model 2, and 1.033 for Model 3. Consequently, the direction and magnitude of the fixed-effect findings are considered stable, while the exact higher-level variance estimates will be confirmed with longer production runs before final thesis submission.
+Across all of these fits, no divergent NUTS transitions were observed. Fixed-effect coefficients showed good cross-chain agreement, with $\hat R$ values close to 1.00. The hierarchical standard-deviation parameters mixed more slowly than the fixed effects; maximum $\hat R$ values were approximately 1.018 for Model 1, 1.012 for Model 2 on the full sample, 1.036 for the harmonized Model 2, and 1.033 for Model 3. Consequently, all inferential findings remain provisional. Apparently satisfactory fixed-effect diagnostics do not establish adequate exploration of the joint posterior when hierarchical variance parameters have not converged.
 
 \subsection{Model 1: Household and Community Random Effects}
 
@@ -234,7 +236,7 @@ Model 3 & 0.411 & 1.239 & 0.034 & 0.307 \\
 
 \section{Diagnostic and Sensitivity Analyses}
 
-The fixed-effect parameters in Models 1--3 showed satisfactory chain agreement and no divergent transitions were observed. The hierarchical variance parameters were more computationally demanding, particularly in the harmonized Model 2 and Model 3, where $\hat R$ for the community SD was approximately 1.036 and 1.033, respectively. These values do not overturn the broad conclusion that household heterogeneity is substantially larger than community heterogeneity, because the household/community contrast is large and consistent across models, but they indicate that longer production runs are warranted before final submission.
+The fixed-effect parameters in Models 1--3 showed satisfactory chain agreement and no divergent transitions were observed. The hierarchical variance parameters were more computationally demanding, particularly in the harmonized Model 2 and Model 3, where $\hat R$ for the community SD was approximately 1.036 and 1.033, respectively. These diagnostics prevent treating the household/community contrast as confirmed. Consistency across short runs is encouraging but does not substitute for convergence of the joint posterior.
 
 \subsection{Prior Sensitivity}
 
@@ -250,7 +252,7 @@ A rescaled survey-weight pseudo-posterior was fitted as a sensitivity analysis o
 
 The water association attenuated under weighting: the weighted median OR was 1.38 with a 95\% posterior interval of 0.90--2.07, although the posterior probability that the water coefficient was positive remained approximately 0.94. The sanitation estimate remained uncertain (OR 1.14, 0.82--1.65).
 
-The pseudo-posterior variance decomposition is not used for substantive interpretation because the community-level standard deviation showed unsatisfactory chain mixing in the weighted specification. In the initial four-chain weighted sensitivity fit, the maximum $\hat R$ was approximately 1.09 for the community SD. Longer weighted chains improved agreement but did not provide a sufficiently stable four-chain variance estimate within the current computational environment. The weighted sensitivity analysis is therefore reported for the fixed-effect conclusions only.
+The pseudo-posterior variance decomposition is not used for substantive interpretation because the community-level standard deviation showed unsatisfactory chain mixing in the weighted specification. In the initial four-chain weighted sensitivity fit, the maximum $\hat R$ was approximately 1.09 for the community SD. Longer weighted chains improved agreement but did not provide a sufficiently stable four-chain variance estimate within the current computational environment. The weighted estimates are retained as exploratory results only; they cannot establish robustness of either fixed effects or variance components until the joint posterior is adequately sampled.
 
 \subsection{Missing Maternal-Education Sensitivity}
 
@@ -279,13 +281,13 @@ These checks indicate that Model 3 reproduces the overall stunting level and the
 
 Model 2 and Model 3 were compared on the same 4,503-child harmonized sample using conditional WAIC based on pointwise posterior log-likelihood draws. Model 2 produced a WAIC of approximately 3983.3, while Model 3 produced a WAIC of approximately 3982.7. On the expected log predictive density scale, the Model 3 minus Model 2 difference was only 0.30 with an approximate standard error of 4.66.
 
-The predictive difference is therefore negligible relative to its uncertainty and does not support a claim that adding maternal education materially improves predictive accuracy. At the same time, the WAIC diagnostics indicated substantial pointwise log-likelihood variability for a number of observations, which is common in high-dimensional hierarchical models and reduces confidence in fine distinctions between the models. The predictive comparison is therefore treated as supportive evidence that Models 2 and 3 have similar predictive adequacy rather than as a basis for declaring one model superior.
+The predictive difference is therefore negligible relative to its uncertainty and does not support a claim that adding maternal education materially improves predictive accuracy. At the same time, the WAIC diagnostics indicated substantial pointwise log-likelihood variability for a number of observations, which is common in high-dimensional hierarchical models and reduces confidence in fine distinctions between the models. This comparison is inconclusive. The warnings and short runs prevent a reliable predictive ranking or a claim of equivalence. Conditional WAIC does not assess prediction in new households or communities.
 
 This result does not diminish the substantive interpretation of the maternal-education coefficient. Model 3 adds an interpretable association—particularly for higher maternal education—without providing clear evidence of a meaningful gain in predictive performance over the harmonized WASH model.
 
 \subsection{Remaining Production Checks}
 
-The current results constitute the principal inferential analysis, but they are not yet the final locked publication analysis. Before thesis submission, the hierarchical variance parameters will be confirmed with longer production runs in a stable computational environment. The existing posterior predictive checks and predictive model comparison will then be regenerated from the final locked posterior objects to ensure that the reported publication tables and figures correspond exactly to the production fits.
+The current results are exploratory and do not constitute the final publication analysis. Before thesis submission, the hierarchical variance parameters will be confirmed with longer production runs in a stable computational environment. The existing posterior predictive checks and predictive model comparison will then be regenerated from the final locked posterior objects to ensure that the reported publication tables and figures correspond exactly to the production fits.
 
 \section{Chapter Summary}
 

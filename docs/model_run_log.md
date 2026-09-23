@@ -1,3 +1,5 @@
+> **Status correction (2026-09-23):** The Bayesian numerical results described below are legacy exploratory outputs, not validated publication findings. See `docs/reproducibility_repair.md` and per-run manifests under `results/runs/` for the repaired workflow and current validation status. Historical assertions of stability do not supersede the diagnostic gate.
+
 # Bayesian model run log
 
 This file records the posterior runs currently used for the thesis results. The current results are scientifically informative but are **not yet the final locked publication runs**. Longer production runs will replace or confirm these summaries before submission.

@@ -3,5 +3,5 @@ import sys
 from bayesian_workflow import main
 
 if __name__ == "__main__":
-    for model in ['m2', 'm2_harmonized']:
+    for model in ['missing']:
         main(["--model", model, *sys.argv[1:]])

@@ -1,12 +1,7 @@
-"""Community-level Bayesian pilot model.
-
-This file will hold the reproducible version of the completed pilot model.
-Pilot estimates are provisional until the full model sequence and sensitivity
-analyses are complete.
-"""
-
-def main():
-    raise NotImplementedError("Pilot model code will be migrated from the saved pilot package.")
+"""Compatibility entry point; pass --run-id and optional sampler settings."""
+import sys
+from bayesian_workflow import main
 
 if __name__ == "__main__":
-    main()
+    for model in ['m0']:
+        main(["--model", model, *sys.argv[1:]])

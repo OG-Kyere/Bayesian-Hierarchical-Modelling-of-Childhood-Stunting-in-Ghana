@@ -14,6 +14,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.rcParams["svg.hashsalt"] = "ghana-stunting"
 
 RAW = Path("data/raw/GHPR8CFL.DTA")
 TABLE_DIR = Path("results/tables")
@@ -25,57 +26,11 @@ AGE_ORDER = ["0-5", "6-11", "12-23", "24-35", "36-47", "48-59"]
 WEALTH_ORDER = ["poorest", "poorer", "middle", "richer", "richest"]
 MAT_ED_ORDER = ["no education", "primary", "secondary", "higher", "Missing"]
 
-IMPROVED_WATER = {
-    "piped into dwelling", "piped to yard/plot", "piped to neighbor",
-    "public tap/standpipe", "tube well or borehole", "protected well",
-    "protected spring", "rainwater", "tanker truck", "cart with small tank",
-    "bottled water", "sachet water",
-}
-
-IMPROVED_SANITATION = {
-    "flush to piped sewer system", "flush to septic tank", "flush to pit latrine",
-    "flush, bio-digester (biofil)", "ventilated improved pit latrine (vip)",
-    "pit latrine with slab", "composting toilet",
-}
+from stunting_data import load_data
 
 
 def prepare():
-    full = pd.read_stata(RAW, convert_categoricals=True)
-    full["stratum"] = full["hv022"].astype(str)
-    full["psu"] = pd.to_numeric(full["hv021"], errors="coerce").astype("Int64")
-    psu_frame = full[["stratum", "psu"]].drop_duplicates()
-
-    hc1_num = pd.to_numeric(full["hc1"], errors="coerce")
-    hc70_num = pd.to_numeric(full["hc70"], errors="coerce")
-    keep = (
-        full["hv103"].astype(str).eq("yes")
-        & hc1_num.between(0, 59)
-        & hc70_num.between(-600, 600)
-    )
-
-    d = full.loc[keep].copy()
-    d["hc1_num"] = hc1_num.loc[keep]
-    d["hc70_num"] = hc70_num.loc[keep]
-    d["stunted"] = (d["hc70_num"] < -200).astype(int)
-    d["weight"] = pd.to_numeric(d["hv005"], errors="coerce") / 1_000_000
-    d["age_group"] = pd.cut(
-        d["hc1_num"], [-0.1, 5, 11, 23, 35, 47, 59], labels=AGE_ORDER
-    )
-    d["household_id"] = (
-        pd.to_numeric(d["hv001"], errors="coerce").astype(int).astype(str)
-        + "_"
-        + pd.to_numeric(d["hv002"], errors="coerce").astype(int).astype(str)
-    )
-    d["maternal_education"] = d["hc61"].astype(str).replace("nan", np.nan)
-    d["water_source_group"] = np.where(
-        d["hv201"].astype(str).isin(IMPROVED_WATER),
-        "Improved source", "Unimproved source"
-    )
-    d["sanitation_group"] = np.where(
-        d["hv205"].astype(str).isin(IMPROVED_SANITATION),
-        "Improved facility", "Unimproved/no facility"
-    )
-    return d, psu_frame
+    return load_data(RAW)
 
 
 def taylor_ratio(d, psu_frame, mask):
@@ -172,7 +127,7 @@ def plot_group(summary, variable, title, filename, order=None, horizontal=False)
 
     ax.set_title(title)
     fig.tight_layout()
-    fig.savefig(FIG_DIR / filename, format="svg")
+    fig.savefig(FIG_DIR / filename, format="svg", metadata={"Date": None})
     plt.close(fig)
 
 

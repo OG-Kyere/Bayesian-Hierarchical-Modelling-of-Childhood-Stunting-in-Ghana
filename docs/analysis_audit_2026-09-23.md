@@ -1,3 +1,5 @@
+> **Status correction (2026-09-23):** The Bayesian numerical results described below are legacy exploratory outputs, not validated publication findings. See `docs/reproducibility_repair.md` and per-run manifests under `results/runs/` for the repaired workflow and current validation status. Historical assertions of stability do not supersede the diagnostic gate.
+
 # Analysis and Thesis Audit — 23 September 2026
 
 This document records major consistency checks and corrections performed before drafting Chapter 5.
