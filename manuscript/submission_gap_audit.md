@@ -14,7 +14,7 @@
 ## Highest-priority remaining gaps
 
 ### 1. Reference style
-The manuscript currently uses `apalike`, which is not a true APA 7 implementation. Before submission, use the Wiley/MCN preferred reference workflow or an APA 7 BibLaTeX/CSL style and inspect the rendered bibliography manually.
+The currently cited references have been checked and an APA 7-style comparison list is stored under `manuscript/targets/mcn/references_apa7_check.md`. The LaTeX manuscript still uses `apalike`, which is not a true APA 7 implementation, so the final rendered bibliography must still be converted or formatted using the journal's production workflow.
 
 ### 2. Reference verification
 The bibliography is internally consistent, but each cited item should be verified against the publisher page. One missing DOI (Iddrisu & Gyabaah, 2023) has already been corrected.
@@ -47,7 +47,7 @@ Record exact versions of:
 The household/community contrast is stable, but the two SD parameters remain around R-hat 1.02. Keep this limitation transparent. A longer unrestricted run would still be useful if practical.
 
 ### 7. Target-journal keywords
-MCN requests seven keywords drawn from MeSH where possible. The current keyword list is not yet verified against MeSH terminology.
+Seven MeSH-aligned terms are now used: Growth Disorders; Multilevel Analysis; Bayes Theorem; Socioeconomic Factors; Educational Status; Drinking Water; Africa, Western.
 
 ### 8. AI disclosure
 Keep the disclosure factual and narrow. Do not describe AI as an author. State what it assisted with and that authors verified all outputs.
