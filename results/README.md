@@ -8,7 +8,13 @@ This directory contains only **aggregate, non-identifying derived outputs** from
 - `tables/analysis_sample_summary.csv`: analytic-sample counts and clustering summary.
 - `tables/household_structure.csv`: distribution of eligible children per household.
 - `figures/`: publication-ready descriptive SVG figures.
-- model-summary tables will be added only after each Bayesian model has been successfully fitted and checked.
+- `tables/model*_variance_summary.csv`: aggregate posterior variance summaries for Models 1--3.
+- `tables/model_comparison_variance.csv`: harmonized comparison of household/community heterogeneity across models.
+- `tables/model3_key_effects.csv`: selected posterior odds ratios from Model 3.
+- `tables/prior_sensitivity_key_effects.csv`: fixed-effect robustness under tighter and wider priors.
+- `tables/survey_weight_sensitivity_key_effects.csv`: fixed-effect comparison under the weighted pseudo-posterior.
+- `figures/model3_posterior_or_forest.svg`: Model 3 posterior odds-ratio forest plot.
+- `figures/model_variance_comparison.svg`: household/community SD comparison across models.
 
 ## What is deliberately not public
 
