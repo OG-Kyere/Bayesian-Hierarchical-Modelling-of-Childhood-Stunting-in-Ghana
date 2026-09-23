@@ -24,18 +24,19 @@ The journal explicitly covers maternal and child nutrition, socioeconomic and en
 
 - Approximate generic-manuscript word count: ~2,100 words before MCN adaptation — PASS.
 - MCN abstract: <250 words — PASS.
-- Key messages: 5 messages, ~88 words — PASS.
-- Main figures/tables in blinded manuscript: 2 figures — PASS.
+- Key messages: 5 messages, ~91 words — PASS.
+- Main figures/tables in blinded manuscript: 2 tables + 2 figures = 4 display items — PASS.
 - Separate supplement exists — PASS.
 - Blinded manuscript has no author name/affiliation — PASS.
 - Separate title page exists — PASS.
 - Data availability statement included — PASS.
+- Seven MeSH-aligned keywords selected — PASS.
 - AI disclosure drafted — REVIEW BEFORE SUBMISSION.
-- APA 7 bibliography formatting — NEEDS FINAL CONVERSION/CHECK.
-- Affiliation/email/ORCID — NEED USER DETAILS.
+- APA 7 reference metadata check — COMPLETED FOR CURRENTLY CITED SOURCES; rendered bibliography still needs final APA 7 production formatting.
+- Affiliation/email/ORCID — NEED AUTHOR DETAILS.
 - Funding statement — NEED AUTHOR CONFIRMATION.
 - Co-authorship/CRediT — NEED AUTHOR CONFIRMATION.
-- Ethics/exemption wording — VERIFY AGAINST THE AUTHOR'S INSTITUTIONAL REQUIREMENTS.
+- Ethics/exemption wording — VERIFY AGAINST THE SUBMITTING INSTITUTION'S REQUIREMENTS.
 
 ## Publication-cost note
 
