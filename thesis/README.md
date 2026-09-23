@@ -2,7 +2,9 @@
 
 Working title: **Bayesian Hierarchical Modelling of Childhood Stunting in Ghana**
 
-## Current structure
+The thesis contains the longer version of the project, including the descriptive analysis, full model sequence, sensitivity analyses, diagnostics, and discussion.
+
+## Chapters
 
 1. Introduction
 2. Literature Review
@@ -10,17 +12,13 @@ Working title: **Bayesian Hierarchical Modelling of Childhood Stunting in Ghana*
 4. Results
 5. Discussion, Conclusions, and Recommendations
 
-The thesis includes the full methodological workflow, Bayesian model sequence, sensitivity analyses, posterior predictive checks, and reproducibility documentation.
+The root-level `main.tex` is the easiest entry point for Overleaf. It pulls in the chapter files from this folder and the figures from `results/figures/`.
 
-## Overleaf workflow
+The local `thesis/main.tex` file does the same thing when working directly inside the thesis folder.
 
-The project is institution-neutral and designed for a full-repository Overleaf sync.
+## Front matter
 
-Select the **root-level `main.tex`** as the Overleaf main document. It includes the chapter files under `thesis/` and accesses figures under `results/figures/`.
-
-The file `thesis/main.tex` is retained as a convenience entry point when working inside the thesis folder.
-
-### Front matter currently included
+Generic versions of the following are already included:
 
 - title page
 - declaration
@@ -32,33 +30,32 @@ The file `thesis/main.tex` is retained as a convenience entry point when working
 - list of figures
 - list of abbreviations
 
-These are generic templates. Their wording and order should be changed to match the actual university or programme requirements once those requirements are available.
+I have deliberately left the university-specific details out. They should only be added once the actual programme or institutional thesis template is known.
 
-### Metadata to complete
+The metadata placeholders are in `config.tex`.
 
-Edit `thesis/config.tex` and replace:
+## Current formatting
 
-- `[INSERT DEPARTMENT / SCHOOL]`
-- `[INSERT UNIVERSITY / INSTITUTION]`
-- `[INSERT CITY / COUNTRY IF REQUIRED]`
-- `[INSERT OFFICIAL DEGREE NAME]`
-- `[INSERT MONTH]`
-- `[INSERT SUPERVISOR NAME]`
-
-The current abstract is approximately 264 words.
-
-### Formatting
-
-The current Overleaf setup intentionally uses neutral defaults:
+For now the thesis uses simple, neutral formatting:
 
 - A4 paper
-- 12-point report class
+- 12-point text
 - 1-inch margins
-- one-and-a-half spacing for main text
-- single-spaced captions, abstract, and references
-- Roman page numbers for preliminary pages
-- Arabic numbering for the main chapters
-- centred page numbers
-- separate lists of tables and figures
+- 1.5 line spacing for the main text
+- Roman numbering in the front matter
+- Arabic numbering from Chapter 1
 
-No university-specific formatting should be inferred from the current template. Once the actual institutional guide or thesis template is supplied, only the layout/front-matter layer should need to change; the chapter files and statistical content can remain intact.
+The statistical content is independent of that layout, so the thesis can later be moved into an official university template without rewriting the chapters.
+
+## Main result files
+
+The results used in Chapter 4 are stored under `../results/tables/` and `../results/figures/`.
+
+For the final Bayesian model, the most useful summary files are:
+
+- `model3_final_8chain_key_or.csv`
+- `model3_final_8chain_variance_summary.csv`
+- `model3_final_8chain_sampler_diagnostics.csv`
+- `model3_final_8chain_loo_summary.csv`
+
+The thesis should always be checked against those files before final submission so that prose and numerical results stay synchronized.
