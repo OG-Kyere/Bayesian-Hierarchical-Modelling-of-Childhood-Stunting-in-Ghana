@@ -45,7 +45,7 @@ No failed joint posterior is salvaged by selectively reporting fixed effects. A 
 
 ## Predictive and prior assessment
 
-Prior predictive summaries are generated for each specification. The mean-zero intercept prior implies a broad, often high prevalence distribution; retain or revise it using external scientific justification, not optimization against observed results. The shifted-intercept scenario uses Normal(-1.5,1.5) as an explicitly labelled external sensitivity, not a sample-estimated prior.
+Prior predictive summaries are generated for each specification. The mean-zero intercept prior implies a broad, often high prevalence distribution; retain or revise it using external scientific justification, not optimization against observed results. The shifted-intercept scenario uses Normal(-1.5,1.5) as an explicitly labelled illustrative sensitivity, not a sample-estimated prior.
 
 PPCs use the exact fitted posterior, cover prevalence by age/sex/wealth, and include distributions of household/community zero/all-stunted groups and group-prevalence variability. A good marginal prevalence PPC alone cannot validate variance decomposition. PPC simulation after weighted fitting describes Bernoulli outcomes under draws from the pseudo-posterior; it does not simulate the survey selection process.
 
@@ -56,3 +56,11 @@ Run `python src/09_model_comparison_ppc.py --run-id production-v1` only after bo
 Primary hierarchical posteriors are unweighted model-based inference. Mean-one survey-weight pseudo-posteriors are sensitivity analyses and do not establish design-calibrated uncertainty. If the scientific target requires population-calibrated hierarchical inference, the sampling model/weighting approach must be strengthened before making that claim.
 
 The independent-report title page and abstract no longer imply a degree submission or confirmed Bayesian effects. Legacy chapter estimates are clearly marked exploratory; a passing final model sequence and scientific review are required before replacing that status. The journal manuscript excludes unsupported substantive estimates.
+
+## Recovery and computation update
+
+The first long-run session (`validation-v1`) was interrupted by a runtime reset before its results were preserved; no scientific claims use that session. The subsequent `validation-v2` reruns use concurrently sampled independent chains and checkpoint the combined sampled posterior before diagnostics or predictive calculations. Log likelihood and Bernoulli replicates are generated in bounded NumPy batches from the exact fitted posterior; unit tests verify the nested predictor and Bernoulli probability calculations. Sample-level arrays remain private.
+
+The initial m3 and weighted v2 fits failed the R-hat threshold despite adequate ESS and zero divergences. This triggered a documented computational escalation: new `validation-v3` fits with 3,000 tuning and 6,000 retained draws per chain, retaining the same likelihood and priors. Both attempts are retained, without choosing runs on the basis of effect estimates.
+
+Local computational revision `820fec3` has the same Git tree and analysis source as published revision `15c6bf1cf1943ea03b7c2e4813d97bd0ebc19b8c`; the SHA differs because authenticated publication created an equivalent commit. Per-run source hashes provide the exact code identity.

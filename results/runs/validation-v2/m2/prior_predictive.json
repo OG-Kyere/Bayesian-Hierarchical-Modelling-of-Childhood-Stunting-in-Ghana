@@ -1,0 +1,9 @@
+{
+  "prevalence_quantiles": [
+    0.10120231331168832,
+    0.4752435064935065,
+    0.8985795454545454
+  ],
+  "probability_prevalence_gt_080": 0.116,
+  "note": "1000 independent prior draws; unweighted sample prevalence. Scientific plausibility requires review."
+}

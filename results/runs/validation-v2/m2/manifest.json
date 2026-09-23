@@ -1,0 +1,80 @@
+{
+  "model": "m2",
+  "specification": {
+    "household": true,
+    "wash": true
+  },
+  "settings": {
+    "model": "m2",
+    "run_id": "validation-v2",
+    "draws": 2000,
+    "tune": 2000,
+    "chains": 4,
+    "seed": 20260923,
+    "target_accept": 0.97,
+    "max_treedepth": 12,
+    "sampler": "nutpie",
+    "prior_only": false
+  },
+  "git_commit": "15c6bf1cf1943ea03b7c2e4813d97bd0ebc19b8c",
+  "source_sha256": {
+    "bayesian_workflow.py": "9ed8292301f0d9894cd9225be5e853de0ac0bf7a4a513a961c1c1024c70b1fe9",
+    "stunting_data.py": "7f3991e0548279ea9925625b0731928b8bc90e6d51b2b3d4d3388cf25c0de0ef"
+  },
+  "raw_sha256": "b3c2556088d7bad06da3323090cef0b69e2eea148b96e8bf295ede19d764f59a",
+  "sample_sha256": "5b08c5c62f5a38f7726ca9f2d48ae149cf7db1087359b5d7b9e57f604f4953fd",
+  "n": 4928,
+  "households": 3545,
+  "communities": 616,
+  "columns": [
+    "male",
+    "age_12-23",
+    "age_24-35",
+    "age_36-47",
+    "age_48-59",
+    "age_6-11",
+    "wealth_middle",
+    "wealth_poorer",
+    "wealth_richer",
+    "wealth_richest",
+    "region_ahafo",
+    "region_ashanti",
+    "region_bono",
+    "region_bono east",
+    "region_central",
+    "region_eastern",
+    "region_greater accra",
+    "region_north east",
+    "region_northern",
+    "region_oti",
+    "region_savannah",
+    "region_upper east",
+    "region_upper west",
+    "region_volta",
+    "region_western north",
+    "rural",
+    "water_unimproved",
+    "sanitation_unimproved"
+  ],
+  "python": "3.12.14",
+  "packages": {
+    "pymc": "5.28.5",
+    "arviz": "0.23.4",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pytensor": "2.38.3",
+    "nutpie": "0.16.11"
+  },
+  "status": "provisional_diagnostics_failed",
+  "diagnostics": {
+    "chains": 4,
+    "draws_per_chain": 2000,
+    "divergences": 0,
+    "max_rhat": 1.0072320788369609,
+    "min_bulk_ess": 615.7198286288192,
+    "min_tail_ess": 302.5626246001363,
+    "min_bfmi": 0.5577073702276859,
+    "max_depth_hits": 0,
+    "diagnostic_gate_passed": false
+  }
+}

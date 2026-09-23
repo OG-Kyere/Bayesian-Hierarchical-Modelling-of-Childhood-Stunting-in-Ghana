@@ -11,19 +11,25 @@ from stunting_data import ROOT
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run-id',required=True)
+    p.add_argument('--m2-run-id',help='Optional source run for harmonized Model 2')
+    p.add_argument('--m3-run-id',help='Optional source run for Model 3')
     args=p.parse_args()
     base=ROOT/'results/runs'/args.run_id
-    manifests=[json.loads((base/m/'manifest.json').read_text()) for m in ['m2_harmonized','m3']]
+    sources={'m2_harmonized':args.m2_run_id or args.run_id,'m3':args.m3_run_id or args.run_id}
+    manifests=[json.loads((ROOT/'results/runs'/run/m/'manifest.json').read_text()) for m,run in sources.items()]
+    if manifests[0]['raw_sha256']!=manifests[1]['raw_sha256']:
+        raise ValueError('Models use different source data files')
     if manifests[0]['sample_sha256']!=manifests[1]['sample_sha256']:
         raise ValueError('Models do not use identical ordered children')
     if not all(m.get('diagnostics',{}).get('diagnostic_gate_passed',False) for m in manifests):
         raise ValueError('Both models must pass the diagnostic gate before comparison')
-    fits={m:az.from_netcdf(ROOT/'results/model_outputs'/args.run_id/m/'posterior.nc') for m in ['m2_harmonized','m3']}
+    fits={m:az.from_netcdf(ROOT/'results/model_outputs'/run/m/'posterior.nc') for m,run in sources.items()}
     for fit in fits.values():
         if 'log_likelihood' not in fit.groups():raise ValueError('Missing log likelihood: rerun updated model script')
     if not np.array_equal(fits['m2_harmonized'].observed_data.stunted,fits['m3'].observed_data.stunted):
         raise ValueError('Observed outcomes differ')
-    out=base/'comparison';out.mkdir(exist_ok=True)
+    out=base/'comparison';out.mkdir(parents=True,exist_ok=True)
+    (out/'source_runs.json').write_text(json.dumps(sources,indent=2)+'\n')
     rows=[]
     for name,fit in fits.items():
         w=az.waic(fit,pointwise=True)

@@ -1,0 +1,8 @@
+{
+  "probability_household_sd_gt_community_sd": 1.0,
+  "sd_difference_equal_tail_95": [
+    0.3626976632726032,
+    0.7127371480542942,
+    1.1562226421272415
+  ]
+}
