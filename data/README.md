@@ -10,9 +10,12 @@ Place authorized source files in:
 data/raw/
 ```
 
-The current workflow expects, as required:
+The current core workflow uses:
 
-- `GHPR8CFL.DTA` — Household Member Recode (PR)
+- `GHPR8CFL.DTA` — Household Member Recode (PR), which contains the anthropometry, household identifiers, household WASH variables, and linked maternal-education variables used in the current model sequence.
+
+The following authorized recodes are retained locally only if later extensions require variables not available in the PR file:
+
 - `GHHR8CFL.DTA` — Household Recode (HR)
 - `GHKR8CFL.DTA` — Children's Recode (KR)
 
@@ -31,7 +34,7 @@ No row-level DHS-derived dataset is committed.
 
 ## Reproducing the current descriptive analysis
 
-After placing `GHPR8CFL.DTA` in `data/raw/`:
+After placing the authorized `GHPR8CFL.DTA` in `data/raw/`:
 
 ```bash
 python src/02_descriptive_analysis.py
