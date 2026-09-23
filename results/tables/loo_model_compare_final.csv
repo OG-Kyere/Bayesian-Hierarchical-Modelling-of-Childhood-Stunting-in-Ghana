@@ -1,0 +1,2 @@
+model2_elpd_loo,model3_elpd_loo,delta_model3_minus_model2,se_delta,model2_bad_k,model3_bad_k
+-2012.388454,-2011.472970,0.915484,3.377193,5,0
