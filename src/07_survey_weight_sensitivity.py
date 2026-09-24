@@ -101,7 +101,7 @@ def main():
         pm.Potential("weighted_likelihood", pm.math.sum(w * logp))
 
         idata = pm.sample(
-            draws=1000, tune=1000, chains=4, target_accept=0.95,
+            draws=1500, tune=2000, chains=4, target_accept=0.99,
             random_seed=20262300, return_inferencedata=True,
         )
     idata.to_netcdf(OUT / "model3_weighted_sensitivity.nc")
