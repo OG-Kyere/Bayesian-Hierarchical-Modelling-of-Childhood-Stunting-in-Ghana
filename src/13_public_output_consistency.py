@@ -31,10 +31,11 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def normalize(text: str) -> str:
-    # Make Markdown/Unicode and LaTeX interval punctuation comparable.
+    # Make Markdown/Unicode/LaTeX punctuation and thousands separators comparable.
     text = text.replace("--", "–").replace("—", "–")
     text = text.replace("\\%", "%")
     text = re.sub(r"\\[A-Za-z]+\{([^{}]*)\}", r"\1", text)
+    text = re.sub(r"(?<=\d),(?=\d{3}\b)", "", text)
     return " ".join(text.split())
 
 
