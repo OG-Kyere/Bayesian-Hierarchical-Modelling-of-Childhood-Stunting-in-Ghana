@@ -84,9 +84,10 @@ def main():
             "exchangeable_working_correlation": float(result.cov_struct.dep_params),
         })
 
-    pd.DataFrame(rows).to_csv(
-        OUT / "gee_working_correlations.csv", index=False
-    )
+    corr = pd.DataFrame(rows)
+    corr.to_csv(OUT / "gee_working_correlations.csv", index=False)
+    print("\nGEE working correlations")
+    print(corr.to_string(index=False))
 
 
 if __name__ == "__main__":
