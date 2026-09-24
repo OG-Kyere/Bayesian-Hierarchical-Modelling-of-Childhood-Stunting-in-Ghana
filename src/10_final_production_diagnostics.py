@@ -1,15 +1,13 @@
-"""Final production diagnostic runner for saved PyMC InferenceData files.
+"""Final production diagnostics for saved PyMC InferenceData files.
 
-Creates a compact diagnostics table with:
-- divergences
-- maximum R-hat
-- minimum bulk/tail ESS
-- BFMI
-- maximum observed tree depth
-- fraction of draws at maximum tree depth
-- PSIS-LOO / Pareto-k diagnostics when log-likelihood is available
+Sampler diagnostics and PSIS-LOO diagnostics are reported separately.  A model
+can therefore have healthy NUTS sampling while still requiring review of a few
+high-Pareto-k observations.
 
-Run this only on the final locked NetCDF posterior files.
+The tree-depth fields deliberately distinguish the largest depth *observed*
+from actual maximum-tree-depth hits.  The previous implementation counted
+draws at the largest observed depth, which is not the same thing as sampler
+saturation.
 """
 
 from pathlib import Path
@@ -27,6 +25,15 @@ MODELS = {
     "model2_harmonized": OUT / "model2_wash_harmonized.nc",
     "model3": OUT / "model3_maternal_education.nc",
 }
+
+
+def _max_treedepth_hits(sample_stats):
+    """Return (hits, fraction) when PyMC stored a saturation flag."""
+    for key in ("reached_max_treedepth", "reached_max_tree_depth"):
+        if key in sample_stats:
+            flag = np.asarray(sample_stats[key], dtype=bool)
+            return int(flag.sum()), float(flag.mean())
+    return np.nan, np.nan
 
 
 def summarize_model(name, path):
@@ -66,12 +73,13 @@ def summarize_model(name, path):
 
     if "tree_depth" in idata.sample_stats:
         td = np.asarray(idata.sample_stats["tree_depth"])
-        max_td = int(td.max())
-        row["max_tree_depth_observed"] = max_td
-        row["fraction_at_max_tree_depth"] = float((td == max_td).mean())
+        row["max_tree_depth_observed"] = int(td.max())
     else:
         row["max_tree_depth_observed"] = np.nan
-        row["fraction_at_max_tree_depth"] = np.nan
+
+    hits, hit_fraction = _max_treedepth_hits(idata.sample_stats)
+    row["max_tree_depth_hits"] = hits
+    row["fraction_reached_max_tree_depth"] = hit_fraction
 
     if "log_likelihood" in idata.groups():
         loo = az.loo(idata, pointwise=True)
@@ -88,17 +96,30 @@ def summarize_model(name, path):
         row["pareto_k_gt_0_7"] = np.nan
         row["pareto_k_gt_1"] = np.nan
 
-    # Conservative production flags.
-    row["diagnostic_status"] = "PASS"
-    if (
+    # Keep MCMC convergence separate from predictive-importance diagnostics.
+    sampler_review = (
         row["divergences"] != 0
         or row["max_rhat"] > 1.01
         or row["min_ess_bulk"] < 400
         or row["min_ess_tail"] < 400
         or (not np.isnan(row["min_bfmi"]) and row["min_bfmi"] < 0.3)
-        or (not np.isnan(row["pareto_k_gt_0_7"]) and row["pareto_k_gt_0_7"] > 0)
-    ):
-        row["diagnostic_status"] = "REVIEW"
+        or (not np.isnan(row["max_tree_depth_hits"]) and row["max_tree_depth_hits"] > 0)
+    )
+    row["sampling_status"] = "REVIEW" if sampler_review else "PASS"
+
+    if np.isnan(row["pareto_k_gt_0_7"]):
+        row["loo_status"] = "NOT_AVAILABLE"
+    elif row["pareto_k_gt_0_7"] > 0:
+        row["loo_status"] = "REVIEW"
+    else:
+        row["loo_status"] = "PASS"
+
+    if row["sampling_status"] == "PASS" and row["loo_status"] == "REVIEW":
+        row["diagnostic_status"] = "PASS_SAMPLING_LOO_REVIEW"
+    elif row["sampling_status"] == "REVIEW":
+        row["diagnostic_status"] = "SAMPLING_REVIEW"
+    else:
+        row["diagnostic_status"] = "PASS"
 
     return row
 
@@ -109,12 +130,16 @@ def main():
         if path.exists():
             rows.append(summarize_model(name, path))
         else:
-            rows.append({"model": name, "diagnostic_status": "FILE_MISSING"})
+            rows.append({
+                "model": name,
+                "sampling_status": "FILE_MISSING",
+                "loo_status": "FILE_MISSING",
+                "diagnostic_status": "FILE_MISSING",
+            })
 
-    pd.DataFrame(rows).to_csv(
-        TABLES / "final_production_diagnostics.csv", index=False
-    )
-    print(pd.DataFrame(rows).to_string(index=False))
+    table = pd.DataFrame(rows)
+    table.to_csv(TABLES / "final_production_diagnostics.csv", index=False)
+    print(table.to_string(index=False))
 
 
 if __name__ == "__main__":
