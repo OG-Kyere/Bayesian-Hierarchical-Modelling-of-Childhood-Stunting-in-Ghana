@@ -132,9 +132,19 @@ def main():
         tidy(fit(spline_age, d), "spline_age_binary_wash"),
         tidy(fit(detailed_wash, d), "categorical_age_detailed_wash"),
     ]
-    pd.concat(results, ignore_index=True).to_csv(
+    combined = pd.concat(results, ignore_index=True)
+    combined.to_csv(
         OUT / "gee_functional_form_wash_sensitivity.csv", index=False
     )
+
+    key = combined.loc[
+        combined["term"].str.contains(
+            "male|richest|water|sanitation|higher", case=False, regex=True
+        ),
+        ["model", "term", "OR", "l95", "u95", "working_correlation"],
+    ]
+    print("\nKey GEE sensitivity results")
+    print(key.to_string(index=False))
 
 
 if __name__ == "__main__":
