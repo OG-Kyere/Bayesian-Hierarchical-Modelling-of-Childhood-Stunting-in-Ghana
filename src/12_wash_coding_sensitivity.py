@@ -140,10 +140,10 @@ def main():
         )
 
         idata = pm.sample(
-            draws=1000,
-            tune=1000,
+            draws=1500,
+            tune=2000,
             chains=4,
-            target_accept=0.95,
+            target_accept=0.99,
             random_seed=20262500,
             return_inferencedata=True,
             idata_kwargs={"log_likelihood": True},
