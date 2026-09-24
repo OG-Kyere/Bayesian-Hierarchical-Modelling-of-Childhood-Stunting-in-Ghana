@@ -1,5 +1,6 @@
 # DHS/raw data
 data/raw/
+data/derived/
 *.dta
 *.sav
 *.sas7bdat
