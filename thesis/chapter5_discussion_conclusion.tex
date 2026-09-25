@@ -5,7 +5,7 @@
 
 This chapter interprets the findings of the study in relation to the research objectives and previous evidence. The discussion focuses on the distribution of childhood stunting in the 2022 Ghana Demographic and Health Survey (GDHS), the relative importance of household and community heterogeneity, the associations involving household wealth, water and sanitation, maternal education, and the robustness of the Bayesian results. The chapter also considers the implications of the findings, outlines the principal strengths and limitations of the study, and presents recommendations for research and practice.
 
-Because the study is based on cross-sectional observational data, the discussion is framed in terms of associations rather than causal effects. In addition, the hierarchical variance estimates are interpreted with greater caution than the fixed-effect results because the random-effect standard deviations mixed more slowly in the current computational runs.
+Because the data are cross-sectional and observational, the discussion is framed in terms of associations rather than causal effects. The hierarchical variance estimates also receive more caution than the fixed effects because the random-effect standard deviations mixed more slowly, even in the strengthened eight-chain run.
 
 \section{Summary of the Main Findings}
 
@@ -29,7 +29,7 @@ The main fixed-effect conclusions were broadly stable under alternative prior sp
 
 The most distinctive result of the study is the magnitude of residual household-level heterogeneity. After adjustment for child age, sex, wealth, region, residence, and subsequently WASH and maternal education, the household random-effect variation remained substantially larger than the community-level variation.
 
-This finding is consistent with earlier Ghanaian evidence. Using the 2008 GDHS, \citet{AhetoEtAl2015} reported strong residual household-level variation in childhood nutritional outcomes after measured risk factors had been included. The present study extends that observation using the 2022 GDHS and explicitly separates household and community random effects for binary stunting. The persistence of a comparatively large household variance more than a decade later suggests that children living in the same household continue to share important nutritional and health-related conditions that are not fully captured by standard DHS covariates.
+Earlier Ghanaian evidence points in the same direction. Using the 2008 GDHS, \citet{AhetoEtAl2015} reported substantial residual household-level variation in childhood nutritional outcomes after measured risk factors had been included. The 2022 analysis extends that observation by separating household and community random effects for binary stunting. The comparatively large household variance suggests that children sharing a household also share nutritional and health-related conditions that standard DHS covariates do not fully capture.
 
 Several mechanisms could contribute to this pattern. Children in the same household share food availability, food allocation, caregiving routines, exposure to household pathogens, sanitation practices, crowding, parental resources, economic shocks, and other behavioural or environmental factors. Some potentially important determinants, including detailed dietary intake, household food insecurity, maternal nutritional status, recent infection history, birth size, and intra-household allocation of resources, were not included in the present model sequence.
 
@@ -95,7 +95,7 @@ The community random effect should not be interpreted as a complete measure of n
 
 \subsection{Predictive Performance and Model Development}
 
-The harmonized Model 2 and Model 3 had nearly identical predictive performance under the conditional WAIC comparison. The difference in WAIC was small relative to its uncertainty. This finding is useful because it separates explanatory interpretation from prediction. Maternal education contributed an interpretable posterior association, especially for higher education, but did not produce a large improvement in predictive performance once the other covariates and hierarchical effects were already included.
+The harmonized Model 2 and Model 3 were also predictively similar under PSIS-LOO. Model 3 improved ELPD by only 0.92, with an estimated standard error of 3.38. Model 3 had no Pareto-$k$ values above 0.70, while Model 2 had five, and neither model had a value above one. The comparison is conditional on the observed household and community structure, so it does not test prediction for entirely new clusters. Maternal education remains scientifically informative even though it does not materially improve observation-level prediction.
 
 Posterior predictive checks indicated that Model 3 reproduced the observed overall prevalence and age-specific prevalence reasonably well. These checks support the adequacy of the model for the features examined, although they cannot establish that all aspects of the data-generating process are represented correctly.
 
@@ -129,7 +129,7 @@ Fourth, the Bayesian framework provides full posterior distributions for regress
 
 Fifth, the analysis includes several robustness checks: alternative prior specifications, survey-weight sensitivity, explicit treatment of missing maternal-education information, an independent GEE clustering diagnostic, posterior predictive checks, PSIS-LOO model comparison, a spline-based age sensitivity analysis, and a more detailed WASH-coding sensitivity analysis. The latter two checks showed that the main fixed-effect conclusions were not artifacts of the six age bands or the binary WASH classification.
 
-Finally, the project has been developed as a reproducible research workflow. Analysis code, aggregate tables, figures, variable definitions, model metadata, and LaTeX thesis files are version-controlled, while restricted DHS microdata are excluded from the public repository.
+The project was also built as a reproducible research workflow. Analysis code, aggregate tables, figures, variable definitions, model metadata, and LaTeX report files are version-controlled, while restricted DHS microdata are excluded from the public repository.
 
 \section{Limitations of the Study}
 
@@ -153,13 +153,13 @@ Maternal education was unavailable for 425 children, resulting in a 4,503-child 
 
 \subsection{Survey Design in Bayesian Inference}
 
-Survey weights were used for descriptive population estimates, but the primary Bayesian hierarchical likelihood was not survey-weighted. A rescaled pseudo-posterior was examined as a sensitivity analysis. The weighted model increased uncertainty around some coefficients, particularly the water association, and the community variance parameter mixed poorly. Therefore, the study cannot claim that the primary posterior fully incorporates all aspects of the complex survey design.
+Survey weights were used for descriptive population estimates, but the primary Bayesian hierarchical likelihood was not survey-weighted. A rescaled pseudo-posterior was examined as a sensitivity analysis. The strengthened weighted fit sampled adequately, but weighting increased uncertainty around some coefficients, particularly the water association. Because the pseudo-posterior changes the inferential target and the meaning of the hierarchical variance components, it is treated as a robustness check rather than a replacement for the primary model. The study therefore does not claim that the primary posterior fully incorporates every feature of the complex survey design.
 
 \subsection{Interpretation of Household and Community Variance}
 
 The latent-scale ICC and VPC calculations use the conventional logistic residual variance of $\pi^2/3$. These are useful comparative measures but are model-based quantities rather than directly observed proportions of individual binary-outcome variance.
 
-In addition, many households contained only one eligible child. Although 1,147 households contained multiple eligible children and 51.3\% of analysed children lived in such households, estimation of the household variance is informed disproportionately by households with repeated eligible children. The household variance should therefore be interpreted as a population-level random-effect parameter under the assumed hierarchical model, not as a directly observed household correlation for every household.
+Many households also contained only one eligible child. Although 1,147 households contained multiple eligible children and 51.3\% of analysed children lived in such households, estimation of the household variance is informed disproportionately by households with repeated eligible children. The household variance should therefore be interpreted as a population-level random-effect parameter under the assumed hierarchical model, not as a directly observed household correlation for every household.
 
 The community identifier is the DHS survey cluster. It is an operational sampling unit and may not correspond perfectly to a socially meaningful neighbourhood or community.
 
@@ -167,7 +167,7 @@ The community identifier is the DHS survey cluster. It is an operational samplin
 
 All principal Model 1--3 fits had zero divergent transitions and fixed-effect parameters showed good chain agreement. An extended Model 3 diagnostic run using eight independent chains and 4,000 retained posterior draws also showed acceptable sampler geometry: chain-specific BFMI values ranged from approximately 0.51 to 0.66, no divergences occurred, and no chain reached the maximum tree depth. Fixed-effect convergence was excellent, with maximum $\hat R$ of approximately 1.003 and bulk effective sample sizes above 2,200.
 
-The household and community standard deviations nevertheless remained the slowest-mixing quantities. In the extended run, $\hat R$ was approximately 1.021 for the community SD and 1.018 for the household SD, with bulk effective sample sizes of approximately 544 and 524. These diagnostics are substantially stronger than the earlier runs and support the broad household-versus-community contrast, but they remain slightly above the conservative $\hat R\leq1.01$ target for locking exact variance-component intervals.
+The household and community standard deviations nevertheless remained the slowest-mixing quantities. In the locked run, $\hat R$ was approximately 1.021 for the community SD and 1.018 for the household SD, with bulk effective sample sizes of approximately 544 and 524. Those diagnostics support the broad household-versus-community contrast, but they justify more caution around the exact variance-component intervals than around the fixed-effect intervals.
 
 \subsection{Model Comparison}
 
@@ -201,20 +201,20 @@ Longitudinal data would help clarify temporal ordering and distinguish determina
 
 Future Bayesian analyses could incorporate the complex survey design more fully, including alternative pseudo-posterior approaches or joint models of sampling and outcome processes, and compare the resulting posterior inferences with the current unweighted hierarchical specification.
 
-A spatial extension using authorized DHS GPS data could separate spatially structured community variation from non-spatial cluster heterogeneity. Such a model would complement the household/community decomposition developed in this thesis.
+A spatial extension using authorized DHS GPS data could separate spatially structured community variation from non-spatial cluster heterogeneity. Such a model would complement the household/community decomposition developed here.
 
 The maternal-education analysis could also be extended by examining more detailed educational categories, paternal education, maternal age, women's decision-making, healthcare utilisation, and interactions between education and household wealth or rural residence.
 
-Finally, longer unrestricted within-chain sampling would further tighten the Monte Carlo precision of the household and community variance parameters. Posterior predictive checks could also be extended to household- and community-level counts before journal submission, although the current overall and age-specific checks show no major lack of fit.
+Future work could use longer within-chain sampling if still tighter Monte Carlo precision is needed for the household and community variance components. Posterior predictive checks could also be extended to household- and community-level count distributions. Neither extension is required to support the locked fixed-effect results or the observed household-versus-community contrast.
 
 \section{Conclusion}
 
 Childhood stunting in Ghana has declined substantially over recent decades, yet the 2022 GDHS shows that approximately one in six children under five remains stunted. The burden is not evenly distributed. Children in poorer households, boys, and children in the second and third years of life experience higher risk, while substantial regional and socioeconomic differences remain.
 
-The central contribution of this thesis is the explicit separation of residual household and community heterogeneity using a Bayesian hierarchical framework. The findings indicate that unexplained variation in childhood stunting is concentrated more strongly at the household level than at the community level. This household heterogeneity persists after adjustment for demographic and socioeconomic characteristics, water and sanitation, and maternal education.
+The central contribution of this report is the explicit separation of residual household and community heterogeneity using a Bayesian hierarchical framework. The findings indicate that unexplained variation in childhood stunting is concentrated more strongly at the household level than at the community level. This household heterogeneity persists after adjustment for demographic and socioeconomic characteristics, water and sanitation, and maternal education.
 
 Unimproved drinking-water source was associated with higher posterior odds of stunting in the primary models, although this association became less precise under the survey-weight sensitivity analysis. Sanitation showed a weaker adjusted association. Higher maternal education was strongly associated with lower posterior odds of stunting, and the household wealth gradient remained evident after adjustment.
 
-Taken together, the results suggest that Ghana's remaining burden of childhood stunting cannot be understood solely through national or regional averages. The persistence of large household-level heterogeneity points to important shared household conditions that are only partly represented by standard DHS variables. Continued progress is therefore likely to require both population-level action on socioeconomic and environmental inequalities and more detailed understanding of the household environments in which children grow.
+The results therefore point beyond national and regional averages. A large share of the residual clustering sits between households, suggesting that standard DHS variables capture only part of the shared conditions in which children grow. That pattern supports continued attention to socioeconomic and environmental inequalities while also motivating more detailed study of food security, caregiving, maternal health, infection, and other household-level conditions.
 
-The study also demonstrates the value of treating hierarchical variation as a substantive research question rather than only a statistical correction. By distinguishing household and community heterogeneity and examining the stability of conclusions across model specifications, the thesis provides an updated and reproducible account of childhood stunting in Ghana using the 2022 GDHS.
+The study also demonstrates the value of treating hierarchical variation as a substantive research question rather than only a statistical correction. By distinguishing household and community heterogeneity and checking the result across alternative specifications, the report provides an updated and reproducible account of childhood stunting in Ghana using the 2022 GDHS.
