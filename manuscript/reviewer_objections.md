@@ -100,9 +100,9 @@ The supplement retains the detailed diagnostics and sensitivity tables.
 
 ## Remaining actions before submission
 
-1. Verify every cited reference and DOI against the publisher record.
-2. Convert the bibliography output to the target journal's exact APA 7 implementation.
-3. Confirm all authors, affiliations, ORCIDs, funding, conflicts, and CRediT contributions.
-4. Confirm ethics/exemption wording required by the corresponding author's institution.
-5. Consider a final longer run only if exact variance-component R-hat <= 1.01 is required by the author team.
-6. If reviewers emphasize prediction for new households, add grouped cross-validation rather than defending observation-level LOO as equivalent.
+1. Re-check publisher records only if the cited reference list changes.
+2. Inspect the final Vancouver reference numbering after the last editorial edit.
+3. Confirm the final author list, correspondence details, ORCID, funding, conflicts, and CRediT contributions.
+4. Keep the ethics statement limited to the documented GDHS approvals and authorized secondary-data use.
+5. Treat longer variance-component sampling as optional future work rather than a pre-submission requirement.
+6. If reviewers emphasize prediction for new households, add grouped cross-validation rather than treating observation-level LOO as equivalent.
