@@ -28,7 +28,7 @@ This is a working self-audit for the observational cross-sectional manuscript. I
 - [x] MCMC diagnostics are described.
 - [x] Sensitivity analyses are described.
 - [x] Ethics/data-access statement is included.
-- [ ] Add exact PyMC/ArviZ/Python version numbers used for the final locked production analysis once the environment is frozen.
+- [x] Exact Python/PyMC/ArviZ and supporting package versions for the strengthened locked analysis are recorded in `docs/executed_environment_2026-09-23.md`; the later independent reproducibility environment is documented separately.
 - [ ] If required by the journal, state the exact GDHS fieldwork dates in Methods.
 
 ## Results
@@ -64,4 +64,4 @@ This is a working self-audit for the observational cross-sectional manuscript. I
 - [ ] Finalize affiliations, ORCID, and corresponding-author details.
 - [ ] Confirm institutional ethics/exemption wording.
 - [ ] Convert bibliography output to the target journal's exact APA 7 implementation.
-- [ ] Verify all cited references and DOIs against publisher records.
+- [x] Verify all currently cited references and DOIs against publisher/official records. Re-check only if the reference list changes.
