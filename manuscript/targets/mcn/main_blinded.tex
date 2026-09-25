@@ -48,7 +48,7 @@ We also test whether the main findings depend on choices that could reasonably b
 
 \subsection{Data source and analytic sample}
 
-This was a cross-sectional secondary analysis of the Household Member Recode from the 2022 GDHS, accessed under authorization from The DHS Program. The GDHS used a stratified two-stage cluster sample \citep{GSSICF2024}. Children were eligible for this analysis if they were aged 0--59 months, had slept in the sampled household on the night before the interview (\texttt{hv103 = yes}), and had a valid height-for-age z-score in \texttt{hc70}.
+This was a cross-sectional secondary analysis of the Household Member Recode from the 2022 GDHS, accessed under authorization from The DHS Program. Fieldwork was conducted from October 2022 to January 2023. The GDHS used a stratified two-stage cluster sample \citep{GSSICF2024}. Children were eligible for this analysis if they were aged 0--59 months, had slept in the sampled household on the night before the interview (\texttt{hv103 = yes}), and had a valid height-for-age z-score in \texttt{hc70}.
 
 We defined stunting as height-for-age below $-2$ standard deviations from the WHO reference median, corresponding to \texttt{hc70 < -200} in the DHS recode. The resulting core sample contained 4,928 children in 3,545 households and 616 survey communities.
 
@@ -99,7 +99,11 @@ We then challenged the main specification in several ways. We refitted Model 3 w
 
 \subsection{Ethics and data access}
 
-The analysis used de-identified secondary data obtained through authorized DHS access. The original GDHS obtained informed consent under its survey protocol. We do not redistribute DHS microdata. The public reproducibility repository contains code and aggregate, non-identifying outputs only.
+The 2022 GDHS protocol received ethical clearance from the Ethical Review Committee of the Ghana Health Service and from the ICF Institutional Review Board \citep{GSSICF2024}. The original survey used informed-consent procedures under its approved protocol. This secondary analysis used de-identified data obtained through authorized DHS access and involved no direct participant contact. We do not redistribute DHS microdata. The public reproducibility repository contains code and aggregate, non-identifying outputs only.
+
+\subsection{Use of generative artificial intelligence}
+
+OpenAI ChatGPT (GPT-5.6 Sol; accessed September 2026) was used to assist with language editing, manuscript organization, code drafting and review, and reproducibility documentation. The authors reviewed and revised the manuscript text, checked analysis code and reported numerical results against the saved outputs, and remain responsible for the accuracy and integrity of the work.
 
 \section{Results}
 
