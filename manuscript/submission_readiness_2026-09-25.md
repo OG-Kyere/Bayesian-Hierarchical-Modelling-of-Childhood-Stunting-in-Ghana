@@ -12,7 +12,7 @@ The statistical analysis and public reproducibility repository are complete for 
 - sensitivity analyses already cover priors, survey weighting, missing maternal education, age functional form, detailed WASH coding, posterior predictive checks, PSIS-LOO, and independent GEE checks;
 - the manuscript identifies the study as a cross-sectional secondary analysis and avoids causal interpretation;
 - the TMIH manuscript uses a structured Objectives / Methods / Results / Conclusions abstract under the 300-word limit;
-- the current TMIH main body is approximately 2,674 words, below the journal's 3,500-word target;
+- the current TMIH main body is approximately 2,870 words, below the journal's 3,500-word target;
 - the main manuscript contains two tables and two figures;
 - the TMIH reference target is Vancouver/numerical;
 - the current cited-reference metadata and DOIs have been checked;
