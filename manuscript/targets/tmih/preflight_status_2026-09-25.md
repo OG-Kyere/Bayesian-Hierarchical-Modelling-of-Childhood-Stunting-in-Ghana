@@ -11,7 +11,7 @@ The TMIH package is structurally ready for final author metadata and submission 
 - no KNUST affiliation or KNUST-specific ethics action remains in active TMIH submission files;
 - manuscript is a Research Article using IMRD structure;
 - structured abstract uses Objectives / Methods / Results / Conclusions and is below 300 words;
-- main body is approximately 2,674 words, below the 3,500-word target;
+- main body is approximately 2,870 words, below the 3,500-word target;
 - main paper contains two tables and two figures;
 - numerical/Vancouver reference target is configured;
 - data availability statement is present;
