@@ -2,21 +2,19 @@
 
 **Manuscript title:** Household and Community Heterogeneity in Childhood Stunting in Ghana
 
-**Corresponding author:** Kyere Ofosu Gideon
+As corresponding author for the above-named manuscript, I declare and take responsibility for stating that each person named as an author:
 
-By signing this statement, I confirm on behalf of the listed author(s) that each author:
+- has made substantial contributions to the conception or design of the work, or to the acquisition, analysis, or interpretation of data for the work; **AND**
+- has drafted the work or revised it critically for important intellectual content; **AND**
+- has approved the final version to be published; **AND**
+- agrees to be accountable for all aspects of the work, including ensuring that questions related to the accuracy or integrity of any part of the work are appropriately investigated and resolved.
 
-- made a substantial contribution to the conception/design of the study or to data acquisition, analysis, or interpretation;
-- participated in drafting the manuscript or revising it critically for important intellectual content;
-- approved the final version submitted for publication; and
-- accepts accountability for the integrity and accuracy of the work and for resolving questions about any part of it.
-
-I also confirm that any non-author who made a substantial contribution to the manuscript will be acknowledged only with that person’s permission, and that no individual meeting full authorship criteria has been omitted.
+I also declare that persons who made substantial contributions to the work but do not qualify for authorship will be named in the Acknowledgements only with their permission. If the manuscript contains no Acknowledgements, this indicates that no substantial non-author contributions require acknowledgement.
 
 **Author signature:** ______________________________
 
 **Printed name:** Kyere Ofosu Gideon
 
-**Date:** ______________________________
+**Date signed:** ______________________________
 
 > Submission action: sign by hand or with a verified digital signature and upload the completed statement with the TMIH submission. If the author list changes, regenerate this statement before signing.
