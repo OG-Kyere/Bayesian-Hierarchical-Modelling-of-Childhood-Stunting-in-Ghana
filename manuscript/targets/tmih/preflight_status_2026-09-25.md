@@ -38,9 +38,7 @@ The manuscript does not claim a separate institutional ethics approval that was 
 
 These cannot be safely inferred and must be confirmed before submission:
 
-- correspondence email;
-- correspondence postal address;
-- ORCID, if available;
+- final author/co-author list if additional qualifying contributors are added;
 - final author/co-author list;
 - funding declaration;
 - conflict-of-interest declaration;
