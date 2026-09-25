@@ -18,7 +18,7 @@ Guidelines rechecked on **25 September 2026** against the current Wiley/TMIH aut
 - Current main display items: **2 tables + 2 figures** — concise and non-duplicative.
 - Supplementary material retained for diagnostics and sensitivity analyses.
 - TMIH requests a **word count and at least five potential reviewer suggestions** — included in the target package.
-- ORCID is encouraged — ADD IF AVAILABLE.
+- ORCID: https://orcid.org/0009-0003-9848-8437.
 
 ## References
 
@@ -55,9 +55,9 @@ Guidelines rechecked on **25 September 2026** against the current Wiley/TMIH aut
 - TMIH author statement template prepared; corresponding author must sign the final version.
 - Current title page assumes a single author.
 - **ACTION:** confirm final author list and ICMJE eligibility.
-- **ACTION:** confirm correspondence postal address, email, and ORCID.
-- **ACTION:** confirm funding statement.
-- **ACTION:** confirm conflict-of-interest statement.
+- Correspondence postal address, email, and ORCID confirmed.
+- Funding statement confirmed: no specific funding.
+- Conflict-of-interest statement confirmed: none declared.
 
 ## Submission system and publication cost
 
