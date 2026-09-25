@@ -18,6 +18,6 @@ Thank you for considering the manuscript.
 
 Sincerely,
 
-Kyere Ofosu Gideon, BSc  
+Gideon Ofosu Kyere, BSc  
 Independent Researcher, Ghana  
-[INSERT EMAIL]
+kyereofosu2003@gmail.com
