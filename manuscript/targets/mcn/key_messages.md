@@ -1,6 +1,6 @@
 # Key Messages
 
-- Most residual clustering in childhood stunting occurred between households rather than between survey communities in the 2022 Ghana DHS.
+- Residual clustering in childhood stunting was substantially stronger at the household level than at the survey-community level in the 2022 Ghana DHS.
 - The household component remained large after adjustment for child characteristics, wealth, region, residence, WASH, and maternal education.
 - Surface-water use showed the clearest signal when drinking-water source was examined in more detail.
 - Higher maternal education and greater household wealth were associated with lower odds of stunting.
