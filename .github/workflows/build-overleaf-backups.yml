@@ -1,0 +1,65 @@
+name: Build Overleaf Backups
+
+on:
+  push:
+    paths:
+      - ".github/workflows/build-overleaf-backups.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-backups:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare full-project Overleaf backup
+        shell: bash
+        run: |
+          mkdir -p build/full-project
+          rsync -a --exclude='.git/' --exclude='build/' ./ build/full-project/
+          cat > build/full-project/_OVERLEAF_IMPORT_NOTE.md <<'EOF'
+          # Overleaf full-project backup
+          Import this ZIP as a new Overleaf project and select the repository-root main.tex as the Main document.
+          All tracked LaTeX, Markdown, Python source code, figures, tables, and project documentation are included.
+          Restricted DHS row-level microdata are not included because they are not stored in the public repository.
+          EOF
+
+      - name: Prepare self-contained TMIH manuscript backup
+        shell: bash
+        run: |
+          mkdir -p build/tmih-manuscript/figures
+          mkdir -p build/tmih-manuscript/submission_materials
+          cp manuscript/targets/tmih/main.tex build/tmih-manuscript/main.tex
+          cp manuscript/targets/tmih/supplement.tex build/tmih-manuscript/supplement.tex
+          cp thesis/references.bib build/tmih-manuscript/references.bib
+          cp results/figures/stunting_by_region.svg build/tmih-manuscript/figures/
+          cp results/figures/model3_posterior_or_forest.svg build/tmih-manuscript/figures/
+          cp manuscript/targets/tmih/*.md build/tmih-manuscript/submission_materials/
+          sed -i 's#../../../results/figures/#figures/#g' build/tmih-manuscript/main.tex
+          sed -i 's#../../../thesis/references#references#g' build/tmih-manuscript/main.tex
+          sed -i 's#../../../results/figures/#figures/#g' build/tmih-manuscript/supplement.tex
+          sed -i 's#../../../thesis/references#references#g' build/tmih-manuscript/supplement.tex
+          cat > build/tmih-manuscript/README_OVERLEAF.md <<'EOF'
+          # TMIH manuscript — Overleaf backup
+          Upload this ZIP to Overleaf and set main.tex as the Main document.
+          EOF
+
+      - name: Upload full-project Overleaf backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bayesian-Stunting-Full-Project-Overleaf
+          path: build/full-project/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload TMIH manuscript Overleaf backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bayesian-Stunting-TMIH-Manuscript-Overleaf
+          path: build/tmih-manuscript/
+          if-no-files-found: error
+          retention-days: 90
