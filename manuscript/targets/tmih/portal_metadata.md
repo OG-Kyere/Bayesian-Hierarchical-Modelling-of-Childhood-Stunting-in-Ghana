@@ -12,12 +12,12 @@
 **Main-body word count:** approximately 2,870 words
 
 ## Corresponding author
-**Name:** Kyere Ofosu Gideon  
+**Name:** Gideon Ofosu Kyere  
 **Degree:** BSc  
 **Affiliation:** Independent Researcher, Ghana  
-**Postal address:** [INSERT CORRESPONDENCE POSTAL ADDRESS]  
-**Email:** [INSERT]  
-**ORCID:** [INSERT IF AVAILABLE]
+**Postal address:** 47 Mempeasem ST, GA-485-2566  
+**Email:** kyereofosu2003@gmail.com  
+**ORCID:** https://orcid.org/0009-0003-9848-8437
 
 ## Abstract
 Use the structured abstract in `main.tex` under these headings:
@@ -27,10 +27,10 @@ Use the structured abstract in `main.tex` under these headings:
 - Conclusions
 
 ## Funding
-[INSERT FINAL FUNDING DECLARATION.]
+The author received no specific funding for this work.
 
 ## Conflict of interest
-[INSERT FINAL CONFLICT-OF-INTEREST DECLARATION.]
+The author declares no conflict of interest.
 
 ## Data availability
 The 2022 Ghana DHS microdata are distributed by The DHS Program and cannot be redistributed by the author. Eligible researchers may request access directly from The DHS Program under its data-use conditions. Reproducibility code, aggregate tables, figures, and non-identifying diagnostic outputs are available at:
