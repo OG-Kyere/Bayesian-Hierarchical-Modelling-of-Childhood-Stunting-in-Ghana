@@ -1,44 +1,60 @@
-# Journal targeting memo — 23 September 2026
+# Journal targeting memo — updated 25 September 2026
 
-## First target: Maternal & Child Nutrition
+## Current first target: Tropical Medicine & International Health (TMIH)
 
-Why it fits:
-- dedicated maternal and child nutrition readership;
-- explicitly includes socioeconomic, environmental and policy dimensions of nutrition;
-- accepts methodological development and nutritional-risk research;
-- current format naturally accommodates the paper's focused contribution;
-- recent issues publish population-based and sub-Saharan African child-nutrition research.
+Decision: retarget the completed manuscript from *Maternal & Child Nutrition* to *Tropical Medicine & International Health*.
 
-Current Research Article constraints:
-- 5,000-word main-text limit;
-- 250-word unstructured abstract;
-- 3–5 key messages totaling about 80–100 words;
-- no more than five main tables/figures;
-- double-blind peer review;
-- APA 7 references;
-- supporting appendix allowed.
+### Why TMIH fits
 
-Practical consideration:
-- fully open access;
-- listed APC: USD 4,540 before any eligible waiver/discount/institutional agreement.
+- TMIH explicitly publishes research relevant to public health in low- and middle-income settings.
+- The manuscript's focus on childhood stunting, household context, socioeconomic inequality, water and sanitation, and maternal education is within that scope.
+- The paper is led from Ghana and uses Ghanaian national survey data, aligning with the journal's stated interest in equitable authorship and LMIC-led research.
+- The manuscript's central contribution is methodological and epidemiologic: separating residual household heterogeneity from residual survey-community heterogeneity rather than treating all clustering as community-level dependence.
+- The paper already uses uncertainty intervals and avoids causal overstatement, which fits the journal's statistical reporting guidance.
 
-## Strong alternatives
+### Current Research Article requirements used for retargeting
 
-### BMC Public Health
-Broad public-health scope explicitly includes social determinants and environmental/behavioral correlates of health. This is a strong alternative if the manuscript is framed more around multilevel inequality and household context than nutrition-specific mechanisms.
+- approximately 3,500-word main-body limit in principle;
+- structured abstract up to 300 words;
+- abstract headings: Objectives, Methods, Results, Conclusions;
+- IMRD main-text structure;
+- Vancouver publication reference style, with Harvard or Vancouver acceptable at submission;
+- concise non-duplicative tables and figures;
+- word count in the submission;
+- at least five suggested reviewers;
+- data-accessibility statement encouraged;
+- author names, affiliations, degrees, addresses, email addresses and corresponding-author details supplied at submission;
+- signed author statement;
+- declaration of funding and competing interests;
+- ORCID encouraged.
 
-### PLOS Global Public Health
-Strong thematic fit for health inequities, global public health, and transparent reproducible methods. Particularly attractive if open-science positioning and fee-assistance mechanisms are priorities.
+### Publication-cost decision
 
-### BMC Nutrition
-Direct fit for nutritional epidemiology and public-health nutrition. It is likely the easiest structural transfer from the MCN version if a broader nutrition journal becomes preferable.
+TMIH states that authors do not incur page charges. Immediate OnlineOpen is optional. The project will therefore use the journal's standard publication route and will **not** select paid OnlineOpen unless a separate funding source later covers it.
+
+### Submission route
+
+New TMIH submissions are currently initiated through Wiley Authors. Submissions begun before 30 July 2025 remain in Editorial Manager.
+
+## Previous target retained for provenance
+
+The existing `manuscript/targets/mcn/` directory is retained as an archived earlier target. It should not be used for the current submission.
+
+The active journal-specific package is now:
+
+`manuscript/targets/tmih/`
 
 ## Manuscript positioning
 
-Keep the main contribution focused on:
-1. household versus community residual heterogeneity;
-2. persistence of household heterogeneity after WASH and maternal education;
-3. robustness across modelling choices;
-4. practical interpretation of household context without causal overclaiming.
+Keep the paper focused on:
 
-Avoid presenting the paper as novel merely because it uses Bayesian modelling.
+1. household versus community residual heterogeneity;
+2. persistence of the household component after WASH and maternal education are included;
+3. robustness across the already completed sensitivity analyses;
+4. public-health interpretation of household context without causal overclaiming.
+
+Do not present Bayesian modelling itself as the novelty.
+
+## Locked analysis rule
+
+The statistical analysis is complete. Retargeting must not trigger additional model fitting, new covariates, new sensitivity analyses, or replacement of the locked eight-chain Model 3 estimates. Any future statistical extension should occur only if a reviewer or editor raises a substantive issue that cannot be answered from the completed analyses.
