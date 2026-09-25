@@ -1,0 +1,138 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{../results/figures/}}
+\svgpath{{../results/figures/}}
+
+\title{Supplementary Material: Household and Community Heterogeneity in Childhood Stunting in Ghana}
+\author{Kyere Ofosu Gideon}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Analytic sample validation}
+
+The reconstructed analytic sample contained 4,928 children, 927 stunted children, 3,545 households, and 616 survey communities. The sum of rescaled DHS sampling weights was 4,292.97, reproducing the official weighted height-for-age denominator of 4,293 after rounding. Survey-weighted stunting prevalence was 17.39\%.
+
+\section{Household structure}
+
+Of the 3,545 households, 2,398 contributed one eligible child, 951 contributed two, 165 contributed three, 26 contributed four, four contributed five, and one household contributed nine. In total, 1,147 households contained multiple eligible children, and approximately 51.3\% of analysed children lived in multi-child households.
+
+\section{Extended Model 3 diagnostics}
+
+The strengthened Model 3 diagnostic run used eight independent chains, each with 500 warmup and 500 retained draws, for 4,000 posterior draws.
+
+\begin{table}[H]
+\centering
+\caption{Sampler diagnostics for the strengthened Model 3 run}
+\begin{tabular}{rrrrr}
+\toprule
+Chain & Divergences & BFMI & Max tree depth & Mean acceptance \\
+\midrule
+1 & 0 & 0.519 & 6 & 0.946 \\
+2 & 0 & 0.655 & 6 & 0.943 \\
+3 & 0 & 0.530 & 6 & 0.935 \\
+4 & 0 & 0.660 & 6 & 0.935 \\
+5 & 0 & 0.514 & 6 & 0.937 \\
+6 & 0 & 0.562 & 6 & 0.937 \\
+7 & 0 & 0.534 & 6 & 0.941 \\
+8 & 0 & 0.651 & 6 & 0.929 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+No chain reached the configured maximum tree depth. Fixed effects had $\hat R$ values near 1.00 and large effective sample sizes. The community and household standard deviations remained slower-mixing, with $\hat R$ approximately 1.021 and 1.018 and bulk ESS approximately 544 and 524, respectively.
+
+\section{Variance decomposition}
+
+\begin{table}[H]
+\centering
+\caption{Posterior variance summaries from the strengthened Model 3 run}
+\begin{tabular}{lrrr}
+\toprule
+Quantity & Median & 2.5th percentile & 97.5th percentile \\
+\midrule
+Community SD & 0.389 & 0.067 & 0.610 \\
+Household SD & 1.234 & 0.940 & 1.535 \\
+Community ICC & 0.030 & 0.001 & 0.073 \\
+Household VPC & 0.307 & 0.203 & 0.406 \\
+Same-household correlation & 0.339 & 0.236 & 0.436 \\
+Community MOR & 1.45 & 1.07 & 1.79 \\
+Household MOR & 3.24 & 2.45 & 4.32 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Prior sensitivity}
+
+Major fixed effects were stable under tighter and wider weakly regularizing priors. The posterior median OR for unimproved water was approximately 1.48 under both alternatives, compared with 1.50 in the primary model. Higher maternal education had ORs of approximately 0.44 under the tighter prior, 0.37 in the strengthened primary run, and 0.35 under the wider prior.
+
+\section{Survey-weight sensitivity}
+
+A pseudo-posterior sensitivity analysis normalized the DHS household-member weights to mean one and multiplied the Bernoulli log-likelihood contributions by these weights. The weighted water estimate was less precise (OR 1.38, 95\% posterior interval 0.90--2.07), although the posterior probability of a positive coefficient remained approximately 0.94. Sex, age, richest-versus-poorest wealth, and higher maternal education retained their directions.
+
+\section{Missing maternal-education sensitivity}
+
+A full-sample model retained all 4,928 children by representing missing maternal education as a separate category. The main conclusions persisted: unimproved water OR 1.35 (1.01--1.74), higher maternal education OR 0.38 (0.22--0.63), and the missing maternal-education category itself was highly uncertain at OR 1.11 (0.80--1.53).
+
+\section{Age functional-form sensitivity}
+
+Replacing the six age categories with a cubic B-spline produced nearly unchanged estimates for the principal variables:
+
+\begin{table}[H]
+\centering
+\caption{Selected age-spline sensitivity results}
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Male vs female & 1.53 & 1.27 & 1.86 \\
+Richest vs poorest & 0.35 & 0.19 & 0.61 \\
+Unimproved water & 1.49 & 1.12 & 2.00 \\
+Unimproved sanitation & 1.11 & 0.86 & 1.44 \\
+Higher maternal education & 0.37 & 0.20 & 0.67 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Detailed WASH sensitivity}
+
+\begin{table}[H]
+\centering
+\caption{Selected detailed-WASH sensitivity results}
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Surface water vs improved & 1.52 & 1.10 & 2.08 \\
+Unprotected groundwater vs improved & 1.41 & 0.90 & 2.21 \\
+Open defecation vs improved sanitation & 1.23 & 0.92 & 1.64 \\
+Other unimproved vs improved sanitation & 0.93 & 0.68 & 1.31 \\
+Higher maternal education vs none & 0.38 & 0.20 & 0.67 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Independent GEE robustness checks}
+
+As an independent sensitivity analysis, logistic generalized estimating equation (GEE) models with exchangeable working correlation were fitted at the household and community levels. The estimated working correlation was 0.154 for household clustering and 0.024 for community clustering. These are not interpreted as Bayesian ICCs; they provide an external check that residual dependence is much stronger within households.
+
+The GEE fixed-effect results were also consistent with the Bayesian sensitivity analyses. In the binary-WASH specification, unimproved water had OR 1.40 (1.12--1.74). Replacing the categorical age term with a cubic spline gave OR 1.39 (1.12--1.74). With detailed WASH coding, surface water had OR 1.43 (1.12--1.83), while unprotected groundwater had OR 1.34 (0.93--1.94).
+
+\section{Predictive checks and PSIS-LOO}
+
+Posterior predictive checks reproduced overall and age-specific prevalence. For the strengthened Model 3 run, PSIS-LOO produced ELPD $-2011.47$, with maximum Pareto $k=0.69$ and no observations above 0.70. Harmonized Model 2 had five observations above Pareto $k=0.70$ and none above one. The ELPD difference favouring Model 3 was only 0.92 with SE 3.38, indicating effectively equivalent predictive performance.
+
+\bibliographystyle{unsrtnat}
+\bibliography{../thesis/references}
+
+\end{document}
