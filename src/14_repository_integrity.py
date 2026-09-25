@@ -13,6 +13,7 @@ Only the Python standard library is required.
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
@@ -116,14 +117,26 @@ def main() -> int:
                     f"{tex.relative_to(ROOT)}: referenced figure not found: '{ref}'"
                 )
 
-    # Restricted/raw file types must never be tracked in this repository.
-    for path in ROOT.rglob("*"):
-        if not path.is_file():
+    # Restricted/raw file types must never be TRACKED in this repository.
+    # Use the Git index rather than scanning the working tree, because authorized
+    # DHS microdata and NetCDF posterior files may legitimately exist locally
+    # while being ignored by .gitignore.
+    try:
+        tracked = subprocess.run(
+            ["git", "ls-files", "-z"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout.decode("utf-8").split("\0")
+    except (subprocess.CalledProcessError, FileNotFoundError, UnicodeDecodeError) as exc:
+        failures.append(f"could not inspect Git-tracked files: {exc}")
+        tracked = []
+
+    for rel_text in tracked:
+        if not rel_text:
             continue
-        rel = path.relative_to(ROOT)
-        if ".git" in rel.parts:
-            continue
-        if path.suffix.lower() in RAW_SUFFIXES:
+        rel = Path(rel_text)
+        if rel.suffix.lower() in RAW_SUFFIXES:
             failures.append(f"restricted/large data-like file is tracked: {rel}")
         if len(rel.parts) >= 2 and rel.parts[0] == "data" and rel.parts[1] == "raw":
             failures.append(f"file is tracked under data/raw: {rel}")
