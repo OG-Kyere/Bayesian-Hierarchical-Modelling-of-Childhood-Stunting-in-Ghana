@@ -161,6 +161,75 @@ The literature also leaves several gaps that matter for this analysis. Many infl
 
 These distinctions are important because a community random effect fitted without a household effect can absorb heterogeneity arising from shared household conditions. Similarly, adding household-level predictors without examining changes in variance components gives limited information about whether those predictors explain between-household or between-community differences.
 
+\section{Recent Regional Evidence and What It Adds}
+
+Recent multi-country work helps place the Ghanaian evidence in a wider sub-Saharan African context. Using the most recent DHS available between 2011 and 2024 for 35 countries, \citet{MoloroEtAl2026} analysed a weighted sample of 191,953 children with multilevel mixed-effects robust Poisson regression. The pooled prevalence of stunting was 29.9\%, but country estimates varied widely. Male sex, older child age, lower maternal education, poorer household socioeconomic position, small reported birth size, and weaker contact with maternal and child health services were among the recurring correlates. The study is useful because it shows that several relationships repeatedly reported in Ghana are not isolated national findings. At the same time, its country-pooled design answers a different question from the present analysis. Country and cluster heterogeneity are central to a regional model, whereas the Ghana analysis can examine the household layer in more detail and can interpret that layer within one national survey system.
+
+The regional evidence also illustrates why the scale used for association matters. \citet{MoloroEtAl2026} used prevalence ratios from robust Poisson models rather than odds ratios from logistic models. For common outcomes, odds ratios can appear farther from one than prevalence ratios even when they describe the same underlying contrast. This does not make one approach inherently preferable, but it does mean that effect magnitudes should not be compared mechanically across studies. The more defensible comparison is whether the direction, uncertainty, and substantive pattern agree.
+
+Bayesian multilevel work outside Ghana points to a similar lesson about socioeconomic measurement. \citet{MusheiguzaEtAl2023} compared several socioeconomic-status indices in Tanzanian DHS data using Bayesian and maximum-likelihood multilevel generalized linear mixed models. Their results showed that the apparent socioeconomic pattern depended partly on how socioeconomic position was represented. The DHS wealth index remains useful because it is consistently measured and widely available, but it does not capture every dimension of deprivation. Food insecurity, income volatility, maternal employment, housing quality, and access to services can be only partly represented by an asset-based quintile. This limitation matters when interpreting the residual household variance in the Ghana model: a large household random effect may partly reflect dimensions of material conditions that the wealth index cannot measure.
+
+\section{Critical Synthesis of the WASH Evidence}
+
+The WASH literature is especially important for this project because it contains both a plausible biological pathway and substantial empirical inconsistency. Unsafe water and sanitation can increase exposure to enteric pathogens and recurrent gastrointestinal infection, which may interfere with nutrient absorption and growth. On that basis, one might expect strong and consistent associations between improved WASH conditions and lower stunting. The empirical literature is less straightforward.
+
+A recent systematic review and meta-analysis of low- and middle-income countries by \citet{WijayantoEtAl2026} concluded that WASH conditions are associated with childhood stunting, but also emphasized heterogeneity across WASH components and studies. This is consistent with a broader methodological problem in the literature: ``water'', ``sanitation'', and ``hygiene'' are often defined differently across studies. Some analyses use facility type, others use service ladders, household treatment practices, distance to source, shared sanitation, handwashing facilities, or composite WASH measures. These definitions are related but not interchangeable.
+
+The Ghanaian evidence reflects the same complexity. Earlier studies have reported associations between household sanitation or water conditions and child nutritional outcomes \cite{AhetoEtAl2015,BoahEtAl2019}. The more recent 2022-GDHS analysis by \citet{OgumEtAl2026} also identified WASH-related inequalities in a restricted population of children born to young mothers. Yet adjusted associations often weaken after wealth, residence, maternal education, and regional conditions are included. This attenuation is substantively meaningful rather than merely a statistical inconvenience. WASH infrastructure is strongly patterned by socioeconomic position, so part of the crude WASH gradient may reflect broader deprivation.
+
+This helps explain why the present results show a clearer association for drinking-water source than for sanitation. The binary sanitation contrast has a large crude prevalence difference but a much weaker adjusted posterior association. By contrast, the water association persists in the main model and is supported most clearly by the detailed surface-water category, although the survey-weight pseudo-posterior is less precise. The literature therefore supports cautious interpretation: WASH is part of the causal environment in which child growth occurs, but a single cross-sectional facility variable cannot isolate a simple intervention effect.
+
+\section{Areas of Agreement, Uncertainty, and Disagreement}
+
+Across the Ghanaian and regional literature, several areas of agreement are strong. Child age is consistently associated with stunting, with risk rising after infancy and often peaking in the second or third year of life \cite{AkombiEtAl2017,TakeleEtAl2022,MoloroEtAl2026}. Male children commonly show higher prevalence than female children. Household socioeconomic disadvantage and lower maternal education are also repeatedly associated with poorer linear growth \cite{AhetoEtAl2015,AgyenEtAl2024,SeworJayalakshmi2024,MoloroEtAl2026}. These repeated findings justify their inclusion in the core adjustment set.
+
+Other relationships are less stable. Rural residence often has a strong crude association with stunting but can attenuate substantially after region, wealth, WASH, and other household characteristics are included. The same is true for sanitation. Maternal primary or secondary education may differ from no education in some studies but not in others once household socioeconomic position is represented. These differences should not automatically be interpreted as contradictions. They may arise from survey year, age restrictions, reference categories, covariate adjustment, missing-data handling, outcome definition, model scale, or the degree to which contextual clustering is represented.
+
+The literature also differs in the level at which unexplained heterogeneity is allowed to operate. Some studies model children nested only within clusters, while others include household-level clustering. Spatial models can detect geographical dependence but do not necessarily separate household similarity from community similarity. A community random effect fitted without a household random effect may therefore absorb variation that is actually shared by siblings or other children living in the same household. This distinction is central to the present project and is one reason direct comparison of ICCs across published studies requires care.
+
+\section{Methodological Lessons from Previous Studies}
+
+Several methodological lessons emerge from the literature. First, sample definition matters. Analyses restricted to children with particular maternal characteristics, age ranges, or complete covariate information can answer important questions but may not estimate the same population-level relationships as analyses of the full eligible under-five sample. This is particularly relevant when comparing the present work with \citet{OgumEtAl2026}, whose 2022-GDHS analysis focused on children born to mothers aged 15--24 years.
+
+Second, the choice between binary logistic regression, ordinal models, robust Poisson models, and continuous HAZ models affects the estimand. A binary model addresses the probability or odds of crossing the conventional stunting threshold. Continuous HAZ models retain information about the full distribution of linear growth, while ordinal or multinomial approaches can distinguish severity categories. None is universally superior; they answer different questions. The present analysis uses binary stunting because the main scientific aim is to decompose variation in a clinically and policy-recognised outcome across households and communities.
+
+Third, hierarchical variance deserves direct interpretation rather than being treated as a nuisance. Measures such as ICCs, VPCs, and MORs answer questions that fixed-effect odds ratios cannot. A model may show only modest community-level fixed effects yet still reveal substantial unexplained clustering. Conversely, adding measured household characteristics may change fixed effects without greatly reducing the household random-effect variance. This is precisely why sequential variance decomposition is informative.
+
+Fourth, model comparison should be matched to the prediction question. Observation-level PSIS-LOO evaluates prediction for a held-out child conditional on the remaining observed hierarchy. It is not equivalent to asking how well the model predicts a child in a completely new household or community. Several applied studies report information criteria without making this distinction explicit. The present project therefore treats PSIS-LOO as one diagnostic among several rather than as a mechanical model-selection rule.
+
+Finally, survey design and multilevel structure should not be conflated. Design weights support population-representative description, while random effects describe dependence and heterogeneity in the outcome model. A weighted pseudo-posterior can test sensitivity to unequal selection probabilities, but it changes the likelihood contribution and can change the interpretation of variance components. Keeping the design-based descriptive analysis separate from the primary hierarchical model, while checking weighted sensitivity, provides a transparent compromise for this project.
+
+\section{Comparative Summary of Key Empirical Studies}
+
+Table~\ref{tab:literature_matrix} summarizes selected studies that most directly motivate the current analysis. The table is deliberately comparative: the point is not simply to catalogue findings, but to show how differences in data, population, hierarchy, and modelling strategy lead to different inferential targets.
+
+\begin{table}[H]
+\centering
+\caption{Selected empirical literature most relevant to the current study}
+\label{tab:literature_matrix}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{3.2cm}p{2.2cm}p{2.7cm}p{3.2cm}p{4.7cm}}
+\toprule
+Study & Data / setting & Main method & Hierarchical or contextual focus & Relevance to the current study \\
+\midrule
+\citet{DartehEtAl2014} & Ghana DHS & Regression analysis & Household and demographic correlates & Establishes earlier Ghanaian correlates of stunting but predates the latest GDHS and does not provide the present household/community variance decomposition. \\
+\citet{AhetoEtAl2015} & 2008 Ghana DHS & Multilevel models & Children within households & Important precedent showing residual household heterogeneity in Ghanaian child nutrition. \\
+\citet{AhetoDagne2021} & 2014 Ghana DHS & Bayesian geostatistical modelling & Spatial / cluster heterogeneity & Demonstrates geographic structure but addresses spatial dependence rather than household-versus-community decomposition. \\
+\citet{AmoakoJohnson2022} & Multiple Ghana DHS rounds & Bayesian geo-additive modelling & Spatial and nonlinear effects & Shows persistent non-random geographic patterning and nonlinear covariate relationships. \\
+\citet{IddrisuGyabaah2023} & Ghana MICS 2017--2018 & Bayesian multilevel ordinal logistic regression & Multilevel child-malnutrition outcome & Confirms that Bayesian multilevel child-nutrition modelling is already established in Ghana; differs in dataset and outcome formulation. \\
+\citet{MusheiguzaEtAl2023} & Tanzania DHS rounds & Bayesian multilevel GLMM & Socioeconomic measurement and clustering & Shows that conclusions about socioeconomic patterning depend partly on how SES is represented. \\
+\citet{OsborneEtAl2025} & Ghana, 1993--2022 & Trend and inequality analysis & Socioeconomic inequalities & Documents long-run decline alongside persistent inequality through the latest GDHS period. \\
+\citet{OgumEtAl2026} & 2022 Ghana DHS & Survey-weighted multilevel / spatial analysis & WASH, spatial inequality, young mothers & Uses the latest survey but a restricted maternal-age population and a different substantive focus. \\
+\citet{MoloroEtAl2026} & DHS, 35 SSA countries & Multilevel robust Poisson model & Child, household and contextual determinants & Provides recent regional evidence that age, sex, education, wealth and contextual heterogeneity remain important across SSA. \\
+\citet{WijayantoEtAl2026} & LMIC systematic review / meta-analysis & Meta-analysis & WASH components & Shows overall WASH relevance but substantial heterogeneity by exposure definition and setting. \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+The comparison highlights the niche of the present work. It does not claim to be the first Ghanaian stunting study, the first multilevel analysis, or the first Bayesian application. Instead, it combines the latest national survey with explicit household and community random effects, sequential WASH and maternal-education extensions, and a broad set of sensitivity checks. The contribution is the decomposition and interpretation of residual heterogeneity, not the novelty of the statistical label attached to the model.
+
 \section{Research Gap}
 
 The review does not support the claim that childhood stunting in Ghana has not previously been studied using multilevel or Bayesian methods. Such a claim would be inaccurate. Ghanaian researchers have used multilevel models, Bayesian geostatistical models, Bayesian geo-additive models, and Bayesian multilevel ordinal models across several nationally representative datasets \cite{AhetoEtAl2015,AhetoDagne2021,AmoakoJohnson2022,IddrisuGyabaah2023}.
