@@ -8,11 +8,11 @@
 
 **Author:** Kyere Ofosu Gideon, BSc
 
-**Affiliation:** Department of Statistics and Actuarial Science, Kwame Nkrumah University of Science and Technology, Kumasi, Ghana **[CONFIRM BEFORE SUBMISSION]**
+**Affiliation:** Independent Researcher, Ghana
 
 **Corresponding author:** Kyere Ofosu Gideon
 
-**Postal address:** [INSERT CURRENT INSTITUTIONAL POSTAL ADDRESS]
+**Postal address:** [INSERT CORRESPONDENCE POSTAL ADDRESS]
 
 **Corresponding email:** [INSERT EMAIL]
 
@@ -40,7 +40,7 @@ The author declares no conflict of interest. **[CONFIRM BEFORE SUBMISSION.]**
 
 ## Ethics statement
 
-The 2022 Ghana Demographic and Health Survey protocol received ethical clearance from the Ghana Health Service Ethical Review Committee and the ICF Institutional Review Board. The original survey obtained informed consent under its approved protocol. This study is a secondary analysis of de-identified DHS data accessed under authorization from The DHS Program and involved no direct participant contact. Confirm whether KNUST requires an additional institutional exemption or notification statement for this secondary analysis before submission.
+The 2022 Ghana Demographic and Health Survey protocol received ethical clearance from the Ghana Health Service Ethical Review Committee and the ICF Institutional Review Board. The original survey obtained informed consent under its approved protocol. This independent study is a secondary analysis of de-identified DHS data accessed under authorization from The DHS Program and involved no direct participant contact or primary data collection.
 
 ## Data availability statement
 
