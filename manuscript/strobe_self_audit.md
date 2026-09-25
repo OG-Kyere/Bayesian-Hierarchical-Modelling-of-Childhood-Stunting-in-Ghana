@@ -61,7 +61,7 @@ This is a working self-audit for the observational cross-sectional manuscript. I
 - [x] Funding placeholder drafted.
 - [x] AI-use disclosure drafted.
 - [ ] Finalize author list and CRediT contributions.
-- [ ] Finalize affiliations, ORCID, and corresponding-author details.
-- [ ] Confirm institutional ethics/exemption wording.
-- [ ] Convert bibliography output to the target journal's exact APA 7 implementation.
+- [ ] Finalize correspondence address, email, and ORCID; affiliation is set to Independent Researcher, Ghana.
+- [x] Ethics wording is limited to the documented GDHS approvals and authorized secondary-data use; no additional institutional approval is claimed.
+- [x] Active TMIH target uses numerical/Vancouver-style references; final numbering is checked after the last editorial change.
 - [x] Verify all currently cited references and DOIs against publisher/official records. Re-check only if the reference list changes.
