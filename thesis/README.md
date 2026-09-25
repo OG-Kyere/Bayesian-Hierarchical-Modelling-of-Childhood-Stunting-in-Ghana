@@ -1,8 +1,8 @@
-# Thesis
+# Long-form research report
 
 Working title: **Bayesian Hierarchical Modelling of Childhood Stunting in Ghana**
 
-The thesis contains the longer version of the project, including the descriptive analysis, full model sequence, sensitivity analyses, diagnostics, and discussion.
+This folder contains the long-form version of the project: background and literature review, methodology, descriptive results, the full Bayesian model sequence, sensitivity analyses, diagnostics, discussion, and recommendations. The work is presented as an independent research report rather than as an institutional degree submission.
 
 ## Chapters
 
@@ -12,50 +12,44 @@ The thesis contains the longer version of the project, including the descriptive
 4. Results
 5. Discussion, Conclusions, and Recommendations
 
-The root-level `main.tex` is the easiest entry point for Overleaf. It pulls in the chapter files from this folder and the figures from `results/figures/`.
+The repository-root `main.tex` is the recommended Overleaf entry point. It pulls the chapter files from this folder and figures from `results/figures/`.
 
-The local `thesis/main.tex` file does the same thing when working directly inside the thesis folder.
+The local `thesis/main.tex` file provides the same document when working directly inside this folder.
 
 ## Front matter
 
-Generic versions of the following are already included:
+The report includes:
 
-- title page
-- declaration
-- abstract
-- acknowledgements
-- ethical considerations
-- table of contents
-- list of tables
-- list of figures
-- list of abbreviations
+- independent title page;
+- declaration;
+- abstract;
+- acknowledgements;
+- ethical-considerations statement;
+- table of contents;
+- list of tables;
+- list of figures;
+- list of abbreviations.
 
-I have deliberately left the university-specific details out. They should only be added once the actual programme or institutional thesis template is known.
-
-The metadata placeholders are in `config.tex`.
+No university, supervisor, or degree metadata is assumed.
 
 ## Current formatting
 
-For now the thesis uses simple, neutral formatting:
+The report uses an institution-neutral layout:
 
-- A4 paper
-- 12-point text
-- 1-inch margins
-- 1.5 line spacing for the main text
-- Roman numbering in the front matter
-- Arabic numbering from Chapter 1
+- A4 paper;
+- 12-point text;
+- 1-inch margins;
+- 1.5 line spacing for the main text;
+- Roman numbering in the front matter;
+- Arabic numbering from Chapter 1.
 
-The statistical content is independent of that layout, so the thesis can later be moved into an official university template without rewriting the chapters.
+## Locked result files
 
-## Main result files
+The main locked Model 3 summaries are:
 
-The results used in Chapter 4 are stored under `../results/tables/` and `../results/figures/`.
+- `../results/tables/model3_final_8chain_key_or.csv`
+- `../results/tables/model3_final_8chain_variance_summary.csv`
+- `../results/tables/model3_final_8chain_sampler_diagnostics.csv`
+- `../results/tables/model3_final_8chain_loo_summary.csv`
 
-For the final Bayesian model, the most useful summary files are:
-
-- `model3_final_8chain_key_or.csv`
-- `model3_final_8chain_variance_summary.csv`
-- `model3_final_8chain_sampler_diagnostics.csv`
-- `model3_final_8chain_loo_summary.csv`
-
-The thesis should always be checked against those files before final submission so that prose and numerical results stay synchronized.
+The prose is protected by `../src/13_public_output_consistency.py`, which checks key long-form and manuscript quantities against the saved aggregate outputs.
