@@ -3,7 +3,7 @@
 
 \section{Introduction}
 
-This chapter describes the data source, study population, variable construction, survey design, Bayesian hierarchical modelling strategy, prior distributions, computational procedures, model assessment, and sensitivity analyses used to investigate childhood stunting in Ghana. The analysis is based on secondary data from the 2022 Ghana Demographic and Health Survey (GDHS). Because the study is intended for both thesis examination and publication, the methodological workflow is designed to be reproducible, transparent, and explicit about the distinction between the preliminary model and the final inferential models.
+This chapter describes the data source, study population, variable construction, survey design, Bayesian hierarchical models, prior distributions, computation, model assessment, and sensitivity analyses used in the project. The analysis uses secondary data from the 2022 Ghana Demographic and Health Survey (GDHS). The workflow was designed to be reproducible and to keep the early community-only pilot separate from the models used for final inference.
 
 \section{Study Design and Data Source}
 
@@ -17,7 +17,7 @@ A total of 18,540 households were selected, of which 17,933 were successfully in
 
 The target population for the present study is de facto children aged 0--59 months who were present in sampled Ghanaian households on the night preceding the household interview. This definition follows the DHS convention for child anthropometric indicators \citep{DHSGuide2023}.
 
-For the preliminary analysis, the Household Member Recode (PR) file was used because it contains anthropometric measurements for household members together with household and cluster identifiers. Children were included when they:
+The Household Member Recode (PR) file was used because it contains child anthropometry together with household and cluster identifiers. Children were included when they:
 
 \begin{enumerate}
     \item were members or visitors who slept in the household on the night preceding the survey, operationalized by \texttt{hv103 = 1};
@@ -25,7 +25,7 @@ For the preliminary analysis, the Household Member Recode (PR) file was used bec
     \item had a valid height-for-age z-score in the DHS recode, operationalized as \texttt{hc70} between -600 and 600.
 \end{enumerate}
 
-Applying these rules produced an analytic sample of 4,928 children distributed across 616 communities and 3,545 households. The 616 communities represent the survey clusters containing at least one eligible child with a valid height-for-age measurement. Household WASH variables and linked maternal-education variables required for the planned extensions are already available in the PR file; therefore, no separate household-file merge is required for the current model sequence. Model-specific sample sizes will nevertheless be reported whenever missing covariate information reduces the analysis sample.
+Applying these rules produced an analytic sample of 4,928 children distributed across 616 communities and 3,545 households. The 616 communities are survey clusters containing at least one eligible child with a valid height-for-age measurement. The WASH and linked maternal-education variables used in the later models are already available in the PR file, so no separate household-file merge was required. Model-specific sample sizes are reported whenever missing covariate information reduced the analysis sample.
 
 \section{Outcome Variable}
 
@@ -39,9 +39,9 @@ Y_i =
 \end{cases}
 \end{equation}
 
-Operationally, the preliminary analysis classifies a child as stunted when \texttt{hc70 < -200}. This definition is consistent with the WHO Child Growth Standards, under which a height-for-age z-score below -2 standard deviations indicates stunting \cite{WHOStunting2026}.
+Operationally, a child was classified as stunted when \texttt{hc70 < -200}. This definition is consistent with the WHO Child Growth Standards, under which a height-for-age z-score below -2 standard deviations indicates stunting \cite{WHOStunting2026}.
 
-The pilot analytic sample contained 927 children classified as stunted. This count is unweighted and is used only to describe the preliminary modelling dataset. Population prevalence estimates will use the appropriate survey weights.
+The analytic sample contained 927 children classified as stunted. This count is unweighted; population prevalence was estimated separately using the DHS survey weights.
 
 \section{Explanatory Variables}
 
@@ -49,7 +49,7 @@ Variable selection is guided by the conceptual framework developed in Chapter Tw
 
 \subsection{Child-Level Variables}
 
-The preliminary model includes child sex and age. Sex is coded as male versus female, with female as the reference category.
+The pilot model included child sex and age. Sex is coded as male versus female, with female as the reference category.
 
 Child age is grouped into six categories:
 
@@ -72,17 +72,17 @@ Place of residence is derived from \texttt{hv025} and coded as urban or rural, w
 
 \subsection{Region}
 
-Administrative region is represented by \texttt{hv024}. The 2022 GDHS contains 16 regions. Western Region, corresponding to code 1 in the recode file, is used as the reference category in the preliminary model. Region is included as a fixed effect to account for broad observed geographical differences while community-level random effects represent residual heterogeneity across survey clusters.
+Administrative region is represented by \texttt{hv024}. The 2022 GDHS contains 16 regions. Western Region, corresponding to code 1 in the recode file, was used as the reference category in the pilot model. Region is included as a fixed effect to account for broad observed geographical differences while community-level random effects represent residual heterogeneity across survey clusters.
 
 \subsection{Water and Sanitation Variables}
 
 Water and sanitation variables are obtained directly from the Household Member Recode through household-level variables \texttt{hv201} (main source of drinking water) and \texttt{hv205} (type of toilet facility). For the current analysis, facility types are grouped as improved versus unimproved/no facility using WHO/UNICEF Joint Monitoring Programme (JMP) source and facility classifications \citep{WHOUNICEFJMP2021}. These categories describe facility type only; they should not be interpreted as the JMP ``basic'' or ``safely managed'' service levels, which require additional information on accessibility, sharing, availability, management, or water quality.
 
-The exact source variables and category mapping will be documented in the final variable dictionary and analysis code before interpretation. This is important because DHS response categories can contain heterogeneous sources within broad labels, and careless dichotomization can obscure meaningful differences.
+The exact source variables and category mappings are documented in the project variable dictionary and analysis code. This is important because DHS response categories can contain heterogeneous sources within broad labels, and careless dichotomization can obscure meaningful differences.
 
 \subsection{Maternal Education}
 
-Maternal education is represented by \texttt{hc61}, the mother's highest educational level linked to the child in the PR recode. The categories are no education, primary, secondary, and higher education. Maternal education is unavailable for children whose mothers cannot be linked to the relevant maternal information; in the current analytic sample, 425 children (8.6\%) have missing \texttt{hc61}. These children are retained in descriptive summaries as a missing category but will not be silently reassigned to an education group in the inferential model.
+Maternal education is represented by \texttt{hc61}, the mother's highest educational level linked to the child in the PR recode. The categories are no education, primary, secondary, and higher education. Maternal education is unavailable for children whose mothers cannot be linked to the relevant maternal information; in the current analytic sample, 425 children (8.6\%) have missing \texttt{hc61}. These children are retained in descriptive summaries as a missing category and were not reassigned to an education group in the inferential model.
 
 The maternal-education extension is compared with the preceding WASH model on a harmonized sample of 4,503 children with non-missing maternal education so that changes in coefficients or random-effect variances are not mistakenly attributed to changes in sample composition.
 
@@ -94,7 +94,7 @@ The community identifier is based on the DHS cluster variable \texttt{hv001}. A 
 
 \section{Descriptive Analysis and Survey Weights}
 
-Descriptive estimates intended to represent the Ghanaian population will account for the DHS sampling weights. The household-member sampling weight is stored in \texttt{hv005} and will be rescaled according to DHS conventions before use in weighted descriptive statistics.
+Descriptive estimates intended to represent the Ghanaian population use the DHS sampling weights. The household-member sampling weight is stored in \texttt{hv005} and was rescaled according to DHS conventions for weighted descriptive statistics.
 
 Weighted estimates are used for quantities such as national stunting prevalence and weighted subgroup prevalence. Design-based standard errors and 95\% confidence intervals for descriptive prevalence estimates are calculated by Taylor linearization using \texttt{hv021} as the primary sampling unit and \texttt{hv022} as the sampling stratum. Unweighted counts are reported where they describe the actual analytic sample size.
 
@@ -120,7 +120,7 @@ The log odds of stunting are related to covariates through a logistic link:
 
 \subsection{Preliminary Community-Level Model}
 
-The preliminary model was specified as
+The pilot model was specified as
 
 \begin{equation}
 \eta_{ik}
@@ -188,7 +188,7 @@ The thesis documents the full model sequence. For the comparison between Models 
 
 \section{Prior Distributions}
 
-The preliminary model uses weakly regularizing priors chosen to constrain implausibly large effects without forcing coefficients toward a particular substantive conclusion.
+The pilot model used weakly regularizing priors chosen to constrain implausibly large effects without forcing coefficients toward a particular substantive conclusion.
 
 The intercept prior is
 
@@ -214,17 +214,17 @@ These priors imply substantial prior uncertainty on the odds-ratio scale while r
 
 \section{Prior Predictive Assessment}
 
-Prior predictive simulation is part of the final production validation plan and will be used to assess whether the chosen priors generate plausible distributions of stunting prevalence and between-group heterogeneity. This step is important because priors that appear weak on the coefficient scale can produce implausible probabilities after the inverse-logit transformation.
+Prior predictive simulation was used to assess whether the chosen priors generated plausible distributions of stunting prevalence and between-group heterogeneity. This check matters because priors that look weak on the coefficient scale can still imply implausible probabilities after the inverse-logit transformation.
 
 Alternative prior scales are evaluated in the sensitivity analysis. The objective is not to select priors that reproduce the observed results, but to ensure that the primary priors are scientifically defensible and not excessively restrictive or diffuse.
 
 \section{Posterior Computation}
 
-Posterior sampling is conducted in Python using PyMC. The preliminary model was fitted with the No-U-Turn Sampler (NUTS), an adaptive Hamiltonian Monte Carlo algorithm \citep{HoffmanGelman2014}.
+Posterior sampling was conducted in Python using PyMC. The pilot model was fitted with the No-U-Turn Sampler (NUTS), an adaptive Hamiltonian Monte Carlo algorithm \citep{HoffmanGelman2014}.
 
 The community-only pilot model used four independent chains with 1,000 tuning iterations followed by 1,000 retained draws per chain. For the subsequent three-level models, the execution environment imposed a per-process runtime ceiling. To preserve independent-chain inference without truncating completed work, each chain was therefore run sequentially with its own seed and the retained draws were combined after sampling. Model 1 used four chains with 400 tuning and 400 retained iterations per chain (1,600 retained draws). Model 2, the harmonized Model 2, and Model 3 each used four chains with 300 tuning and 300 retained iterations per chain (1,200 retained draws). The target acceptance probability was 0.95 for all principal fits.
 
-The principal extended models were sampled with PyMC's NUTS implementation using a non-centred random-effects parameterization. Chain-level outputs were stored separately and combined for posterior summaries, \hat{R}, effective sample-size calculations, divergence counts, posterior predictive checks, and derived variance quantities. This sequential execution strategy changes only how independent chains were scheduled computationally; it does not change the model likelihood, priors, or posterior target. The exact chain metadata and aggregate diagnostics are version-controlled with the analysis outputs. Longer production runs remain planned for the final locked publication environment, particularly for the hierarchical variance parameters.
+The principal extended models were sampled with PyMC's NUTS implementation using a non-centred random-effects parameterization. Chain-level outputs were stored separately and combined for posterior summaries, $\hat{R}$, effective sample-size calculations, divergence counts, posterior predictive checks, and derived variance quantities. This sequential execution strategy changes only how independent chains were scheduled computationally; it does not change the model likelihood, priors, or posterior target. The final Model 3 diagnostic run combined eight independent chains with 500 warmup and 500 retained draws per chain, giving 4,000 retained posterior draws. Exact chain metadata and aggregate diagnostics are version-controlled with the analysis outputs.
 
 \section{Convergence and Sampling Diagnostics}
 
@@ -240,27 +240,27 @@ Convergence and sampling quality are evaluated using several complementary diagn
     \item NUTS tree-depth diagnostics.
 \end{itemize}
 
-The preliminary model produced no divergent transitions, a maximum $\hat{R}$ of approximately 1.008, a minimum bulk effective sample size of approximately 827, and a minimum tail effective sample size of approximately 1,186. These values support adequate sampling for the pilot model, although they do not validate the substantive adequacy of the final model.
+The pilot model produced no divergent transitions, a maximum $\hat{R}$ of approximately 1.008, a minimum bulk effective sample size of approximately 827, and a minimum tail effective sample size of approximately 1,186. These values support adequate sampling for the pilot model, although they do not validate the substantive adequacy of the final model.
 
-For final inference, convergence will be assessed for all scientifically relevant parameters and variance components rather than relying only on global summary values.
+For final inference, convergence was assessed for the scientifically relevant fixed effects and variance components rather than relying only on a global summary value.
 
 \section{Posterior Summaries}
 
-Fixed-effect results will primarily be presented as posterior odds ratios. For regression coefficient $\beta_r$, the odds ratio is
+Fixed-effect results are presented primarily as posterior odds ratios. For regression coefficient $\beta_r$, the odds ratio is
 
 \begin{equation}
 OR_r = \exp(\beta_r).
 \end{equation}
 
-Posterior medians and 95\% credible intervals are reported. Where scientifically useful, posterior probabilities such as
+Posterior medians and 95\% posterior intervals are reported. Where scientifically useful, posterior probabilities such as
 
 \begin{equation}
 P(\beta_r > 0 \mid \text{data})
 \end{equation}
 
-or equivalent probabilities on the odds-ratio scale will also be calculated.
+or equivalent probabilities on the odds-ratio scale are also reported.
 
-Interpretation will emphasize magnitude, uncertainty, and posterior probability rather than binary declarations based on whether an interval crosses one.
+Interpretation emphasizes magnitude, uncertainty, and posterior probability rather than binary declarations based only on whether an interval crosses one.
 
 \section{Variance Partitioning and Intraclass Correlation}
 
@@ -328,18 +328,18 @@ Separate MOR distributions are calculated for household and community heterogene
 
 Posterior predictive checking is used to assess whether the fitted models can reproduce important features of the observed data. Replicated stunting outcomes are generated from the posterior predictive distribution and compared with observed quantities.
 
-The preliminary checks compare:
+The pilot posterior predictive checks compared:
 
 \begin{itemize}
     \item overall unweighted stunting prevalence; and
     \item stunting prevalence across child age groups.
 \end{itemize}
 
-For the current Model 3 analysis, posterior predictive checks compare the observed overall prevalence and age-specific prevalence with replicated datasets generated directly from the fitted posterior draws. The final production analysis will additionally examine selected household- or community-level count distributions where computationally feasible. A model is not considered adequate solely because coefficient diagnostics converge; it must also reproduce substantively important features of the observed data.
+For Model 3, posterior predictive checks compared observed overall and age-specific prevalence with replicated datasets generated from the fitted posterior draws. These checks complement the sampler diagnostics: acceptable coefficient convergence alone is not evidence that a model reproduces substantively important features of the data.
 
 \section{Model Comparison}
 
-Model comparison considers both predictive performance and scientific interpretability. For the harmonized comparison between Models 2 and 3, a conditional widely applicable information criterion (WAIC) is calculated from pointwise log-likelihood draws evaluated on the same 4,503 children. Because hierarchical models can produce unstable pointwise importance measures, the effective number of parameters and the variance of the pointwise log likelihood are also inspected. Predictive criteria are not used mechanically to choose a single model when differences are negligible relative to their uncertainty. Changes in fixed effects, household variance, community variance, posterior predictive performance, and sensitivity to model assumptions are considered jointly.
+Model comparison considers both predictive performance and scientific interpretability. Harmonized Models 2 and 3 were compared on the same 4,503 children using Pareto-smoothed importance-sampling leave-one-out cross-validation (PSIS-LOO) computed from pointwise log-likelihood draws. The expected log predictive density (ELPD), its uncertainty, and Pareto-$k$ diagnostics were examined together. Because the held-out unit is an individual child while household and community effects remain estimated from the other observations, this is a conditional comparison within the observed hierarchy rather than a test of prediction for entirely new households or communities. Predictive criteria were not used mechanically when differences were small relative to their uncertainty.
 
 \section{Survey-Weight Sensitivity Analysis}
 
@@ -383,9 +383,9 @@ The intercept prior remains $\mathcal{N}(0,1.5^2)$ in all specifications. Robust
 
 \section{Missing Data and Harmonized Samples}
 
-Missing data will be handled transparently. The primary modelling analysis will initially use observations with valid stunting measurements and complete information for the variables included in each model.
+Missing data were handled transparently. Each primary model used observations with valid stunting measurements and complete information for the variables included in that model.
 
-However, sequential models with different covariates can otherwise contain different observations. Therefore, model comparisons intended to assess the effect of adding predictors will also be repeated on a harmonized sample containing complete information for all variables involved in the compared models.
+Because sequential models with different covariates can otherwise contain different observations, comparisons intended to assess the addition of predictors were repeated on a harmonized sample with complete information for all variables involved in the comparison.
 
 The amount and pattern of missingness for key variables are described. Maternal education is missing for 425 children (8.6\% of the core analytic sample). The primary maternal-education model therefore uses complete linked maternal information, with Model 2 refitted on the same observations for a fair comparison. A full-sample missing-category sensitivity analysis is also performed to assess whether the main fixed-effect conclusions depend materially on the complete-case restriction. In that sensitivity model, children without linked maternal-education information are retained as an explicit ``Missing'' category rather than being excluded.
 
@@ -401,16 +401,16 @@ The repository separates data preparation, descriptive analysis, model fitting, 
 
 The study uses de-identified secondary survey data obtained through authorized access to The DHS Program. The 2022 GDHS was implemented under established ethical and informed-consent procedures described in the survey documentation \cite{GSSICF2024}.
 
-No attempt will be made to re-identify respondents or households. Raw DHS files will not be publicly redistributed through the project repository. Results are reported in aggregate form, and small-cell outputs that could create unnecessary disclosure risk are avoided.
+No attempt was made to re-identify respondents or households. Raw DHS files are not publicly redistributed through the project repository. Results are reported in aggregate form, and small-cell outputs that could create unnecessary disclosure risk are avoided.
 
 \section{Methodological Status of the Preliminary Model}
 
-The current community-level model is explicitly treated as a pilot rather than the final inferential model. It establishes that the data-processing pipeline, Bayesian specification, non-centred hierarchical parameterization, MCMC workflow, posterior summaries, and predictive checks operate successfully.
+The community-level model is treated as a pilot rather than the final inferential model. It establishes that the data-processing pipeline, Bayesian specification, non-centred hierarchical parameterization, MCMC workflow, posterior summaries, and predictive checks operate successfully.
 
-The pilot deliberately omits household random effects, WASH variables, maternal education, and final survey-weight treatment. Therefore, estimates from the pilot are not used as the final thesis conclusions. Final inference will be based on the completed sequence of hierarchical models and sensitivity analyses described above.
+The pilot omits household random effects, WASH variables, maternal education, and survey-weight sensitivity. Its estimates are therefore not used as the final conclusions. Final inference is based on the completed sequence of hierarchical models and sensitivity analyses described above.
 
 \section{Chapter Summary}
 
 This chapter has described the design and analytical framework for the study. The 2022 GDHS provides a nationally representative, hierarchically sampled dataset suitable for investigating childhood stunting at the child, household, and community levels. The primary analysis uses Bayesian hierarchical logistic regression to estimate associations while partitioning residual heterogeneity across households and communities.
 
-The modelling workflow proceeds sequentially from the completed community-level pilot to household-and-community models, followed by WASH and maternal-education extensions. Posterior inference is evaluated using MCMC diagnostics, variance partitioning, median odds ratios, prior sensitivity, and survey-weight sensitivity. Posterior predictive checks of overall and age-specific prevalence are reported in Chapter Four. Predictive model comparison and any additional cluster-level predictive diagnostics will be generated from the final locked posterior objects. Chapter Four presents the descriptive and current modelling results.
+The modelling workflow proceeds from the community-level pilot to household-and-community models, followed by WASH and maternal-education extensions. Posterior inference is evaluated using MCMC diagnostics, variance partitioning, median odds ratios, prior sensitivity, survey-weight sensitivity, posterior predictive checks, and PSIS-LOO. Independent GEE analyses provide an additional check on the relative strength of household and community dependence. Chapter Four presents the descriptive results, the locked eight-chain Model 3 findings, and the completed sensitivity analyses.
