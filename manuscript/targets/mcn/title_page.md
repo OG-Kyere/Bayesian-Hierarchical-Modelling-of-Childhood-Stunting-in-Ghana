@@ -38,7 +38,7 @@ The 2022 Ghana DHS microdata are owned and distributed by The DHS Program and ca
 
 ## Generative AI use declaration — draft for author review
 
-OpenAI ChatGPT (GPT-5.6 Sol; accessed September 2026) assisted with language editing, manuscript organization, code drafting and review, and reproducibility documentation. The author(s) reviewed the analysis code, checked all reported numerical results against the saved outputs, revised the manuscript text, and remain responsible for the accuracy and integrity of the work. The public repository does not contain restricted DHS microdata. This disclosure should be checked against the journal's submission form immediately before submission.
+OpenAI ChatGPT (GPT-5.6 Sol; accessed September 2026) assisted with language editing, manuscript organization, code drafting and review, and reproducibility documentation. The author(s) reviewed the analysis code, checked all reported numerical results against the saved outputs, revised the manuscript text, and remain responsible for the accuracy and integrity of the work. The public repository does not contain restricted DHS microdata. The same disclosure is included in the Methods section, consistent with the journal's current AI-disclosure requirement.
 
 ## Keywords
 
