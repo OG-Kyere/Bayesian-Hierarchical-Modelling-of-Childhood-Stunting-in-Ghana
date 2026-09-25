@@ -3,7 +3,7 @@
 
 \section{Introduction}
 
-This chapter presents the empirical findings from the 2022 Ghana Demographic and Health Survey. It begins with the construction of the analytic sample and survey-weighted descriptive patterns of childhood stunting, followed by the sequential Bayesian hierarchical models. The chapter also reports prior-sensitivity, survey-weight sensitivity, missing-data sensitivity, posterior predictive checks, and a predictive comparison of the harmonized WASH and maternal-education models. Longer production runs for the hierarchical variance parameters remain part of the final publication lock.
+This chapter presents the empirical findings from the 2022 Ghana Demographic and Health Survey. It begins with the analytic sample and survey-weighted descriptive patterns, then reports the sequential Bayesian hierarchical models. The chapter also covers prior, survey-weight, missing-data, age-functional-form, and detailed-WASH sensitivity analyses, posterior predictive checks, independent GEE checks, and the PSIS-LOO comparison of the harmonized WASH and maternal-education models. The eight-chain Model 3 results reported here are the locked primary results for the current manuscript.
 
 \section{Analytic Sample}
 
@@ -132,7 +132,7 @@ These crude differences should not be interpreted causally because WASH conditio
 \begin{figure}[H]
 \centering
 \includesvg[width=0.88\textwidth]{stunting_by_water_source}
-\caption{Survey-weighted stunting prevalence by improved versus unimproved drinking-water source type.}
+\caption[Stunting prevalence by drinking-water source]{Survey-weighted stunting prevalence by improved versus unimproved drinking-water source type.}
 \label{fig:stunting_water}
 \end{figure}
 
@@ -144,7 +144,7 @@ The structure of the analytic data demonstrates that stunting observations are n
 
 Three Bayesian hierarchical extensions were examined after the community-only pilot. Model 1 included both household and community random intercepts alongside the core child, household-wealth, residence, and regional covariates. Model 2 added drinking-water and sanitation source/facility type. Model 3 added maternal education and was fitted to the 4,503 children with linked maternal-education information. To separate the effect of maternal education from the effect of changing the analysis sample, Model 2 was also refitted on the same 4,503-child harmonized sample.
 
-Across all of these fits, no divergent NUTS transitions were observed. Fixed-effect coefficients showed good cross-chain agreement, with $\hat R$ values close to 1.00. The hierarchical standard-deviation parameters mixed more slowly than the fixed effects; maximum $\hat R$ values were approximately 1.018 for Model 1, 1.012 for Model 2 on the full sample, 1.036 for the harmonized Model 2, and 1.033 for Model 3. Consequently, the direction and magnitude of the fixed-effect findings are considered stable, while the exact higher-level variance estimates will be confirmed with longer production runs before final thesis submission.
+Across the initial sequential fits, no divergent NUTS transitions were observed and fixed-effect coefficients showed good cross-chain agreement. The hierarchical standard-deviation parameters mixed more slowly, which motivated the strengthened eight-chain Model 3 diagnostic run reported below. The locked Model 3 estimates come from that extended run rather than from the shorter preliminary fit.
 
 \subsection{Model 1: Household and Community Random Effects}
 
@@ -164,7 +164,7 @@ Adding the WASH variables did not eliminate the hierarchical structure. The post
 
 For the maternal-education analysis, Model 2 was first refitted to the 4,503 children with non-missing maternal education. On this harmonized sample, unimproved water remained associated with higher posterior odds of stunting (OR 1.51, 1.16--1.98), whereas the sanitation comparison remained less clearly separated from one (OR 1.13, 0.87--1.45).
 
-After maternal education was added in Model 3, the posterior association for unimproved drinking water remained essentially unchanged (OR 1.50, 1.15--1.99), with $P(\text{OR}>1\mid\text{data})\approx0.998$. The sanitation estimate remained comparatively uncertain (OR 1.12, 0.86--1.46; $P(\text{OR}>1\mid\text{data})\approx0.79$).
+After maternal education was added in Model 3, the posterior association for unimproved drinking water remained essentially unchanged (OR 1.50, 1.15--1.99), with $P(\text{OR}>1\mid\text{data})\approx0.998$. The sanitation estimate remained comparatively uncertain (OR 1.12, 0.86--1.46; $P(\text{OR}>1\mid\text{data})\approx0.79$). In the locked eight-chain run, boys had higher odds than girls (OR 1.50, 1.24--1.82), children aged 24--35 months had higher odds than those aged 0--5 months (OR 2.91, 2.06--4.21), and the richest-versus-poorest OR was 0.36 (0.20--0.64).
 
 Maternal higher education showed the clearest education association. Relative to children whose mothers had no formal education, children whose mothers had higher education had substantially lower posterior odds of stunting (OR 0.37, 0.20--0.65), with $P(\text{OR}<1\mid\text{data})\approx0.999$. Primary education was not clearly separated from no education (OR 1.02, 0.75--1.41), and the secondary-education estimate was also compatible with a range of modest protective or null associations (OR 0.89, 0.68--1.14).
 
@@ -174,7 +174,8 @@ The wealth gradient attenuated after maternal education entered the model. For e
 \centering
 \caption{Selected posterior odds ratios from the hierarchical models}
 \label{tab:key_posterior_or}
-\begin{tabular}{lll}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrr}
 \toprule
 Model and comparison & Posterior median OR & 95\% posterior interval \\
 \midrule
@@ -183,13 +184,17 @@ Model 1: Age 24--35 vs 0--5 months & 2.95 & 2.10--4.20 \\
 Model 1: Richest vs poorest & 0.25 & 0.15--0.38 \\
 Model 2 full: Unimproved water & 1.36 & 1.05--1.78 \\
 Model 2 full: Unimproved/no sanitation & 1.16 & 0.91--1.45 \\
+Model 3: Male vs female & 1.50 & 1.24--1.82 \\
+Model 3: Age 24--35 vs 0--5 months & 2.91 & 2.06--4.21 \\
+Model 3: Richest vs poorest & 0.36 & 0.20--0.64 \\
 Model 3: Unimproved water & 1.50 & 1.15--1.99 \\
 Model 3: Unimproved/no sanitation & 1.12 & 0.86--1.46 \\
 Model 3: Maternal primary vs none & 1.02 & 0.75--1.41 \\
 Model 3: Maternal secondary vs none & 0.89 & 0.68--1.14 \\
 Model 3: Maternal higher vs none & 0.37 & 0.20--0.65 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \begin{figure}[H]
@@ -207,6 +212,7 @@ Table~\ref{tab:variance_comparison} summarizes the random-effect results. Househ
 \centering
 \caption{Posterior summaries of hierarchical heterogeneity across models}
 \label{tab:variance_comparison}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccc}
 \toprule
 Model & Community SD & Household SD & Community ICC & Household VPC \\
@@ -216,7 +222,8 @@ Model 2 full & 0.390 & 1.100 & 0.033 & 0.260 \\
 Model 2 harmonized & 0.391 & 1.222 & 0.031 & 0.301 \\
 Model 3 & 0.389 & 1.234 & 0.030 & 0.307 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 
 \vspace{0.4em}
 \begin{minipage}{0.94\textwidth}
@@ -238,7 +245,7 @@ The fixed-effect parameters in Models 1--3 showed satisfactory chain agreement a
 
 \subsection{Prior Sensitivity}
 
-Model 3 was refitted under tighter and wider prior scales for the regression coefficients and hierarchical standard deviations. The principal fixed-effect conclusions were stable. Under the tighter prior, the OR for unimproved drinking water was 1.48 (95\% posterior interval: 1.14--1.88), while under the wider prior it was 1.48 (1.12--2.06), compared with 1.50 (1.14--2.00) under the primary prior. The maternal higher-education OR was 0.44 (0.26--0.70) under the tighter prior and 0.35 (0.18--0.66) under the wider prior, compared with 0.38 (0.19--0.70) under the primary prior.
+Model 3 was refitted under tighter and wider prior scales for the regression coefficients and hierarchical standard deviations. The principal fixed-effect conclusions were stable. Under the tighter prior, the OR for unimproved drinking water was 1.48 (95\% posterior interval: 1.14--1.88), while under the wider prior it was 1.48 (1.12--2.06), compared with 1.50 (1.15--1.99) in the locked primary run. The maternal higher-education OR was 0.44 (0.26--0.70) under the tighter prior and 0.35 (0.18--0.66) under the wider prior, compared with 0.37 (0.20--0.65) in the locked primary run.
 
 The sanitation estimate remained comparatively uncertain under all prior choices. A separate intercept-prior sensitivity analysis used $\alpha\sim\mathcal{N}(-1.5,1^2)$ instead of the broader primary $\mathcal{N}(0,1.5^2)$ intercept prior. The key fixed effects again remained stable: unimproved water had a posterior median OR of 1.49 (1.10--1.98), maternal higher education had an OR of 0.37 (0.21--0.66), and the richest-versus-poorest OR was 0.35 (0.21--0.62).
 
@@ -250,13 +257,13 @@ A rescaled survey-weight pseudo-posterior was fitted as a sensitivity analysis o
 
 The water association attenuated under weighting: the weighted median OR was 1.38 with a 95\% posterior interval of 0.90--2.07, although the posterior probability that the water coefficient was positive remained approximately 0.94. The sanitation estimate remained uncertain (OR 1.14, 0.82--1.65).
 
-The pseudo-posterior variance decomposition is not used for substantive interpretation because the community-level standard deviation showed unsatisfactory chain mixing in the weighted specification. In the initial four-chain weighted sensitivity fit, the maximum $\hat R$ was approximately 1.09 for the community SD. Longer weighted chains improved agreement but did not provide a sufficiently stable four-chain variance estimate within the current computational environment. The weighted sensitivity analysis is therefore reported for the fixed-effect conclusions only.
+The strengthened weighted sensitivity fit completed without divergences, with a maximum $\hat R$ of about 1.01 and minimum bulk effective sample size above 400. Even with acceptable sampling, its variance components are not used as substitutes for the primary decomposition because the survey-weight pseudo-posterior changes the target and the interpretation of hierarchical variance. The weighted fit is therefore used chiefly to assess whether the fixed-effect conclusions are sensitive to the treatment of survey weights.
 
 \subsection{Missing Maternal-Education Sensitivity}
 
 To assess whether exclusion of the 425 children without linked maternal-education information materially influenced the substantive conclusions, Model 3 was refitted to the full 4,928-child sample with missing maternal education represented as an explicit category.
 
-The principal fixed-effect findings were similar to the complete-case analysis. The posterior median OR for unimproved drinking water was 1.35 (95\% posterior interval: 1.01--1.74), compared with 1.50 (1.14--2.00) in the complete-case Model 3. The maternal higher-education OR was 0.38 (0.22--0.63), nearly identical in direction and magnitude to the complete-case estimate of 0.38 (0.19--0.70). The missing maternal-education category itself was not clearly separated from no education (OR 1.11, 0.80--1.53).
+The principal fixed-effect findings were similar to the complete-case analysis. The posterior median OR for unimproved drinking water was 1.35 (95\% posterior interval: 1.01--1.74), compared with 1.50 (1.15--1.99) in the locked complete-case Model 3. The maternal higher-education OR was 0.38 (0.22--0.63), close in direction and magnitude to the locked complete-case estimate of 0.37 (0.20--0.65). The missing maternal-education category itself was not clearly separated from no education (OR 1.11, 0.80--1.53).
 
 The full-sample sensitivity model also retained the same broad clustering pattern: the posterior median community SD was approximately 0.385 and the household SD approximately 1.114. However, as in the other extended models, the household variance parameter mixed more slowly than the fixed effects, so these variance quantities are interpreted cautiously. Overall, the missing-data sensitivity analysis indicates that the principal fixed-effect conclusions are not strongly dependent on the complete-case restriction.
 
@@ -294,14 +301,14 @@ The harmonized Model 2 and Model 3 were compared on the same 4,503 children usin
 
 The predictive difference is negligible relative to its uncertainty and does not support a claim that adding maternal education materially improves out-of-sample predictive accuracy. Model 3 nevertheless had cleaner importance-sampling diagnostics: its maximum Pareto $k$ was approximately 0.69, with no observations exceeding 0.70, whereas Model 2 had a maximum Pareto $k$ of approximately 0.79 and five observations above 0.70; neither model had an observation with Pareto $k>1$.
 
-The earlier WAIC comparison led to the same substantive conclusion but showed greater pointwise instability. PSIS-LOO is therefore used as the preferred predictive comparison. The result does not diminish the substantive interpretation of the maternal-education coefficient: Model 3 adds an interpretable association, particularly for higher maternal education, without evidence of a meaningful improvement in predictive performance over the harmonized WASH model.
+An earlier WAIC calculation led to the same broad conclusion, but the final project uses PSIS-LOO because it provides direct pointwise influence diagnostics through Pareto $k$. The result does not diminish the substantive interpretation of the maternal-education coefficient: Model 3 adds an interpretable association, particularly for higher maternal education, without evidence of a meaningful improvement in predictive performance over the harmonized WASH model.
 
-\subsection{Remaining Production Checks}
+\subsection{Final Diagnostic Status}
 
-The extended Model 3 run substantially strengthened the fixed-effect and sampler diagnostics and the PSIS-LOO comparison is now based on pointwise posterior log-likelihood draws. The remaining computational caution concerns the slower convergence of the household and community standard deviations, whose $\hat R$ values remain modestly above the conservative 1.01 publication target despite effective sample sizes above 500 in the extended run. A final unrestricted production run with longer within-chain trajectories is therefore desirable for locking the exact variance-component intervals, but the principal fixed-effect conclusions are no longer dependent on the shorter preliminary chains.
+The eight-chain Model 3 run substantially strengthened the fixed-effect and sampler diagnostics, and the PSIS-LOO comparison is based on pointwise posterior log-likelihood draws. The household and community standard deviations remain the slowest-mixing parameters, with $\hat R$ values modestly above 1.01 despite bulk effective sample sizes above 500. For that reason, their interval endpoints deserve more Monte Carlo caution than the fixed effects. The household-versus-community contrast itself is stable across the completed checks and is treated as locked for the current manuscript.
 
 \section{Chapter Summary}
 
 The weighted descriptive analysis estimated a national childhood stunting prevalence of 17.4\%. The hierarchical models showed that residual heterogeneity is concentrated more strongly at the household level than at the community level. In Model 1, the household VPC was approximately 0.25 compared with a community ICC of approximately 0.04, and the household MOR was about 2.76 compared with a community MOR of about 1.49.
 
-After adjustment for demographic, socioeconomic, regional, household, and community structure, unimproved drinking-water source remained associated with higher posterior odds of stunting. Sanitation showed a weaker and less certain adjusted association. Maternal higher education was associated with substantially lower posterior odds of stunting, while primary and secondary education were not clearly separated from no formal education after full adjustment. The household variance remained substantial after WASH and maternal education were introduced, indicating that important unmeasured household-level influences remain. Prior, survey-weight, missing-maternal-information, age-functional-form, and WASH-coding sensitivity analyses broadly supported the main fixed-effect conclusions, although the water association was less precise under the weighted pseudo-posterior. PSIS-LOO indicated essentially equivalent predictive performance for the harmonized WASH and maternal-education models. The principal remaining production check is a longer unrestricted run to tighten the Monte Carlo diagnostics for the hierarchical variance parameters.
+After adjustment for demographic, socioeconomic, regional, household, and community structure, unimproved drinking-water source remained associated with higher posterior odds of stunting. Sanitation showed a weaker and less certain adjusted association. Maternal higher education was associated with substantially lower posterior odds of stunting, while primary and secondary education were not clearly separated from no formal education after full adjustment. The household variance remained substantial after WASH and maternal education were introduced, indicating that important unmeasured household-level influences remain. Prior, survey-weight, missing-maternal-information, age-functional-form, and WASH-coding sensitivity analyses broadly supported the main fixed-effect conclusions, although the water association was less precise under the weighted pseudo-posterior. PSIS-LOO indicated essentially equivalent predictive performance for the harmonized WASH and maternal-education models. The variance-component intervals warrant more caution than the fixed-effect intervals because those parameters mixed more slowly, but the locked eight-chain run and the independent local reproduction support the same household-versus-community pattern.
