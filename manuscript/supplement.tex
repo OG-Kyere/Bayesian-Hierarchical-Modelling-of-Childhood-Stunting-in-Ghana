@@ -135,4 +135,99 @@ Posterior predictive checks reproduced overall and age-specific prevalence. For 
 \bibliographystyle{apalike}
 \bibliography{../thesis/references}
 
+
+\section{Additional descriptive figures}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.80\textwidth]{stunting_by_age}
+\caption{Survey-weighted stunting prevalence by child age group.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.80\textwidth]{stunting_by_wealth}
+\caption{Survey-weighted stunting prevalence by household wealth quintile.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{stunting_by_region}
+\caption{Survey-weighted stunting prevalence by region.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.80\textwidth]{stunting_by_maternal_education}
+\caption{Survey-weighted stunting prevalence by maternal education.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.80\textwidth]{stunting_by_water_source}
+\caption{Survey-weighted stunting prevalence by drinking-water source.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.80\textwidth]{stunting_by_sanitation}
+\caption{Survey-weighted stunting prevalence by sanitation category.}
+\end{figure}
+
+\section{Additional hierarchical-model figures}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.82\textwidth]{model_variance_comparison}
+\caption{Household and community variance components across the principal model sequence.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{model3_ppc_age}
+\caption{Posterior predictive check for age-specific stunting prevalence in the strengthened Model 3 run.}
+\end{figure}
+
+\section{Model-sequence variance summary}
+
+\begin{table}[H]
+\centering
+\caption{Selected variance quantities across Models 1--3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & Community SD & Household SD & Community ICC & Household VPC & Community MOR & Household MOR \\
+\midrule
+Model 1 & 0.416 & 1.066 & 0.038 & 0.246 & 1.49 & 2.76 \\
+Model 2 & 0.390 & 1.100 & 0.033 & 0.260 & 1.45 & 2.86 \\
+Model 3, locked eight-chain & 0.389 & 1.234 & 0.030 & 0.307 & 1.45 & 3.24 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section{Selected final-model parameter diagnostics}
+
+\begin{table}[H]
+\centering
+\caption{Selected parameter diagnostics from the locked eight-chain Model 3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Parameter & Median & 2.5th percentile & 97.5th percentile & $\hat R$ & Bulk ESS \\
+\midrule
+Intercept & -2.598 & -3.276 & -1.955 & 1.003 & 1,830 \\
+Community SD & 0.389 & 0.067 & 0.610 & 1.021 & 544 \\
+Household SD & 1.234 & 0.940 & 1.535 & 1.018 & 524 \\
+Male coefficient & 0.409 & 0.218 & 0.599 & 1.001 & 6,871 \\
+Age 24--35 coefficient & 1.070 & 0.721 & 1.437 & 1.001 & 3,302 \\
+Richest wealth coefficient & -1.020 & -1.622 & -0.449 & 1.000 & 3,670 \\
+Unimproved-water coefficient & 0.404 & 0.138 & 0.687 & 1.001 & 5,444 \\
+Unimproved-sanitation coefficient & 0.112 & -0.155 & 0.377 & 1.002 & 6,098 \\
+Higher maternal education coefficient & -1.003 & -1.624 & -0.433 & 1.002 & 6,030 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
 \end{document}
