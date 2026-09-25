@@ -48,8 +48,7 @@ jobs:
           cp manuscript/targets/tmih/main.tex build/tmih-manuscript/main.tex
           cp manuscript/targets/tmih/supplement.tex build/tmih-manuscript/supplement.tex
           cp thesis/references.bib build/tmih-manuscript/references.bib
-          cp results/figures/stunting_by_region.svg build/tmih-manuscript/figures/
-          cp results/figures/model3_posterior_or_forest.svg build/tmih-manuscript/figures/
+          cp results/figures/*.svg build/tmih-manuscript/figures/
           cp manuscript/targets/tmih/*.md build/tmih-manuscript/submission_materials/
           sed -i 's#../../../results/figures/#figures/#g' build/tmih-manuscript/main.tex
           sed -i 's#../../../thesis/references#references#g' build/tmih-manuscript/main.tex
