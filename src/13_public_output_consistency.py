@@ -21,7 +21,13 @@ DESC = ROOT / "results/tables/descriptive_all.csv"
 PUBLIC_TEXT = [
     ROOT / "README.md",
     ROOT / "manuscript/main.tex",
-    ROOT / "manuscript/targets/mcn/main_blinded.tex",
+    ROOT / "manuscript/targets/mcn/main_blinded.tex",  # archived target, kept consistent
+    ROOT / "manuscript/targets/tmih/main.tex",        # active journal target
+]
+
+LONG_FORM_TEXT = [
+    ROOT / "thesis/frontmatter/abstract.tex",
+    ROOT / "thesis/chapter4_results.tex",
 ]
 
 
@@ -31,7 +37,6 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def normalize(text: str) -> str:
-    # Make Markdown/Unicode/LaTeX punctuation and thousands separators comparable.
     text = text.replace("--", "–").replace("—", "–")
     text = text.replace("\\%", "%")
     text = re.sub(r"\\[A-Za-z]+\{([^{}]*)\}", r"\1", text)
@@ -113,19 +118,41 @@ def main() -> int:
     expect_in(readme, overall["n_unweighted"], "README sample size", failures)
     expect_in(readme, overall["stunted_unweighted"], "README stunted count", failures)
 
-    mcn = (ROOT / "manuscript/targets/mcn/main_blinded.tex").read_text(encoding="utf-8")
     delta = f"{float(loo['delta_model3_minus_model2']):.2f}"
     se_delta = f"{float(loo['se_delta']):.2f}"
-    expect_in(mcn, delta, "MCN LOO ELPD difference", failures)
-    expect_in(mcn, se_delta, "MCN LOO SE", failures)
+    for target in [
+        ROOT / "manuscript/targets/mcn/main_blinded.tex",
+        ROOT / "manuscript/targets/tmih/main.tex",
+        ROOT / "thesis/chapter4_results.tex",
+        ROOT / "thesis/chapter5_discussion_conclusion.tex",
+    ]:
+        target_text = target.read_text(encoding="utf-8")
+        expect_in(target_text, delta, f"{target}: LOO ELPD difference", failures)
+        expect_in(target_text, se_delta, f"{target}: LOO SE", failures)
 
-    # Known superseded values should not reappear in the public summary files.
+    long_form_expected = {
+        "male OR": [rounded(male["median"]), interval(male)],
+        "age 24–35 OR": [rounded(age["median"]), interval(age)],
+        "water OR": [rounded(water["median"]), interval(water)],
+        "sanitation OR": [rounded(sanitation["median"]), interval(sanitation)],
+        "higher education OR": [rounded(higher["median"]), interval(higher)],
+        "household SD": [rounded(household_sd["median"])],
+        "community SD": [rounded(community_sd["median"])],
+        "household VPC": [rounded(household_vpc["median"])],
+        "community ICC": [rounded(community_icc["median"])],
+    }
+    for path in LONG_FORM_TEXT:
+        text = path.read_text(encoding="utf-8")
+        for label, fragments in long_form_expected.items():
+            for fragment in fragments:
+                expect_in(text, fragment, f"{path}: {label}", failures)
+
     stale = [
         "1.14–2.00",
         "0.38 (0.19–0.70)",
         "WAIC difference was negligible",
     ]
-    for path in PUBLIC_TEXT:
+    for path in PUBLIC_TEXT + LONG_FORM_TEXT + [ROOT / "thesis/chapter5_discussion_conclusion.tex"]:
         text = normalize(path.read_text(encoding="utf-8"))
         for old in stale:
             if normalize(old) in text:
