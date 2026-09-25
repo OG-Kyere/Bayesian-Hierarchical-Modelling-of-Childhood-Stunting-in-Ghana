@@ -32,8 +32,7 @@ Guidelines rechecked on **25 September 2026** against the current Wiley/TMIH aut
 - Manuscript identifies the work as a **cross-sectional secondary analysis** of de-identified 2022 GDHS data.
 - Original GDHS ethics approval and informed-consent procedures are stated.
 - No direct participant contact occurred.
-- **ACTION:** confirm whether KNUST requires an additional exemption, notification, or institutional wording for secondary analysis before submission.
-- TMIH’s signed ethics statement requirement specifically addresses animal/human studies involving actively and purposely collected data; this paper uses previously collected de-identified survey data, but local institutional requirements still need confirmation.
+- This is an independent secondary analysis of previously collected de-identified survey data; the manuscript does not claim any additional institutional ethics approval beyond the documented GDHS approvals.
 
 ## AI disclosure
 
@@ -56,7 +55,7 @@ Guidelines rechecked on **25 September 2026** against the current Wiley/TMIH aut
 - TMIH author statement template prepared; corresponding author must sign the final version.
 - Current title page assumes a single author.
 - **ACTION:** confirm final author list and ICMJE eligibility.
-- **ACTION:** confirm affiliation, postal address, email, and ORCID.
+- **ACTION:** confirm correspondence postal address, email, and ORCID.
 - **ACTION:** confirm funding statement.
 - **ACTION:** confirm conflict-of-interest statement.
 
@@ -72,7 +71,7 @@ Guidelines rechecked on **25 September 2026** against the current Wiley/TMIH aut
 - Replace all bracketed placeholders.
 - Re-screen the five reviewer suggestions for conflicts.
 - Sign the author statement.
-- Confirm ethics wording with the submitting institution.
+- Confirm that the final ethics wording accurately reflects the documented GDHS approvals and authorized secondary-data use.
 - Compile the TMIH manuscript and supplement once after metadata edits; do **not** rerun statistical analyses.
 - Inspect all figures for readability and all references for final numbering/order.
 - Confirm that manuscript, title page, cover letter, supplement, and portal metadata use the identical title and author list.
