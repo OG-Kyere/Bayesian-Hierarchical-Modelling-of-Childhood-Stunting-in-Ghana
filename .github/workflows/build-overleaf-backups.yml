@@ -8,6 +8,8 @@ on:
     paths:
       - "main.tex"
       - "README.md"
+      - "CITATION.cff"
+      - ".gitignore"
       - "requirements*.txt"
       - "thesis/**"
       - "manuscript/**"
