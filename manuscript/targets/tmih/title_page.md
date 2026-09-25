@@ -6,17 +6,17 @@
 
 **Short running title:** Household heterogeneity in Ghanaian stunting
 
-**Author:** Kyere Ofosu Gideon, BSc
+**Author:** Gideon Ofosu Kyere, BSc
 
 **Affiliation:** Independent Researcher, Ghana
 
-**Corresponding author:** Kyere Ofosu Gideon
+**Corresponding author:** Gideon Ofosu Kyere
 
-**Postal address:** [INSERT CORRESPONDENCE POSTAL ADDRESS]
+**Postal address:** 47 Mempeasem ST, GA-485-2566
 
-**Corresponding email:** [INSERT EMAIL]
+**Corresponding email:** kyereofosu2003@gmail.com
 
-**ORCID:** [INSERT ORCID IF AVAILABLE]
+**ORCID:** https://orcid.org/0009-0003-9848-8437
 
 **Main-body word count:** approximately 2870 words
 
@@ -28,15 +28,15 @@ Current draft assumes a single author. Add co-authors only after ICMJE authorshi
 
 Draft contribution statement:
 
-Kyere Ofosu Gideon: Conceptualization; Data curation; Formal analysis; Investigation; Methodology; Software; Validation; Visualization; Writing – original draft; Writing – review & editing.
+Gideon Ofosu Kyere: Conceptualization; Data curation; Formal analysis; Investigation; Methodology; Software; Validation; Visualization; Writing – original draft; Writing – review & editing.
 
 ## Funding
 
-[CONFIRM EITHER: “This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.” OR INSERT THE ACTUAL FUNDING SOURCE.]
+The author received no specific funding for this work.
 
 ## Conflict of interest
 
-The author declares no conflict of interest. **[CONFIRM BEFORE SUBMISSION.]**
+The author declares no conflict of interest.
 
 ## Ethics statement
 
