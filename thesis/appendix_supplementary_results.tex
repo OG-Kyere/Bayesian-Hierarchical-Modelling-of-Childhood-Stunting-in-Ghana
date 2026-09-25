@@ -1,0 +1,326 @@
+\chapter{Supplementary Results and Output Catalogue}
+\label{app:supplementary_results}
+
+This appendix brings the project's main aggregate outputs into the compiled long-form report. The underlying CSV and SVG files remain in the \texttt{results/} directory so that the numerical outputs and publication figures can also be inspected directly. The appendix is descriptive and diagnostic; it does not introduce a new model or alter the locked results reported in Chapter~\ref{chap:results}.
+
+\section{Complete Figure Gallery}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.78\textwidth]{stunting_by_sex}
+\caption{Survey-weighted childhood stunting prevalence by sex.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.82\textwidth]{stunting_by_age}
+\caption{Survey-weighted childhood stunting prevalence by age group.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.78\textwidth]{stunting_by_residence}
+\caption{Survey-weighted childhood stunting prevalence by place of residence.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.82\textwidth]{stunting_by_wealth}
+\caption{Survey-weighted childhood stunting prevalence by household wealth quintile.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.90\textwidth]{stunting_by_region}
+\caption{Survey-weighted childhood stunting prevalence by region.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.82\textwidth]{stunting_by_water_source}
+\caption{Survey-weighted childhood stunting prevalence by drinking-water source.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.82\textwidth]{stunting_by_sanitation}
+\caption{Survey-weighted childhood stunting prevalence by sanitation category.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.82\textwidth]{stunting_by_maternal_education}
+\caption{Survey-weighted childhood stunting prevalence by maternal education.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.82\textwidth]{model_variance_comparison}
+\caption{Household and community variance comparison across the model sequence.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.88\textwidth]{model3_ppc_age}
+\caption{Posterior predictive check for age-specific stunting prevalence in Model 3.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.94\textwidth]{model3_posterior_or_forest}
+\caption{Selected posterior odds ratios from the locked final Model 3.}
+\end{figure}
+
+\section{Analytic Sample and Household Structure}
+
+\begin{table}[H]
+\centering
+\caption{Core analytic sample summary}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+Eligible children & 4,928 \\
+Stunted children & 927 \\
+Weighted stunting prevalence & 17.39\% \\
+Design-based 95\% CI & 15.83--18.94\% \\
+Weighted denominator & 4,292.97 \\
+Households & 3,545 \\
+Communities & 616 \\
+Multi-child households & 1,147 \\
+Children in multi-child households & 2,530 \\
+Missing maternal education & 425 (8.62\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Number of eligible children contributed by sampled households}
+\begin{tabular}{rrr}
+\toprule
+Eligible children in household & Households & Percent of households \\
+\midrule
+1 & 2,398 & 67.64 \\
+2 & 951 & 26.83 \\
+3 & 165 & 4.65 \\
+4 & 26 & 0.73 \\
+5 & 4 & 0.11 \\
+9 & 1 & 0.03 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Variance Decomposition Across the Main Model Sequence}
+
+\begin{table}[H]
+\centering
+\caption{Selected variance summaries across Models 1--3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & Community SD & Household SD & Community ICC & Household VPC & Community MOR & Household MOR \\
+\midrule
+Model 1 & 0.416 & 1.066 & 0.038 & 0.246 & 1.49 & 2.76 \\
+Model 2 & 0.390 & 1.100 & 0.033 & 0.260 & 1.45 & 2.86 \\
+Model 3, locked 8-chain & 0.389 & 1.234 & 0.030 & 0.307 & 1.45 & 3.24 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section{Selected Final-Model Diagnostics}
+
+\begin{table}[H]
+\centering
+\caption{Selected parameter diagnostics from the locked eight-chain Model 3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Parameter & Median & 2.5th percentile & 97.5th percentile & $\hat R$ & Bulk ESS \\
+\midrule
+Intercept & -2.598 & -3.276 & -1.955 & 1.003 & 1,830 \\
+Community SD & 0.389 & 0.067 & 0.610 & 1.021 & 544 \\
+Household SD & 1.234 & 0.940 & 1.535 & 1.018 & 524 \\
+Male coefficient & 0.409 & 0.218 & 0.599 & 1.001 & 6,871 \\
+Age 24--35 coefficient & 1.070 & 0.721 & 1.437 & 1.001 & 3,302 \\
+Richest wealth coefficient & -1.020 & -1.622 & -0.449 & 1.000 & 3,670 \\
+Unimproved-water coefficient & 0.404 & 0.138 & 0.687 & 1.001 & 5,444 \\
+Unimproved-sanitation coefficient & 0.112 & -0.155 & 0.377 & 1.002 & 6,098 \\
+Higher maternal education coefficient & -1.003 & -1.624 & -0.433 & 1.002 & 6,030 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section{Sensitivity Analyses}
+
+\begin{table}[H]
+\centering
+\caption{Prior-sensitivity summaries for selected effects}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrr}
+\toprule
+Prior & Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Tighter & Male vs female & 1.45 & 1.21 & 1.76 \\
+Tighter & Unimproved water & 1.48 & 1.14 & 1.88 \\
+Tighter & Unimproved sanitation & 1.15 & 0.91 & 1.47 \\
+Tighter & Higher maternal education & 0.44 & 0.26 & 0.70 \\
+Wider & Male vs female & 1.52 & 1.25 & 1.85 \\
+Wider & Unimproved water & 1.48 & 1.12 & 2.06 \\
+Wider & Unimproved sanitation & 1.10 & 0.84 & 1.43 \\
+Wider & Higher maternal education & 0.35 & 0.18 & 0.66 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Survey-weight pseudo-posterior sensitivity}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Weighted median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Male vs female & 1.53 & 1.22 & 1.97 \\
+Age 24--35 vs 0--5 months & 3.45 & 2.20 & 5.38 \\
+Richest vs poorest & 0.30 & 0.16 & 0.61 \\
+Unimproved water & 1.38 & 0.90 & 2.07 \\
+Unimproved sanitation & 1.14 & 0.82 & 1.65 \\
+Higher maternal education & 0.31 & 0.15 & 0.61 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Full-sample missing-maternal-education sensitivity}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Male vs female & 1.44 & 1.21 & 1.70 \\
+Age 24--35 vs 0--5 months & 2.90 & 2.11 & 4.10 \\
+Richest vs poorest & 0.39 & 0.24 & 0.66 \\
+Unimproved water & 1.35 & 1.01 & 1.74 \\
+Unimproved sanitation & 1.15 & 0.90 & 1.48 \\
+Missing maternal education vs none & 1.11 & 0.80 & 1.53 \\
+Higher maternal education vs none & 0.38 & 0.22 & 0.63 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Age-spline sensitivity}
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Male vs female & 1.53 & 1.27 & 1.86 \\
+Richest vs poorest & 0.35 & 0.19 & 0.61 \\
+Unimproved water & 1.49 & 1.12 & 2.00 \\
+Unimproved sanitation & 1.11 & 0.86 & 1.44 \\
+Higher maternal education & 0.37 & 0.20 & 0.67 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Detailed-WASH sensitivity}
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Surface water vs improved & 1.52 & 1.10 & 2.08 \\
+Unprotected groundwater vs improved & 1.41 & 0.90 & 2.21 \\
+Open defecation vs improved sanitation & 1.23 & 0.92 & 1.64 \\
+Other unimproved sanitation vs improved & 0.93 & 0.68 & 1.31 \\
+Higher maternal education vs none & 0.38 & 0.20 & 0.67 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Predictive Comparison}
+
+\begin{table}[H]
+\centering
+\caption{Final observation-level PSIS-LOO comparison}
+\begin{tabular}{lrr}
+\toprule
+Quantity & Model 2 & Model 3 \\
+\midrule
+ELPD-LOO & -2012.39 & -2011.47 \\
+Observations with Pareto $k>0.70$ & 5 & 0 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.4em}
+\begin{minipage}{0.92\textwidth}
+\footnotesize
+Model 3 minus Model 2 ELPD difference = 0.92 (SE 3.38). This is conditional observation-level prediction within the observed hierarchy and should not be interpreted as prediction for entirely new households or communities.
+\end{minipage}
+\end{table}
+
+\section{Catalogue of Saved Aggregate Result Tables}
+
+The files below are the complete tracked CSV output set used for reproducibility, audit, and manuscript preparation. They remain machine-readable in \texttt{results/tables/}; selected quantities are rendered above.
+
+\scriptsize
+\begin{longtable}{p{0.46\textwidth}p{0.46\textwidth}}
+\toprule
+File & Purpose \\
+\midrule
+\endfirsthead
+\toprule
+File & Purpose \\
+\midrule
+\endhead
+\texttt{analysis\_sample\_summary.csv} & Core sample counts and weighted prevalence \\
+\texttt{descriptive\_all.csv} & Full survey-weighted descriptive results \\
+\texttt{executed\_model\_metadata.csv} & Model execution metadata \\
+\texttt{household\_structure.csv} & Eligible-child counts per household \\
+\texttt{key\_posterior\_odds\_ratios.csv} & Key posterior OR summaries \\
+\texttt{loo\_model\_compare\_final.csv} & Final PSIS-LOO comparison \\
+\texttt{missing\_maternal\_sensitivity\_key\_effects.csv} & Missing maternal-education sensitivity \\
+\texttt{model1\_or\_summary.csv} & Model 1 fixed-effect summaries \\
+\texttt{model1\_variance\_summary.csv} & Model 1 variance summaries \\
+\texttt{model2\_harm\_key\_effects.csv} & Harmonized Model 2 key effects \\
+\texttt{model2\_harm\_variance\_summary.csv} & Harmonized Model 2 variance summary \\
+\texttt{model2\_harmonized\_final\_diagnostics.csv} & Harmonized Model 2 diagnostics \\
+\texttt{model2\_harmonized\_loo\_summary.csv} & Harmonized Model 2 LOO summary \\
+\texttt{model2\_harmonized\_variance\_summary.csv} & Harmonized Model 2 variance output \\
+\texttt{model2\_or\_summary.csv} & Model 2 fixed-effect summaries \\
+\texttt{model2\_variance\_summary.csv} & Model 2 variance summaries \\
+\texttt{model3\_age\_spline\_key\_results.csv} & Key age-spline results \\
+\texttt{model3\_age\_spline\_sensitivity.csv} & Age-spline sensitivity output \\
+\texttt{model3\_detailed\_wash\_key\_results.csv} & Key detailed-WASH results \\
+\texttt{model3\_detailed\_wash\_sensitivity.csv} & Detailed-WASH sensitivity output \\
+\texttt{model3\_extended\_diagnostic\_summary.csv} & Extended Model 3 diagnostics \\
+\texttt{model3\_extended\_key\_effects.csv} & Extended Model 3 effects \\
+\texttt{model3\_extended\_variance\_summary.csv} & Extended Model 3 variance output \\
+\texttt{model3\_final\_8chain\_key\_or.csv} & Locked eight-chain key ORs \\
+\texttt{model3\_final\_8chain\_loo\_summary.csv} & Locked Model 3 LOO summary \\
+\texttt{model3\_final\_8chain\_parameter\_diagnostics.csv} & Locked parameter diagnostics \\
+\texttt{model3\_final\_8chain\_sampler\_diagnostics.csv} & Locked chain/sampler diagnostics \\
+\texttt{model3\_final\_8chain\_variance\_summary.csv} & Locked variance summaries \\
+\texttt{model3\_key\_effects.csv} & Model 3 key effects \\
+\texttt{model3\_loo\_summary.csv} & Earlier Model 3 LOO output \\
+\texttt{model3\_or\_summary.csv} & Model 3 OR summary \\
+\texttt{model3\_ppc\_summary.csv} & Posterior predictive summaries \\
+\texttt{model3\_variance\_summary.csv} & Model 3 variance summary \\
+\texttt{model\_comparison\_variance.csv} & Variance comparison across models \\
+\texttt{model\_predictive\_comparison.csv} & Predictive comparison output \\
+\texttt{model\_predictive\_comparison\_loo.csv} & PSIS-LOO comparison output \\
+\texttt{prior\_predictive\_summary.csv} & Prior predictive summary \\
+\texttt{prior\_sensitivity\_key\_effects.csv} & Prior sensitivity \\
+\texttt{survey\_weight\_sensitivity\_key\_effects.csv} & Survey-weight sensitivity \\
+\bottomrule
+\end{longtable}
+\normalsize
