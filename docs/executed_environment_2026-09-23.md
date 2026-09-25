@@ -21,8 +21,8 @@ The installed PyMC 5.27.1 / ArviZ 1.1.0 combination is not a recommended clean e
 
 For that reason:
 
-1. this file records the environment in which the strengthened diagnostic work was executed;
-2. `requirements.txt` remains the preferred specification for a clean reproducible rerun, with ArviZ constrained below 1.0;
-3. the final submission environment should be rebuilt cleanly, rerun, and frozen only after all preferred models reproduce the reported estimates and diagnostics.
+1. this file records the environment in which the strengthened eight-chain diagnostic work was executed;
+2. `requirements.txt` remains the preferred specification for clean reproducibility, with ArviZ constrained below 1.0;
+3. a later independent local rerun under Python 3.11 reproduced the analytic sample, the main fixed-effect pattern, healthy sampler diagnostics, and the principal sensitivity conclusions; see `docs/local_reproduction_2026-09-24.md`.
 
-The exact numerical manuscript results are preserved in version-controlled aggregate tables under `results/tables/`.
+The strengthened eight-chain summaries remain the locked manuscript results, while the later local run is retained as an independent reproducibility check. The exact manuscript numbers are preserved in version-controlled aggregate tables under `results/tables/`.
