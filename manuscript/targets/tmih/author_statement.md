@@ -13,7 +13,7 @@ I also declare that persons who made substantial contributions to the work but d
 
 **Author signature:** ______________________________
 
-**Printed name:** Kyere Ofosu Gideon
+**Printed name:** Gideon Ofosu Kyere
 
 **Date signed:** ______________________________
 
