@@ -122,6 +122,12 @@ Higher maternal education vs none & 0.38 & 0.20 & 0.67 \\
 \end{tabular}
 \end{table}
 
+\section{Independent GEE robustness checks}
+
+As an independent sensitivity analysis, logistic generalized estimating equation (GEE) models with exchangeable working correlation were fitted at the household and community levels. The estimated working correlation was 0.154 for household clustering and 0.024 for community clustering. These are not interpreted as Bayesian ICCs; they provide an external check that residual dependence is much stronger within households.
+
+The GEE fixed-effect results were also consistent with the Bayesian sensitivity analyses. In the binary-WASH specification, unimproved water had OR 1.40 (1.12--1.74). Replacing the categorical age term with a cubic spline gave OR 1.39 (1.12--1.74). With detailed WASH coding, surface water had OR 1.43 (1.12--1.83), while unprotected groundwater had OR 1.34 (0.93--1.94).
+
 \section{Predictive checks and PSIS-LOO}
 
 Posterior predictive checks reproduced overall and age-specific prevalence. For the strengthened Model 3 run, PSIS-LOO produced ELPD $-2011.47$, with maximum Pareto $k=0.69$ and no observations above 0.70. Harmonized Model 2 had five observations above Pareto $k=0.70$ and none above one. The ELPD difference favouring Model 3 was only 0.92 with SE 3.38, indicating effectively equivalent predictive performance.
