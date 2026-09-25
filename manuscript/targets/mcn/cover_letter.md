@@ -1,6 +1,6 @@
 Dear Editors,
 
-Please consider our manuscript, “Household and Community Heterogeneity in Childhood Stunting in Ghana: A Bayesian Hierarchical Analysis of the 2022 Demographic and Health Survey,” for publication as a Research Article in *Maternal & Child Nutrition*.
+Please consider our manuscript, “Household and Community Heterogeneity in Childhood Stunting in Ghana,” for publication as a Research Article in *Maternal & Child Nutrition*.
 
 The manuscript addresses a focused multilevel question: once children in the same household are allowed to share a household-level random effect, how much residual variation in stunting remains at the community level?
 
