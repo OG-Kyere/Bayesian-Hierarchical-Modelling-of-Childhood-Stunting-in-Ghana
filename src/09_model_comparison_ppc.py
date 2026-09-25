@@ -34,7 +34,7 @@ def _paired_loo_se(loo2, loo3):
     return float(np.sqrt(d.size * np.var(d, ddof=1)))
 
 
-def main(include_waic=False):
+def main(include_waic=False, write_final=False):
     m2 = az.from_netcdf(OUT / "model2_wash_harmonized.nc")
     m3 = az.from_netcdf(OUT / "model3_maternal_education.nc")
 
@@ -59,7 +59,8 @@ def main(include_waic=False):
         "model3_bad_k": int((k3 > 0.7).sum()),
     }])
     summary.to_csv(TABLES / "model_predictive_comparison_loo.csv", index=False)
-    summary.to_csv(TABLES / "loo_model_compare_final.csv", index=False)
+    if write_final:
+        summary.to_csv(TABLES / "loo_model_compare_final.csv", index=False)
 
     pareto = pd.DataFrame({
         "model": ["model2_harmonized", "model3"],
@@ -108,5 +109,13 @@ if __name__ == "__main__":
         action="store_true",
         help="Also compute WAIC as a secondary diagnostic.",
     )
+    parser.add_argument(
+        "--write-final",
+        action="store_true",
+        help=(
+            "Also overwrite loo_model_compare_final.csv. Use only when the "
+            "current posterior files are the intentionally locked final fits."
+        ),
+    )
     args = parser.parse_args()
-    main(include_waic=args.include_waic)
+    main(include_waic=args.include_waic, write_final=args.write_final)
