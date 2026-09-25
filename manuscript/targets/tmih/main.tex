@@ -1,0 +1,273 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{float}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{../../results/figures/}}
+\svgpath{{../../results/figures/}}
+\doublespacing
+\title{Household and Community Heterogeneity in Childhood Stunting in Ghana}
+\author{Kyere Ofosu Gideon, BSc\\\small Department of Statistics and Actuarial Science, Kwame Nkrumah University of Science and Technology, Kumasi, Ghana [CONFIRM AFFILIATION]\\\small Correspondence: [INSERT EMAIL]}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent\textbf{Objectives:} To quantify residual household- and community-level heterogeneity in childhood stunting in Ghana and assess whether the pattern persisted after accounting for water, sanitation, maternal education, and core sociodemographic characteristics.
+
+\noindent\textbf{Methods:} We conducted a cross-sectional secondary analysis of the 2022 Ghana Demographic and Health Survey including 4,928 children aged 0--59 months in 3,545 households and 616 survey communities. Survey-weighted prevalence was estimated using the DHS design. Bayesian hierarchical logistic models included household and community random intercepts. The final model was evaluated with eight chains and was challenged through alternative priors, survey-weight sensitivity, missing-data treatment, spline age specification, detailed WASH coding, posterior predictive checks, PSIS-LOO, and independent GEE analyses.
+
+\noindent\textbf{Results:} Survey-weighted stunting prevalence was 17.4\% (95\% CI 15.8--18.9). In the final model, the household SD was 1.23 and the community SD 0.39; the corresponding household VPC and community ICC were 0.31 and 0.03. Boys had higher odds of stunting than girls (OR 1.50, 95\% posterior interval 1.24--1.82), as did children aged 24--35 versus 0--5 months (OR 2.91, 2.06--4.21). Unimproved drinking-water source had OR 1.50 (1.15--1.99), whereas higher maternal education had OR 0.37 (0.20--0.65). Sensitivity analyses preserved the main household-versus-community pattern.
+
+\noindent\textbf{Conclusions:} Residual clustering of childhood stunting in these data was concentrated more strongly at the household than the survey-community level. The findings are observational and support further study of household conditions not captured by standard DHS covariates.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Growth Disorders; Multilevel Analysis; Bayes Theorem; Socioeconomic Factors; Educational Status; Drinking Water; Africa, Western
+
+\section{Introduction}
+
+Ghana has made substantial progress in reducing childhood stunting, but the problem has not disappeared. In the 2022 Ghana Demographic and Health Survey (GDHS), about 17\% of children under five were stunted \citep{GSSICF2024}. That national figure hides sizeable differences by region, household wealth, and place of residence. It also says little about where the remaining unexplained variation lies: between communities, between households within those communities, or mainly between individual children.
+
+That distinction matters because children are not sampled independently of one another. Children in the same household share food resources, caregivers, sanitation facilities, economic circumstances, and many day-to-day exposures. Households in the same survey cluster may also share markets, health services, infrastructure, and environmental conditions. A model that allows only for community clustering can therefore attribute household similarity to the wrong level.
+
+Previous work in Ghana has already shown that stunting has both socioeconomic and spatial structure. Bayesian geostatistical studies have described geographical variation in childhood stunting \citep{AhetoDagne2021,AmoakoJohnson2022}, and multilevel analyses have identified household and socioeconomic correlates \citep{AhetoEtAl2015,IddrisuGyabaah2023}. More recent work using the 2022 GDHS has examined WASH and child nutrition among children born to young mothers \citep{OgumEtAl2026}. Our contribution is not the use of Bayesian modelling by itself. Instead, we use the latest GDHS to separate household from community heterogeneity in the full eligible under-five sample, and then ask whether that decomposition changes after WASH and maternal education are added.
+
+We also test whether the main findings depend on choices that could reasonably be questioned by a reviewer: the prior scale, treatment of survey weights, missing maternal-education information, the use of age groups rather than a smooth age function, and a binary rather than more detailed WASH classification.
+
+\section{Methods}
+
+\subsection{Data source and analytic sample}
+
+This was a cross-sectional secondary analysis of the Household Member Recode from the 2022 GDHS, accessed under authorization from The DHS Program. Fieldwork was conducted from October 2022 to January 2023. The GDHS used a stratified two-stage cluster sample \citep{GSSICF2024}. Children were eligible for this analysis if they were aged 0--59 months, had slept in the sampled household on the night before the interview (\texttt{hv103 = yes}), and had a valid height-for-age z-score in \texttt{hc70}.
+
+We defined stunting as height-for-age below $-2$ standard deviations from the WHO reference median, corresponding to \texttt{hc70 < -200} in the DHS recode. The resulting core sample contained 4,928 children in 3,545 households and 616 survey communities.
+
+\subsection{Covariates}
+
+The core model included child sex, age, household wealth quintile, urban or rural residence, and administrative region. For the primary model, age was grouped as 0--5, 6--11, 12--23, 24--35, 36--47, and 48--59 months.
+
+Drinking-water source (\texttt{hv201}) and sanitation facility (\texttt{hv205}) were grouped into improved and unimproved/no-facility categories using JMP-consistent facility-type definitions \citep{WHOUNICEFJMP2021}. These groupings refer to source or facility type; they do not represent the full JMP service ladders. Maternal education came from \texttt{hc61} and was classified as no education, primary, secondary, or higher. Maternal education was unavailable for 425 children, leaving 4,503 children for the complete-case maternal-education model.
+
+\subsection{Descriptive analysis}
+
+We used the DHS household-member weight (\texttt{hv005}) for descriptive prevalence estimates. Taylor linearization was used for standard errors and 95\% confidence intervals, with \texttt{hv021} as the primary sampling unit and \texttt{hv022} as the sampling stratum. The sum of the rescaled weights in our analytic sample was 4,292.97, which reproduces the official GDHS weighted height-for-age denominator of 4,293 after rounding.
+
+\subsection{Bayesian hierarchical models}
+
+For child $i$ in household $j$ and community $k$, we modelled
+\[
+Y_{ijk}\sim\text{Bernoulli}(p_{ijk}),
+\]
+with
+\[
+\text{logit}(p_{ijk})
+=
+\alpha+\mathbf{x}_{ijk}^{\top}\boldsymbol{\beta}+u_k+v_{jk},
+\]
+where $u_k\sim N(0,\tau_c^2)$ is the community random intercept and $v_{jk}\sim N(0,\tau_h^2)$ is the household random intercept. Both random effects were fitted with non-centred parameterizations.
+
+We used $N(0,1.5^2)$ for the intercept, $N(0,1^2)$ for regression coefficients, and Half-Normal$(1)$ priors for the household and community standard deviations. Model 1 contained the core covariates together with household and community random intercepts. Model 2 added WASH. Model 3 added maternal education. We also refitted Model 2 on the 4,503-child maternal-education sample so that the Model 2--Model 3 comparison was not confounded by a change in sample composition.
+
+For interpretation of the random effects, we used a latent logistic residual variance of $\pi^2/3$. The community ICC and household variance partition coefficient were
+\[
+ICC_c=
+\frac{\tau_c^2}{\tau_c^2+\tau_h^2+\pi^2/3},
+\qquad
+VPC_h=
+\frac{\tau_h^2}{\tau_c^2+\tau_h^2+\pi^2/3}.
+\]
+We also calculated median odds ratios (MORs) as
+\[
+MOR=\exp\left[\sqrt{2}\Phi^{-1}(0.75)\tau\right].
+\]
+
+\subsection{Computation, diagnostics, and sensitivity analyses}
+
+Models were fitted with NUTS in PyMC. For the strengthened final Model 3 diagnostic run, we combined eight independent chains, each with 500 warmup and 500 retained draws, giving 4,000 retained posterior draws. We examined divergences, $\hat R$, effective sample size, BFMI, and tree depth, and used posterior predictive checks to compare replicated and observed prevalence.
+
+We then challenged the main specification in several ways. We refitted Model 3 with tighter and wider priors; fitted a pseudo-posterior using survey weights rescaled to mean one; retained children with missing maternal education as a separate sensitivity category; replaced the age groups with a cubic B-spline; and replaced the binary WASH variables with more detailed water and sanitation categories. Predictive performance of harmonized Models 2 and 3 was compared with PSIS-LOO and Pareto-$k$ diagnostics. As an independent check on residual clustering and fixed-effect robustness, we also fitted logistic generalized estimating equation (GEE) models with exchangeable working correlation. The GEE working correlations were used only as sensitivity diagnostics and were not interpreted as Bayesian ICCs.
+
+\subsection{Ethics and data access}
+
+The 2022 GDHS protocol received ethical clearance from the Ethical Review Committee of the Ghana Health Service and from the ICF Institutional Review Board \citep{GSSICF2024}. The original survey used informed-consent procedures under its approved protocol. This secondary analysis used de-identified data obtained through authorized DHS access and involved no direct participant contact. We do not redistribute DHS microdata. The public reproducibility repository contains code and aggregate, non-identifying outputs only.
+
+\subsection{Use of generative artificial intelligence}
+
+OpenAI ChatGPT (GPT-5.6 Sol; accessed September 2026) was used as an assistive tool for language editing, manuscript organization, code drafting and review, and reproducibility documentation. It did not generate or alter the DHS microdata or the locked saved model outputs. The author reviewed and revised all AI-assisted text and code, verified the reported numerical results against the saved outputs, and remains responsible for the accuracy, interpretation, and integrity of the work.
+
+\section{Results}
+
+\subsection{Stunting prevalence and descriptive pattern}
+
+Of the 4,928 children in the analytic sample, 927 were stunted. The survey-weighted prevalence was 17.4\% (95\% CI: 15.8--18.9). Boys had a higher weighted prevalence than girls (19.4\% vs 15.3\%), and prevalence was highest at ages 24--35 months (24.6\%). The wealth gradient was pronounced: 22.8\% of children in the poorest quintile were stunted compared with 7.5\% in the richest. Northern (29.6\%) and North East (29.3\%) had the highest regional estimates.
+
+
+\begin{table}[H]
+\centering
+\caption{Selected characteristics of the analytic sample and survey-weighted stunting prevalence}
+\label{tab:selected_descriptive}
+\begin{tabular}{lrr}
+\toprule
+Characteristic & Unweighted $n$ & Weighted prevalence, \% (95\% CI) \\
+\midrule
+Overall & 4,928 & 17.4 (15.8--18.9) \\
+Male & 2,529 & 19.4 (17.2--21.6) \\
+Female & 2,399 & 15.3 (13.3--17.3) \\
+Urban & 2,024 & 15.1 (12.6--17.5) \\
+Rural & 2,904 & 19.6 (17.6--21.6) \\
+Poorest wealth quintile & 1,601 & 22.8 (19.7--25.9) \\
+Richest wealth quintile & 536 & 7.5 (4.7--10.3) \\
+Improved water source & 3,904 & 16.4 (14.7--18.1) \\
+Unimproved water source & 1,024 & 23.0 (19.0--27.0) \\
+Improved sanitation facility & 2,219 & 13.8 (11.8--15.7) \\
+Unimproved/no sanitation facility & 2,709 & 22.3 (19.9--24.6) \\
+No maternal education & 1,468 & 24.4 (21.5--27.2) \\
+Higher maternal education & 328 & 5.7 (2.4--8.9) \\
+\bottomrule
+\end{tabular}
+
+\begin{minipage}{0.95\textwidth}
+\footnotesize
+\textit{Note.} Prevalence estimates use DHS sampling weights; confidence intervals use Taylor linearization with survey strata and primary sampling units. Maternal-education counts include only the observed education categories; 425 children had missing linked maternal education.
+\end{minipage}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.90\textwidth]{stunting_by_region}
+\caption{Survey-weighted prevalence of childhood stunting by region.}
+\end{figure}
+
+\subsection{Most residual variation was at the household level}
+
+Adding a household random intercept changed the interpretation of the clustering structure. In Model 1, the community SD had a posterior median of 0.416 (95\% posterior interval 0.159--0.590), while the household SD was 1.066 (0.774--1.346). On the latent scale, the community ICC was 0.038 and the household VPC was 0.246. The corresponding MORs were 1.49 and 2.76.
+
+The difference did not disappear in the fuller model. In the strengthened Model 3 run, the community SD was 0.389 and the household SD 1.234. The community ICC was 0.030, whereas the household VPC was 0.307. The MORs were 1.45 for communities and 3.24 for households. In other words, the broad household-versus-community contrast became, if anything, more apparent after the additional covariates were included.
+
+\subsection{Fixed effects}
+
+Several fixed effects were stable across the modelling sequence. In Model 3, boys had higher odds of stunting than girls (OR 1.50, 95\% posterior interval 1.24--1.82). Children aged 24--35 months had nearly three times the odds of those aged 0--5 months (OR 2.91, 2.06--4.21).
+
+The socioeconomic gradient also remained. For children in the richest households, the posterior OR relative to the poorest group was 0.36 (0.20--0.64).
+
+For WASH, the water result was clearer than the sanitation result. Unimproved drinking-water source had an OR of 1.50 (1.15--1.99). The corresponding sanitation estimate was 1.12 (0.86--1.46), leaving substantial posterior support for both modest harm and little or no independent association.
+
+Maternal education showed a similar contrast across categories. Higher education was associated with lower odds of stunting relative to no education (OR 0.37, 0.20--0.65). The primary and secondary categories were much less distinct from the reference group: OR 1.02 (0.75--1.41) and 0.89 (0.68--1.14), respectively.
+
+
+\begin{table}[H]
+\centering
+\caption{Selected posterior results from the strengthened final model}
+\label{tab:main_bayesian_results}
+\begin{tabular}{lcc}
+\toprule
+Parameter or comparison & Posterior median & 95\% posterior interval \\
+\midrule
+Male vs female OR & 1.50 & 1.24--1.82 \\
+Age 24--35 vs 0--5 months OR & 2.91 & 2.06--4.21 \\
+Richest vs poorest OR & 0.36 & 0.20--0.64 \\
+Rural vs urban OR & 0.85 & 0.64--1.12 \\
+Unimproved vs improved water OR & 1.50 & 1.15--1.99 \\
+Unimproved/no vs improved sanitation OR & 1.12 & 0.86--1.46 \\
+Maternal primary vs no education OR & 1.02 & 0.75--1.41 \\
+Maternal secondary vs no education OR & 0.89 & 0.68--1.14 \\
+Maternal higher vs no education OR & 0.37 & 0.20--0.65 \\
+\addlinespace
+Community SD & 0.39 & 0.07--0.61 \\
+Household SD & 1.23 & 0.94--1.53 \\
+Community ICC & 0.03 & 0.001--0.07 \\
+Household VPC & 0.31 & 0.20--0.41 \\
+Community MOR & 1.45 & 1.07--1.79 \\
+Household MOR & 3.24 & 2.45--4.32 \\
+\bottomrule
+\end{tabular}
+
+\begin{minipage}{0.95\textwidth}
+\footnotesize
+\textit{Note.} OR = odds ratio; SD = random-intercept standard deviation; ICC = intraclass correlation coefficient; VPC = variance partition coefficient; MOR = median odds ratio. Fixed-effect ORs and variance summaries come from the strengthened eight-chain Model 3 run.
+\end{minipage}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.94\textwidth]{model3_posterior_or_forest}
+\caption{Selected posterior odds ratios from the final maternal-education model.}
+\end{figure}
+
+\subsection{Diagnostics and sensitivity analyses}
+
+The strengthened Model 3 run produced no divergences. BFMI ranged from 0.51 to 0.66 across chains, and no chain saturated the tree depth. Fixed-effect convergence was strong: the largest $\hat R$ among the reported fixed effects was about 1.003, and bulk effective sample sizes exceeded 2,200. Mixing was slower for the two variance parameters. The community and household SDs had $\hat R$ values of about 1.021 and 1.018, with bulk ESS of about 544 and 524.
+
+The posterior predictive distribution reproduced the observed overall prevalence and the prevalence in each of the six age groups. Changing the functional form of age made little difference to the other main coefficients: in the spline-age model, the OR was 1.49 (1.12--2.00) for unimproved water, 0.37 (0.20--0.67) for higher maternal education, and 0.35 (0.19--0.61) for richest versus poorest.
+
+The more detailed WASH analysis helped locate the water signal. Surface-water use had an OR of 1.52 (1.10--2.08) relative to improved sources. The estimate for unprotected groundwater was 1.41 (0.90--2.21). For sanitation, neither open defecation [OR 1.23 (0.92--1.64)] nor other unimproved facilities [OR 0.93 (0.68--1.31)] was clearly separated from the improved-facility group.
+
+The survey-weight pseudo-posterior was less precise for water: OR 1.38 (0.90--2.07). This did not reverse the direction of the estimate, but it weakened the strength of the evidence.
+
+The independent GEE checks pointed in the same direction as the hierarchical model. The exchangeable working correlation was 0.154 when clustering by household and 0.024 when clustering by community. With household clustering, the GEE estimate for unimproved water was OR 1.40 (1.12--1.74); replacing age categories with a spline gave OR 1.39 (1.12--1.74). Under the detailed WASH coding, surface water had OR 1.43 (1.12--1.83), whereas unprotected groundwater remained less precise at OR 1.34 (0.93--1.94). These GEE quantities are sensitivity checks rather than substitutes for the Bayesian variance components.
+
+Finally, observation-level PSIS-LOO did not distinguish the harmonized WASH and maternal-education models in a practically meaningful way. Model 3 improved ELPD by 0.92, with an SE of 3.38. No Model 3 observation had Pareto $k>0.70$; Model 2 had five, and neither model had $k>1$. Because individual children are left out while household and community effects are estimated from the remaining data, this comparison reflects conditional prediction within the observed hierarchy; it should not be read as performance for entirely new households or communities.
+
+\section{Discussion}
+
+The clearest result from this analysis was not a single covariate. It was the size of the household random effect. Once household and community clustering were represented separately, unexplained household variation was several times larger than community variation, and that pattern survived the addition of WASH and maternal education.
+
+That finding is compatible with earlier Ghanaian work showing important household-level variation in childhood malnutrition \citep{AhetoEtAl2015}. It also sits alongside, rather than contradicting, evidence of spatial heterogeneity from geostatistical studies \citep{AhetoDagne2021,AmoakoJohnson2022}. A DHS cluster captures one kind of shared context; a household captures another, more immediate one. Treating the cluster as the only higher level risks mixing these sources of dependence.
+
+The household MOR makes the difference easier to interpret. In the final model it was about 3.24, compared with 1.45 at the community level. These are not causal effects of moving a child from one household to another. They summarize the spread of the random effects. Even with that caveat, the scale of the household term points to shared conditions that are not well represented by the covariates we could measure. Food security, food allocation, maternal nutrition, caregiving, recurrent infection, and short-term economic shocks are plausible candidates.
+
+The age pattern was expected but still important. Stunting was most common around the second and third years of life, and the adjusted odds were highest at 24--35 months. Replacing age groups with a spline left the other major coefficients almost unchanged, which reassures us that the wealth, water, sex, and education results were not created by the chosen age cut-points.
+
+The wealth gradient was one of the most stable findings. Even after WASH and maternal education were in the model, children in the richest households had markedly lower odds of stunting than those in the poorest. Similar socioeconomic inequalities have been reported repeatedly in Ghana \citep{SeworJayalakshmi2024,OsborneEtAl2025}. The attenuation of the wealth coefficient after maternal education was added is unsurprising given the relationship between schooling and economic position, but these cross-sectional data cannot establish mediation.
+
+The WASH results were less uniform. A binary unimproved-water indicator was associated with higher odds of stunting in the main model, but the weighted pseudo-posterior was more uncertain. The detailed coding added useful context: surface water showed the clearest signal, while unprotected groundwater was less precisely estimated. Sanitation, despite a large crude difference in prevalence, was weak after multivariable adjustment. Taken together, these results make a stronger case for saying that water source is associated with stunting in these data than for claiming an independent sanitation effect. They do not establish that changing water source alone would prevent stunting.
+
+Higher maternal education was associated with substantially lower odds of stunting, whereas primary and secondary education were not clearly different from no education once the other covariates were included. Similar inverse associations between maternal schooling and child undernutrition have been reported elsewhere in Ghana and sub-Saharan Africa \citep{AhetoEtAl2015,TakeleEtAl2022,AgyenEtAl2024}. The pattern here should not be read as evidence of a precise educational threshold. Maternal education is also a marker for differences in health literacy, income opportunities, autonomy, healthcare use, and family circumstances that we cannot fully separate in this dataset.
+
+One result that is easy to overstate is the model comparison. Adding maternal education was useful substantively, but it did not materially improve observation-level predictive performance. The ELPD difference between harmonized Models 2 and 3 was small relative to its uncertainty. This is a conditional comparison within the sampled hierarchy, not a test of prediction in entirely new households or communities. We therefore keep maternal education because it answers a scientific question, not because Model 3 can be shown to predict substantially better.
+
+\subsection{Strengths and limitations}
+
+A strength of the analysis is that the descriptive sample reconstruction can be checked against the published GDHS: both the weighted denominator and national stunting prevalence match the official report after rounding. The modelling also separates household and community clustering, compares models on a harmonized sample where necessary, and subjects the main results to several alternative specifications rather than relying on a single preferred model.
+
+There are also important limits. The GDHS is cross-sectional, so the odds ratios are associations rather than causal effects. Several plausible determinants of child growth---including detailed diet, household food insecurity, maternal nutritional status, birth size, and repeated infection---were not included. Those omissions may also be part of what the household random effect is capturing.
+
+Our WASH variables describe source and facility types, not the full JMP service ladders. Maternal education was missing for 8.6\% of the core sample, although a sensitivity analysis retaining those children did not materially change the main conclusions. The primary Bayesian likelihood does not fully incorporate the survey design; the weighted pseudo-posterior was therefore treated as a sensitivity analysis.
+
+Finally, household variance is harder to estimate than the fixed effects. Many households contributed only one eligible child, and the two random-effect SDs mixed more slowly than the regression coefficients. The eight-chain run improved the effective sample sizes substantially and left the household-versus-community contrast unchanged, but exact variance-component intervals deserve more caution than the fixed-effect intervals.
+
+\subsection{Conclusions}
+
+The 2022 GDHS shows that Ghana's remaining burden of childhood stunting is not only geographically and socioeconomically uneven; substantial variation also sits inside communities, between households. In our models, that household component was much larger than the residual community component and remained so after WASH and maternal education were included.
+
+This shifts the emphasis of the paper away from another list of stunting correlates. The more important result is that standard DHS covariates leave a large amount of shared household-level variation unexplained. Understanding that residual household component---through better information on food security, diet, maternal health, infection, caregiving, and household shocks---is a useful next step for research on child growth in Ghana.
+
+
+\section*{Data Availability Statement}
+The 2022 Ghana DHS microdata are distributed by The DHS Program and cannot be redistributed by the authors. Eligible researchers may request access directly from The DHS Program. The project repository contains code and aggregate, non-identifying outputs; it does not contain row-level DHS data.
+
+% Author-identifying submission metadata (funding, conflicts, affiliations, and
+% contributions) is kept on the separate title page for double-blind review.
+
+
+\section*{Editorial Information (for submission only)}
+\noindent\textbf{Main-body word count:} approximately 2682 words.
+
+\noindent\textbf{Suggested reviewers:}
+\begin{enumerate}
+\item Justice Moses K. Aheto, University of Ghana School of Public Health --- jmkaheto@ug.edu.gh
+\item Richmond N. O. Aryeetey, University of Ghana School of Public Health --- raryeetey@ug.edu.gh
+\item Amos Laar, University of Ghana School of Public Health --- alaar@ug.edu.gh
+\item Duah Dwomoh, University of Ghana School of Public Health --- duahdwomoh@ug.edu.gh
+\item Fusta Azupogo, University for Development Studies --- fazupoko@uds.edu.gh
+\end{enumerate}
+Reviewer suggestions are provisional and should be checked for recent collaboration, supervisory relationships, institutional conflicts, or other competing interests before submission.
+
+\bibliographystyle{unsrtnat}
+\bibliography{../../thesis/references}
+\end{document}
