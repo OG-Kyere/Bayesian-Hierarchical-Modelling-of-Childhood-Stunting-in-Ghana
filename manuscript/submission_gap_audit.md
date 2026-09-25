@@ -17,7 +17,7 @@
 The currently cited references have been checked and an APA 7-style comparison list is stored under `manuscript/targets/mcn/references_apa7_check.md`. The LaTeX manuscript still uses `apalike`, which is not a true APA 7 implementation, so the final rendered bibliography must still be converted or formatted using the journal's production workflow.
 
 ### 2. Reference verification
-The bibliography is internally consistent, but each cited item should be verified against the publisher page. One missing DOI (Iddrisu & Gyabaah, 2023) has already been corrected.
+Completed for all references currently cited in the manuscript. Journal-article metadata and DOIs have been checked against publisher or official records, and the 2022 GDHS and WHO/UNICEF JMP reports have been checked against official sources. The APA 7-style comparison list is stored in `manuscript/targets/mcn/references_apa7_check.md`. Re-check only if references are added or changed.
 
 ### 3. Final author metadata
 Need:
@@ -33,15 +33,7 @@ Need:
 The DHS survey ethics are documented, but the manuscript should use the exact wording required by the corresponding author's institution for secondary analysis/exemption.
 
 ### 5. Final environment lock
-Record exact versions of:
-- Python;
-- PyMC;
-- ArviZ;
-- NumPy;
-- pandas;
-- PyTensor;
-- statsmodels;
-- scipy.
+The executed environment and the later independent local rerun are documented under `docs/`. Before submission, record the exact package versions associated with whichever posterior files are formally designated as the archival production fit, and keep that environment record with the submission archive.
 
 ### 6. Variance-component Monte Carlo precision
 The household/community contrast is stable, but the two SD parameters remain around R-hat 1.02. Keep this limitation transparent. A longer unrestricted run would still be useful if practical.
