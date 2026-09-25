@@ -1,10 +1,20 @@
 name: Build Overleaf Backups
 
 on:
-  push:
-    paths:
-      - ".github/workflows/build-overleaf-backups.yml"
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "main.tex"
+      - "README.md"
+      - "requirements*.txt"
+      - "thesis/**"
+      - "manuscript/**"
+      - "src/**"
+      - "docs/**"
+      - "results/**"
+      - ".github/workflows/build-overleaf-backups.yml"
 
 permissions:
   contents: read
