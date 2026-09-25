@@ -12,7 +12,7 @@ Guidelines rechecked on **25 September 2026** against the current Wiley/TMIH aut
 ## Format and limits
 
 - Main-body limit: **3,500 words in principle**.
-- Current TMIH main-body count: approximately **2674 words** — PASS.
+- Current TMIH main-body count: approximately **2870 words** — PASS.
 - Abstract: **structured**, maximum **300 words**, using **Objectives / Methods / Results / Conclusions** — PASS.
 - Main structure: **Introduction / Methods / Results / Discussion** — PASS; the conclusion is nested within Discussion.
 - Current main display items: **2 tables + 2 figures** — concise and non-duplicative.
