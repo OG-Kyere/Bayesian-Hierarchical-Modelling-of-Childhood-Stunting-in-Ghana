@@ -21,16 +21,14 @@ The statistical analysis and public reproducibility repository are complete for 
 - the AI disclosure states the tool and role and preserves human responsibility for all analysis, interpretation and reporting;
 - the data-availability statement preserves DHS redistribution restrictions while linking the public reproducibility repository.
 
-## Still requires author metadata or institutional confirmation
+## Still requires author confirmation
 
-- final affiliation wording;
-- institutional postal address;
+- correspondence postal address;
 - corresponding-author email;
 - ORCID, if available;
 - final author/co-author list;
 - funding statement;
 - conflict-of-interest confirmation;
-- exact institutional wording, if any, for secondary-data ethics/exemption;
 - final author review of the AI disclosure;
 - signed TMIH author statement.
 
