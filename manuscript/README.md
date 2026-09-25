@@ -53,4 +53,4 @@ The earlier MCN package is retained only as a provenance archive.
 
 The statistical analysis is complete. Do not rerun models, add covariates, add spatial analysis, replace the primary model, or modify locked numerical results merely for journal retargeting.
 
-The remaining work before submission is editorial and administrative: finalize author metadata, funding/conflict declarations, any institutional secondary-data ethics wording, the signed author statement, and the final rendered manuscript.
+The remaining work before submission is editorial and administrative: finalize correspondence details, funding/conflict declarations, the signed author statement, reviewer conflict screening, and the final rendered manuscript. The active paper is presented as independent research and does not claim an additional institutional ethics approval.
