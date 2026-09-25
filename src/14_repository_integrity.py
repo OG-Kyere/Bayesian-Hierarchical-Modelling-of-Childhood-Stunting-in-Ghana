@@ -1,14 +1,4 @@
-"""Repository integrity checks that do not require DHS microdata.
-
-Checks:
-- every LaTeX citation key exists in thesis/references.bib;
-- BibTeX keys are unique;
-- figure files referenced by LaTeX exist;
-- restricted/raw data formats are not committed;
-- the blinded manuscript does not expose author identity or submission placeholders.
-
-Only the Python standard library is required.
-"""
+"""Repository integrity checks that do not require DHS microdata."""
 
 from __future__ import annotations
 
@@ -21,14 +11,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BIB = ROOT / "thesis/references.bib"
 BLINDED = ROOT / "manuscript/targets/mcn/main_blinded.tex"
+TMIH = ROOT / "manuscript/targets/tmih/main.tex"
 
 RAW_SUFFIXES = {
     ".dta", ".sav", ".sas7bdat", ".por", ".zip", ".nc", ".pkl", ".pickle", ".joblib"
 }
-
 FIGURE_SUFFIXES = [".svg", ".png", ".pdf", ".jpg", ".jpeg"]
 
-# Author/institution strings that must not appear in the double-blind manuscript.
 BLINDED_FORBIDDEN = [
     "Kyere Ofosu Gideon",
     "OG-Kyere",
@@ -52,7 +41,6 @@ def bib_keys(text: str) -> list[str]:
 
 def citation_keys(text: str) -> list[str]:
     keys: list[str] = []
-    # Matches \cite{}, \citep{}, \citet{}, \citealp{}, etc.
     for match in re.finditer(r"\\cite[a-zA-Z*]*\s*(?:\[[^\]]*\]\s*)*\{([^}]+)\}", text):
         keys.extend(k.strip() for k in match.group(1).split(",") if k.strip())
     return keys
@@ -72,7 +60,6 @@ def figure_refs(text: str) -> list[str]:
 def figure_exists(tex: Path, ref: str) -> bool:
     ref_path = Path(ref)
     candidates: list[Path] = []
-
     if ref_path.suffix:
         candidates.extend([
             tex.parent / ref_path,
@@ -86,41 +73,29 @@ def figure_exists(tex: Path, ref: str) -> bool:
                 ROOT / ref_path.with_suffix(suffix),
                 ROOT / "results/figures" / (ref_path.name + suffix),
             ])
-
     return any(candidate.exists() for candidate in candidates)
 
 
 def main() -> int:
     failures: list[str] = []
 
-    # BibTeX uniqueness.
     bib_text = BIB.read_text(encoding="utf-8")
     keys = bib_keys(bib_text)
     counts = Counter(keys)
-    duplicates = sorted(key for key, count in counts.items() if count > 1)
-    for key in duplicates:
-        failures.append(f"duplicate BibTeX key: {key}")
-
+    for key, count in counts.items():
+        if count > 1:
+            failures.append(f"duplicate BibTeX key: {key}")
     available = set(keys)
 
-    # Citation completeness and figure existence.
     for tex in tex_files():
         text = tex.read_text(encoding="utf-8")
-
         for key in citation_keys(text):
             if key not in available:
                 failures.append(f"{tex.relative_to(ROOT)}: missing citation key '{key}'")
-
         for ref in figure_refs(text):
             if not figure_exists(tex, ref):
-                failures.append(
-                    f"{tex.relative_to(ROOT)}: referenced figure not found: '{ref}'"
-                )
+                failures.append(f"{tex.relative_to(ROOT)}: referenced figure not found: '{ref}'")
 
-    # Restricted/raw file types must never be TRACKED in this repository.
-    # Use the Git index rather than scanning the working tree, because authorized
-    # DHS microdata and NetCDF posterior files may legitimately exist locally
-    # while being ignored by .gitignore.
     try:
         tracked = subprocess.run(
             ["git", "ls-files", "-z"],
@@ -141,15 +116,21 @@ def main() -> int:
         if len(rel.parts) >= 2 and rel.parts[0] == "data" and rel.parts[1] == "raw":
             failures.append(f"file is tracked under data/raw: {rel}")
 
-    # Double-blind manuscript should not identify the author or retain placeholders.
     blinded_text = BLINDED.read_text(encoding="utf-8")
     for token in BLINDED_FORBIDDEN:
         if token.lower() in blinded_text.lower():
             failures.append(f"blinded manuscript contains forbidden text: '{token}'")
-
-    # Require an empty author field in the blinded manuscript.
     if not re.search(r"\\author\{\s*\}", blinded_text):
         failures.append("blinded manuscript does not have an empty \\author{} field")
+
+    tmih_text = TMIH.read_text(encoding="utf-8")
+    if "Independent Researcher, Ghana" not in tmih_text:
+        failures.append("active TMIH manuscript is missing independent-researcher affiliation")
+    for token in ["KNUST", "Kwame Nkrumah", "Maternal & Child Nutrition"]:
+        if token.lower() in tmih_text.lower():
+            failures.append(
+                f"active TMIH manuscript contains stale target/affiliation text: '{token}'"
+            )
 
     if failures:
         print("Repository integrity check FAILED:\n")
@@ -165,6 +146,7 @@ def main() -> int:
     print("- referenced figures: present")
     print("- tracked restricted/raw data files: none")
     print("- blinded manuscript identity check: passed")
+    print("- active TMIH target identity/target check: passed")
     return 0
 
 
