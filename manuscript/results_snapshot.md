@@ -1,6 +1,6 @@
 # Current manuscript results snapshot
 
-This snapshot records the numerical results used in the first journal-style manuscript draft.
+This snapshot records the locked numerical results used in the current journal manuscript. Later local reproducibility runs are documented separately and do not replace these values unless the manuscript result set is deliberately re-locked.
 
 ## Sample
 - children: 4,928
