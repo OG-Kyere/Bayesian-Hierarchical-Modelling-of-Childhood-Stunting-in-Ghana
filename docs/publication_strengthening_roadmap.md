@@ -50,13 +50,16 @@ The paper is stronger when it stays focused on:
 
 ## Submission work still pending
 
-The main remaining tasks are practical:
+The main remaining tasks are now practical rather than analytical:
 
-- finalize authorship and affiliations;
+- finalize authorship, affiliations, ORCIDs, funding, conflicts, and CRediT roles;
 - confirm the submitting institution's ethics/exemption wording;
-- freeze the final software environment;
-- render references in the journal's exact style;
-- verify the final manuscript against the saved aggregate result tables;
-- run one longer variance-component fit if computing resources allow it.
+- freeze and archive the exact software environment associated with the submission fit;
+- render the references in the journal's exact APA 7 implementation;
+- run the final journal-specific formatting and submission checklist.
 
-At this point, clarity and reproducibility matter more than extra model complexity.
+The public manuscript/result consistency check and repository-integrity check are automated in GitHub Actions and currently pass. Publisher/official records have also been checked for all references cited in the current manuscript.
+
+A longer variance-component run remains optional if the author team wants tighter Monte Carlo precision for the hierarchical SDs; it is not required to resolve a contradiction in the substantive findings.
+
+At this point, clarity, metadata, and reproducibility matter more than extra model complexity.
