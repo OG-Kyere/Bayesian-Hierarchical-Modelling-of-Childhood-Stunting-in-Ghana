@@ -19,6 +19,5 @@ Thank you for considering the manuscript.
 Sincerely,
 
 Kyere Ofosu Gideon, BSc  
-Department of Statistics and Actuarial Science  
-Kwame Nkrumah University of Science and Technology, Kumasi, Ghana **[CONFIRM AFFILIATION]**  
+Independent Researcher, Ghana  
 [INSERT EMAIL]
