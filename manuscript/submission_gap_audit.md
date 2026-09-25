@@ -18,8 +18,7 @@
 ### 1. Final author metadata
 
 Need:
-- exact current affiliation wording;
-- institutional postal address;
+- correspondence postal address;
 - corresponding email;
 - ORCID if available;
 - final co-author list, if any;
@@ -29,7 +28,7 @@ Need:
 
 ### 2. Ethics wording
 
-The GDHS ethics and original informed-consent procedures are documented. Confirm whether the corresponding author's institution requires an additional exemption, notification, or prescribed statement for secondary analysis of de-identified DHS data.
+The GDHS ethics and original informed-consent procedures are documented. This manuscript is an independent secondary analysis of de-identified DHS data accessed under authorization from The DHS Program. It should preserve that wording and should not imply an additional institutional approval that was not obtained.
 
 ### 3. Signed author statement
 
