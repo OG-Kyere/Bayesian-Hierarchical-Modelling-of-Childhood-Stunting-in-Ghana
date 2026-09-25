@@ -36,3 +36,14 @@ Thumbs.db
 *.out
 *.synctex.gz
 *.toc
+
+# Additional LaTeX/Overleaf build products
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+svg-inkscape/
+*-eps-converted-to.pdf
