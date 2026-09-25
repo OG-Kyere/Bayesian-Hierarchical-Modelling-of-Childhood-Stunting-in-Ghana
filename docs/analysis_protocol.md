@@ -24,12 +24,12 @@ where:
 - `u_k` is a community-level random intercept.
 - `v_jk` is a household-level random intercept.
 
-## Planned model sequence
+## Completed model sequence
 - Model 0: demographic and socioeconomic covariates + community random intercept.
 - Model 1: Model 0 + household random intercept.
 - Model 2: Model 1 + water and sanitation variables.
 - Model 3: Model 2 + maternal education.
-- Sensitivity analyses: survey weighting, alternative priors, and same-sample model comparisons.
+- Sensitivity analyses: survey weighting, alternative priors, harmonized-sample comparison, missing maternal education, spline age, detailed WASH coding, posterior predictive checks, PSIS-LOO, and independent GEE checks.
 
 ## Key estimands
 - Posterior odds ratios and credible intervals.
@@ -37,13 +37,13 @@ where:
 - Latent-scale ICCs.
 - Median odds ratios (MORs).
 - Posterior predictive performance.
-- Model-comparison criteria appropriate to the final Bayesian workflow.
+- Conditional observation-level PSIS-LOO with Pareto-k diagnostics.
 
 ## Reproducibility principles
-- All modelling decisions are documented before interpretation.
+- Modelling decisions, run metadata, and later changes are documented alongside the analysis outputs.
 - Raw DHS files remain local and are never committed.
-- Model comparisons will use harmonized samples where required.
-- Pilot estimates are provisional until the full specification and sensitivity analyses are complete.
+- Model comparisons use harmonized samples where required.
+- Pilot estimates remain clearly separated from the locked final Model 3 results.
 
 ## Publication strategy
-The thesis will provide full methodological and substantive detail. The journal manuscript will focus on the strongest defensible contribution established after literature review and model-comparison results.
+The long-form report provides the full methodological and substantive record. The active TMIH manuscript focuses on the household-versus-community heterogeneity result and the completed robustness checks.
