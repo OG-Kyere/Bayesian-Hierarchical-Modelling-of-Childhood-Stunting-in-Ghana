@@ -9,7 +9,7 @@
 
 **Keywords:** Growth Disorders; Multilevel Analysis; Bayes Theorem; Socioeconomic Factors; Educational Status; Drinking Water; Africa, Western
 
-**Main-body word count:** approximately 2,674 words
+**Main-body word count:** approximately 2,870 words
 
 ## Corresponding author
 **Name:** Kyere Ofosu Gideon  
