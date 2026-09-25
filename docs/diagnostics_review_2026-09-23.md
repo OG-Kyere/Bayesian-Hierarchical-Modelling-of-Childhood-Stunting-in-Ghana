@@ -95,8 +95,12 @@ Model 3 has no Pareto-k values above 0.70 and a maximum of about 0.69. Model 2 h
 
 This is an observation-level comparison within the fitted hierarchy. It is not a test of prediction for completely new households or communities.
 
+## Later local reproducibility check
+
+A separate four-chain local rerun on 24 September 2026 reproduced the analytic sample exactly and returned healthy sampler diagnostics for Models 1--3. The local Model 3 run had 0 divergences, maximum R-hat 1.00, minimum bulk ESS 464, minimum tail ESS 518, and minimum BFMI 0.482. Its PSIS-LOO comparison included a small number of observations with Pareto k above 0.70 in both harmonized Model 2 and Model 3, but none above 1. The ELPD difference remained smaller than its paired SE, preserving the conclusion of predictive similarity.
+
+The full local rerun is documented in `docs/local_reproduction_2026-09-24.md`. It is a reproducibility check and does not replace the stronger eight-chain locked manuscript summaries.
+
 ## Bottom line
 
-The fixed-effect results and the household-versus-community contrast are supported by several independent checks. The main remaining diagnostic caution is the slower mixing of the two hierarchical SDs.
-
-For a final locked submission, I would still prefer one clean longer run in the pinned environment if computing resources allow it. If that run is not feasible, the manuscript should keep the current wording: strong fixed-effect convergence, stable household-versus-community contrast, and more caution around the exact variance-component intervals.
+The fixed-effect results, household-versus-community contrast, and main sensitivity conclusions are supported by repeated Bayesian fits and independent GEE checks. The main diagnostic caution remains the slower mixing of the hierarchical SDs and the limited reliability of observation-level PSIS-LOO for a small number of influential observations.
