@@ -1,5 +1,9 @@
 # Analysis and Thesis Audit — 23 September 2026
 
+## Status update — 25 September 2026
+
+This file records the state of the project on 23 September and is retained for provenance. Several items below were subsequently superseded: the final Model 3 result set is now the locked eight-chain run with 4,000 retained draws; PSIS-LOO replaced WAIC as the primary predictive comparison; the strengthened survey-weight sensitivity completed with acceptable sampler diagnostics; and no additional production run is required before the current TMIH submission.
+
 This document records major consistency checks and corrections performed before drafting Chapter 5.
 
 ## Corrections completed
