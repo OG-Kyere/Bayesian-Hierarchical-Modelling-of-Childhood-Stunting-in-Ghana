@@ -1,52 +1,58 @@
-# Submission-gap audit
+# Submission-gap audit — TMIH target
 
 ## Already strong
-- Clear, defensible contribution.
-- Main results reproduced in tables rather than only prose.
-- Eight-chain diagnostics available.
-- Multiple sensitivity analyses.
-- Conditional nature of PSIS-LOO now stated.
-- Main manuscript is below the journal word limit.
-- Two tables + two figures = four main display items, below the MCN limit of five.
-- Double-blind MCN manuscript version exists.
-- Cover letter, title page, key messages, supplement, and data-access statement exist.
+
+- Clear, defensible contribution focused on household-versus-community residual heterogeneity.
+- Locked main results reproduced in tables rather than only prose.
+- Strengthened eight-chain Model 3 diagnostics available.
+- Multiple completed sensitivity analyses.
+- Conditional nature of PSIS-LOO explicitly stated.
+- TMIH main manuscript is below the 3,500-word target.
+- Two tables and two figures keep the main paper concise.
+- TMIH-specific manuscript, cover letter, title page, supplement, author statement, reviewer suggestions, Vancouver reference check, AI disclosure and data-accessibility statement exist.
+- Five reviewer contacts have been verified and remain subject to conflict screening.
+- The active paper remains non-causal.
 
 ## Highest-priority remaining gaps
 
-### 1. Reference style
-The currently cited references have been checked and an APA 7-style comparison list is stored under `manuscript/targets/mcn/references_apa7_check.md`. The LaTeX manuscript still uses `apalike`, which is not a true APA 7 implementation, so the final rendered bibliography must still be converted or formatted using the journal's production workflow.
+### 1. Final author metadata
 
-### 2. Reference verification
-Completed for all references currently cited in the manuscript. Journal-article metadata and DOIs have been checked against publisher or official records, and the 2022 GDHS and WHO/UNICEF JMP reports have been checked against official sources. The APA 7-style comparison list is stored in `manuscript/targets/mcn/references_apa7_check.md`. Re-check only if references are added or changed.
-
-### 3. Final author metadata
 Need:
-- exact affiliation(s);
+- exact current affiliation wording;
+- institutional postal address;
 - corresponding email;
 - ORCID if available;
-- final co-author list;
-- agreed CRediT statement;
-- funding;
-- conflicts.
+- final co-author list, if any;
+- final contribution statement;
+- funding declaration;
+- conflict-of-interest confirmation.
 
-### 4. Ethics wording
-The DHS survey ethics are documented, but the manuscript should use the exact wording required by the corresponding author's institution for secondary analysis/exemption.
+### 2. Ethics wording
 
-### 5. Final environment lock
-The executed environment and the later independent local rerun are documented under `docs/`. Before submission, record the exact package versions associated with whichever posterior files are formally designated as the archival production fit, and keep that environment record with the submission archive.
+The GDHS ethics and original informed-consent procedures are documented. Confirm whether the corresponding author's institution requires an additional exemption, notification, or prescribed statement for secondary analysis of de-identified DHS data.
 
-### 6. Variance-component Monte Carlo precision
-The household/community contrast is stable, but the two SD parameters remain around R-hat 1.02. Keep this limitation transparent. A longer unrestricted run would still be useful if practical.
+### 3. Signed author statement
 
-### 7. Target-journal keywords
-Seven MeSH-aligned terms are now used: Growth Disorders; Multilevel Analysis; Bayes Theorem; Socioeconomic Factors; Educational Status; Drinking Water; Africa, Western.
+TMIH requires the corresponding author to sign the journal's author statement on behalf of all authors. A current signature template is stored under `manuscript/targets/tmih/author_statement.md`.
 
-### 8. AI disclosure
-Keep the disclosure factual and narrow. Do not describe AI as an author. State what it assisted with and that authors verified all outputs.
+### 4. Final reference rendering
 
-## Do not change unless a reviewer asks
-- Do not add many more covariates.
-- Do not add spatial modelling just to make the paper look more advanced.
-- Do not replace the main hierarchical model with the weighted pseudo-posterior.
+TMIH publishes Vancouver references and permits Harvard or Vancouver at submission. The TMIH LaTeX version uses numerical citations with `unsrtnat`, and a manual Vancouver cross-check is stored in `manuscript/targets/tmih/references_vancouver_check.md`. Inspect final numbering after the last editorial changes.
+
+### 5. AI disclosure
+
+Keep the disclosure factual and specific. State what the tool assisted with, state that it did not create or alter original DHS data or locked model outputs, and retain human responsibility for all analysis and interpretation.
+
+### 6. Reviewer conflict screen
+
+The five reviewer suggestions have verified public institutional contact information, but eligibility still depends on the author's actual professional relationships. Screen recent co-authorship, supervision, current collaboration, same-institution ties, and personal conflicts immediately before submission.
+
+## Analysis closed unless an editor/reviewer identifies a substantive need
+
+- Do not add more covariates.
+- Do not add spatial modelling.
+- Do not rerun Model 3 simply to chase different Monte Carlo diagnostics.
+- Do not replace the primary hierarchical model with the weighted pseudo-posterior.
 - Do not over-focus on predictive model ranking.
-- Do not claim a causal effect of water, maternal education, or wealth.
+- Do not claim causal effects of water, maternal education, wealth, sex, age, household membership, or community membership.
+- Preserve the locked eight-chain numerical results.
