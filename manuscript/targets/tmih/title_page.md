@@ -18,7 +18,7 @@
 
 **ORCID:** [INSERT ORCID IF AVAILABLE]
 
-**Main-body word count:** approximately 2682 words
+**Main-body word count:** approximately 2674 words
 
 **Abstract word count:** under 300 words
 
