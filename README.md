@@ -91,9 +91,9 @@ A separate local reproducibility rerun is documented in `docs/local_reproduction
 ```text
 src/                 analysis and diagnostic scripts
 results/tables/      aggregate model and descriptive results
-results/figures/     figures used in the thesis and manuscript
+results/figures/     figures used in the long-form report and manuscript
 docs/                variable definitions, audits, and diagnostic notes
-thesis/              LaTeX thesis files
+thesis/              LaTeX long-form report files
 manuscript/          journal manuscript and supplementary material
 ```
 
@@ -119,9 +119,9 @@ Then install the Python dependencies in `requirements.txt` and run the analysis 
 
 The exact sandbox environment used for the strengthened diagnostic work is documented in `docs/executed_environment_2026-09-23.md`. Because that environment required a PyMC/ArviZ compatibility workaround, `requirements.txt` is the preferred starting point for a clean rerun.
 
-## Thesis and manuscript
+## Long-form report and manuscript
 
-The repository contains both the thesis version of the work and a shorter journal manuscript.
+The repository contains both a long-form research report and a shorter journal manuscript.
 
 The manuscript focuses on the part of the project I think is most useful: separating household and community heterogeneity rather than presenting another list of factors associated with stunting.
 
@@ -130,6 +130,6 @@ The analysis is still observational, so the reported odds ratios are interpreted
 
 ## Citation
 
-A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. The preferred citation will be updated to the final manuscript or thesis record once one is formally available.
+A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. The preferred citation will be updated to the final publication record once one is formally available.
 
 No open-source license has been assigned yet. That is intentional; reuse rights should be chosen explicitly rather than assumed.
