@@ -56,7 +56,9 @@ I also checked whether the conclusions changed when I:
 - replaced the age groups with a spline;
 - used more detailed WASH categories.
 
-The broad conclusions remained similar.
+The broad conclusions remained similar. An independent GEE check also found substantially stronger residual dependence within households than within communities (working correlations about 0.154 and 0.024, respectively); these working correlations are used only as robustness diagnostics, not as Bayesian ICCs.
+
+A separate local reproducibility rerun is documented in `docs/local_reproduction_2026-09-24.md`. It reproduced the analytic sample and the main scientific pattern without replacing the stronger locked manuscript summaries.
 
 ## Figures
 
