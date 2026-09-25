@@ -22,7 +22,7 @@ This is the working upload order for the current TMIH submission.
 
 4. **Cover letter**
    - Source: `cover_letter.md`
-   - Replace affiliation/email placeholders before submission.
+   - Replace the email placeholder before submission; affiliation is set to Independent Researcher, Ghana.
 
 5. **Reviewer suggestions**
    - Source: `reviewer_suggestions.md`
@@ -54,7 +54,7 @@ The manuscript currently embeds two SVG figures from the repository. For peer re
 - author list identical everywhere;
 - affiliations and correspondence finalized;
 - funding/conflict statements finalized;
-- KNUST secondary-data ethics wording confirmed if required;
+- ethics wording matches the documented GDHS approvals and authorized secondary-data use;
 - author statement signed;
 - reviewer conflicts screened;
 - no bracketed placeholders remain;
