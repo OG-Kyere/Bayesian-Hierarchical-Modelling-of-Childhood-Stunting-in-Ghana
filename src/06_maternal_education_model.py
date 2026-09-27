@@ -2,6 +2,11 @@
 
 Model 3 is fitted only to children with linked maternal-education information so
 its results can be compared with the harmonized Model 2 on the same observations.
+
+The default sampling settings in this public script are for a clean
+reproducibility rerun of the same model specification. They are not a
+bit-for-bit recipe for the locked strengthened eight-chain posterior used in
+the manuscript. See docs/locked_model3_result_provenance.md.
 """
 from pathlib import Path
 import numpy as np
