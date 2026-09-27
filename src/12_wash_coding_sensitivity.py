@@ -53,8 +53,27 @@ def prepare():
         + pd.to_numeric(d["hv002"], errors="coerce").astype(int).astype(str)
     )
 
+    if d["hv201"].isna().any() or d["hv205"].isna().any():
+        raise ValueError(
+            "Missing hv201/hv205 values found in the Model 3 sensitivity sample; "
+            "review WASH missing-data handling before fitting."
+        )
+
     water = d["hv201"].astype(str)
     sanitation = d["hv205"].astype(str)
+
+    expected_water = IMPROVED_WATER | {
+        "unprotected well",
+        "unprotected spring",
+        "river/dam/lake/ponds/stream/canal/irrigation channel",
+    }
+    unexpected_water = sorted(set(water.unique()) - expected_water)
+    if unexpected_water:
+        raise ValueError(
+            "Unexpected hv201 category/categories in detailed-WASH sensitivity: "
+            + ", ".join(unexpected_water)
+        )
+
     d["water3"] = np.where(
         water.eq("river/dam/lake/ponds/stream/canal/irrigation channel"),
         "surface water",
