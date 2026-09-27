@@ -23,6 +23,8 @@ jobs:
       matrix:
         target:
           - main.tex
+          - manuscript/main.tex
+          - manuscript/supplement.tex
           - manuscript/targets/tmih/main.tex
           - manuscript/targets/tmih/supplement.tex
     steps:
