@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BIB = ROOT / "thesis/references.bib"
 BLINDED = ROOT / "manuscript/targets/mcn/main_blinded.tex"
 TMIH = ROOT / "manuscript/targets/tmih/main.tex"
+GENERIC = ROOT / "manuscript/main.tex"
+CONFIG = ROOT / "thesis/config.tex"
+CITATION = ROOT / "CITATION.cff"
 
 RAW_SUFFIXES = {
     ".dta", ".sav", ".sas7bdat", ".por", ".zip", ".nc", ".pkl", ".pickle", ".joblib"
@@ -19,11 +22,19 @@ RAW_SUFFIXES = {
 FIGURE_SUFFIXES = [".svg", ".png", ".pdf", ".jpg", ".jpeg"]
 
 BLINDED_FORBIDDEN = [
+    "Gideon Ofosu Kyere",
     "Kyere Ofosu Gideon",
     "OG-Kyere",
     "[INSERT",
     "INSERT AFFILIATION",
     "INSERT EMAIL",
+]
+
+ACTIVE_PLACEHOLDERS = [
+    "[INSERT",
+    "[FINAL",
+    "CONFIRM BEFORE SUBMISSION",
+    "Not yet available",
 ]
 
 
@@ -48,11 +59,10 @@ def citation_keys(text: str) -> list[str]:
 
 def figure_refs(text: str) -> list[str]:
     refs: list[str] = []
-    patterns = [
+    for pattern in [
         r"\\includesvg(?:\[[^\]]*\])?\{([^}]+)\}",
         r"\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}",
-    ]
-    for pattern in patterns:
+    ]:
         refs.extend(re.findall(pattern, text))
     return refs
 
@@ -61,11 +71,7 @@ def figure_exists(tex: Path, ref: str) -> bool:
     ref_path = Path(ref)
     candidates: list[Path] = []
     if ref_path.suffix:
-        candidates.extend([
-            tex.parent / ref_path,
-            ROOT / ref_path,
-            ROOT / "results/figures" / ref_path.name,
-        ])
+        candidates.extend([tex.parent / ref_path, ROOT / ref_path, ROOT / "results/figures" / ref_path.name])
     else:
         for suffix in FIGURE_SUFFIXES:
             candidates.extend([
@@ -98,10 +104,7 @@ def main() -> int:
 
     try:
         tracked = subprocess.run(
-            ["git", "ls-files", "-z"],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
+            ["git", "ls-files", "-z"], cwd=ROOT, check=True, capture_output=True
         ).stdout.decode("utf-8").split("\0")
     except (subprocess.CalledProcessError, FileNotFoundError, UnicodeDecodeError) as exc:
         failures.append(f"could not inspect Git-tracked files: {exc}")
@@ -128,9 +131,26 @@ def main() -> int:
         failures.append("active TMIH manuscript is missing independent-researcher affiliation")
     for token in ["KNUST", "Kwame Nkrumah", "Maternal & Child Nutrition"]:
         if token.lower() in tmih_text.lower():
-            failures.append(
-                f"active TMIH manuscript contains stale target/affiliation text: '{token}'"
-            )
+            failures.append(f"active TMIH manuscript contains stale target/affiliation text: '{token}'")
+
+    for path in [TMIH, GENERIC, CONFIG, CITATION]:
+        text = path.read_text(encoding="utf-8")
+        if "Kyere Ofosu Gideon" in text:
+            failures.append(f"{path.relative_to(ROOT)}: stale author-name order")
+        for token in ACTIVE_PLACEHOLDERS:
+            if token.lower() in text.lower():
+                failures.append(f"{path.relative_to(ROOT)}: unresolved active placeholder '{token}'")
+
+    if "Gideon Ofosu Kyere" not in GENERIC.read_text(encoding="utf-8"):
+        failures.append("generic manuscript is missing confirmed author name")
+    if "Gideon Ofosu Kyere" not in CONFIG.read_text(encoding="utf-8"):
+        failures.append("thesis config is missing confirmed author name")
+
+    citation_text = CITATION.read_text(encoding="utf-8")
+    if 'given-names: "Gideon Ofosu"' not in citation_text:
+        failures.append("CITATION.cff: given-names are not standardized")
+    if "0009-0003-9848-8437" not in citation_text:
+        failures.append("CITATION.cff: ORCID is missing")
 
     if failures:
         print("Repository integrity check FAILED:\n")
@@ -146,7 +166,7 @@ def main() -> int:
     print("- referenced figures: present")
     print("- tracked restricted/raw data files: none")
     print("- blinded manuscript identity check: passed")
-    print("- active TMIH target identity/target check: passed")
+    print("- active manuscript/report metadata: synchronized")
     return 0
 
 
