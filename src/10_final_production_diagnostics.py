@@ -1,4 +1,8 @@
-"""Final production diagnostics for saved PyMC InferenceData files.
+"""Diagnostics for locally saved PyMC InferenceData files.
+
+This script diagnoses whichever local NetCDF files are present under
+results/model_outputs. It does not recreate or certify the archived locked
+eight-chain result set by itself; see docs/locked_model3_result_provenance.md.
 
 Sampler diagnostics and PSIS-LOO diagnostics are reported separately.  A model
 can therefore have healthy NUTS sampling while still requiring review of a few
