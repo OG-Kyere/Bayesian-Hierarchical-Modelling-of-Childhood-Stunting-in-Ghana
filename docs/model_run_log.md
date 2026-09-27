@@ -1,6 +1,6 @@
 # Bayesian model run log
 
-This file distinguishes the **locked manuscript results** from later local reproducibility reruns.
+This file distinguishes the **locked manuscript results** from later local reproducibility reruns. See `docs/locked_model3_result_provenance.md` for the boundary between version-controlled aggregate verification and exact chain-level replay.
 
 The strengthened eight-chain Model 3 summaries remain the primary manuscript results. A separate four-chain local rerun reproduced the analytic sample, main fixed-effect pattern, sampler health, and sensitivity conclusions; those results are documented in `docs/local_reproduction_2026-09-24.md`.
 
