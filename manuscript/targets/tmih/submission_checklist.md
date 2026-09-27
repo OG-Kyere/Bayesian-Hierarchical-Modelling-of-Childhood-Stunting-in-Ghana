@@ -68,7 +68,7 @@ Guidelines rechecked on **25 September 2026** against the current Wiley/TMIH aut
 
 ## Final pre-upload actions
 
-- Replace all bracketed placeholders.
+- Confirm that no unresolved author/declaration placeholders remain.
 - Re-screen the five reviewer suggestions for conflicts.
 - Sign the author statement.
 - Confirm that the final ethics wording accurately reflects the documented GDHS approvals and authorized secondary-data use.
