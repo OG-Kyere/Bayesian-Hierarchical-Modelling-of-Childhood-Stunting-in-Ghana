@@ -25,7 +25,7 @@ The strengthened final Model 3 summaries are:
 - `tables/model3_final_8chain_sampler_diagnostics.csv`
 - `tables/model3_final_8chain_loo_summary.csv`
 
-Those are the files to check first if a manuscript number looks wrong.
+Those are the authoritative numerical files to check first if a manuscript number looks wrong. The exact chain-level posterior objects from the strengthened eight-chain run are not stored in the public repository; the locked aggregate summaries and diagnostics are version-controlled here.
 
 Earlier Model 1 and Model 2 summaries are retained because they show how the household/community variance structure changes as WASH and maternal education are added.
 
@@ -51,4 +51,4 @@ The main Bayesian figures include:
 - `figures/model_variance_comparison.svg`
 - `figures/model3_ppc_age.svg`
 
-All public figures are generated from aggregate outputs. No row-level DHS records are stored here.
+All public figures are generated from aggregate outputs. Run `python src/15_build_public_figures.py` from the repository root to rebuild the Bayesian forest, variance-comparison, and posterior-predictive figures directly from the locked tables. No row-level DHS records are stored here.
