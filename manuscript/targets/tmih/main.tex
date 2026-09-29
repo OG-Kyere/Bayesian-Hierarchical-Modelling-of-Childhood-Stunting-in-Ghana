@@ -46,7 +46,7 @@ We also test whether the main findings depend on choices that could reasonably b
 
 This was a cross-sectional secondary analysis of the Household Member Recode from the 2022 GDHS, accessed under authorization from The DHS Program. Fieldwork was conducted from October 2022 to January 2023. The GDHS used a stratified two-stage cluster sample \citep{GSSICF2024}. Children were eligible for this analysis if they were aged 0--59 months, had slept in the sampled household on the night before the interview (\texttt{hv103 = yes}), and had a valid height-for-age z-score in \texttt{hc70}.
 
-We defined stunting as height-for-age below $-2$ standard deviations from the WHO reference median, corresponding to \texttt{hc70 < -200} in the DHS recode. The resulting core sample contained 4,928 children in 3,545 households and 616 survey communities.
+We defined stunting as height-for-age below $-2$ standard deviations from the WHO reference median, corresponding to \texttt{hc70 < -200} in the DHS recode. The resulting core sample contained 4,928 children in 3,545 households and 616 survey communities. For the hierarchical models, community was operationalized as the DHS survey cluster (\texttt{hv001}), and households were uniquely identified by the combination of cluster and household identifiers (\texttt{hv001} and \texttt{hv002}).
 
 \subsection{Covariates}
 
@@ -148,7 +148,7 @@ Higher maternal education & 328 & 5.7 (2.4--8.9) \\
 
 Adding a household random intercept changed the interpretation of the clustering structure. In Model 1, the community SD had a posterior median of 0.416 (95\% posterior interval 0.159--0.590), while the household SD was 1.066 (0.774--1.346). On the latent scale, the community ICC was 0.038 and the household VPC was 0.246. The corresponding MORs were 1.49 and 2.76.
 
-The difference did not disappear in the fuller model. In the strengthened Model 3 run, the community SD was 0.389 and the household SD 1.234. The community ICC was 0.030, whereas the household VPC was 0.307. The MORs were 1.45 for communities and 3.24 for households. In other words, the broad household-versus-community contrast became, if anything, more apparent after the additional covariates were included.
+The difference did not disappear in the fuller model. In the strengthened Model 3 run, the community SD was 0.389 and the household SD 1.234. The community ICC was 0.030, whereas the household VPC was 0.307. The MORs were 1.45 for communities and 3.24 for households. The broad household-versus-community contrast remained clearly apparent after the additional covariates were included.
 
 \subsection{Fixed effects}
 
@@ -259,20 +259,13 @@ The author received no specific funding for this work.
 The author declares no conflict of interest.
 
 \section*{Author Contributions}
-Gideon Ofosu Kyere: Conceptualization; Data curation; Formal analysis; Investigation; Methodology; Software; Validation; Visualization; Writing -- original draft; Writing -- review \& editing; Project administration. The author list and contribution statement should be revisited if additional qualifying contributors are added before submission.
+Gideon Ofosu Kyere: Conceptualization; Data curation; Formal analysis; Investigation; Methodology; Software; Validation; Visualization; Writing -- original draft; Writing -- review \& editing; Project administration.
 
-\section*{Editorial Information (for submission only)}
-\noindent\textbf{Main-body word count:} approximately 2870 words.
+\section*{Word Count}
+Main body: approximately 2,900 words. Structured abstract: under 300 words.
 
-\noindent\textbf{Suggested reviewers:}
-\begin{enumerate}
-\item Justice Moses K. Aheto, University of Ghana School of Public Health --- \nolinkurl{jmkaheto@ug.edu.gh}
-\item Richmond N. O. Aryeetey, University of Ghana School of Public Health --- \nolinkurl{raryeetey@ug.edu.gh}
-\item Amos Laar, University of Ghana School of Public Health --- \nolinkurl{alaar@ug.edu.gh}
-\item Duah Dwomoh, University of Ghana School of Public Health --- \nolinkurl{duahdwomoh@ug.edu.gh}
-\item Fusta Azupogo, University for Development Studies --- \nolinkurl{fazupoko@uds.edu.gh}
-\end{enumerate}
-Reviewer suggestions are provisional and should be checked for recent collaboration, supervisory relationships, institutional conflicts, or other competing interests before submission.
+\section*{Supporting Information}
+Additional supporting information contains sample-validation and household-structure summaries, sampler and parameter diagnostics, variance summaries, prior and survey-weight sensitivity analyses, missing-data and age-functional-form sensitivity analyses, detailed WASH and GEE robustness checks, posterior predictive checks, and the PSIS-LOO comparison.
 
 \bibliographystyle{unsrtnat}
 \bibliography{../../../thesis/references}
