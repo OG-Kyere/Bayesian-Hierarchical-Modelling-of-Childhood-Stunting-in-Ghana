@@ -128,11 +128,13 @@ def main() -> int:
         failures.append("blinded manuscript does not have an empty \\author{} field")
 
     tmih_text = TMIH.read_text(encoding="utf-8")
-    if "Independent Researcher, Ghana" not in tmih_text:
-        failures.append("active TMIH manuscript is missing independent-researcher affiliation")
-    for token in ["KNUST", "Kwame Nkrumah", "Maternal & Child Nutrition"]:
-        if token.lower() in tmih_text.lower():
-            failures.append(f"active TMIH manuscript contains stale target/affiliation text: '{token}'")
+    canonical_affiliation = "Kwame Nkrumah University of Science and Technology, Kumasi-Ghana"
+    if canonical_affiliation not in tmih_text:
+        failures.append("active TMIH manuscript is missing the canonical KNUST affiliation")
+    if "Independent Researcher, Ghana" in tmih_text:
+        failures.append("active TMIH manuscript contains the superseded independent-researcher affiliation")
+    if "Maternal & Child Nutrition".lower() in tmih_text.lower():
+        failures.append("active TMIH manuscript contains stale target text: 'Maternal & Child Nutrition'")
 
     tmih_required = [
         "community was operationalized as the DHS survey cluster",
@@ -166,7 +168,7 @@ def main() -> int:
         if "2.5th percentile" in gee_block or "97.5th percentile" in gee_block:
             failures.append("TMIH GEE table incorrectly labels frequentist confidence limits as posterior percentiles")
 
-    for path in [TMIH, GENERIC, CONFIG, CITATION]:
+    for path in [TMIH, TMIH_SUPP, GENERIC, CONFIG, CITATION]:
         text = path.read_text(encoding="utf-8")
         if "Kyere Ofosu Gideon" in text:
             failures.append(f"{path.relative_to(ROOT)}: stale author-name order")
@@ -178,6 +180,11 @@ def main() -> int:
         failures.append("generic manuscript is missing confirmed author name")
     if "Gideon Ofosu Kyere" not in CONFIG.read_text(encoding="utf-8"):
         failures.append("thesis config is missing confirmed author name")
+
+    canonical_affiliation = "Kwame Nkrumah University of Science and Technology, Kumasi-Ghana"
+    for path in [TMIH, TMIH_SUPP, GENERIC, CONFIG]:
+        if canonical_affiliation not in path.read_text(encoding="utf-8"):
+            failures.append(f"{path.relative_to(ROOT)}: canonical KNUST affiliation is missing")
 
     citation_text = CITATION.read_text(encoding="utf-8")
     if 'given-names: "Gideon Ofosu"' not in citation_text:
