@@ -8,7 +8,7 @@ That is the thread the manuscript should keep.
 
 ## Files
 
-- `main.tex` — general manuscript version
+- `main.tex` — general manuscript source and canonical base for the standalone preprint
 - `supplement.tex` — diagnostics and sensitivity analyses
 - `results_snapshot.md` — locked numerical values used in the paper
 - `reviewer_objections.md` — questions a skeptical reviewer is likely to ask
@@ -54,3 +54,10 @@ The earlier MCN package is retained only as a provenance archive.
 The statistical analysis is complete. Do not rerun models, add covariates, add spatial analysis, replace the primary model, or modify locked numerical results merely for journal retargeting.
 
 The remaining work before submission is editorial and administrative: finalize correspondence details, funding/conflict declarations, the signed author statement, reviewer conflict screening, and the final rendered manuscript. The active paper is presented as independent research and does not claim an additional institutional ethics approval.
+
+
+## Preprint source
+
+The standalone preprint is built from the general manuscript content in `manuscript/main.tex`, with the same locked numerical results as the TMIH target. The preprint keeps the journal-independent scientific content, uses numerical Vancouver references, and should use the canonical affiliation **Kwame Nkrumah University of Science and Technology, Kumasi-Ghana**. Supplementary analyses remain in `manuscript/supplement.tex`.
+
+When a preprint DOI is assigned, record it in the root README and `CITATION.cff` rather than changing the locked numerical result files.
