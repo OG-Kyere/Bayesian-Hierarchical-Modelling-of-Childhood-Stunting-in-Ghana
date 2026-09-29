@@ -6,9 +6,9 @@ The statistical analysis is frozen. No model was rerun and no locked numerical r
 
 ## Files
 
-- `main.tex` — TMIH Research Article manuscript with structured abstract, IMRD structure, numerical references, data/ethics/AI declarations, and submission-only editorial information.
+- `main.tex` — TMIH Research Article manuscript with structured abstract, IMRD structure, numerical references, data/ethics/AI declarations, word count, and Supporting Information statement.
 - `supplement.tex` — existing locked sensitivity/diagnostic supplement with numerical-reference styling.
-- `title_page.md` — confirmed author metadata, funding/conflict declarations, ethics, data availability, and AI disclosure.
+- `title_page.md` — confirmed author metadata, funding/conflict declarations, ethics, data availability, AI disclosure, and current word count.
 - `cover_letter.md` — TMIH-specific cover letter.
 - `references_vancouver_check.md` — manual Vancouver-style cross-check for cited references.
 - `reviewer_suggestions.md` — five provisional reviewer suggestions to be conflict-screened before submission.
