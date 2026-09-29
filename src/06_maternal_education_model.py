@@ -9,6 +9,7 @@ bit-for-bit recipe for the locked strengthened eight-chain posterior used in
 the manuscript. See docs/locked_model3_result_provenance.md.
 """
 from pathlib import Path
+import argparse
 import numpy as np
 import pandas as pd
 import pymc as pm
@@ -74,7 +75,7 @@ def prepare_base(complete_maternal=False):
     return d, parts
 
 
-def fit_hierarchical(d, X, output_stem, seed=20260922):
+def fit_hierarchical(d, X, output_stem, seed=20260922, draws=1000, tune=1000, chains=4, target_accept=0.95):
     community_idx, communities = pd.factorize(d["hv001"], sort=True)
     household_idx, households = pd.factorize(d["household_id"], sort=True)
 
@@ -105,7 +106,7 @@ def fit_hierarchical(d, X, output_stem, seed=20260922):
         pm.Bernoulli("stunted", logit_p=eta, observed=d["stunted"].to_numpy(), dims="obs")
 
         idata = pm.sample(
-            draws=1000, tune=1000, chains=4, target_accept=0.95,
+            draws=draws, tune=tune, chains=chains, target_accept=target_accept,
             random_seed=seed, return_inferencedata=True,
             idata_kwargs={"log_likelihood": True},
         )
@@ -138,13 +139,39 @@ def fit_hierarchical(d, X, output_stem, seed=20260922):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--locked-schedule",
+        action="store_true",
+        help=(
+            "Run the manuscript's strengthened schedule: 8 chains, 500 warmup "
+            "and 500 retained draws per chain. This reconstructs the model "
+            "specification and schedule but is not a bit-for-bit replay of the "
+            "archived locked posterior object."
+        ),
+    )
+    args = parser.parse_args()
+
     d, parts = prepare_base(complete_maternal=True)
     maternal = pd.get_dummies(
         d["hc61"].astype(str), prefix="maternal_education", dtype=float
     ).drop(columns=["maternal_education_no education"])
     parts.append(maternal)
     X = pd.concat(parts, axis=1).astype(float)
-    fit_hierarchical(d, X, "model3_maternal_education", seed=20261322)
+
+    if args.locked_schedule:
+        fit_hierarchical(
+            d,
+            X,
+            "model3_maternal_education_locked_schedule_reproduction",
+            seed=20261322,
+            draws=500,
+            tune=500,
+            chains=8,
+            target_accept=0.95,
+        )
+    else:
+        fit_hierarchical(d, X, "model3_maternal_education", seed=20261322)
 
 
 if __name__ == "__main__":
