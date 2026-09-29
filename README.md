@@ -136,4 +136,4 @@ The analysis is still observational, so the reported odds ratios are interpreted
 
 A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. When the preprint receives a DOI, the repository citation and README should be updated to point to that public preprint record; after journal publication, the preferred citation should be updated again to the final article.
 
-No open-source license has been assigned yet. That is intentional; reuse rights should be chosen explicitly rather than assumed.
+The analysis software under `src/` is released under the MIT License (`src/LICENSE`). That license does not apply to restricted DHS microdata, manuscript text, journal-template assets, or other materials outside `src/`.
