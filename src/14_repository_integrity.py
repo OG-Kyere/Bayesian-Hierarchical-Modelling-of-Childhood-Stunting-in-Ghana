@@ -14,6 +14,7 @@ BLINDED = ROOT / "manuscript/targets/mcn/main_blinded.tex"
 TMIH = ROOT / "manuscript/targets/tmih/main.tex"
 TMIH_SUPP = ROOT / "manuscript/targets/tmih/supplement.tex"
 GENERIC = ROOT / "manuscript/main.tex"
+GENERIC_SUPP = ROOT / "manuscript/supplement.tex"
 CONFIG = ROOT / "thesis/config.tex"
 CITATION = ROOT / "CITATION.cff"
 
@@ -154,6 +155,7 @@ def main() -> int:
             failures.append(f"active TMIH manuscript contains stale editorial wording: '{stale}'")
 
     tmih_supp_text = TMIH_SUPP.read_text(encoding="utf-8")
+    generic_supp_text = GENERIC_SUPP.read_text(encoding="utf-8")
     for required in [
         "Lower 95\\% CI",
         "Upper 95\\% CI",
@@ -162,13 +164,22 @@ def main() -> int:
     ]:
         if required.lower() not in tmih_supp_text.lower():
             failures.append(f"TMIH supplement is missing required clarification: '{required}'")
+    for required in [
+        "Model 2 harmonized (same 4,503-child sample as Model 3)",
+        "commonly used 1.01 guideline",
+        "4,503-child complete-case Model 3 sample",
+        "distinct from the survey-weighted prevalence",
+    ]:
+        if required.lower() not in generic_supp_text.lower():
+            failures.append(f"generic supplement is missing required clarification: '{required}'")
+
     gee_start = tmih_supp_text.lower().find("selected independent gee robustness checks")
     if gee_start >= 0:
         gee_block = tmih_supp_text[gee_start:gee_start + 1200]
         if "2.5th percentile" in gee_block or "97.5th percentile" in gee_block:
             failures.append("TMIH GEE table incorrectly labels frequentist confidence limits as posterior percentiles")
 
-    for path in [TMIH, TMIH_SUPP, GENERIC, CONFIG, CITATION]:
+    for path in [TMIH, TMIH_SUPP, GENERIC, GENERIC_SUPP, CONFIG, CITATION]:
         text = path.read_text(encoding="utf-8")
         if "Kyere Ofosu Gideon" in text:
             failures.append(f"{path.relative_to(ROOT)}: stale author-name order")
@@ -182,7 +193,7 @@ def main() -> int:
         failures.append("thesis config is missing confirmed author name")
 
     canonical_affiliation = "Kwame Nkrumah University of Science and Technology, Kumasi-Ghana"
-    for path in [TMIH, TMIH_SUPP, GENERIC, CONFIG]:
+    for path in [TMIH, TMIH_SUPP, GENERIC, GENERIC_SUPP, CONFIG]:
         if canonical_affiliation not in path.read_text(encoding="utf-8"):
             failures.append(f"{path.relative_to(ROOT)}: canonical KNUST affiliation is missing")
 
