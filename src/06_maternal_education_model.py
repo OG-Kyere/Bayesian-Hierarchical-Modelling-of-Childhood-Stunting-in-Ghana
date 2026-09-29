@@ -140,7 +140,8 @@ def fit_hierarchical(d, X, output_stem, seed=20260922, draws=1000, tune=1000, ch
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
         "--locked-schedule",
         action="store_true",
         help=(
@@ -148,6 +149,16 @@ def main():
             "and 500 retained draws per chain. This reconstructs the model "
             "specification and schedule but is not a bit-for-bit replay of the "
             "archived locked posterior object."
+        ),
+    )
+    mode.add_argument(
+        "--convergence-run",
+        action="store_true",
+        help=(
+            "Run a longer 8-chain fit intended to strengthen Monte Carlo "
+            "precision of the household/community variance components: 1500 "
+            "warmup and 2000 retained draws per chain with target_accept=0.98. "
+            "This writes to a separate output and never overwrites locked results."
         ),
     )
     args = parser.parse_args()
@@ -169,6 +180,17 @@ def main():
             tune=500,
             chains=8,
             target_accept=0.95,
+        )
+    elif args.convergence_run:
+        fit_hierarchical(
+            d,
+            X,
+            "model3_maternal_education_convergence_run",
+            seed=20262922,
+            draws=2000,
+            tune=1500,
+            chains=8,
+            target_accept=0.98,
         )
     else:
         fit_hierarchical(d, X, "model3_maternal_education", seed=20261322)
