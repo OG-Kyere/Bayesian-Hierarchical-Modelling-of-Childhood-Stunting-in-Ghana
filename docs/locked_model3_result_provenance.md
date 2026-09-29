@@ -42,3 +42,14 @@ The CI consistency check in `src/13_public_output_consistency.py` verifies the m
 ## Interpretation boundary
 
 The locked values are conditional associations from a cross-sectional hierarchical model. They are not causal effects. Observation-level PSIS-LOO is conditional within the observed household/community hierarchy and is not a test of prediction for entirely new households or communities.
+
+
+## Convergence-strengthening option
+
+The locked manuscript values are not changed automatically. If a stricter variance-component convergence check is desired before or during peer review, run:
+
+```bash
+python src/06_maternal_education_model.py --convergence-run
+```
+
+This mode uses eight chains, 1,500 warmup iterations and 2,000 retained draws per chain with `target_accept=0.98`, and writes to a separate output stem. Its purpose is to assess whether the household/community SD \hat R values and effective sample sizes improve materially without silently replacing the locked manuscript result set. Any decision to re-lock results should be explicit and followed by the repository consistency checks.
