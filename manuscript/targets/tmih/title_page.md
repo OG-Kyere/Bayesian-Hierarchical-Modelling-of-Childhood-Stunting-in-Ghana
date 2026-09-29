@@ -8,7 +8,7 @@
 
 **Author:** Gideon Ofosu Kyere, BSc
 
-**Affiliation:** Independent Researcher, Ghana
+**Affiliation:** Kwame Nkrumah University of Science and Technology, Kumasi-Ghana
 
 **Corresponding author:** Gideon Ofosu Kyere
 
