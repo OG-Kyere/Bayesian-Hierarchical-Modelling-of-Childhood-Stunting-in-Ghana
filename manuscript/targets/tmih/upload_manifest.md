@@ -6,8 +6,8 @@ This is the working upload order for the current TMIH submission.
 
 1. **Primary manuscript**
    - Source: `main.tex`
-   - Contains title, author information, structured abstract, keywords, main text, data availability, funding/conflict placeholders, word count, and five suggested reviewers.
-   - Before upload: replace every bracketed placeholder and compile/render once.
+   - Contains title, author information, structured abstract, keywords, main text, data availability, confirmed funding/conflict declarations, word count, and Supporting Information statement.
+   - Before upload: compile/render once and confirm the final author list.
 
 2. **Supplementary material**
    - Source: `supplement.tex`
@@ -22,7 +22,7 @@ This is the working upload order for the current TMIH submission.
 
 4. **Cover letter**
    - Source: `cover_letter.md`
-   - Replace the email placeholder before submission; affiliation is set to Independent Researcher, Ghana.
+   - Corresponding email and affiliation are confirmed; review once before submission.
 
 5. **Reviewer suggestions**
    - Source: `reviewer_suggestions.md`
@@ -57,7 +57,7 @@ The manuscript currently embeds two SVG figures from the repository. For peer re
 - ethics wording matches the documented GDHS approvals and authorized secondary-data use;
 - author statement signed;
 - reviewer conflicts screened;
-- no bracketed placeholders remain;
+- no unresolved author/declaration placeholders remain;
 - no MCN-specific text remains in TMIH files;
 - locked results unchanged;
 - manuscript and supplement compile/render correctly;
