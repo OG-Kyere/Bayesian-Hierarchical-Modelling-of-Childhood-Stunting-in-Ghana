@@ -18,7 +18,7 @@
 
 **ORCID:** https://orcid.org/0009-0003-9848-8437
 
-**Main-body word count:** approximately 2870 words
+**Main-body word count:** approximately 3,100 words
 
 **Abstract word count:** under 300 words
 
