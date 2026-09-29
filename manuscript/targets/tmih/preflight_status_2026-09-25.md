@@ -1,8 +1,8 @@
-# TMIH preflight status — 27 September 2026
+# TMIH preflight status — 29 September 2026
 
 ## Current status
 
-The TMIH package is synchronized to the audited 27 September 2026 repository state. The statistical analysis remains locked; no model was rerun during this package update.
+The TMIH package is synchronized to the audited 29 September 2026 repository state. The statistical analysis remains locked; no model was rerun during this package update.
 
 ### Passed
 
@@ -11,7 +11,7 @@ The TMIH package is synchronized to the audited 27 September 2026 repository sta
 - no KNUST affiliation or unsupported institutional-ethics claim appears in the active submission files;
 - manuscript is a Research Article using IMRD structure;
 - structured abstract uses Objectives / Methods / Results / Conclusions and is below 300 words;
-- main body remains approximately 2,870 words;
+- main body remains approximately 3,100 words;
 - main paper contains two tables and two figures;
 - numerical/Vancouver reference target is configured;
 - correspondence email, postal address, and ORCID are confirmed;
