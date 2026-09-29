@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BIB = ROOT / "thesis/references.bib"
 BLINDED = ROOT / "manuscript/targets/mcn/main_blinded.tex"
 TMIH = ROOT / "manuscript/targets/tmih/main.tex"
+TMIH_SUPP = ROOT / "manuscript/targets/tmih/supplement.tex"
 GENERIC = ROOT / "manuscript/main.tex"
 CONFIG = ROOT / "thesis/config.tex"
 CITATION = ROOT / "CITATION.cff"
@@ -132,6 +133,38 @@ def main() -> int:
     for token in ["KNUST", "Kwame Nkrumah", "Maternal & Child Nutrition"]:
         if token.lower() in tmih_text.lower():
             failures.append(f"active TMIH manuscript contains stale target/affiliation text: '{token}'")
+
+    tmih_required = [
+        "community was operationalized as the DHS survey cluster",
+        "household-versus-community contrast remained clearly apparent",
+        "commonly used 1.01 guideline",
+    ]
+    for token in tmih_required:
+        if token.lower() not in tmih_text.lower():
+            failures.append(f"active TMIH manuscript is missing required clarification: '{token}'")
+
+    for stale in [
+        "became, if anything, more apparent",
+        "author list and contribution statement should be revisited",
+        "Editorial Information (for submission only)",
+    ]:
+        if stale.lower() in tmih_text.lower():
+            failures.append(f"active TMIH manuscript contains stale editorial wording: '{stale}'")
+
+    tmih_supp_text = TMIH_SUPP.read_text(encoding="utf-8")
+    for required in [
+        "Lower 95\\% CI",
+        "Upper 95\\% CI",
+        "Model 2 harmonized",
+        "commonly used 1.01 guideline",
+    ]:
+        if required.lower() not in tmih_supp_text.lower():
+            failures.append(f"TMIH supplement is missing required clarification: '{required}'")
+    gee_start = tmih_supp_text.lower().find("selected independent gee robustness checks")
+    if gee_start >= 0:
+        gee_block = tmih_supp_text[gee_start:gee_start + 1200]
+        if "2.5th percentile" in gee_block or "97.5th percentile" in gee_block:
+            failures.append("TMIH GEE table incorrectly labels frequentist confidence limits as posterior percentiles")
 
     for path in [TMIH, GENERIC, CONFIG, CITATION]:
         text = path.read_text(encoding="utf-8")
