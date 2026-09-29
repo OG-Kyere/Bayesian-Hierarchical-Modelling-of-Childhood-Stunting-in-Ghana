@@ -19,7 +19,15 @@ The final run used eight independent chains with 500 warmup and 500 retained dra
 
 The chain-level NetCDF posterior objects from the strengthened run are not committed to the public repository. The public repository therefore supports verification of the reported aggregate results and reconstruction of the model specification, but it should not be described as providing a bit-for-bit replay of the exact archived eight-chain posterior object.
 
-The model specification is encoded in the public PyMC scripts. A later four-chain local rerun reconstructed the analytic sample and reproduced the same substantive conclusions; that independent check is documented in `docs/local_reproduction_2026-09-24.md`.
+The model specification is encoded in the public PyMC scripts. The public Model 3 runner now also exposes the manuscript's strengthened sampling schedule:
+
+```bash
+python src/06_maternal_education_model.py --locked-schedule
+```
+
+That command uses eight chains with 500 warmup and 500 retained draws per chain and writes to a separate reproduction output stem. It reconstructs the model specification and sampling schedule without overwriting the locked aggregate files. Because the original chain-level posterior object and its exact random-number streams are not version-controlled, it should still not be described as a bit-for-bit replay of the archived locked posterior.
+
+A later four-chain local rerun reconstructed the analytic sample and reproduced the same substantive conclusions; that independent check is documented in `docs/local_reproduction_2026-09-24.md`.
 
 ## Figures and public summaries
 
