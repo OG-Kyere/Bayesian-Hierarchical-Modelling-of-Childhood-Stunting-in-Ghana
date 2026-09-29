@@ -1,5 +1,9 @@
 # Bayesian Hierarchical Modelling of Childhood Stunting in Ghana
 
+**Author:** Gideon Ofosu Kyere  
+**Affiliation:** Kwame Nkrumah University of Science and Technology, Kumasi-Ghana  
+**ORCID:** 0009-0003-9848-8437
+
 This project uses the 2022 Ghana Demographic and Health Survey (GDHS) to study childhood stunting in Ghana.
 
 I started with a question that became more important as the analysis developed: **how much of the unexplained variation in stunting is shared within households, and how much is shared at the community level?**
@@ -130,6 +134,6 @@ The analysis is still observational, so the reported odds ratios are interpreted
 
 ## Citation
 
-A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. The preferred citation will be updated to the final publication record once one is formally available.
+A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. When the preprint receives a DOI, the repository citation and README should be updated to point to that public preprint record; after journal publication, the preferred citation should be updated again to the final article.
 
 No open-source license has been assigned yet. That is intentional; reuse rights should be chosen explicitly rather than assumed.
