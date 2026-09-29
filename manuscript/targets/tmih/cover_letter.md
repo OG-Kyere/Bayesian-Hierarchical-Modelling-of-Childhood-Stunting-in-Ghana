@@ -19,5 +19,5 @@ Thank you for considering the manuscript.
 Sincerely,
 
 Gideon Ofosu Kyere, BSc  
-Independent Researcher, Ghana  
+Kwame Nkrumah University of Science and Technology, Kumasi-Ghana  
 kyereofosu2003@gmail.com
