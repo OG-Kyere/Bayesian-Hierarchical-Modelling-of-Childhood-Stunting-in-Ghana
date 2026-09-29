@@ -14,7 +14,7 @@
 ## Corresponding author
 **Name:** Gideon Ofosu Kyere  
 **Degree:** BSc  
-**Affiliation:** Independent Researcher, Ghana  
+**Affiliation:** Kwame Nkrumah University of Science and Technology, Kumasi-Ghana  
 **Postal address:** 47 Mempeasem ST, GA-485-2566  
 **Email:** kyereofosu2003@gmail.com  
 **ORCID:** https://orcid.org/0009-0003-9848-8437
