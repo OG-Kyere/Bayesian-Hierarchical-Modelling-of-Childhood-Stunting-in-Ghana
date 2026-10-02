@@ -14,6 +14,7 @@ The statistical analysis is frozen. No model was rerun and no locked numerical r
 - `reviewer_suggestions.md` — five provisional reviewer suggestions to be conflict-screened before submission.
 - `author_statement.md` — signature template reflecting TMIH/ICMJE authorship requirements.
 - `submission_checklist.md` — current requirement-by-requirement submission audit.
+- `preflight_status_2026-10-02.md` — latest editorial/diagnostic caveats and author-only actions; earlier dated preflight documents are retained as provenance.
 - `author_guidelines_snapshot.md` — dated record of the TMIH/Wiley rules used for this retarget.
 
 ## Locked interpretation
