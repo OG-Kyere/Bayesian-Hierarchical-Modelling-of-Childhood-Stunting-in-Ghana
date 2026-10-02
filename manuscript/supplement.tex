@@ -16,6 +16,10 @@
 \author{Gideon Ofosu Kyere\\\small Kwame Nkrumah University of Science and Technology, Kumasi-Ghana}
 \date{}
 
+% Supporting-information numbering
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
 \begin{document}
 \maketitle
 
@@ -50,7 +54,7 @@ Chain & Divergences & BFMI & Max tree depth & Mean acceptance \\
 \end{tabular}
 \end{table}
 
-No chain reached the configured maximum tree depth. Fixed effects had $\hat R$ values near 1.00 and large effective sample sizes. The community and household standard deviations remained slower-mixing, with $\hat R$ approximately 1.021 and 1.018 and bulk ESS approximately 544 and 524, respectively. Because the two variance-component $\hat R$ values remain above the commonly used 1.01 guideline, their exact interval endpoints should be interpreted more cautiously than the fixed-effect intervals; the household-versus-community ordering remained stable across the model sequence and sensitivity analyses.
+No chain reached the configured maximum tree depth. Fixed effects had $\hat R$ values near 1.00 and large effective sample sizes. The community and household standard deviations remained slower-mixing, with $\hat R$ approximately 1.021 and 1.018 and bulk ESS approximately 544 and 524, respectively. The variance-component $\hat R$ values exceed 1.01, so exact interval endpoints warrant caution. Because the two variance-component $\hat R$ values remain above the commonly used 1.01 guideline, their exact interval endpoints should be interpreted more cautiously than the fixed-effect intervals; the household-versus-community ordering remained stable across the model sequence and sensitivity analyses.
 
 \section{Variance decomposition}
 
