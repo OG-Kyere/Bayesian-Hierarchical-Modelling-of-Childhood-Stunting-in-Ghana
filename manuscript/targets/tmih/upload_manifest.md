@@ -46,7 +46,7 @@ This is the working upload order for the current TMIH submission.
 
 ## Figure handling
 
-The manuscript currently embeds two SVG figures from the repository. For peer review, Wiley accepts a broad range of standard figure formats; PDF is preferred for line-art style figures when practical. Before final upload, ensure each figure is readable at manuscript scale. If the portal requests separate figure files, export the two final figures to PDF without changing the plotted data.
+The standard LaTeX source currently embeds two SVG figures from the repository; the Wiley/Overleaf export uses compile-ready PDF versions of the same plots. For peer review, Wiley accepts a broad range of standard figure formats; PDF is preferred for line-art style figures when practical. Before final upload, ensure each figure is readable at manuscript scale. If the portal requests separate figure files, export the two final figures to PDF without changing the plotted data.
 
 ## Final checks immediately before submission
 
