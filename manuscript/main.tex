@@ -49,7 +49,7 @@ We also examine whether the main findings depend on modelling choices that could
 
 This was a cross-sectional secondary analysis of the Household Member Recode from the 2022 GDHS, accessed under authorization from The DHS Program. Fieldwork was conducted from October 2022 to January 2023. The GDHS used a stratified two-stage cluster sample \citep{GSSICF2024}. Children were eligible for this analysis if they were aged 0--59 months, had slept in the sampled household on the night before the interview (\texttt{hv103 = yes}), and had a valid height-for-age z-score in \texttt{hc70}.
 
-We defined stunting as height-for-age below $-2$ standard deviations from the WHO reference median, corresponding to \texttt{hc70 < -200} in the DHS recode. The resulting core sample contained 4,928 children in 3,545 households and 616 survey communities.
+We defined stunting as height-for-age below $-2$ standard deviations from the WHO reference median, corresponding to \texttt{hc70 < -200} in the DHS recode. The resulting core sample contained 4,928 children in 3,545 households and 616 survey communities. For the hierarchical models, community was operationalized as the DHS survey cluster (\texttt{hv001}), and households were uniquely identified by their cluster and household identifiers (\texttt{hv001}, \texttt{hv002}).
 
 \subsection{Covariates}
 
@@ -205,7 +205,7 @@ Household MOR & 3.24 & 2.45--4.32 \\
 
 \subsection{Diagnostics and sensitivity analyses}
 
-The strengthened Model 3 run produced no divergences. BFMI ranged from 0.51 to 0.66 across chains, and no chain saturated the tree depth. Fixed-effect convergence was strong: the largest $\hat R$ among the reported fixed effects was about 1.003, and bulk effective sample sizes exceeded 2,200. Mixing was slower for the two variance parameters. The community and household SDs had $\hat R$ values of about 1.021 and 1.018, with bulk ESS of about 544 and 524.
+The strengthened Model 3 run produced no divergences. BFMI ranged from 0.51 to 0.66 across chains, and no chain saturated the tree depth. Fixed-effect convergence was strong: the largest $\hat R$ among the reported fixed effects was about 1.003, and bulk effective sample sizes exceeded 2,200. Mixing was slower for the two variance parameters. The community and household SDs had $\hat R$ values of about 1.021 and 1.018, with bulk ESS of about 544 and 524. Both $\hat R$ values exceed the commonly used 1.01 guideline, so their exact interval endpoints warrant additional caution.
 
 The posterior predictive distribution reproduced the observed overall prevalence and the prevalence in each of the six age groups. Changing the functional form of age made little difference to the other main coefficients: in the spline-age model, the OR was 1.49 (1.12--2.00) for unimproved water, 0.37 (0.20--0.67) for higher maternal education, and 0.35 (0.19--0.61) for richest versus poorest.
 
