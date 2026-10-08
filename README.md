@@ -4,11 +4,11 @@
 **Affiliation:** Kwame Nkrumah University of Science and Technology, Kumasi-Ghana  
 **ORCID:** 0009-0003-9848-8437
 
-This project uses the 2022 Ghana Demographic and Health Survey (GDHS) to study childhood stunting in Ghana.
+This project uses the **2022 Ghana Demographic and Health Survey (GDHS)** to study childhood stunting through a three-level Bayesian model.
 
-I started with a question that became more important as the analysis developed: **how much of the unexplained variation in stunting is shared within households, and how much is shared at the community level?**
+The question that drove the work was simple: **after accounting for measured characteristics, how much of the remaining variation in stunting is shared within households, and how much is shared across communities?**
 
-That led to a three-level Bayesian logistic model with children nested within households and households nested within survey communities. I then extended the model to examine household water and sanitation conditions, maternal education, and the stability of the results under different modelling choices.
+That question led to a model with children nested within households and households nested within survey communities. I later extended the analysis to examine water and sanitation, maternal education, survey weighting, alternative age specifications, and prior sensitivity.
 
 ## Data
 
@@ -20,49 +20,49 @@ The core sample contains 4,928 children aged 0–59 months with valid height-for
 - 3,545 households
 - 616 survey communities
 
-The survey-weighted prevalence of stunting is 17.39%, which reproduces the published 2022 GDHS estimate.
+The survey-weighted prevalence of stunting is 17.39%, matching the published 2022 GDHS estimate.
 
-Raw DHS files are not included in this repository. They are restricted data and must be requested directly from [The DHS Program](https://dhsprogram.com/). The repository contains code, aggregate tables, figures, and other non-identifying outputs only.
+Raw DHS files are restricted and are not included in this repository. They must be requested directly from [The DHS Program](https://dhsprogram.com/). Only code, aggregate tables, figures, and other non-identifying outputs are stored here.
 
-## What I found
+## Main findings
 
-The main result is the difference between household and community heterogeneity.
+The clearest result is the contrast between household and community heterogeneity.
 
-Once both levels are included in the model, the household random effect is much larger than the community random effect. In the strengthened final model, the posterior median household SD is about 1.23 compared with 0.39 at the community level. This corresponds to a household VPC of about 0.31 and a community ICC of about 0.03.
+Once both levels are included, the household random effect is much larger than the community random effect. In the strengthened final model, the posterior median household SD is about 1.23, compared with 0.39 at the community level. That corresponds to a household VPC of about 0.31 and a community ICC of about 0.03.
 
-The household median odds ratio is about 3.24, compared with 1.45 for communities. I interpret this as evidence that a large amount of the remaining clustering in childhood stunting is shared within households rather than between survey communities.
+The household median odds ratio is about 3.24, versus 1.45 for communities. In practical terms, the remaining clustering in childhood stunting is much stronger within households than between survey communities.
 
-Some of the fixed-effect results are also quite stable across the different model specifications:
+Several fixed-effect estimates were also stable across model specifications:
 
-- boys have higher posterior odds of stunting than girls: OR 1.50 (95% posterior interval 1.24–1.82);
-- children aged 24–35 months have higher odds than children aged 0–5 months: OR 2.91 (2.06–4.21);
-- children in the richest households have lower odds than those in the poorest: OR 0.36 (0.20–0.64);
-- unimproved drinking-water source has OR 1.50 (1.15–1.99);
-- higher maternal education has OR 0.37 (0.20–0.65).
+- boys had higher posterior odds of stunting than girls: OR 1.50 (95% posterior interval 1.24–1.82);
+- children aged 24–35 months had higher odds than children aged 0–5 months: OR 2.91 (2.06–4.21);
+- children in the richest households had lower odds than those in the poorest: OR 0.36 (0.20–0.64);
+- unimproved drinking-water source had OR 1.50 (1.15–1.99);
+- higher maternal education had OR 0.37 (0.20–0.65).
 
-The sanitation estimate is weaker and more uncertain after adjustment: OR 1.12 (0.86–1.46).
+The sanitation estimate was weaker after adjustment: OR 1.12 (0.86–1.46).
 
-A more detailed WASH sensitivity analysis suggests that the water result is clearest for surface-water use. The water estimate also becomes less precise when survey weights are incorporated through a pseudo-posterior, so I treat that result more cautiously than the age, sex, wealth, and maternal-education results.
+A more detailed WASH sensitivity analysis suggested that the water association was clearest for surface-water use. The estimate also became less precise under the survey-weighted pseudo-posterior, so I treat the water result more cautiously than the age, sex, wealth, and maternal-education findings.
 
 ## Model checks
 
 The final Model 3 diagnostic run combines eight independent chains and 4,000 retained posterior draws.
 
-There were no divergences, BFMI ranged from 0.51 to 0.66, and none of the chains reached the maximum tree depth. The fixed effects mix well. The household and community standard deviations remain the slowest-mixing parameters, with R-hat values around 1.02, so their exact intervals should be read with a little more caution.
+There were no divergences, BFMI ranged from 0.51 to 0.66, and no chain reached the maximum tree depth. The fixed effects mixed well. Household and community standard deviations were slower to mix, with R-hat values around 1.02, so their exact intervals deserve a little more caution.
 
-Posterior predictive checks reproduce the observed overall stunting prevalence and the age-specific pattern well.
+Posterior predictive checks reproduced both the observed overall stunting prevalence and the age pattern well.
 
-I also checked whether the conclusions changed when I:
+I also checked whether the main conclusions changed when I:
 
 - used tighter or wider priors;
 - incorporated survey weights through a pseudo-posterior;
 - retained children with missing maternal education;
-- replaced the age groups with a spline;
+- replaced age groups with a spline;
 - used more detailed WASH categories.
 
-The broad conclusions remained similar. An independent GEE check also found substantially stronger residual dependence within households than within communities (working correlations about 0.154 and 0.024, respectively); these working correlations are used only as robustness diagnostics, not as Bayesian ICCs.
+The broad pattern remained similar. An independent GEE analysis also found much stronger residual dependence within households than within communities, with working correlations of about 0.154 and 0.024 respectively. These are used only as robustness diagnostics and should not be interpreted as Bayesian ICCs.
 
-A separate local reproducibility rerun is documented in `docs/local_reproduction_2026-09-24.md`. It reproduced the analytic sample and the main scientific pattern without replacing the stronger locked manuscript summaries.
+A separate local rerun is documented in `docs/local_reproduction_2026-09-24.md`. It reproduced the analytic sample and the main scientific pattern without replacing the stronger locked manuscript summaries.
 
 ## Figures
 
@@ -101,39 +101,38 @@ thesis/              LaTeX long-form report files
 manuscript/          journal manuscript and supplementary material
 ```
 
-A few useful starting points are:
+Useful starting points:
 
-- `src/02_descriptive_analysis.py` — survey-weighted descriptive analysis;
-- `src/04_household_community_model.py` — household + community model;
-- `src/05_wash_model.py` — WASH extension;
-- `src/06_maternal_education_model.py` — maternal-education extension;
-- `src/10_final_production_diagnostics.py` — MCMC diagnostics;
-- `results/tables/model3_final_8chain_key_or.csv` — key final-model odds ratios;
-- `results/tables/model3_final_8chain_variance_summary.csv` — household/community variance results.
+- `src/02_descriptive_analysis.py` — survey-weighted descriptive analysis
+- `src/04_household_community_model.py` — household + community model
+- `src/05_wash_model.py` — WASH extension
+- `src/06_maternal_education_model.py` — maternal-education extension
+- `src/10_final_production_diagnostics.py` — MCMC diagnostics
+- `results/tables/model3_final_8chain_key_or.csv` — key final-model odds ratios
+- `results/tables/model3_final_8chain_variance_summary.csv` — household/community variance results
 
 ## Reproducing the analysis
 
-After obtaining authorized access to the GDHS data, place the required PR recode file under:
+After obtaining authorized GDHS access, place the required PR recode file at:
 
 ```text
 data/raw/GHPR8CFL.DTA
 ```
 
-Then install the Python dependencies in `requirements.txt` and run the analysis scripts in numerical order.
+Install the dependencies in `requirements.txt`, then run the analysis scripts in numerical order.
 
-The exact sandbox environment used for the strengthened diagnostic work is documented in `docs/executed_environment_2026-09-23.md`. Because that environment required a PyMC/ArviZ compatibility workaround, `requirements.txt` is the preferred starting point for a clean rerun.
+The environment used for the strengthened diagnostic work is documented in `docs/executed_environment_2026-09-23.md`. Because that environment needed a PyMC/ArviZ compatibility workaround, `requirements.txt` is the better starting point for a clean rerun.
 
 ## Long-form report and manuscript
 
 The repository contains both a long-form research report and a shorter journal manuscript.
 
-The manuscript focuses on the part of the project I think is most useful: separating household and community heterogeneity rather than presenting another list of factors associated with stunting.
+The manuscript centers on the part of the project I find most informative: separating household and community heterogeneity rather than presenting another list of factors associated with stunting.
 
-The analysis is still observational, so the reported odds ratios are interpreted as associations rather than causal effects.
-
+The study is observational, so all odds ratios are interpreted as associations rather than causal effects.
 
 ## Citation
 
-A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. When the preprint receives a DOI, the repository citation and README should be updated to point to that public preprint record; after journal publication, the preferred citation should be updated again to the final article.
+A `CITATION.cff` file is included so GitHub can generate citation metadata for the repository. When the preprint receives a DOI, the repository citation and README should be updated to point to that public record. After journal publication, the preferred citation should be updated again to the final article.
 
 The analysis software under `src/` is released under the MIT License (`src/LICENSE`). That license does not apply to restricted DHS microdata, manuscript text, journal-template assets, or other materials outside `src/`.
