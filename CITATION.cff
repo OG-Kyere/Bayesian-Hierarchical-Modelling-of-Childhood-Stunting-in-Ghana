@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this repository or its analysis, please cite the associated manuscript or publication when available."
+message: "If you use this repository or its analysis, please cite the Research Square preprint in the preferred-citation entry."
 title: "Bayesian Hierarchical Modelling of Childhood Stunting in Ghana"
 type: software
 authors:
@@ -18,3 +18,16 @@ keywords:
   - multilevel analysis
   - WASH
 license: "NOASSERTION"
+
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Kyere"
+      given-names: "Gideon Ofosu"
+      orcid: "https://orcid.org/0009-0003-9848-8437"
+      affiliation: "Kwame Nkrumah University of Science and Technology, Kumasi-Ghana"
+  title: "Household and Community Heterogeneity in Childhood Stunting in Ghana"
+  year: 2026
+  journal: "Research Square"
+  doi: "10.21203/rs.3.rs-11224582/v1"
+  url: "https://doi.org/10.21203/rs.3.rs-11224582/v1"
