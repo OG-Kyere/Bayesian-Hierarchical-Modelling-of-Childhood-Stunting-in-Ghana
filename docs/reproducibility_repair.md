@@ -2,6 +2,8 @@
 
 This is a retrospective repair after exploratory analysis, not a preregistration.
 
+The [9 October branch reconciliation](validation_reconciliation_2026-10-09.md) distinguishes this draft protocol from later results on main. Audit existing saved posteriors with `src/posterior_audit.py` before deciding on any new sampling. Later selected-parameter PASS reports do not certify this joint-posterior gate.
+
 ## Scientific target
 
 Estimate conditional associations and residual household/community heterogeneity in nonspatial Bayesian logistic models of childhood stunting in the 2022 Ghana DHS. The primary heterogeneity estimand is the posterior distribution of `tau_household - tau_community`, with its 95% equal-tail interval and posterior probability of being positive. These are latent-scale model quantities, not causal effects or population shares of binary-outcome variance.

@@ -81,23 +81,8 @@ def write_json(path, obj):
 
 
 def diagnostics(idata, max_depth):
-    import arviz as az
-    # Include latent effects, not only selected scientific coefficients.
-    diag = az.summary(idata, kind='diagnostics', round_to='none')
-    bfmi = np.asarray(az.bfmi(idata))
-    stats = idata.sample_stats
-    depth_name = next((x for x in ['tree_depth', 'depth'] if x in stats), None)
-    hits = int((stats[depth_name] >= max_depth).sum()) if depth_name else None
-    metrics = dict(chains=int(idata.posterior.sizes['chain']), draws_per_chain=int(idata.posterior.sizes['draw']),
-        divergences=int(stats.diverging.sum()), max_rhat=float(diag.r_hat.max()),
-        min_bulk_ess=float(diag.ess_bulk.min()), min_tail_ess=float(diag.ess_tail.min()),
-        min_bfmi=float(bfmi.min()), max_depth_hits=hits)
-    finite = np.isfinite(diag[['r_hat','ess_bulk','ess_tail']].to_numpy()).all()
-    passed = bool(finite and metrics['chains'] >= 4 and metrics['max_rhat'] < 1.01
-        and metrics['min_bulk_ess'] >= 400 and metrics['min_tail_ess'] >= 400
-        and metrics['divergences'] == 0 and metrics['min_bfmi'] >= .3 and hits == 0)
-    metrics['diagnostic_gate_passed'] = passed
-    return diag, metrics
+    from posterior_audit import diagnostics as audit
+    return audit(idata, max_depth)
 
 
 def posterior_tables(idata, out, spec):
@@ -266,7 +251,7 @@ def main(argv=None):
     write_json(out/'manifest.json',manifest)
     diag,metrics=diagnostics(idata,args.max_treedepth)
     diag.to_csv(private/'all_parameter_diagnostics.csv')
-    diag.loc[~diag.index.str.startswith('z_')].to_csv(out/'scientific_parameter_diagnostics.csv')
+    diag.loc[~diag.index.str.startswith(('z_', 'u_'))].to_csv(out/'scientific_parameter_diagnostics.csv')
     posterior_tables(idata,out,spec)
     add_predictive_arrays(idata,d,X,spec,args.seed+10000)
     aggregate_ppc(idata,d,out)
