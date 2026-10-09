@@ -212,6 +212,15 @@ def main() -> int:
         text = path.read_text(encoding='utf-8')
         for required in ['seven', 'reproduction', 'inconclusive', 'provisional', 'No saved missing-maternal-education fit']:
             expect_in(text, required, f'{path}: full-posterior interpretation', failures)
+    for path in [ROOT / 'manuscript/supplement.tex', ROOT / 'manuscript/targets/tmih/supplement.tex']:
+        text = path.read_text(encoding='utf-8')
+        if text.count(r'\begin{table}') != 12 or text.count(r'\begin{figure}') != 9:
+            failures.append(f'{path}: preserve the original 11 tables/9 figures and add audit Table S12')
+        for required in ['stunting_by_sex', 'stunting_by_residence',
+                         'Prior-sensitivity summaries', 'Survey-weight pseudo-posterior sensitivity',
+                         'Full-sample missing-maternal-education sensitivity',
+                         'Selected independent GEE robustness checks', 'observation-level PSIS-LOO comparison']:
+            expect_in(text, required, f'{path}: original supporting content', failures)
 
     male = find_row(key, "term", "male")
     age = find_row(key, "term", "age_24-35")
