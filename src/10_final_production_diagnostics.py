@@ -18,6 +18,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import arviz as az
+from posterior_audit import diagnostics
 
 OUT = Path("results/model_outputs")
 TABLES = Path("results/tables")
@@ -28,6 +29,11 @@ MODELS = {
     "model2_full": OUT / "model2_wash_full.nc",
     "model2_harmonized": OUT / "model2_wash_harmonized.nc",
     "model3": OUT / "model3_maternal_education.nc",
+    "age_spline": OUT / "model3_age_spline_sensitivity.nc",
+    "detailed_wash": OUT / "model3_detailed_wash_sensitivity.nc",
+    "prior_tight": OUT / "model3_prior_tight.nc",
+    "prior_wide": OUT / "model3_prior_wide.nc",
+    "weighted": OUT / "model3_weighted_sensitivity.nc",
 }
 
 
@@ -43,16 +49,9 @@ def _max_treedepth_hits(sample_stats):
 def summarize_model(name, path):
     idata = az.from_netcdf(path)
 
-    vars_present = [
-        v for v in ["alpha", "beta", "tau_community", "tau_household"]
-        if v in idata.posterior
-    ]
-    summary = az.summary(
-        idata,
-        var_names=vars_present,
-        kind="diagnostics",
-        round_to=None,
-    )
+    # Strict, unrounded joint audit includes all latent/scaled effects and
+    # reconstructed scientific variance quantities. Missing evidence cannot pass.
+    summary, audit = diagnostics(idata)
 
     row = {
         "model": name,
@@ -65,6 +64,10 @@ def summarize_model(name, path):
         "max_rhat": float(summary["r_hat"].max()),
         "min_ess_bulk": float(summary["ess_bulk"].min()),
         "min_ess_tail": float(summary["ess_tail"].min()),
+        "chains": audit["chains"],
+        "parameters_checked": audit["parameters_checked"],
+        "nonfinite_parameter_diagnostics": audit["nonfinite_parameter_diagnostics"],
+        "audit_status": audit["status"],
     }
 
     try:
@@ -85,7 +88,7 @@ def summarize_model(name, path):
     row["max_tree_depth_hits"] = hits
     row["fraction_reached_max_tree_depth"] = hit_fraction
 
-    if "log_likelihood" in idata.groups():
+    if audit["diagnostic_gate_passed"] and "log_likelihood" in idata.groups():
         loo = az.loo(idata, pointwise=True)
         k = np.asarray(loo.pareto_k, dtype=float)
         row["elpd_loo"] = float(loo.elpd_loo)
@@ -101,30 +104,24 @@ def summarize_model(name, path):
         row["pareto_k_gt_1"] = np.nan
 
     # Keep MCMC convergence separate from predictive-importance diagnostics.
-    sampler_review = (
-        row["divergences"] != 0
-        or row["max_rhat"] > 1.01
-        or row["min_ess_bulk"] < 400
-        or row["min_ess_tail"] < 400
-        or (not np.isnan(row["min_bfmi"]) and row["min_bfmi"] < 0.3)
-        or (not np.isnan(row["max_tree_depth_hits"]) and row["max_tree_depth_hits"] > 0)
-    )
-    row["sampling_status"] = "REVIEW" if sampler_review else "PASS"
+    sampler_review = not audit["diagnostic_gate_passed"]
+    row["sampling_status"] = "REVIEW" if sampler_review else "PASS_PENDING_SCIENTIFIC_REVIEW"
 
     if np.isnan(row["pareto_k_gt_0_7"]):
-        row["loo_status"] = "NOT_AVAILABLE"
+        row["loo_status"] = "SKIPPED_DIAGNOSTIC_GATE" if sampler_review else "NOT_AVAILABLE"
     elif row["pareto_k_gt_0_7"] > 0:
         row["loo_status"] = "REVIEW"
     else:
         row["loo_status"] = "PASS"
 
-    if row["sampling_status"] == "PASS" and row["loo_status"] == "REVIEW":
-        row["diagnostic_status"] = "PASS_SAMPLING_LOO_REVIEW"
+    if not sampler_review and row["loo_status"] == "REVIEW":
+        row["diagnostic_status"] = "PASS_SAMPLING_LOO_REVIEW_PENDING_SCIENTIFIC_REVIEW"
     elif row["sampling_status"] == "REVIEW":
         row["diagnostic_status"] = "SAMPLING_REVIEW"
     else:
-        row["diagnostic_status"] = "PASS"
+        row["diagnostic_status"] = "PASS_PENDING_SCIENTIFIC_REVIEW"
 
+    idata.close()
     return row
 
 

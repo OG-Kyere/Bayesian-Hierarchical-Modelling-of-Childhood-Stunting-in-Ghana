@@ -24,15 +24,19 @@ The survey-weighted prevalence of stunting is 17.39%, matching the published 202
 
 Raw DHS files are restricted and are not included in this repository. They must be requested directly from [The DHS Program](https://dhsprogram.com/). Only code, aggregate tables, figures, and other non-identifying outputs are stored here.
 
-## Main findings
+## Evidence update — 9 October 2026
 
-The clearest result is the contrast between household and community heterogeneity.
+All 41 descriptive rows were independently reproduced. A full-parameter audit of nine separate four-chain reproduction fits passed the strict numerical screen for local Model 3 and survey weighting only; seven fits failed R-hat below 1.01 when latent and derived parameters were included. The retained eight-chain Model 3 variance scales also exceed 1.01. The Bayesian estimates below remain exploratory, and robustness across the full sensitivity sequence is not yet established. See [revision and validation record](docs/preprint_revision_2026-10-09.md) and [aggregate full-posterior diagnostics](results/tables/local_full_posterior_audit_2026-10-09.csv).
+
+## Exploratory Bayesian summaries
+
+The stored model summaries suggest a contrast between household and community heterogeneity; full validation of that contrast remains unfinished.
 
 Once both levels are included, the household random effect is much larger than the community random effect. In the strengthened final model, the posterior median household SD is about 1.23, compared with 0.39 at the community level. That corresponds to a household VPC of about 0.31 and a community ICC of about 0.03.
 
 The household median odds ratio is about 3.24, versus 1.45 for communities. In practical terms, the remaining clustering in childhood stunting is much stronger within households than between survey communities.
 
-Several fixed-effect estimates were also stable across model specifications:
+Selected exploratory fixed-effect summaries were similar across several specifications:
 
 - boys had higher posterior odds of stunting than girls: OR 1.50 (95% posterior interval 1.24–1.82);
 - children aged 24–35 months had higher odds than children aged 0–5 months: OR 2.91 (2.06–4.21);
@@ -48,7 +52,7 @@ A more detailed WASH sensitivity analysis suggested that the water association w
 
 The final Model 3 diagnostic run combines eight independent chains and 4,000 retained posterior draws.
 
-There were no divergences, BFMI ranged from 0.51 to 0.66, and no chain reached the maximum tree depth. The fixed effects mixed well. Household and community standard deviations were slower to mix, with R-hat values around 1.02, so their exact intervals deserve a little more caution.
+There were no divergences, BFMI ranged from 0.51 to 0.66, and no chain reached the maximum tree depth. The fixed effects mixed well. The locked household and community SD R-hat values are approximately 1.018 and 1.021, respectively. They fail the strict below-1.01 rule; the resulting variance inferences remain provisional, rather than merely requiring caution about interval endpoints.
 
 Posterior predictive checks reproduced both the observed overall stunting prevalence and the age pattern well.
 
@@ -60,7 +64,7 @@ I also checked whether the main conclusions changed when I:
 - replaced age groups with a spline;
 - used more detailed WASH categories.
 
-The broad pattern remained similar. An independent GEE analysis also found much stronger residual dependence within households than within communities, with working correlations of about 0.154 and 0.024 respectively. These are used only as robustness diagnostics and should not be interpreted as Bayesian ICCs.
+The stored pattern was similar, but this is not a fully validated robustness result. An independent GEE analysis also found much stronger residual dependence within households than within communities, with working correlations of about 0.154 and 0.024 respectively. These are used only as robustness diagnostics and should not be interpreted as Bayesian ICCs.
 
 A separate local rerun is documented in `docs/local_reproduction_2026-09-24.md`. It reproduced the analytic sample and the main scientific pattern without replacing the stronger locked manuscript summaries.
 

@@ -12,6 +12,7 @@ data/derived/
 *.pkl
 *.pickle
 *.joblib
+results/model_outputs/
 
 # Python
 __pycache__/
