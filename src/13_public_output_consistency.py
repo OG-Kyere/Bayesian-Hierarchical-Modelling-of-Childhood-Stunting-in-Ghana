@@ -187,6 +187,41 @@ def main() -> int:
     desc = read_csv(DESC)
     failures: list[str] = []
 
+    # A selected-parameter summary cannot certify a full hierarchical posterior.
+    audit = read_csv(TABLES / 'local_full_posterior_audit_2026-10-09.csv')
+    if len(audit) != 9:
+        failures.append('full-posterior audit must identify the nine reviewed reproduction fits')
+    passing = []
+    for row in audit:
+        values = [float(row[k]) for k in ('max_rhat', 'min_bulk_ess', 'min_tail_ess', 'min_bfmi')]
+        passed = (all(math.isfinite(x) for x in values)
+                  and int(row['chains']) >= 4 and values[0] < 1.01
+                  and values[1] >= 400 and values[2] >= 400 and values[3] >= .3
+                  and int(row['divergences']) == 0 and int(row['max_depth_hits']) == 0)
+        if passed:
+            passing.append(row['model'])
+        expected = 'PASS_PENDING_SCIENTIFIC_REVIEW' if passed else 'FAIL'
+        if row['status'] != expected:
+            failures.append(f"full-posterior audit: {row['model']} has an inconsistent screen status")
+        for path in [ROOT / 'manuscript/supplement.tex', ROOT / 'manuscript/targets/tmih/supplement.tex']:
+            expect_in(path.read_text(encoding='utf-8'), f"{values[0]:.6f}",
+                      f'{path}: full-posterior R-hat table', failures)
+    if set(passing) != {'Model 3', 'Survey-weight sensitivity'}:
+        failures.append('update manuscript/supplement claims: the numerical passing-fit set has changed')
+    for path in [ROOT / 'manuscript/main.tex', ROOT / 'manuscript/targets/tmih/main.tex']:
+        text = path.read_text(encoding='utf-8')
+        for required in ['seven', 'reproduction', 'inconclusive', 'provisional', 'No saved missing-maternal-education fit']:
+            expect_in(text, required, f'{path}: full-posterior interpretation', failures)
+    for path in [ROOT / 'manuscript/supplement.tex', ROOT / 'manuscript/targets/tmih/supplement.tex']:
+        text = path.read_text(encoding='utf-8')
+        if text.count(r'\begin{table}') != 12 or text.count(r'\begin{figure}') != 9:
+            failures.append(f'{path}: preserve the original 11 tables/9 figures and add audit Table S12')
+        for required in ['stunting_by_sex', 'stunting_by_residence',
+                         'Prior-sensitivity summaries', 'Survey-weight pseudo-posterior sensitivity',
+                         'Full-sample missing-maternal-education sensitivity',
+                         'Selected independent GEE robustness checks', 'observation-level PSIS-LOO comparison']:
+            expect_in(text, required, f'{path}: original supporting content', failures)
+
     male = find_row(key, "term", "male")
     age = find_row(key, "term", "age_24-35")
     wealth = find_row(key, "term", "wealth_richest")

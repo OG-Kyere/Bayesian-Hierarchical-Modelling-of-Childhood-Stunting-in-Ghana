@@ -13,8 +13,8 @@
 \svgpath{{../results/figures/}}
 
 \title{Supplementary Material: Household and Community Heterogeneity in Childhood Stunting in Ghana}
-\author{Gideon Ofosu Kyere\\\small Kwame Nkrumah University of Science and Technology, Kumasi-Ghana}
-\date{}
+\author{Gideon Ofosu Kyere\\\small Kwame Nkrumah University of Science and Technology, Kumasi-Ghana\\\small ORCID: 0009-0003-9848-8437}
+\date{Preprint revision --- 9 October 2026}
 
 % Supporting-information numbering
 \renewcommand{\thetable}{S\arabic{table}}
@@ -54,13 +54,13 @@ Chain & Divergences & BFMI & Max tree depth & Mean acceptance \\
 \end{tabular}
 \end{table}
 
-No chain reached the configured maximum tree depth. Fixed effects had $\hat R$ values near 1.00 and large effective sample sizes. The community and household standard deviations remained slower-mixing, with $\hat R$ approximately 1.021 and 1.018 and bulk ESS approximately 544 and 524, respectively. The variance-component $\hat R$ values exceed 1.01, so exact interval endpoints warrant caution. Because the two variance-component $\hat R$ values remain above the commonly used 1.01 guideline, their exact interval endpoints should be interpreted more cautiously than the fixed-effect intervals; the household-versus-community ordering remained stable across the model sequence and sensitivity analyses.
+No chain reached the configured maximum tree depth. Selected fixed-effect diagnostics were close to 1.00, but the locked community and household SDs had $\hat R$ approximately 1.021 and 1.018 and bulk ESS approximately 544 and 524. Both exceed the commonly used 1.01 guideline, so the locked fit does not meet the strict joint-posterior screen. The stored household-versus-community pattern remains exploratory; this is a limitation on validated inference, not only on exact interval endpoints. The separate reproduction audit below does not replace or certify this eight-chain posterior.
 
 \section{Variance decomposition}
 
 \begin{table}[H]
 \centering
-\caption{Posterior variance summaries from the strengthened Model 3 run}
+\caption{Retained exploratory variance summaries from the locked eight-chain Model 3}
 \begin{tabular}{lrrr}
 \toprule
 Quantity & Median & 2.5th percentile & 97.5th percentile \\
@@ -78,19 +78,82 @@ Household MOR & 3.24 & 2.45 & 4.32 \\
 
 \section{Prior sensitivity}
 
-The main fixed-effect estimates changed little under tighter and wider weakly regularizing priors. The posterior median OR for unimproved water was about 1.48 under both alternatives, compared with 1.50 in the primary model. For higher maternal education, the corresponding ORs were about 0.44 under the tighter prior, 0.37 in the strengthened primary run, and 0.35 under the wider prior.
+Historical selected fixed-effect summaries were similar under tighter and wider weakly regularizing priors, but both saved reproduction fits failed the strict full-parameter screen. These comparisons remain exploratory. The posterior median OR for unimproved water was about 1.48 under both alternatives, compared with 1.50 in the primary model. For higher maternal education, the corresponding ORs were about 0.44 under the tighter prior, 0.37 in the strengthened primary run, and 0.35 under the wider prior.
+
+
+\begin{table}[H]
+\centering
+\caption{Prior-sensitivity summaries for selected fixed effects}
+\small
+\begin{tabular}{llrrr}
+\toprule
+Prior & Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Tighter & Male vs female & 1.45 & 1.21 & 1.76 \\
+Tighter & Unimproved water & 1.48 & 1.14 & 1.88 \\
+Tighter & Unimproved sanitation & 1.15 & 0.91 & 1.47 \\
+Tighter & Higher maternal education vs none & 0.44 & 0.26 & 0.70 \\
+Wider & Male vs female & 1.52 & 1.25 & 1.85 \\
+Wider & Unimproved water & 1.48 & 1.12 & 2.06 \\
+Wider & Unimproved sanitation & 1.10 & 0.84 & 1.43 \\
+Wider & Higher maternal education vs none & 0.35 & 0.18 & 0.66 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\textwidth}\footnotesize \textit{Note.} Retained historical summaries; both available prior reproduction fits fail the strict full-parameter screen.\end{minipage}
+\end{table}
 
 \section{Survey-weight sensitivity}
 
 For the survey-weight sensitivity analysis, DHS household-member weights were rescaled to have mean one and then used to weight the Bernoulli log-likelihood contributions. The water estimate became less precise (OR 1.38, 95\% posterior interval 0.90--2.07), although the posterior probability that its coefficient was positive remained about 0.94. The directions of the sex, age, richest-versus-poorest wealth, and higher maternal-education estimates were unchanged.
 
+
+\begin{table}[H]
+\centering
+\caption{Survey-weight pseudo-posterior sensitivity}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Male vs female & 1.53 & 1.22 & 1.97 \\
+Age 24--35 vs 0--5 months & 3.45 & 2.20 & 5.38 \\
+Richest vs poorest & 0.30 & 0.16 & 0.61 \\
+Unimproved water & 1.38 & 0.90 & 2.07 \\
+Unimproved sanitation & 1.14 & 0.82 & 1.65 \\
+Higher maternal education vs none & 0.31 & 0.15 & 0.61 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\textwidth}\footnotesize \textit{Note.} These historical estimates are retained from Version 1. The separately audited local weighted fit passes the numerical screen but is not substituted for this table.\end{minipage}
+\end{table}
+
 \section{Missing maternal-education sensitivity}
 
-A full-sample sensitivity model retained all 4,928 children by treating missing maternal education as a separate category. The main pattern was similar: unimproved water OR 1.35 (1.01--1.74), higher maternal education OR 0.38 (0.22--0.63), and a much less precise estimate for the missing-education category, OR 1.11 (0.80--1.53).
+A historical full-sample sensitivity model retained all 4,928 children by treating missing maternal education as a separate category. Its saved posterior was not among the nine audited files, so its joint diagnostics remain unverified. The main pattern was similar: unimproved water OR 1.35 (1.01--1.74), higher maternal education OR 0.38 (0.22--0.63), and a much less precise estimate for the missing-education category, OR 1.11 (0.80--1.53).
+
+
+\begin{table}[H]
+\centering
+\caption{Full-sample missing-maternal-education sensitivity}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Comparison & Median OR & 2.5th percentile & 97.5th percentile \\
+\midrule
+Male vs female & 1.44 & 1.21 & 1.70 \\
+Age 24--35 vs 0--5 months & 2.90 & 2.11 & 4.10 \\
+Richest vs poorest & 0.39 & 0.24 & 0.66 \\
+Unimproved water & 1.35 & 1.01 & 1.74 \\
+Unimproved sanitation & 1.15 & 0.90 & 1.48 \\
+Missing maternal education vs none & 1.11 & 0.80 & 1.53 \\
+Higher maternal education vs none & 0.38 & 0.22 & 0.63 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\textwidth}\footnotesize \textit{Note.} Retained historical summaries. A saved posterior for this sensitivity was unavailable for the new full-parameter audit.\end{minipage}
+\end{table}
 
 \section{Age functional-form sensitivity}
 
-Replacing the six age categories with a cubic B-spline had little effect on the main estimates:
+The historical cubic B-spline summaries were similar to the categorical-age estimates, but the saved spline reproduction fit failed the strict joint screen. The following values remain exploratory:
 
 \begin{table}[H]
 \centering
@@ -132,11 +195,50 @@ As an independent check, we fitted logistic generalized estimating equation (GEE
 
 The GEE fixed-effect estimates were similar to the Bayesian sensitivity results. In the binary-WASH specification, unimproved water had OR 1.40 (1.12--1.74). Replacing categorical age with a cubic spline gave OR 1.39 (1.12--1.74). With detailed WASH coding, surface water had OR 1.43 (1.12--1.83), while the estimate for unprotected groundwater was less precise at OR 1.34 (0.93--1.94).
 
+\begin{table}[H]
+\centering
+\caption{Selected independent GEE robustness checks}
+\label{tab:gee_checks}
+\begin{tabular}{lrrr}
+\toprule
+Specification / comparison & OR & Lower 95\% CI & Upper 95\% CI \\
+\midrule
+Binary WASH: unimproved water & 1.40 & 1.12 & 1.74 \\
+Spline age: unimproved water & 1.39 & 1.12 & 1.74 \\
+Detailed WASH: surface water & 1.43 & 1.12 & 1.83 \\
+Detailed WASH: unprotected groundwater & 1.34 & 0.93 & 1.94 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Predictive checks and PSIS-LOO}
 
-Posterior predictive checks reproduced the unweighted prevalence pattern in the 4,503-child complete-case Model 3 sample, both overall and across age groups. These PPC values are not the same quantity as the survey-weighted prevalence reported for the 4,928-child descriptive sample. For the strengthened Model 3 run, PSIS-LOO gave ELPD $-2011.47$, with maximum Pareto $k=0.69$ and no observations above 0.70. Harmonized Model 2 had five observations above Pareto $k=0.70$ and none above one. The ELPD difference favouring Model 3 was 0.92 with SE 3.38, so the two models were predictively similar at the observation level.
+Posterior predictive checks reproduced the unweighted prevalence pattern in the 4,503-child complete-case Model 3 sample, both overall and across age groups. These PPC values are not the same quantity as the survey-weighted prevalence reported for the 4,928-child descriptive sample. For the strengthened Model 3 run, PSIS-LOO gave ELPD $-2011.47$, with maximum Pareto $k=0.69$ and no observations above 0.70. Harmonized Model 2 had five observations above Pareto $k=0.70$ and none above one. The ELPD difference favouring Model 3 was 0.92 with SE 3.38, so the retained comparison provides an inconclusive ranking and does not establish predictive equivalence. Joint-posterior limitations remain for the locked primary result and the audited harmonized comparator.
+
+
+\begin{table}[H]
+\centering
+\caption{Retained exploratory observation-level PSIS-LOO comparison}
+\small
+\begin{tabular}{lrr}
+\toprule
+Quantity & Model 2 & Model 3 \\
+\midrule
+ELPD-LOO & -2012.39 & -2011.47 \\
+Observations with Pareto $k>0.70$ & 5 & 0 \\
+Observations with Pareto $k>1.00$ & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\textwidth}\footnotesize \textit{Note.} Model 3 minus Model 2 ELPD difference = 0.92 (SE 3.38). This conditional observation-level comparison remains inconclusive; it does not establish equivalence or performance in new households/communities, and joint-posterior diagnostic limitations remain.\end{minipage}
+\end{table}
 
 \section{Additional descriptive figures}
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.80\textwidth]{stunting_by_sex}
+\caption{Survey-weighted stunting prevalence by child sex.}
+\end{figure}
 
 \begin{figure}[H]
 \centering
@@ -146,14 +248,14 @@ Posterior predictive checks reproduced the unweighted prevalence pattern in the 
 
 \begin{figure}[H]
 \centering
-\includesvg[width=0.80\textwidth]{stunting_by_wealth}
-\caption{Survey-weighted stunting prevalence by household wealth quintile.}
+\includesvg[width=0.80\textwidth]{stunting_by_residence}
+\caption{Survey-weighted stunting prevalence by place of residence.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includesvg[width=0.88\textwidth]{stunting_by_region}
-\caption{Survey-weighted stunting prevalence by region.}
+\includesvg[width=0.80\textwidth]{stunting_by_wealth}
+\caption{Survey-weighted stunting prevalence by household wealth quintile.}
 \end{figure}
 
 \begin{figure}[H]
@@ -230,5 +332,40 @@ Higher maternal education coefficient & -1.003 & -1.624 & -0.433 & 1.002 & 6,030
 \end{tabular}%
 }
 \end{table}
+
+\section{Full-posterior reproduction audit, 9 October 2026}
+
+This post-preprint review read nine saved local fits without new sampling. It audited every stored parameter, including all household/community latent and scaled effects, and scientific quantities reconstructed from the SD draws: their difference, community ICC, household VPC, same-household ICC, and both MORs. Each full audit covered 7,832--8,359 scalar posterior elements; a supplemental calculation checked the six derived scientific quantities. The table reports the most conservative extrema across both checks. The screen required at least four chains, finite rank-normalized $\hat R<1.01$, bulk and tail ESS at least 400, zero divergences, minimum chain BFMI at least 0.3, and no stored maximum-tree-depth saturation flags.
+
+\begin{table}[H]
+\centering
+\caption{Full-parameter diagnostics for separate four-chain reproduction fits}
+\label{tab:full_posterior_audit}
+\small
+\begin{tabular}{lrrrrl}
+\toprule
+Fit & Max $\hat R$ & Min bulk ESS & Min tail ESS & Min BFMI & Screen \\
+\midrule
+Model 1 & 1.010885 & 485 & 533 & 0.496 & Fail \\
+Model 2 full & 1.011620 & 651 & 1042 & 0.515 & Fail \\
+Model 2 harmonized & 1.010417 & 568 & 534 & 0.509 & Fail \\
+Spline age & 1.012751 & 447 & 612 & 0.532 & Fail \\
+Detailed WASH & 1.015940 & 500 & 748 & 0.524 & Fail \\
+Local Model 3 & 1.009845 & 456 & 514 & 0.482 & Pass* \\
+Tight prior & 1.011931 & 456 & 620 & 0.516 & Fail \\
+Wide prior & 1.011403 & 419 & 688 & 0.512 & Fail \\
+Survey weighted & 1.008136 & 425 & 1065 & 0.762 & Pass* \\
+\bottomrule
+\end{tabular}
+
+\begin{minipage}{0.98\textwidth}
+\footnotesize
+\textit{Note.} All nine fits had four chains, finite full-parameter diagnostics, zero divergences and zero tree-depth saturation flags. Seven fail the strict below-1.01 $\hat R$ rule. ESS and BFMI alone do not override a failure. *Pass is a numerical screen pending scientific review, not publication sign-off. Fits retained 1,000 draws per chain except survey weighting (1,500). These are separate reproduction fits; none is the locked eight-chain Model 3 used in the historical result tables.
+\end{minipage}
+\end{table}
+
+Diagnostic calculation used Python 3.12 and ArviZ 0.22.0; archived file metadata reports PyMC 5.28.5 and ArviZ 0.23.4. The authorized analytic sample and all 41 descriptive rows were independently reproduced, with count agreement exactly and prevalence, SE and CI differences below $10^{-16}$. Stored observed outcomes matched the reconstructed full/complete sample for eight files; the weighted file did not store an observed-outcome array. Matching outcomes does not establish ordered child identity, exact original source code, seeds, or full fit provenance. A saved missing-maternal-education fit was not available in this set and remains unaudited. Trace/rank plots and estimand-specific Monte Carlo errors were not certified by this screen. Individual effects, coordinates and row-level arrays remain private.
+
+The retained locked eight-chain SD diagnostics (community 1.021127 and household 1.017634) fail the same $\hat R$ screen. A passing local four-chain Model 3 does not certify that distinct locked fit. Neither the complete sensitivity sequence nor the historical conditional PSIS-LOO comparison is fully validated by the two numerical passes. No new WAIC/LOO ranking or model sampling was performed in this audit.
 
 \end{document}
