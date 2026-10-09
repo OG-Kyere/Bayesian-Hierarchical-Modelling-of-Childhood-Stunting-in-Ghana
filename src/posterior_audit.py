@@ -15,6 +15,16 @@ def diagnostics(idata, max_depth=None):
             posterior[u] = posterior[tau] * posterior[z]
     if 'tau_household' in posterior and 'tau_community' in posterior:
         posterior['sd_difference'] = posterior.tau_household - posterior.tau_community
+    if 'tau_community' in posterior:
+        tc = posterior.tau_community
+        th = posterior.tau_household if 'tau_household' in posterior else 0.
+        total = tc**2 + th**2 + np.pi**2 / 3
+        posterior['icc_community'] = tc**2 / total
+        posterior['mor_community'] = np.exp(np.sqrt(2) * .6744897501960817 * tc)
+        if 'tau_household' in posterior:
+            posterior['vpc_household'] = th**2 / total
+            posterior['icc_same_household'] = (tc**2 + th**2) / total
+            posterior['mor_household'] = np.exp(np.sqrt(2) * .6744897501960817 * th)
     diag = az.summary(posterior, kind='diagnostics', round_to='none')
     values = diag[['r_hat', 'ess_bulk', 'ess_tail']].to_numpy()
     finite = bool(values.size and np.isfinite(values).all())

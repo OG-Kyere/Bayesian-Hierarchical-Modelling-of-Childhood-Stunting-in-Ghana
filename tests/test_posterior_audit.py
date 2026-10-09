@@ -33,6 +33,8 @@ class PosteriorGate(unittest.TestCase):
         for prefix in ('z_household[', 'z_community[', 'u_household[', 'u_community['):
             self.assertTrue(any(str(i).startswith(prefix) for i in diag.index))
         self.assertIn('sd_difference', diag.index)
+        for quantity in ('icc_community', 'mor_community', 'vpc_household', 'icc_same_household', 'mor_household'):
+            self.assertIn(quantity, diag.index)
         self.assertTrue(metrics['diagnostic_gate_passed'])
 
     def test_bad_household_latent_blocks_good_scalar_parameters(self):
