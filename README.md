@@ -137,6 +137,6 @@ The associated preprint is available on Research Square: [*Household and Communi
 
 **Preferred citation:** Gideon Ofosu Kyere. (2026). *Household and Community Heterogeneity in Childhood Stunting in Ghana*. Research Square [Preprint]. https://doi.org/10.21203/rs.3.rs-11224582/v1
 
-A `CITATION.cff` file preserves the repository/software metadata and provides this preprint as the preferred citation so GitHub can generate citation metadata. After journal publication, the preferred citation should be updated to the final article.
+A `CITATION.cff` file preserves the repository/software metadata and provides this preprint as the preferred citation so GitHub can generate citation metadata. After journal publication, the preferred citation will be updated to the final article.
 
 The analysis software under `src/` is released under the MIT License (`src/LICENSE`). That license does not apply to restricted DHS microdata, manuscript text, journal-template assets, or other materials outside `src/`.
