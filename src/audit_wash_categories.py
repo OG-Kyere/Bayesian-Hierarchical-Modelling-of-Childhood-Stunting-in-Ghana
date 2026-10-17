@@ -27,15 +27,16 @@ IMPROVED_SANITATION = {
     "flush to piped sewer system", "flush to septic tank",
     "flush to pit latrine", "flush, bio-digester (biofil)",
     "ventilated improved pit latrine (vip)", "pit latrine with slab",
-    "composting toilet",
+    "composting toilet", "flush, don't know where",
 }
-# Only this known 'no facility' code is provisionally classified here.
-# All other sanitation labels require explicit review before a final whitelist.
+# DHS Guide to Statistics: hv205 codes 14, 23, 42, 43 and 96 are unimproved;
+# code 31 indicates open defecation; code 15 is improved.
+# https://www.dhsprogram.com/pubs/pdf/DHSG1/Guide_to_DHS_Statistics_DHS-7_v2.pdf
 UNIMPROVED_SANITATION = {
     "no facility/bush/field", "pit latrine without slab/open pit",
-    "hanging toilet/latrine", "flush to somewhere else", "bucket toilet",
+    "hanging toilet/latrine", "flush to somewhere else", "bucket toilet", "other",
 }
-# "other" and "flush, don't know where" deliberately remain unresolved.
+# Ghana-specific bio-digester remains in the existing improved set.
 
 
 def classify(series, improved, unimproved):
