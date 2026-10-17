@@ -70,9 +70,15 @@ def main():
     haz = pd.to_numeric(df["hc70"], errors="coerce")
     selection = df["hv103"].astype(str).eq("yes") & age.between(0, 59) & haz.between(-600, 600)
     base = df.loc[selection]
+    if base.empty:
+        print("No eligible children selected; check DHS coding and sample filters.", file=sys.stderr)
+        return 2
     samples = [("core", base), ("Model 3 complete case", base.loc[base["hc61"].notna()])]
     review = False
     for name, subset in samples:
+        if subset.empty:
+            print(f"{name}: empty analytic sample; investigate selection.", file=sys.stderr)
+            return 2
         print(f"\n=== {name}: N={len(subset)} ===")
         for field, improved, unimproved in [
             ("hv201 water", IMPROVED_WATER, UNIMPROVED_WATER),
