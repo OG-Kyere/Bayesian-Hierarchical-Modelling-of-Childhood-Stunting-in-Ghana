@@ -31,7 +31,11 @@ IMPROVED_SANITATION = {
 }
 # Only this known 'no facility' code is provisionally classified here.
 # All other sanitation labels require explicit review before a final whitelist.
-UNIMPROVED_SANITATION = {"no facility/bush/field"}
+UNIMPROVED_SANITATION = {
+    "no facility/bush/field", "pit latrine without slab/open pit",
+    "hanging toilet/latrine", "flush to somewhere else", "bucket toilet",
+}
+# "other" and "flush, don't know where" deliberately remain unresolved.
 
 
 def classify(series, improved, unimproved):
