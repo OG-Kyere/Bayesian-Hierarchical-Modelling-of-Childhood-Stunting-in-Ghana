@@ -53,7 +53,7 @@ class TestWashCodingAudit(unittest.TestCase):
         rows, review = classify(pd.Series([], dtype="object"),
                                 IMPROVED_WATER, UNIMPROVED_WATER)
         self.assertEqual(rows, [])
-        self.assertFalse(review)  # sample non-emptiness checked separately
+        self.assertFalse(review)  # main() now separately rejects empty analytic samples
 
 if __name__ == "__main__":
     unittest.main()
