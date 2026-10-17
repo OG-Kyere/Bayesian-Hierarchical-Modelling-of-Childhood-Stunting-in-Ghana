@@ -49,6 +49,15 @@ class TestWashCodingAudit(unittest.TestCase):
         self.assertEqual(kinds["no facility/bush/field"], "unimproved")
         self.assertEqual(kinds["pit latrine without slab"], "UNRECOGNISED—REVIEW")
 
+    def test_other_sanitation_matches_dhs_standard(self):
+        values = pd.Series(["other", "flush, don't know where", "pit latrine without slab/open pit"])
+        rows, review = classify(values, IMPROVED_SANITATION, UNIMPROVED_SANITATION)
+        self.assertFalse(review)
+        kinds = {label: kind for label, _, kind in rows}
+        self.assertEqual(kinds["other"], "unimproved")
+        self.assertEqual(kinds["flush, don't know where"], "improved")
+        self.assertEqual(kinds["pit latrine without slab/open pit"], "unimproved")
+
     def test_empty_group(self):
         rows, review = classify(pd.Series([], dtype="object"),
                                 IMPROVED_WATER, UNIMPROVED_WATER)
