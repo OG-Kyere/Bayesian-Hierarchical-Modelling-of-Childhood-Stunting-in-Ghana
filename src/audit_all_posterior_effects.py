@@ -3,7 +3,7 @@
 Run from repository root after obtaining authorised posterior NetCDF files:
     python src/audit_all_posterior_effects.py
 
-Outputs only aggregate diagnostics under a local, gitignored audit directory.
+Prints aggregate diagnostics to standard output; does not write any report files.
 Never upload full parameter-level outputs or NetCDF files without privacy review.
 Exit 2 on missing files or review-level diagnostic concerns.
 """
